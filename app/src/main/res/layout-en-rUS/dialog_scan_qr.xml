@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="145dp"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="10dp"
+    android:background="@color/white"
+    app:cardCornerRadius="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvQrScan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/img_scan"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:text="@string/qr_scan"
+            android:textColor="@color/textColor"
+            android:textSize="15sp" />
+
+        <include
+            android:id="@+id/line"
+            layout="@layout/line"
+            app:layout_constraintTop_toBottomOf="@+id/tvAddFriend" />
+
+        <TextView
+            android:id="@+id/tvQrCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/paycodex"
+            android:drawablePadding="10dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/qr_code"
+            android:textColor="@color/textColor"
+            android:textSize="15sp" />
+
+        <include
+            android:id="@+id/line"
+            layout="@layout/line"
+            app:layout_constraintTop_toBottomOf="@+id/tvAddFriend" />
+
+        <TextView
+            android:id="@+id/tvBarCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/payment_ic"
+            android:drawablePadding="10dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/payment_code"
+            android:textColor="@color/textColor"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

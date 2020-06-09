@@ -1,0 +1,655 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_toolbar" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:background="@color/colorBlackBg"
+                android:gravity="bottom|center_horizontal">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clLevelCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/solid_nomal_shape">
+
+                    <ImageView
+                        android:id="@+id/ivAvatar"
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="18dp"
+                        android:src="@drawable/user_default"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvNickName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="18dp"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toEndOf="@+id/ivAvatar"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvLevel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:drawableStart="@drawable/level_icon"
+                        android:gravity="bottom"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"
+                        app:layout_constraintStart_toEndOf="@+id/ivAvatar"
+                        app:layout_constraintTop_toBottomOf="@+id/tvNickName" />
+
+                    <TextView
+                        android:id="@+id/tvMyInvite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="45dp"
+                        android:layout_marginEnd="24dp"
+                        android:drawableStart="@drawable/level_p"
+                        android:drawableEnd="@drawable/level_arrow"
+                        android:drawablePadding="6dp"
+                        android:includeFontPadding="false"
+                        android:padding="5dp"
+                        android:text="@string/my_invite"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvMyInviteNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:padding="5dp"
+                        android:text="0"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@+id/tvMyInvite"
+                        app:layout_constraintEnd_toEndOf="@+id/tvMyInvite"
+                        app:layout_constraintStart_toStartOf="@+id/tvMyInvite" />
+
+                    <com.fjx.mg.view.LevelProgress
+                        android:id="@+id/levelProgress"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="6dp"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/ivAvatar" />
+
+
+                    <ImageView
+                        android:id="@+id/ivLevelUpDesc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_levelup_desc"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="@string/level_desc"
+                android:textColor="@color/textColor"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tvUpgradeDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:layout_weight="0"
+                android:drawablePadding="6dp"
+                android:text="@string/levelup_note"
+                android:textColor="@color/textColorHint"
+                android:textSize="12sp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="10dp"
+                android:gravity="center_vertical">
+
+                <include layout="@layout/layout_level_tag" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/level1"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="15sp" />
+
+                <androidx.gridlayout.widget.GridLayout
+                    android:id="@+id/glLevel1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/levle_item_bg"
+                    app:columnCount="3"
+                    app:rowCount="2">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableStart="@drawable/circle_gray_shape"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/friend_chat"
+                        app:layout_columnWeight="1"
+                        app:layout_rowWeight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableStart="@drawable/circle_gray_shape"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/new_read"
+                        app:layout_columnWeight="1"
+                        app:layout_rowWeight="1" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableStart="@drawable/circle_gray_shape"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/job_read"
+                        app:layout_columnWeight="1"
+                        app:layout_rowWeight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableStart="@drawable/circle_gray_shape"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/house_read"
+                        app:layout_columnWeight="1"
+                        app:layout_rowWeight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableStart="@drawable/circle_gray_shape"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/yellowpage_read"
+                        app:layout_columnWeight="1"
+                        app:layout_rowWeight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/circle_gray_shape"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/exchange_rate_inquiry"
+                        app:layout_columnWeight="1"
+                        app:layout_rowWeight="1" />
+
+                </androidx.gridlayout.widget.GridLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:gravity="center_vertical">
+
+                <include layout="@layout/layout_level_tag" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/level2"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/levle_item_bg"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <androidx.gridlayout.widget.GridLayout
+                        android:id="@+id/glLevel2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:columnCount="3"
+                        app:rowCount="2">
+
+                        <TextView
+                            android:drawableStart="@drawable/circle_gray_shape"
+                            android:drawablePadding="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text="@string/permission_level1"
+                            app:layout_columnSpan="3"
+                            app:layout_columnWeight="1"
+                            app:layout_rowWeight="1" />
+
+                        <TextView
+                            android:drawableStart="@drawable/circle_gray_shape"
+                            android:drawablePadding="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text="@string/mobile_recharge"
+                            app:layout_columnWeight="1"
+                            app:layout_rowWeight="1" />
+
+                        <TextView
+                            android:drawableStart="@drawable/circle_gray_shape"
+                            android:drawablePadding="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text="@string/publish_job"
+                            app:layout_columnWeight="1"
+                            app:layout_rowWeight="1" />
+
+                        <TextView
+                            android:drawableStart="@drawable/circle_gray_shape"
+                            android:drawablePadding="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text="@string/publush_housh"
+                            app:layout_columnWeight="1"
+                            app:layout_rowWeight="1" />
+
+
+                        <TextView
+                            android:drawableStart="@drawable/circle_gray_shape"
+                            android:drawablePadding="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text="@string/publish_yellopage"
+                            app:layout_columnWeight="1"
+                            app:layout_rowWeight="1" />
+
+                        <TextView
+                            android:id="@+id/tvRedPacketQuota"
+                            android:drawableStart="@drawable/circle_gray_shape"
+                            android:drawablePadding="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            app:layout_columnSpan="2"
+                            app:layout_columnWeight="1"
+                            app:layout_rowWeight="1" />
+
+
+                    </androidx.gridlayout.widget.GridLayout>
+
+                    <TextView
+                        android:id="@+id/tvUpgrade2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/solid_nomal_shape"
+                        android:paddingStart="30dp"
+                        android:paddingTop="4dp"
+                        android:paddingEnd="30dp"
+                        android:paddingBottom="4dp"
+                        android:text="@string/upgrade_5k"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:gravity="center_vertical">
+
+                <include layout="@layout/layout_level_tag" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/level3"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/levle_item_bg"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <androidx.gridlayout.widget.GridLayout
+                        android:id="@+id/glLevel3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:columnCount="3"
+                        app:rowCount="2">
+
+
+                        <TextView
+                            android:drawableStart="@drawable/circle_gray_shape"
+                            android:drawablePadding="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text="@string/permission_level1"
+                            app:layout_columnWeight="1"
+                            app:layout_rowWeight="1" />
+
+                        <TextView
+                            android:drawableStart="@drawable/circle_gray_shape"
+                            android:drawablePadding="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text="@string/permission_level2"
+                            app:layout_columnWeight="1"
+                            app:layout_rowWeight="1" />
+
+                        <TextView
+                            android:drawableStart="@drawable/circle_gray_shape"
+                            android:drawablePadding="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text="@string/permission_level2"
+                            android:visibility="invisible"
+                            app:layout_columnWeight="1"
+                            app:layout_rowWeight="1" />
+
+                        <TextView
+                            android:id="@+id/tvTransferQuota3"
+                            android:drawableStart="@drawable/circle_gray_shape"
+                            android:drawablePadding="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text="@string/coming_soon1"
+                            app:layout_columnSpan="3"
+                            app:layout_columnWeight="1"
+                            app:layout_rowWeight="1" />
+
+
+                    </androidx.gridlayout.widget.GridLayout>
+
+                    <TextView
+                        android:id="@+id/tvUpgrade3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/solid_nomal_shape"
+                        android:paddingStart="30dp"
+                        android:paddingTop="4dp"
+                        android:paddingEnd="30dp"
+                        android:paddingBottom="4dp"
+                        android:text="@string/upgrade_10k"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:gravity="center_vertical">
+
+                <include layout="@layout/layout_level_tag" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/level4"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/levle_item_bg"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <androidx.gridlayout.widget.GridLayout
+                        android:id="@+id/glLevel4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:columnCount="3"
+                        app:rowCount="2">
+
+
+                        <TextView
+                            android:drawableStart="@drawable/circle_gray_shape"
+                            android:drawablePadding="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text="@string/permission_level1"
+                            app:layout_columnWeight="1"
+                            app:layout_rowWeight="1" />
+
+                        <TextView
+                            android:drawableStart="@drawable/circle_gray_shape"
+                            android:drawablePadding="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text="@string/permission_level2"
+                            app:layout_columnWeight="1"
+                            app:layout_rowWeight="1" />
+
+                        <TextView
+                            android:drawableStart="@drawable/circle_gray_shape"
+                            android:drawablePadding="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text="@string/permission_level2"
+                            android:visibility="invisible"
+                            app:layout_columnWeight="1"
+                            app:layout_rowWeight="1" />
+
+                        <TextView
+                            android:id="@+id/tvTransferQuota4"
+                            android:drawableStart="@drawable/circle_gray_shape"
+                            android:drawablePadding="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text="@string/coming_soon1"
+                            app:layout_columnSpan="3"
+                            app:layout_columnWeight="1"
+                            app:layout_rowWeight="1" />
+
+
+                    </androidx.gridlayout.widget.GridLayout>
+
+
+                    <TextView
+                        android:id="@+id/tvUpgrade4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/solid_nomal_shape"
+                        android:paddingStart="30dp"
+                        android:paddingTop="4dp"
+                        android:paddingEnd="30dp"
+                        android:paddingBottom="4dp"
+                        android:text="@string/upgrade_20k"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:gravity="center_vertical">
+
+                <include layout="@layout/layout_level_tag" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/level5"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/levle_item_bg"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <androidx.gridlayout.widget.GridLayout
+                        android:id="@+id/glLevel5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:columnCount="3"
+                        app:rowCount="2">
+
+
+                        <TextView
+                            android:drawableStart="@drawable/circle_gray_shape"
+                            android:drawablePadding="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text="@string/permission_level1"
+                            app:layout_columnWeight="1"
+                            app:layout_rowWeight="1" />
+
+                        <TextView
+                            android:drawableStart="@drawable/circle_gray_shape"
+                            android:drawablePadding="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text="@string/permission_level2"
+                            app:layout_columnWeight="1"
+                            app:layout_rowWeight="1" />
+
+                        <TextView
+                            android:drawableStart="@drawable/circle_gray_shape"
+                            android:drawablePadding="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text="@string/permission_level2"
+                            android:visibility="invisible"
+                            app:layout_columnWeight="1"
+                            app:layout_rowWeight="1" />
+
+                        <TextView
+                            android:id="@+id/tvTransferQuota5"
+                            android:drawableStart="@drawable/circle_gray_shape"
+                            android:drawablePadding="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text="@string/coming_soon1"
+                            app:layout_columnSpan="3"
+                            app:layout_columnWeight="1"
+                            app:layout_rowWeight="1" />
+
+
+                    </androidx.gridlayout.widget.GridLayout>
+
+
+                    <TextView
+                        android:id="@+id/tvUpgrade5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/solid_nomal_shape"
+                        android:paddingStart="30dp"
+                        android:paddingTop="4dp"
+                        android:paddingEnd="30dp"
+                        android:paddingBottom="4dp"
+                        android:text="@string/upgrade_30k"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</LinearLayout>

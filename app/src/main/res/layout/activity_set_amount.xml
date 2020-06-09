@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg_color"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_toolbar" />
+
+    <EditText
+        android:id="@+id/etCommentx"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginEnd="10dp"
+        android:background="@color/white"
+        android:hint="@string/amountofmoney"
+        android:imeOptions="actionSend"
+        android:inputType="numberDecimal"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:singleLine="true"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tvSend"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/solid_setamount_shape"
+        android:gravity="center"
+        android:text="@string/ok"
+        android:textColor="@color/white" />
+
+</LinearLayout>

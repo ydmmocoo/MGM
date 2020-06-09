@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivHeaderPic"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/food_default" />
+
+    <TextView
+        android:id="@+id/tvUserName"
+        style="@style/TextView_15sp_333333"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintLeft_toRightOf="@id/ivHeaderPic"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="一点点" />
+
+    <TextView
+        android:id="@+id/tvCreateTime"
+        style="@style/TextView_12sp_8e8e8e"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/ivHeaderPic"
+        app:layout_constraintLeft_toLeftOf="@id/tvUserName"
+        app:layout_constraintTop_toBottomOf="@id/tvUserName"
+        tools:text="2天前" />
+
+    <TextView
+        android:id="@+id/tvIsTop"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/nearby_city_top_tv_bg"
+        android:gravity="center"
+        android:text="顶"
+        android:textColor="#f7931e"
+        android:textSize="9sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/tvUserName"
+        app:layout_constraintLeft_toRightOf="@id/tvUserName"
+        app:layout_constraintTop_toTopOf="@id/tvUserName"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/ivPop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:padding="10dp"
+        android:src="@drawable/nearby_city_down_arrow"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/tvCreateTime"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvUserName"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tvContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="10dp"
+        android:ellipsize="end"
+        android:maxLines="4"
+        android:textColor="@color/textColor"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@id/ivHeaderPic"
+        tools:text="＃房屋租售＃类型：出租所在地区：思明区软件园二期装修情况：简装＃房屋租售＃类型：出租所在地区：思明区软件园二期装修情况：简装＃房屋租售＃类型：出租所在地区：思明区软件园二期装修情况：简装＃房屋租售＃类型：出租所在地区：思明区软件园二期装修情况：简装＃房屋租售＃类型：出租所在地区：思明区软件园二期装修情况：简装" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvNearbyCityPic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="10dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvContent"
+        app:spanCount="3" />
+
+    <TextView
+        android:id="@+id/tvType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/nearby_city_type_tv_bg"
+        android:padding="5dp"
+        android:textColor="#c3c2c7"
+        android:textSize="13sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rvNearbyCityPic"
+        tools:text="#二手汽车#" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/divider_color"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvType" />
+
+    <TextView
+        android:id="@+id/tvLook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="12dp"
+        android:drawableLeft="@drawable/nearby_city_look_ic"
+        android:drawablePadding="10dp"
+        android:gravity="center"
+        android:textColor="@color/textColor"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line"
+        tools:text="14670" />
+
+    <TextView
+        android:id="@+id/tvComment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/nearby_city_comment_ic"
+        android:drawablePadding="10dp"
+        android:gravity="center"
+        android:textColor="@color/textColor"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvLook"
+        tools:text="23" />
+
+    <TextView
+        android:id="@+id/tvLike"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="35dp"
+        android:drawableLeft="@drawable/nearby_city_dianzan_ic"
+        android:drawablePadding="10dp"
+        android:gravity="center"
+        android:paddingRight="5dp"
+        android:textColor="@color/textColor"
+        android:textSize="14sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvLook"
+        tools:text="225" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="13dp"
+        android:background="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/tvLook" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

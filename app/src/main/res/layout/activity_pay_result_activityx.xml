@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_toolbar" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/pay_success" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:lineSpacingMultiplier="1.2"
+        android:text="@string/hint_pay_resultx"
+        android:textColor="@color/textColor" />
+
+    <TextView
+        android:id="@+id/tvPriceAR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="0ar"
+        android:textColor="@color/textColor"
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:id="@+id/llPayPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:gravity="center_horizontal"
+        android:visibility="visible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/deal_with"
+            android:textColor="@color/textColorBlak"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tvPayPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="@color/textColorYellow"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/yuan"
+            android:textColor="@color/textColorBlak"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvConfirm"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="70dp"
+        android:background="@drawable/solid_nomal_shape"
+        android:gravity="center"
+        android:text="@string/confirm"
+        android:textColor="@color/white" />
+
+</LinearLayout>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="145dp"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="10dp"
+    android:background="@color/white"
+    app:cardCornerRadius="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvCreateGroupChat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/dialog_create_group_chat"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:paddingStart="15dp"
+            android:text="@string/create_group_chat2"
+            android:textColor="@color/textColor"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/line"
+            layout="@layout/line"
+            app:layout_constraintTop_toBottomOf="@+id/tvAddFriend" />
+
+        <TextView
+            android:id="@+id/tvAddFriend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/dialog_add"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:paddingStart="15dp"
+            android:text="@string/add_friend"
+            android:textColor="@color/textColor"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/line"
+            layout="@layout/line"
+            app:layout_constraintTop_toBottomOf="@+id/tvAddFriend" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvContact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/dialog_contact"
+                android:drawablePadding="10dp"
+                android:padding="10dp"
+                android:paddingStart="15dp"
+                android:text="@string/contacts"
+                android:textColor="@color/textColor"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/viewDot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/solid_nomal_shape"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:minWidth="15dp"
+                android:minHeight="15dp"
+                android:padding="2dp"
+                android:text="99"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+        <include
+            android:id="@+id/line"
+            layout="@layout/line"
+            app:layout_constraintTop_toBottomOf="@+id/tvAddFriend" />
+
+        <TextView
+            android:id="@+id/nearAddFriend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/nearpeople"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:paddingStart="15dp"
+            android:text="@string/nearby_user"
+            android:textColor="@color/textColor"
+            android:textSize="17sp" />
+
+        <include
+            android:id="@+id/line"
+            layout="@layout/line"
+            app:layout_constraintTop_toBottomOf="@+id/tvAddFriend" />
+
+        <TextView
+            android:id="@+id/tvQrScan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/img_scan"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:paddingStart="15dp"
+            android:text="@string/qr_scan"
+            android:textColor="@color/textColor"
+            android:textSize="17sp" />
+
+        <include
+            android:id="@+id/line"
+            layout="@layout/line"
+            app:layout_constraintTop_toBottomOf="@+id/tvAddFriend" />
+
+        <TextView
+            android:id="@+id/tvQrCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/paycodex"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:paddingStart="15dp"
+            android:text="@string/qr_code"
+            android:textColor="@color/textColor"
+            android:textSize="17sp" />
+
+        <include
+            android:id="@+id/line"
+            layout="@layout/line"
+            app:layout_constraintTop_toBottomOf="@+id/tvAddFriend" />
+
+        <TextView
+            android:id="@+id/tvBarCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/payment_ic"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:paddingStart="15dp"
+            android:text="@string/payment_code"
+            android:textColor="@color/textColor"
+            android:textSize="17sp" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

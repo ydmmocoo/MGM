@@ -1,0 +1,200 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="account">Nom d\'utilisateur</string>
+    <string name="password">Code secret</string>
+
+    <string name="pic">Album</string>
+    <string name="take_photo">Photo </string>
+    <string name="video">Vidéo</string>
+    <string name="file">Documents</string>
+    <string name="carry_over">Transférer</string>
+    <string name="red_pack">Sac rouge</string>
+
+    <string name="cancel">Annuler </string>
+    <string name="sure">Confirmer</string>
+    <string name="album_name_all">Tous</string>
+    <string name="button_preview">Aperçu </string>
+    <string name="button_apply_default">Utilisation </string>
+    <string name="button_apply">utiliser(%1$d)</string>
+    <string name="button_back">Retour</string>
+    <string name="photo_grid_capture">Prendre une photo</string>
+    <string name="empty_text">Il n\'y a pas encore de photo ou de video</string>
+    <string name="button_ok">Je sais </string>
+
+    <string name="error_over_count_default">vous avez deja atteint le nombre maximum</string>
+    <string name="error_over_count">最多只能选择 %1$d 个文件</string>
+    <string name="error_under_quality">La qualité de l\'image est trop faible</string>
+    <string name="error_over_quality">La qualité de l\'image est trop élevée.</string>
+    <string name="error_file_type">Types de fichiers non pris en charge</string>
+    <string name="error_type_conflict">Vous ne pouvez pas sélectionner des photos et des vidéos en même temps</string>
+    <string name="error_no_video_activity">Il n\'y a pas d\'applications qui prennent en charge l\'aperçu du vidéo</string>
+    <string name="error_over_original_size">"该照片大于 %1$d M，无法上传将取消勾选原图"</string>
+    <string name="error_over_original_count">"有 %1$d 张照片大于 %2$d M\n无法上传，将取消勾选原图"</string>
+    <string name="button_original">Photo originale </string>
+    <string name="button_sure_default">Confirmer</string>
+    <string name="button_sure">confirmer(%1$d)</string>
+    <string name="face_recently">Récemment </string>
+    <string name="face_Emoji">Emoji</string>
+    <string name="face_set_one">Défaut</string>
+
+    <string name="action_photo">Image</string>
+    <string name="action_video">Vidéo </string>
+    <string name="action_location">Position</string>
+    <string name="action_file">Documents</string>
+
+    <string name="un_download">Non téléchargé</string>
+    <string name="downloaded">Téléchargé</string>
+    <string name="downloading">telechargement en cours...</string>
+    <string name="sending">envoi en cours...</string>
+    <string name="sended">Envoyé</string>
+
+    <string name="self">Moi</string>
+    <string name="user_sex">Sexe</string>
+    <string name="user_location">Position</string>
+    <string name="user_birthday">Naissance </string>
+    <string name="chat_to_top">Forum</string>
+    <string name="chat_to_top_cancel">Unpin</string>
+    <string name="chat_delete">Supprimer le chat</string>
+    <string name="send_message">Envoyer un message</string>
+    <string name="send">Envoyer</string>
+    <string name="add_friend">Ajouter un ami</string>
+    <string name="del_friend">Supprimer un ami</string>
+    <string name="add_to_blacklist">Ajouter à la liste noire </string>
+    <string name="add_rule">Ajouter une méthode d\'authentification ami</string>
+    <string name="settings">Réglages</string>
+    <string name="logout">Se déconnecter</string>
+    <string name="modify_nick_name">Changez votre surnom</string>
+    <string name="modify_signature">Modification de votre signature </string>
+
+    <string name="group_members">Membres du groupe</string>
+    <string name="group_join_apply">Liste des demandes</string>
+    <string name="group_type">Type de groupe</string>
+    <string name="add_group_member">Ajouter un membre </string>
+    <string name="remove_group_member">Supprimer les membres</string>
+    <string name="join_group_type">Mode d\'ajout au groupe</string>
+    <string name="in_group_nick_name">Mon surnom de groupe</string>
+    <string name="dissolve">Dissoudre le groupe</string>
+    <string name="modify_group_name">Modification du nom de groupe</string>
+    <string name="modify_group_notice">Modification des annonces de groupe</string>
+    <string name="record_cancel_tips">Glissez le doigt pour annuler l\'envoi</string>
+    <string name="contacts">Contact </string>
+
+
+    <string name="pickerview_cancel">Annuler </string>
+    <string name="pickerview_submit">Confirmer</string>
+    <string name="pickerview_year">Année </string>
+    <string name="pickerview_month">Mois</string>
+    <string name="pickerview_day">Jour </string>
+    <string name="pickerview_hours">Heure </string>
+    <string name="pickerview_minutes">Minute</string>
+    <string name="pickerview_seconds">Seconde </string>
+    <string name="search">Rechercher</string>
+    <string name="c2c_session_start">Envoyer un message</string>
+    <string name="c2c_session_search_hint">S\'il vous plaît entrer l\'ID de l\'autre personne</string>
+    <string name="create_group_chat">Créer un groupe</string>
+    <string name="input_group_name">Nom du groupe</string>
+    <string name="group_detail">Détails du chat de groupe</string>
+    <string name="input_group_notice">Annonces du groupe</string>
+    <string name="group_search_hint">S\'il vous plaît entrer l\'ID du groupe</string>
+    <string name="join">Rejoindre </string>
+    <string name="accept">Accepter </string>
+    <string name="refuse">Refuser </string>
+    <string name="group_apply_members">Demande de groupe</string>
+    <string name="accepted">Accepté </string>
+    <string name="refused">Rejecte </string>
+    <string name="group_apply_tips">demande de rejoindre le groupe</string>
+    <string name="group_apply_click_handle">Cliquez pour regler</string>
+    <string name="group_remove_member">Deplacer le groupe</string>
+    <string name="group_join_type">Mode d\'ajout au groupe</string>
+    <string name="modify_group_name_success">Modification du nom du groupe avec succès</string>
+    <string name="modify_group_notice_success">Modification de la notification du groupe avec succès </string>
+    <string name="exit_group">Quitter le groupe </string>
+    <string name="modify_nickname_success">Changement du surnom réussi </string>
+    <string name="input_group_id_empty_tips">L\'ID de groupe ne peut pas être vide</string>
+    <string name="input_group_type_empty_tips">S\'il vous plaît sélectionner un type de groupe</string>
+    <string name="input_group_member_empty_tips">S\'il vous plaît sélectionner un membre du groupe</string>
+    <string name="join_group_type_empty_tips">veuillez choisir le mode d’adhesion dans le groue</string>
+    <string name="view_original_image">Voir l\'image originale</string>
+    <string name="attention">Attention/Remarque</string>
+
+
+    <string name="relogin">connecter a nouveau</string>
+    <string name="force_logout">votre compte est deja connecte sur un autre appareil</string>
+    <string name="receive_a_message">recevoir un message</string>
+
+    <!--2019年12月17日11:37:44需要翻译-->
+    <string name="receive_a_red_package">Recevoir un enveloppe rouge</string>
+    <string name="receive_a_transfer_message">Recevoir une information sur le transfert</string>
+    <string name="manual_settings">Pour utiliser cette fonction, vous devez activer l’autorisation. Compte tenu de la désactivation des autorisations associées, veuillez définir manuellement l’autorisation</string>
+    <string name="max_message_length">Atteint la longueur du message maximale</string>
+    <string name="you_accepted_the_transfer">Vous avez reçu la transaction de l`autre utilisateur</string>
+    <string name="your_transfer_was_accepted">L`autre utilisateur a reçu votre transaction</string>
+    <string name="session_adapter_share_tips">[Partager]</string>
+    <string name="session_apdater_red_packet_tips">[Envelope rouge]</string>
+    <string name="session_adapter_transfer_account_tips">[Transfet]</string>
+    <string name="red_package_msg">Bonheur et prospérité，Bonne chance</string>
+    <string name="red_package">Enveloppe rouge</string>
+    <string name="red_package_msg2">Bonheur et prospérité</string>
+    <string name="click_receiver">Cliquer sur obtenir</string>
+    <string name="yellowpage_share">Prtage dans l`annuaire</string>
+    <string name="news_share">Partage d`actualité</string>
+    <string name="nearby_city_share">Partage dans la même ville</string>
+    <string name="your_withdrew_message">Vous avez rappeler un message</string>
+    <string name="withdrew_message">Rappeler  messageing</string>
+    <string name="other_withdrew_message">L`autre utilisateur a rappeler un message</string>
+    <string name="you_accepted_the_red_package">Vous avez reçu une enveloppe rouge de l`autre utilisateur</string>
+    <string name="your_accepted_was_red_package">L`autre utilisateur a reçu votre enveloppe rouge</string>
+    <string name="we_are_friend_we_can_chat">Nous sommes amis maintenant et pouvons commencer la discussion</string>
+
+    // Information relative au groupe
+    <string name="create_group_chat2">Créer un groupe</string>
+    <string name="tips_empty_group_member">Veuillez séléctionner les membres du groupe</string>
+    <string name="tips_empty_group_type">Veuillez choisir le mode d`adhésion dans le groupe</string>
+    <string name="no_friend_apply">Aucun demande  d`ami</string>
+    <string name="group_emptry_tips">Ils sont paresseux, il n’y a pas encore d’annonce de groupe~~</string>
+    <string name="group_chat_member">Membre du groupe</string>
+    <string name="group_chat_more">Voir plus de membre</string>
+    <string name="group_chat_name">Nom du groupe</string>
+    <string name="group_broadcast">Annonce du froupe</string>
+    <string name="group_chat_msg_no_disturb">Ne déranger pas</string>
+    <string name="group_chat_top">Chat épinglé</string>
+    <string name="group_chat_my_nickname">Mon surnom dans le groupe</string>
+    <string name="group_chat_show_member_nickname">Afficher les surnoms des membres du groupe</string>
+    <string name="group_chat_clear">Effacer les historiques du chat</string>
+    <string name="exit_chat">Quitter le groupe</string>
+    <string name="sure_delete_group">Confirmer la dissolution du groupe?</string>
+    <string name="sure_exit_group">Confirmer de quitter le groupe?</string>
+    <string name="add">Ajouter</string>
+    <string name="please_modification_group_name">Veuillez saisir le nom du groupe que vous souhaitez modifier</string>
+    <string name="please_modification_group_nickname">Veuillez saisir le nom du groupe que vous souhaitez modifier</string>
+    <string name="modification_group_name">Modifier le nom du groupe</string>
+    <string name="modification_group_nickname">Modifier le surnom du groupe </string>
+    <string name="modification_group_notice_hint">Veuillez entrer l``annonce du groupe</string>
+    <string name="confirm_exit_group_chat">Confirmer de quitter le groupe?</string>
+    <string name="confirm_clear_chat_history">Êtes vous sûr d`effacer l`historique des chat?</string>
+    <string name="clear_success">Supprimé avec succés</string>
+    <string name="up_slide_cancel_record">Faites glisser vers le haut pour annuler l’enregistrement</string>
+    <string name="speak_time_is_too_short">Le temps de conversation est trop court</string>
+    <string name="no_touch_cancel_send">Relâchez votre doigt pour annuler l’envoi</string>
+    <string name="group_chat_avatar">Profil du groupe</string>
+
+    <string name="photo_album">Album</string>
+    <string name="classic_image">Profil clasique</string>
+    <string name="permission_camata_sd">Besoin d’accéder à vos photos et à votre carte mémoire, Autoriser ou non?？</string>
+    <string name="your_receiver_red_packet">Vous avez reçu un enveloppe rouge</string>
+    <string name="have_receiver">Reçu</string>
+    <string name="your_red_packet">Votre enveloppe rouge</string>
+    <string name="rp">Enveloppe rouge</string>
+
+    <string name="only_group_master_modify">—— Seul l`admin.du groupe peut éditer ——</string>
+    <string name="already_received">Reçu</string>
+    <string name="click_receive">Cliquer pour recevoir</string>
+    <string name="create_group">Créer un groupe</string>
+    <string name="press_talk">Maintenez pour parler</string>
+    <string name="rp_receiver">L`enveloppe rouge a été reçu</string>
+    <string name="transfer_receiver">Le solde a été reçu</string>
+    <string name="tim_psersonal_info">Personal business card</string>
+    <string name="tim_psersonal_info2">Recommend to friends</string>
+    <string name="your_request_trans">Vous avez effectué une transaction</string>
+    <string name="your_response_trans">Vous avez reçu une transaction</string>
+</resources>

@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mRootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/mLlRootView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/white">
+
+            <ImageView
+                android:id="@+id/toolbar_iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:padding="10dp"
+                android:src="@drawable/ic_back_black" />
+
+            <TextView
+                android:id="@+id/toolbar_tv_title"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/toolbar_iv_back"
+                android:ellipsize="end"
+                android:lines="1"
+                android:text="@string/modify_top"
+                android:textColor="@color/textColor"
+                android:textSize="18sp"
+                android:visibility="visible" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvEmpty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/empty_tips"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/llRoot"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/solid_white_5dp_shape"
+                    android:minHeight="200dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:minHeight="122dp"
+                        android:padding="10dp"
+                        android:textSize="14sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@color/gray_line" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize">
+
+                        <TextView
+                            style="@style/TextView_15sp_333333"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="17dp"
+                            android:text="@string/validity" />
+
+                        <TextView
+                            android:id="@+id/tvValidity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="10dp"
+                            tools:text="7天" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlNearbyCityDeadline"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_margin="10dp"
+                    android:background="@android:color/white">
+
+                    <TextView
+                        style="@style/TextView_15sp_333333"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="17dp"
+                        android:text="@string/remaining_set_top" />
+
+                    <TextView
+                        android:id="@+id/tvCurrentSetTop"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"
+                        tools:text="6天6小时23分(200AR/天)" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@android:color/white"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvPutTop"
+                            style="@style/TextView_15sp_333333"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="17dp"
+                            android:text="@string/modify_top" />
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.7dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:background="#30333333"
+                        app:layout_constraintTop_toBottomOf="@id/imgAllowNum" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="19dp"
+                            android:text="@string/price_change" />
+
+                        <LinearLayout
+                            android:layout_width="112dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:gravity="center|right"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tvSubtractPrice"
+                                android:layout_width="21dp"
+                                android:layout_height="21dp"
+                                android:drawableLeft="@drawable/nearby_city_subtract_gray" />
+
+
+                            <EditText
+                                android:id="@+id/etPrice"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:background="@null"
+                                android:ellipsize="end"
+                                android:gravity="center"
+                                android:lines="1"
+                                android:maxEms="5"
+                                android:maxLines="1"
+                                android:numeric="integer"
+                                android:scrollbars="horizontal"
+                                android:singleLine="true"
+                                android:text="0"
+                                android:textColor="@color/textColor"
+                                android:textCursorDrawable="@null"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/tvAddPrice"
+                                android:layout_width="21dp"
+                                android:layout_height="21dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="12dp"
+                                android:drawableRight="@drawable/nearby_city_add_ic" />
+
+
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.7dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:background="#30333333"
+                        app:layout_constraintTop_toBottomOf="@id/imgAllowNum" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="19dp"
+                            android:text="@string/days_change" />
+
+                        <LinearLayout
+                            android:layout_width="112dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:gravity="right|center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tvSubtractDays"
+                                android:layout_width="21dp"
+                                android:layout_height="21dp"
+                                android:drawableLeft="@drawable/nearby_city_subtract_gray" />
+
+
+                            <EditText
+                                android:id="@+id/etDay"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:background="@null"
+                                android:ellipsize="end"
+                                android:gravity="center"
+                                android:lines="1"
+                                android:maxEms="5"
+                                android:maxLines="1"
+                                android:numeric="integer"
+                                android:scrollbars="horizontal"
+                                android:singleLine="true"
+                                android:text="0"
+                                android:textColor="@color/textColor"
+                                android:textCursorDrawable="@null"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/tvAddDays"
+                                android:layout_width="21dp"
+                                android:layout_height="21dp"
+                                android:layout_marginRight="12dp"
+                                android:drawableRight="@drawable/nearby_city_add_ic" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="77dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@android:color/white"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextView_15sp_333333"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="17dp"
+                        android:layout_marginTop="16dp"
+                        android:text="实付"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvRule"
+                        style="@style/TextView_15sp_333333"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="10dp"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="7*9+3*(200+9)" />
+
+                    <TextView
+                        android:id="@+id/tvPayMoney"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginBottom="10dp"
+                        android:text="0"
+                        android:textColor="#d12934"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toLeftOf="@+id/tvPayMoneyUnit" />
+
+                    <TextView
+                        android:id="@+id/tvPayMoneyUnit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/ar"
+                        android:textColor="#d12934"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="14dp"
+                    android:text="置顶规则：置顶的先后顺序按照置顶的每日单价决定，价格越高，置顶的位置越靠前，同价格的按照发布的时间顺序排列\n价格计算：实付=剩余天数*价格变动+天数变动*(原置顶价格+价格变动)"
+                    android:textColor="#8e8e8e"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:id="@+id/btnPublisherNearbyCity"
+                    android:layout_width="323dp"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/nearby_city_publish_btn_bg"
+                    android:text="发布"
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

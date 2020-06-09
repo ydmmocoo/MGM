@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:divider="@drawable/shape_line"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:showDividers="middle">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="13dp">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/consignee"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="@string/receiver_username"
+                android:padding="10dp"
+                android:textSize="15sp"
+                app:layout_constraintStart_toEndOf="@+id/textView" />
+
+            <include
+                android:id="@+id/line1"
+                layout="@layout/line"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/etName"
+                app:layout_constraintTop_toBottomOf="@+id/etName" />
+
+            <TextView
+                android:id="@+id/tvMan"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_marginTop="13dp"
+                android:background="@drawable/solid_nomal_shape"
+                android:gravity="center"
+
+                android:text="@string/mr"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="@+id/etName"
+                app:layout_constraintTop_toBottomOf="@+id/line1" />
+
+            <TextView
+                android:id="@+id/tvWoman"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="13dp"
+                android:background="@drawable/solid_nomal_shape"
+                android:gravity="center"
+                android:text="@string/miss"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toEndOf="@+id/tvMan"
+                app:layout_constraintTop_toBottomOf="@+id/line1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/contact_mobile_symbol"
+                android:textColor="@color/textColor"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/etPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="@string/your_phone_number"
+                android:inputType="phone"
+                android:padding="10dp"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/receive_address"
+                android:textColor="@color/textColor"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tvLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:drawableStart="@drawable/location"
+                android:drawableEnd="@drawable/ic_right_arrow"
+                android:drawablePadding="6dp"
+                android:drawableTint="@color/textColorGray"
+                android:hint="@string/click_select"
+                android:padding="10dp"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/house_number"
+                android:textColor="@color/textColor"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/etDetailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="@string/hint_building_no"
+                android:padding="10dp"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tvConfirm"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/solid_nomal_shape"
+        android:gravity="center"
+        android:text="@string/save"
+        android:textColor="@color/white" />
+
+
+</LinearLayout>

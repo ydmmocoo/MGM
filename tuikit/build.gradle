@@ -1,0 +1,68 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion config.compileSdkVersion
+    defaultConfig {
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode = 1
+        versionName = "4.3.81"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    sourceSets {
+        main {
+            assets.srcDirs = ['assets']
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+
+        google()
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+//afterEvaluate {
+//    assembleDebug.dependsOn ':imsdk:assembleDebug'
+//    assembleRelease.dependsOn ':imsdk:assembleRelease'
+//}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'it.sephiroth.android.library.imagezoom:library:1.0.4'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.github.promeg:tinypinyin:2.0.3'
+    // ~80KB
+    // 如果用aar方式集成，这里需要指定libs文件夹下的aar的名称
+    //    implementation(name: 'imsdk-xxx', ext: 'aar')
+    // 如果用jcenter方式集成，可以使用以下配置保证获取的是4.x版本的最新版，或者指定某一个版本，比如4.3.81
+//    api 'com.tencent.imsdk:imsdk:4.3.145'
+//    api 'com.tencent.imsdk:imsdk:4.4.627'
+    /*别问我为啥升级那么频繁 腾讯云一直在挖坑 竟然不想下兼容 呵呵哒*/
+    api 'com.tencent.imsdk:imsdk:4.6.56'
+//    api 'com.tencent.imsdk:imsdk:4.6.1'
+//    api 'com.tencent.imsdk:tuikit:4.6.1'
+
+    //    api 'com.huawei.android.hms:sns:2.6.3.306'
+    api project(':common')
+//    implementation files('libs/MiPush_SDK_Client_3_6_12.jar')
+}
+

@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="errcode_success">Sent successfully</string>
+    <string name="errcode_cancel">Send cancel</string>
+    <string name="errcode_deny">Sent rejected</string>
+    <string name="errcode_unsupported">Unsupported error</string>
+    <string name="errcode_unknown">Send back</string>
+    //datarepository
+    <string name="error_net">Network error</string>
+    <string name="error_unknow">unknown error</string>
+
+
+</resources>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="wrap_content">
+
+    <com.fjx.mg.view.RoundImageView
+        android:id="@+id/iv_pic"
+        android:layout_width="73dp"
+        android:layout_height="73dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/big_image_default" />
+
+    <TextView
+        android:id="@+id/tv_store_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_toEndOf="@+id/iv_pic"
+        android:textColor="@color/black"
+        tools:text="567蛋糕房" />
+
+    <TextView
+        android:id="@+id/tv_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_store_name"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="2dp"
+        android:layout_toEndOf="@+id/iv_pic"
+        android:drawableStart="@drawable/ic_home_xx"
+        android:drawablePadding="5dp"
+        android:textColor="@color/textColorYellow5"
+        android:textSize="12sp"
+        tools:text="4.0" />
+
+    <TextView
+        android:id="@+id/tv_monthly_sales"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_store_name"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="2dp"
+        android:layout_toEndOf="@+id/tv_score"
+        android:textColor="@color/gray_text"
+        android:textSize="12sp"
+        tools:text="@string/monthly_sales" />
+
+    <TextView
+        android:id="@+id/tv_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_store_name"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="10dp"
+        android:textColor="@color/gray_text"
+        android:textSize="12sp"
+        tools:text="@string/distance_detail" />
+
+    <TextView
+        android:id="@+id/tv_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_score"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="10dp"
+        android:layout_toEndOf="@+id/iv_pic"
+        android:textColor="@color/gray_text"
+        android:textSize="12sp"
+        tools:text="起送500AR | 免配送费 | 支持自取" />
+
+    <View
+        android:id="@+id/v_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/line_color"
+        android:layout_alignStart="@+id/tv_tag"
+        android:layout_below="@+id/tv_tag"
+        android:layout_marginStart="10dp"/>
+
+    <com.library.common.view.WrapContentListView
+        android:id="@+id/lv_discount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:dividerHeight="0dp"
+        android:scrollbars="none"
+        android:divider="@color/transparent"
+        android:layout_alignStart="@+id/tv_tag"
+        android:layout_alignEnd="@+id/tv_tag"
+        android:layout_below="@+id/v_line"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_below="@+id/lv_discount"
+        android:layout_alignStart="@+id/iv_pic"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="10dp"
+        android:background="@color/line_color" />
+
+</RelativeLayout>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/id_toolbar"
+        layout="@layout/layout_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize" />
+
+    <include
+        android:id="@+id/line"
+        layout="@layout/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintTop_toBottomOf="@id/id_toolbar" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clIcon"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line">
+
+        <com.tencent.qcloud.uikit.common.widget.ShadeImageView
+            android:id="@+id/personalIcon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/default_user_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:maxEms="5"
+            android:ellipsize="end"
+            tools:text="Justin Bieber"
+            android:id="@+id/tvNickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:lines="1"
+            android:layout_marginBottom="12dp"
+            android:textColor="@color/text_color_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/personalIcon" />
+
+        <com.tencent.qcloud.uikit.common.widget.ShadeImageView
+            android:background="@drawable/shade_5dp"
+            android:id="@+id/ivStartGroup"
+            android:layout_marginStart="40dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/add_group_member"
+            app:layout_constraintStart_toEndOf="@id/personalIcon"
+            app:layout_constraintTop_toTopOf="@id/personalIcon" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/rlNoDisturb"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/clIcon">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="11dp"
+            android:text="@string/group_chat_msg_no_disturb"
+            android:textColor="@color/textColor"
+            android:textSize="16sp" />
+
+        <CheckBox
+            android:id="@+id/cbNoDisturb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="11dp"
+            android:button="@drawable/nearby_city_set_top_cb_selector"
+            android:checked="false" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlGroupChatTop"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/rlNoDisturb">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="11dp"
+            android:text="@string/group_chat_top"
+            android:textColor="@color/textColor"
+            android:textSize="16sp" />
+
+        <CheckBox
+            android:id="@+id/cbChatTop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="11dp"
+            android:button="@drawable/nearby_city_set_top_cb_selector"
+            android:checked="false" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvChatClear"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:paddingStart="11dp"
+        android:text="@string/group_chat_clear"
+        android:textColor="@color/textColor"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/rlGroupChatTop" />
+
+    <TextView
+        android:id="@+id/tvComplaint"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:paddingStart="11dp"
+        android:text="@string/complaint"
+        android:textColor="@color/textColor"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/tvChatClear" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

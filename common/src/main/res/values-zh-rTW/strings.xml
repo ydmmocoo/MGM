@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">common</string>
+    <string name="download_back">应用在后台下载</string>
+    <string name="hint_rank_no_privileges">您的会员等级不足，是否前往升级？</string>
+    <string name="att">提示</string>
+    <string name="go_uplevel">前往升级</string>
+    <string name="cancel">取消</string>
+    <string name="no_levelup">暂不升级</string>
+    <string name="buy_level">购买会员等级</string>
+    <string name="invite_register">邀请好友注册</string>
+    <string name="close">关闭</string>
+    <string name="hint_forbidden">您的账号由于错误操作，部分功能被禁用，请联系客服处理！</string>
+    <string name="fingerprint_payment">指纹支付</string>
+    <string name="please_pay_psw">请输入支付密码</string>
+    <string name="complaint">投诉</string>
+    <string name="delete">删除</string>
+</resources>

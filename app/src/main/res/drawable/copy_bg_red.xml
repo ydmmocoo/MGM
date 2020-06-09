@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--常态-->
+    <item android:state_pressed="false">
+        <!--形状是矩形-->
+        <shape android:shape="rectangle">
+            <!--填充色-->
+            <solid android:color="@color/colorAccent" />
+
+        </shape>
+    </item>
+    <!--按下-->
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#e5e5e5" />
+        </shape>
+    </item>
+</selector>

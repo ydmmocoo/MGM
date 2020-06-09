@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#ffffff</color>
+    <color name="colorAccent">#e9285f</color>
+
+    <color name="dropSelectColor">#F4F4F4</color>
+    <color name="dropUnSelectColor">#ffffff</color>
+    <color name="default_clickable_color">#cccccc</color>
+    <color name="textColor">#333333</color>
+    <color name="text_gray8e">#8e8e8e</color>
+    <color name="text_4d4d4d">#4d4d4d</color>
+    <color name="bule_0049">#004972</color>
+
+
+    <color name="gray_text">#919191</color>
+    <color name="gray_f1f0f6">#F1F0F6</color>
+    <color name="gray_btn">#EBEBEB</color>
+
+    <color name="gray_bg">#f0eff5</color>
+    <color name="gray_line">#ebebeb</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="black_text">#212121</color>
+    <color name="background_tab_pressed">#00000000</color>
+    <color name="c_d02934">#d02934</color>
+    <color name="dialog_bg">#898684</color>
+</resources>

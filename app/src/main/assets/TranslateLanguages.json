@@ -1,0 +1,118 @@
+[
+  {
+    "name": "auto",
+    "type": "自动检测"
+  },
+  {
+    "name": "zh",
+    "type": "中文"
+  },
+  {
+    "name": "en",
+    "type": "英语"
+  },
+  {
+    "name": "yue",
+    "type": "粤语"
+  },
+  {
+    "name": "wyw",
+    "type": "文言文"
+  },
+  {
+    "name": "jp",
+    "type": "日语"
+  },
+  {
+    "name": "kor",
+    "type": "韩语"
+  },
+  {
+    "name": "fra",
+    "type": "法语"
+  },
+  {
+    "name": "spa",
+    "type": "西班牙语"
+  },
+  {
+    "name": "th",
+    "type": "泰语"
+  },
+  {
+    "name": "ara",
+    "type": "阿拉伯语"
+  },
+  {
+    "name": "ru",
+    "type": "俄语"
+  },
+  {
+    "name": "pt",
+    "type": "葡萄牙语"
+  },
+  {
+    "name": "de",
+    "type": "德语"
+  },
+  {
+    "name": "it",
+    "type": "意大利语"
+  },
+  {
+    "name": "el",
+    "type": "希腊语"
+  },
+  {
+    "name": "nl",
+    "type": "荷兰语"
+  },
+  {
+    "name": "pl",
+    "type": "波兰语"
+  },
+  {
+    "name": "bul",
+    "type": "保加利亚语"
+  },
+  {
+    "name": "est",
+    "type": "爱沙尼亚语"
+  },
+  {
+    "name": "dan",
+    "type": "丹麦语"
+  },
+  {
+    "name": "fin",
+    "type": "芬兰语"
+  },
+  {
+    "name": "cs",
+    "type": "捷克语"
+  },
+  {
+    "name": "rom",
+    "type": "罗马尼亚语"
+  },
+  {
+    "name": "slo",
+    "type": "斯洛文尼亚语"
+  },
+  {
+    "name": "swe",
+    "type": "瑞典语"
+  },
+  {
+    "name": "hu",
+    "type": "匈牙利语"
+  },
+  {
+    "name": "cht",
+    "type": "繁体中文"
+  },
+  {
+    "name": "vie",
+    "type": "越南语"
+  }
+]

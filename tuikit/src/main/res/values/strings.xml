@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  Copyright 2017 Zhihu Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+<resources>
+    <string name="account">用户名</string>
+    <string name="password">密码</string>
+
+    <string name="pic">相册</string>
+    <string name="take_photo">拍照</string>
+    <string name="video">摄像</string>
+    <string name="file">文件</string>
+    <string name="carry_over">转账</string>
+    <string name="red_pack">红包</string>
+
+    <string name="cancel">取消</string>
+    <string name="sure">确定</string>
+    <string name="album_name_all">全部</string>
+    <string name="button_preview">预览</string>
+    <string name="button_apply_default">使用</string>
+    <string name="button_apply">使用(%1$d)</string>
+    <string name="button_back">返回</string>
+    <string name="photo_grid_capture">拍一张</string>
+    <string name="empty_text">还没有图片或视频</string>
+    <string name="button_ok">我知道了</string>
+
+    <string name="error_over_count_default">您已经达到最大选择数量</string>
+    <string name="error_over_count">最多只能选择 %1$d 个文件</string>
+    <string name="error_under_quality">图片质量太低</string>
+    <string name="error_over_quality">图片质量太高</string>
+    <string name="error_file_type">不支持的文件类型</string>
+    <string name="error_type_conflict">不能同时选择图片和视频</string>
+    <string name="error_no_video_activity">没有支持视频预览的应用</string>
+    <string name="error_over_original_size">"该照片大于 %1$d M，无法上传将取消勾选原图"</string>
+    <string name="error_over_original_count">"有 %1$d 张照片大于 %2$d M\n无法上传，将取消勾选原图"</string>
+    <string name="button_original">原图</string>
+    <string name="button_sure_default">确定</string>
+    <string name="button_sure">确定(%1$d)</string>
+    <string name="face_recently">Recently</string>
+    <string name="face_Emoji">Emoji</string>
+    <string name="face_set_one">Default</string>
+
+    <string name="action_photo">图片</string>
+    <string name="action_video">视频</string>
+    <string name="action_voice">语音</string>
+    <string name="action_location">位置</string>
+    <string name="action_file">文件</string>
+    <string name="action_custom_emoji">自定义表情</string>
+
+    <string name="un_download">未下载</string>
+    <string name="downloaded">已下载</string>
+    <string name="downloading">下载中...</string>
+    <string name="sending">发送中...</string>
+    <string name="sended">已发送</string>
+
+    <string name="self">我</string>
+    <string name="user_sex">性别</string>
+    <string name="user_location">所在地</string>
+    <string name="user_birthday">生日</string>
+    <string name="chat_to_top">置顶聊天</string>
+    <string name="chat_to_top_cancel">取消置顶</string>
+    <string name="chat_delete">删除聊天</string>
+    <string name="send_message">发送消息</string>
+    <string name="send">发送</string>
+    <string name="add_friend">添加好友</string>
+    <string name="del_friend">删除好友</string>
+    <string name="add_to_blacklist">加入黑名单</string>
+    <string name="add_rule">添加好友认证方式</string>
+    <string name="add_friend_success">添加好友成功</string>
+    <string name="settings">设置</string>
+    <string name="logout">注销</string>
+    <string name="modify_nick_name">修改昵称</string>
+    <string name="modify_signature">修改个性签名</string>
+
+    <string name="group_members">群成员</string>
+    <string name="group_join_apply">申请列表</string>
+    <string name="group_type">群类型</string>
+    <string name="add_group_member">增加成员</string>
+    <string name="remove_group_member">移除成员</string>
+    <string name="join_group_type">加群方式</string>
+    <string name="in_group_nick_name">我的群昵称</string>
+    <string name="dissolve">解散该群</string>
+    <string name="modify_group_name">修改群名称</string>
+    <string name="modify_group_notice">修改群公告</string>
+    <string name="record_cancel_tips">手指上滑，取消发送</string>
+    <string name="contacts">联系人</string>
+
+
+    <string name="pickerview_cancel">取消</string>
+    <string name="pickerview_submit">确定</string>
+    <string name="pickerview_year">年</string>
+    <string name="pickerview_month">月</string>
+    <string name="pickerview_day">日</string>
+    <string name="pickerview_hours">时</string>
+    <string name="pickerview_minutes">分</string>
+    <string name="pickerview_seconds">秒</string>
+    <string name="search">搜索</string>
+    <string name="c2c_session_start">发消息</string>
+    <string name="c2c_session_search_hint">请输入对方ID</string>
+    <string name="create_group_chat">创建群聊</string>
+    <string name="input_group_name">群聊名称</string>
+    <string name="group_detail">群聊详情</string>
+    <string name="input_group_notice">群公告</string>
+    <string name="group_search_hint">请输入群组ID</string>
+    <string name="join">加入</string>
+    <string name="accept">接受</string>
+    <string name="refuse">拒绝</string>
+    <string name="group_apply_members">群申请</string>
+    <string name="accepted">已接受</string>
+    <string name="refused">已拒绝</string>
+    <string name="group_apply_tips">条入群申请</string>
+    <string name="group_apply_click_handle">点击处理</string>
+    <string name="group_remove_member">移出群聊</string>
+    <string name="group_join_type">加群方式</string>
+    <string name="modify_group_name_success">修改群名称成功</string>
+    <string name="modify_group_notice_success">修改群通知成功</string>
+    <string name="exit_group">退出群聊</string>
+    <string name="modify_nickname_success">修改昵称成功</string>
+    <string name="input_group_id_empty_tips">群组ID不能为空</string>
+    <string name="input_group_type_empty_tips">请选择群类型</string>
+    <string name="input_group_member_empty_tips">请选择群成员</string>
+    <string name="join_group_type_empty_tips">请选择群加群方式</string>
+    <string name="view_original_image">查看原图</string>
+
+
+    <string name="relogin">重新登录</string>
+    <string name="force_logout">您的账号已在其它终端登录</string>
+    <string name="attention">注意</string>
+    <string name="receive_a_message">收到一条消息</string>
+    <!--2019年12月17日11:37:44需要翻译-->
+    <string name="receive_a_red_package">收到一个红包</string>
+    <string name="receive_a_transfer_message">收到一个转账消息</string>
+    <string name="manual_settings">使用该功能，需要开启权限，鉴于您禁用相关权限，请手动设置开启权限</string>
+    <string name="max_message_length">已达最大消息长度</string>
+    <string name="you_accepted_the_transfer">你接收了对方的转账</string>
+    <string name="your_transfer_was_accepted">对方接收了你的转账</string>
+    <string name="session_adapter_share_tips">[分享]</string>
+    <string name="session_apdater_red_packet_tips">[红包]</string>
+    <string name="session_adapter_transfer_account_tips">[转账]</string>
+    <string name="red_package_msg">恭喜发财，大吉大利</string>
+    <string name="red_package">红包</string>
+    <string name="red_package_msg2">恭喜发财</string>
+    <string name="click_receiver">点击领取</string>
+    <string name="yellowpage_share">黄页分享</string>
+    <string name="news_share">新闻分享</string>
+    <string name="nearby_city_share">同城分享</string>
+    <string name="your_withdrew_message">您撤回了一条消息</string>
+    <string name="withdrew_message">撤回了一条消息</string>
+    <string name="other_withdrew_message">对方撤回了一条消息</string>
+    <string name="you_accepted_the_red_package">你领取了对方的红包</string>
+    <string name="your_accepted_was_red_package">对方领取了你的红包</string>
+    <string name="we_are_friend_we_can_chat">我们现在是朋友，可以开始聊天了</string>
+
+    // 群信息相关
+    <string name="create_group_chat2">发起群聊</string>
+    <string name="tips_empty_group_member">请选择群成员</string>
+    <string name="tips_empty_group_type">请选择加群方式</string>
+    <string name="no_friend_apply">暂无好友申请</string>
+    <string name="group_emptry_tips">ta们很懒，暂时还没有群公告~~</string>
+    <string name="group_chat_member">群聊成员</string>
+    <string name="group_chat_more">查看更多群成员</string>
+    <string name="group_chat_name">群聊名称</string>
+    <string name="group_broadcast">群公告</string>
+    <string name="group_chat_msg_no_disturb">消息免打扰</string>
+    <string name="group_chat_top">聊天置顶</string>
+    <string name="group_chat_my_nickname">我在本群的昵称</string>
+    <string name="group_chat_show_member_nickname">显示群成员昵称</string>
+    <string name="group_chat_clear">清空聊天记录</string>
+    <string name="exit_chat">退出群聊</string>
+    <string name="sure_delete_group">确认解散该群?</string>
+    <string name="sure_exit_group">确认退出该群?</string>
+    <string name="add">添加</string>
+    <string name="please_modification_group_name">请输入您想修改的群名称</string>
+    <string name="please_modification_group_nickname">请输入您想修改的群昵称</string>
+    <string name="modification_group_name">修改群聊名称</string>
+    <string name="modification_group_nickname">修改群昵称</string>
+    <string name="modification_group_notice_hint">请输入群公告</string>
+    <string name="confirm_exit_group_chat">确认退出该群?</string>
+    <string name="confirm_clear_chat_history">是否确定清空聊天记录?</string>
+    <string name="clear_success">清除成功</string>
+    <string name="up_slide_cancel_record">上滑取消录音</string>
+    <string name="speak_time_is_too_short">说话时间太短</string>
+    <string name="no_touch_cancel_send">松开手指，取消发送</string>
+    <string name="group_chat_avatar">群头像</string>
+
+    <string name="photo_album">相册</string>
+    <string name="classic_image">经典头像</string>
+    <string name="permission_camata_sd">需要您的拍照和内存卡访问权限，是否允许？</string>
+    <string name="your_receiver_red_packet">你领取红包</string>
+    <string name="have_receiver">领取了</string>
+    <string name="your_red_packet">你的红包</string>
+    <string name="rp">的红包</string>
+    <string name="only_group_master_modify">—— 仅群主可编辑 ——</string>
+    <string name="already_received">已领取</string>
+    <string name="click_receive">点击领取</string>
+    <string name="create_group">创建群组</string>
+    <string name="press_talk">按住说话</string>
+    <string name="rp_receiver">红包已领取</string>
+    <string name="transfer_receiver">转账已领取</string>
+    <string name="tim_psersonal_info">个人名片</string>
+    <string name="tim_psersonal_info2">推荐给朋友</string>
+    <string name="your_request_trans">你发起了一笔转账交易</string>
+    <string name="your_response_trans">你收到一笔转账交易</string>
+</resources>

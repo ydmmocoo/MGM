@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <com.tencent.qcloud.uikit.common.widget.ShadeImageView
+            android:id="@+id/ivImage"
+            android:layout_width="118dp"
+            android:layout_height="78dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/food_default"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/black_33"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/ivImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tool:text="AI软件要怎么做图片的透明度渐变？AI软件要怎么做图片的透明度渐变AI软件要怎么做图片的透明度渐变" />
+
+        <TextView
+            android:id="@+id/tvMoney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/solid_gray_shape"
+            android:paddingStart="5dp"
+            android:paddingTop="2dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="2dp"
+            android:textColor="@color/colorAccent"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+            tool:text="赏金0AR" />
+
+        <TextView
+            android:id="@+id/tvNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:padding="2dp"
+            android:textColor="@color/text_gray8e"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvMoney"
+            app:layout_constraintEnd_toStartOf="@+id/tvTime"
+            app:layout_constraintTop_toTopOf="@+id/tvMoney"
+            tool:text="0回答" />
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:padding="2dp"
+            android:textColor="@color/text_gray8e"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvMoney"
+            app:layout_constraintEnd_toStartOf="@+id/ivImage"
+            app:layout_constraintTop_toTopOf="@+id/tvMoney"
+            tool:text="1分钟前" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray_line"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</LinearLayout>

@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">common</string>
+    <string name="download_back">L`application se télécharge en arrière plan,veuillez vérifier la barre d`état</string>
+    <string name="hint_rank_no_privileges">votre niveaau d’adhésion est insuffisant,accéder à la mise à niveau ou non?？</string>
+    <string name="att">signal</string>
+    <string name="go_uplevel">aller sur la mise à niveau</string>
+    <string name="cancel">annuler</string>
+    <string name="no_levelup">pas de mise à niveau pour le moment</string>
+    <string name="buy_level">acheter un niveau d`adhésion</string>
+    <string name="invite_register">inviter des amis à s’inscrire</string>
+    <string name="close">fermer</string>
+    <string name="hint_forbidden">due à une opération incorrecte,certaine fonction de votre compte a été désactivée,veuillez contacter le service clientèle！</string>
+    <string name="fingerprint_payment">paiement par empreintes digitales</string>
+    <string name="please_pay_psw">Veuillez saisir le mot de passe de paiement</string>
+    <string name="complaint">Réclamation</string>
+    <string name="delete">Supprimer </string>
+</resources>

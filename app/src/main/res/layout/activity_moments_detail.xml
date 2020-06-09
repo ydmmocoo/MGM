@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_toolbar" />
+
+    <com.library.common.view.refresh.CustomRefreshView
+        android:id="@+id/refreshView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:id="@+id/llCommentParent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.fjx.mg.view.RoundImageView
+                        android:id="@+id/ivUserAvatar"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        android:src="@drawable/default_head"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvUserName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="@string/user"
+                        android:textColor="@color/black_33"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toEndOf="@+id/ivUserAvatar"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvcreateTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="6dp"
+                        android:text="2019"
+                        android:textColor="@color/textColorHint"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvSex"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/solid_stroke_city_circle_blue1"
+                        android:drawableStart="@drawable/boy_blue"
+                        android:paddingStart="10dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="10dp"
+                        android:paddingBottom="5dp"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="@+id/tvUserName"
+                        app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="80dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvSex"
+                        app:layout_constraintTop_toTopOf="@+id/tvSex" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/tvContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:paddingStart="47dp"
+                    android:textColor="#1a1a1a"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_marginStart="47dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="14dp"
+                    android:id="@+id/llShareContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#F3F2F7"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/ivPic"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:scaleType="centerCrop" />
+
+                    <TextView
+                        android:id="@+id/tvContent2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:textColor="@color/textColor"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerType2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:paddingStart="47dp" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:visibility="invisible"
+                        android:id="@+id/tvAdress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="47dp"
+                        android:layout_weight="1"
+                        android:drawableStart="@drawable/location_red"
+                        android:ellipsize="end"
+                        android:paddingStart="10dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="5dp"
+                        android:singleLine="true"
+                        android:textColor="@color/text_gray8e"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvKm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="10dp"
+                        android:paddingBottom="5dp"
+                        android:textColor="@color/text_gray8e"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:id="@+id/imgComment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:src="@drawable/comments_gray" />
+
+                    <ImageView
+                        android:id="@+id/imgPraise"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:src="@drawable/like_gray" />
+
+                    <ImageView
+                        android:id="@+id/imgMore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:src="@drawable/more_black" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="47dp">
+
+                    <com.fjx.mg.moments.city.DetailPraiseListView
+                        android:visibility="gone"
+                        android:id="@+id/praiseListView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#F3F2F7"
+                        android:gravity="center_vertical"
+                        android:lineSpacingMultiplier="1.1"
+                        android:padding="10dp"
+                        android:textColor="@color/bule_0049"
+                        android:textSize="14sp"
+                        app:item_color="@color/bule_0049" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="47dp">
+
+                    <com.fjx.mg.moments.city.DetailCommentListView
+                        android:visibility="gone"
+                        android:id="@+id/commentList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:background="#F3F2F7"
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                        app:item_color="@color/bule_0049" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </com.library.common.view.refresh.CustomRefreshView>
+
+    <include layout="@layout/line" />
+
+</LinearLayout>

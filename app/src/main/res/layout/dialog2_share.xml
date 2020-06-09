@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvSMSCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/sms_share"
+            android:drawablePadding="10dp"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="@string/sms_code" />
+
+        <TextView
+            android:id="@+id/tvShareFacebook"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/share_facebook"
+            android:drawablePadding="10dp"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="facebook" />
+
+        <TextView
+            android:id="@+id/tvShareWechat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/share_wx"
+            android:drawablePadding="10dp"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="@string/wechat" />
+
+        <TextView
+            android:id="@+id/tvShareCircle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/share_wx_circle"
+            android:drawablePadding="10dp"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="@string/friend_circle" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvCancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="@string/cancel" />
+
+</LinearLayout>

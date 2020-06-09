@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:background="@color/colorAccent"
+        android:padding="10dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clAddRoot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true">
+
+            <TextView
+                android:id="@+id/viewDot"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="@drawable/solid_red_d1_shape"
+                android:gravity="center"
+                android:text="99"
+                android:textColor="@color/colorAccent"
+                android:textSize="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/ivAddFriend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/add_gray"
+                android:tint="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/viewDot"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/ivSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="19dp"
+            android:layout_toLeftOf="@id/clAddRoot"
+            android:src="@drawable/friends_big_white_search_ic" />
+
+    </RelativeLayout>
+
+
+    <!--    <com.library.common.PagerSlidingTabStrip xmlns:psts="http://schemas.android.com/apk/res-auto"-->
+    <!--        android:id="@+id/tabs"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="50dp"-->
+    <!--        android:background="@color/colorAccent"-->
+    <!--        android:paddingLeft="35dp"-->
+    <!--        android:paddingRight="35dp"-->
+    <!--        psts:SelectedTabTextColor="@color/white"-->
+    <!--        psts:SelectedTabTextSize="23sp"-->
+    <!--        psts:TabTextColor="@color/white"-->
+    <!--        psts:TabTextSize="15sp"-->
+    <!--        psts:pstsDividerColor="@color/background_tab_pressed"-->
+    <!--        psts:pstsIndicatorColor="@color/white"-->
+    <!--        psts:pstsIndicatorHeight="4dp"-->
+    <!--        psts:pstsIndicatorWidth="32dp"-->
+    <!--        psts:pstsShouldExpand="true"-->
+    <!--        psts:pstsTabPaddingLeftRight="1dp"-->
+    <!--        psts:pstsTextAllCaps="false"-->
+    <!--        psts:pstsUnderlineColor="@color/white"-->
+    <!--        psts:pstsUnderlineHeight="0dp" />-->
+    <com.flyco.tablayout.SlidingTabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/white"
+        app:tl_indicator_color="@color/colorAccent"
+        app:tl_indicator_height="3dp"
+        app:tl_indicator_margin_top="3dp"
+        app:tl_indicator_width_equal_title="true"
+        app:tl_tab_padding="10dp"
+        app:tl_tab_space_equal="true"
+        app:tl_textBold="SELECT"
+        app:tl_textSelectColor="@color/colorAccent"
+        app:tl_textUnselectColor="@color/textColor"
+        app:tl_textsize="16sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.7dp"
+        android:background="#30000000" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

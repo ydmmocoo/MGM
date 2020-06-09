@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/gray_bg" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corner_bg_white">
+
+        <TextView
+            android:id="@+id/tv_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/colorAccent"
+            android:textSize="34sp"
+            tools:text="100" />
+
+        <TextView
+            android:id="@+id/tv_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_amount"
+            android:layout_toEndOf="@+id/tv_amount"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp"
+            tools:text="AR" />
+
+        <TextView
+            android:id="@+id/tv_condition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_amount"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/gray_text"
+            android:textSize="12sp"
+            tools:text="满88AR可用" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_unit"
+            android:layout_marginStart="45dp"
+            android:layout_toEndOf="@+id/tv_unit"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:text="567蛋糕房" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_condition"
+            android:layout_alignStart="@+id/tv_title"
+            android:layout_marginTop="5dp"
+            android:text="@string/term_of_validity"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_used"
+            android:layout_width="65dp"
+            android:layout_height="26dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/btn_yellow_bg"
+            android:contentDescription="@null"
+            android:gravity="center"
+            android:text="@string/use_now"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <View
+            android:id="@+id/v_line"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@+id/tv_condition"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="15dp"
+            android:background="@color/line_color"
+            android:visibility="invisible" />
+
+    </RelativeLayout>
+
+</LinearLayout>

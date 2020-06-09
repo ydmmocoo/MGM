@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clipChildren="false"
+    android:orientation="vertical">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include
+                layout="@layout/include_pay_ment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:text="综合"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.library.common.view.dropmenu.DrapMenuTab
+                    android:id="@+id/tvzh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:padding="15dp"
+                    android:text="@string/synthesize"
+                    app:dmt_selectIcon="@drawable/select_up"
+                    app:dmt_selectTextColor="@color/colorAccent"
+                    app:dmt_un_selectIcon="@drawable/select_down"
+                    app:dmt_un_selectTextColor="@color/textColor"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.library.common.view.dropmenu.DrapMenuTab
+                    android:id="@+id/dmtCom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:padding="15dp"
+                    android:text="@string/all"
+                    app:dmt_selectIcon="@drawable/select_up"
+                    app:dmt_selectTextColor="@color/colorAccent"
+                    app:dmt_un_selectIcon="@drawable/select_down"
+                    app:dmt_un_selectTextColor="@color/textColor"
+                    app:layout_constraintEnd_toStartOf="@+id/dmtTime"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/tvzh"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.library.common.view.dropmenu.DrapMenuTab
+                    android:id="@+id/dmtTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:padding="15dp"
+                    android:text="@string/time"
+                    app:dmt_selectIcon="@drawable/select_up"
+                    app:dmt_selectTextColor="@color/colorAccent"
+                    app:dmt_un_selectIcon="@drawable/select_down"
+                    app:dmt_un_selectTextColor="@color/textColor"
+                    app:layout_constraintEnd_toStartOf="@+id/dmtPrice"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/dmtCom"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.library.common.view.dropmenu.DrapMenuTab
+                    android:id="@+id/dmtPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:padding="15dp"
+                    android:text="@string/paid_amount"
+                    app:dmt_selectIcon="@drawable/select_up"
+                    app:dmt_selectTextColor="@color/colorAccent"
+                    app:dmt_un_selectIcon="@drawable/select_down"
+                    app:dmt_un_selectTextColor="@color/textColor"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/dmtTime"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <com.library.common.view.refresh.CustomRefreshView
+                android:id="@+id/refreshView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </com.library.common.view.refresh.CustomRefreshView>
+
+            <com.library.common.view.dropmenu.DropContentView
+                android:id="@+id/dcview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#88000000" />
+
+        </FrameLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="10dp"
+            android:clickable="true"
+            app:rippleColor="#D02934"
+            android:backgroundTint="#D02934"
+            app:maxImageSize="50dp"
+            android:src="@drawable/btn_ask"
+            app:backgroundTint="@color/white"
+            app:borderWidth="0dp" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray_line" />
+
+</LinearLayout>

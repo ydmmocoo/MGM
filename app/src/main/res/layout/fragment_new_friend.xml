@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/top_session_color"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="right|center_vertical">
+
+        <TextView
+            android:id="@+id/ivContacts"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/solid_white_5dp_shape"
+            android:drawableStart="@drawable/search_gray"
+            android:padding="10dp"
+            android:text="@string/search_friend"
+            android:textColor="@color/textColorHint"
+            android:textSize="12sp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:tint="@color/white"
+                android:id="@+id/ivAddFriend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:src="@drawable/add_gray"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/viewDot"
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/solid_nomal_shape"
+                android:gravity="center"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:text="99"
+                android:textColor="@color/textColorAccent"
+                android:textSize="8dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/ivAddFriend"
+                app:layout_constraintStart_toEndOf="@+id/ivAddFriend"
+                app:layout_constraintTop_toTopOf="@+id/ivAddFriend" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvNetError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="#FDEAE8"
+                android:drawableStart="@drawable/net_error"
+                android:drawablePadding="10dp"
+                android:gravity="center"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="5dp"
+                android:text="@string/hint_net_error"
+                android:textColor="#f35643"
+                android:visibility="visible" />
+
+            <RelativeLayout
+                android:id="@+id/rlPayNotice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/session_icon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/friend_pay" />
+
+                <TextView
+                    android:id="@+id/session_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@id/session_icon"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/pay_notice"
+                    android:textColor="@color/black_33"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/session_last_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/session_title"
+                    android:layout_alignBottom="@id/session_icon"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/transfer_notice_hint"
+                    android:textColor="@color/textColorGray"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/session_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/session_title"
+                    android:layout_alignParentRight="true"
+                    android:textColor="#bababa"
+                    android:textSize="12sp" />
+
+                <com.tencent.qcloud.uikit.common.widget.UnReadCountTextView
+                    android:id="@+id/session_unRead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:textColor="#fff"
+                    android:textSize="10sp"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:src="@drawable/red_dot"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+            <include layout="@layout/line" />
+
+            <RelativeLayout
+                android:id="@+id/rlSysNotice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/session_sys_icon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/sys_notice" />
+
+                <TextView
+                    android:id="@+id/session_sys_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@id/session_sys_icon"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/sys_notice"
+                    android:textColor="@color/black_33"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/session__sys_last_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/session_sys_title"
+                    android:layout_alignBottom="@id/session_sys_icon"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/see_notice"
+                    android:textColor="@color/textColorGray"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/session_sys_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/session_sys_title"
+                    android:layout_alignParentRight="true"
+                    android:textColor="#bababa"
+                    android:textSize="12sp" />
+
+                <com.tencent.qcloud.uikit.common.widget.UnReadCountTextView
+                    android:id="@+id/session_sys_unRead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:textColor="#fff"
+                    android:textSize="10sp"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:src="@drawable/red_dot"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="@color/gray_f1f0f6" />
+
+            <com.tencent.qcloud.uikit.business.session.view.SessionPanel
+                android:id="@+id/session_panel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.7dp"
+                android:background="@color/gray_f1f0f6" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

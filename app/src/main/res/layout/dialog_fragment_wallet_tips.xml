@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="294dp"
+    android:layout_height="294dp"
+    android:layout_gravity="center"
+    android:background="@android:color/white">
+
+    <TextView
+        android:id="@+id/tvWalletTipsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/withdrawal_steps"
+        android:textColor="@color/textColor"
+        android:textSize="24sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:id="@+id/tvStepOne"
+        style="@style/TextView_15sp_333333"
+        android:layout_marginTop="19dp"
+        android:text="@string/withdrawal_tips1"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvWalletTipsTitle" />
+
+    <TextView
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:id="@+id/tvStepTwo"
+        style="@style/TextView_15sp_333333"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="@string/withdrawal_tips2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvStepOne" />
+
+    <Button
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:background="@drawable/dialog_fragment_wallet_tips_btn_bg"
+        android:id="@+id/btnSearchNearbyNetwork"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/find_nearby_network"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvStepTwo" />
+
+    <TextView
+        android:id="@+id/tvCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/next_time"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnSearchNearbyNetwork" />
+
+    <LinearLayout
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvCancel"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@android:color/white"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

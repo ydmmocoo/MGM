@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    //设置系统状态栏颜色为透明
+
+    <style name="NearbyCityTheme" parent="AppTheme">
+
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent
+        </item>
+    </style>
+</resources>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:divider="@drawable/shape_line"
+    android:orientation="vertical"
+    android:showDividers="middle">
+
+    <include layout="@layout/layout_toolbar" />
+
+    <TextView
+        android:id="@+id/tv_personal"
+        style="@style/CommonPaddingStyle"
+        android:background="@color/white"
+        android:drawableEnd="@drawable/ic_right_arrow"
+        android:text="@string/personal_message"
+        android:textColor="@color/textColor" />
+
+    <TextView
+        android:id="@+id/tvSaveCenter"
+        style="@style/CommonPaddingStyle"
+        android:background="@color/white"
+        android:drawableEnd="@drawable/ic_right_arrow"
+        android:text="@string/safe_center"
+        android:textColor="@color/textColor" />
+
+    <LinearLayout
+        android:id="@+id/llCertification"
+        style="@style/CommonPaddingStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/Real_name_authentication"
+            android:textColor="@color/textColor" />
+
+        <TextView
+            android:id="@+id/tvCertPerson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:drawableEnd="@drawable/ic_right_arrow"
+            android:drawablePadding="10dp"
+            android:text="@string/unCertified"
+            android:textColor="@color/textColorGray" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/llCertCompany"
+        style="@style/CommonPaddingStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/Enterprise_Certification"
+            android:textColor="@color/textColor" />
+
+        <TextView
+            android:id="@+id/tvCertCompany"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:drawableEnd="@drawable/ic_right_arrow"
+            android:drawablePadding="10dp"
+            android:text="@string/unCertified"
+            android:textColor="@color/textColorGray" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvshielding_friends"
+        style="@style/CommonPaddingStyle"
+        android:background="@color/white"
+        android:drawableEnd="@drawable/ic_right_arrow"
+        android:text="@string/shielding_friends"
+        android:textColor="@color/textColor"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tvAddress"
+        style="@style/CommonPaddingStyle"
+        android:background="@color/white"
+        android:drawableEnd="@drawable/ic_right_arrow"
+        android:text="@string/my_receive_address"
+        android:textColor="@color/textColor" />
+
+
+    <TextView
+        android:id="@+id/tvLoginPassword"
+        style="@style/CommonPaddingStyle"
+        android:background="@color/white"
+        android:drawableEnd="@drawable/ic_right_arrow"
+        android:text="@string/edit_login_password"
+        android:textColor="@color/textColor"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tvPayPassword"
+        style="@style/CommonPaddingStyle"
+        android:background="@color/white"
+        android:drawableEnd="@drawable/ic_right_arrow"
+        android:text="@string/set_pay_password"
+        android:textColor="@color/textColor"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tvPrivacy"
+        style="@style/CommonPaddingStyle"
+        android:background="@color/white"
+        android:drawableEnd="@drawable/ic_right_arrow"
+        android:text="@string/privacy"
+        android:textColor="@color/textColor" />
+
+    <TextView
+        android:id="@+id/tvUpdate"
+        style="@style/CommonPaddingStyle"
+        android:background="@color/white"
+        android:drawableEnd="@drawable/ic_right_arrow"
+        android:text="@string/check_version"
+        android:textColor="@color/textColor" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tvClearCache"
+        style="@style/CommonPaddingStyle"
+        android:background="@color/white"
+        android:drawableEnd="@drawable/ic_right_arrow"
+        android:text="@string/clear_cache"
+        android:textColor="@color/textColor" />
+    <TextView
+        android:id="@+id/tvAbout"
+        style="@style/CommonPaddingStyle"
+        android:background="@color/white"
+        android:drawableEnd="@drawable/ic_right_arrow"
+        android:text="@string/abount"
+        android:textColor="@color/textColor" />
+
+
+    <TextView
+        android:id="@+id/tvExit"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/solid_nomal_shape"
+        android:gravity="center"
+        android:text="@string/exit_login"
+        android:textColor="@color/white" />
+</LinearLayout>

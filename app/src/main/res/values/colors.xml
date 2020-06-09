@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#ffffff</color>
+    <color name="colorAccent">#d12934</color>
+    <color name="trans">#00000000</color>
+    <color name="transWhite1">#22ffffff</color>
+    <color name="transWhite2">#66ffffff</color>
+    <color name="parentBgColor">#F1F0F6</color>
+    <color name="meStatusColor">#E54C61</color>
+    <color name="dialogTransColor">#88000000</color>
+
+    <color name="white">#ffffff</color>
+    <color name="bule_0049">#004972</color>
+    <color name="tab_default">#636363</color>
+    <color name="tab_check">#d12934</color>
+    <color name="colorRed">#d12934</color>
+    <color name="black_1A1A1A">#1A1A1A</color>
+    <color name="searchBg">#f1f0f5</color>
+    <color name="activityBg">#f1f0f5</color>
+    <color name="default_clickable_color">#cccccc</color>
+    <color name="textColor">#333333</color>
+    <color name="textColor_666666">#666666</color>
+    <color name="textColorHint">#bbbbbb</color>
+    <color name="textColorAccent">#d12934</color>
+    <color name="textColorAccent66">#66d12934</color>
+    <color name="textColorRed">#ea3200</color>
+    <color name="textColorBlak">#333333</color>
+    <color name="textColorBlak1">#000000</color>
+    <color name="textColorYellow">#ffb637</color>
+    <color name="textColorYellow3">#FFEED9</color>
+    <color name="textColorYellow1">#f6921e</color>
+    <color name="textColorYellow2">#f7931e</color>
+    <color name="textColorYellow4">#a57200</color>
+    <color name="textColorYellow5">#FAAF3B</color>
+    <color name="textColorBlue">#004972</color>
+    <color name="textColorGray">#8d8d8d</color>
+    <color name="textColorGray1">#CACACA</color>
+    <color name="colorGrayBg">#f1f0f7</color>
+    <color name="colorGrayBg2">#b2b2b2</color>
+    <color name="yellow_bg1">#EEDAB6</color>
+    <color name="divider_color">#F4F4F4</color>
+    <color name="divider_color1">#ECECEC</color>
+    <color name="homeTabBg">#f5f6f7</color>
+    <color name="colorPink">#DF6A71</color>
+    <color name="colorGreen">#39b44a</color>
+    <color name="colorBlackBg">#333333</color>
+    <color name="praise_item">#8290AF</color>
+    <color name="viewfinder_mask">#00ffffff</color>
+    <color name="result_view">#b0000000</color>
+    <color name="my_colors">#0fAEFF</color>
+    <color name="possible_result_points">#c0ffff00</color>
+
+    <!--朋友圈标签-->
+    <color name="friends_blue">#3F51B5</color>
+    <color name="friends_red">#E5164A</color>
+    <color name="friends_green">#4CAF50</color>
+    <color name="friends_yellow">#FFEB3B</color>
+    <color name="friends_black">#1a1a1a</color>
+    <color name="friends_add_tag_default">#bbbbbb</color>
+    <color name="me_parner_top_bg">#20212a</color>
+
+    <color name="nearby_city_detail_tab_unselected">#8e8e8e</color>
+    <color name="c_8c8c8c">#8c8c8c</color>
+    <color name="c_d02934">#d02934</color>
+    <color name="friend_dynamic_top_color">#f7f7f7</color>
+    <color name="friend_dynamic_bottom_color">#efefef</color>
+    <color name="c_4d4d4d">#4d4d4d</color>
+    <color name="c_19c608">#19c608</color>//网络良好
+    <color name="c_ecbb3b">#ecbb3b</color>//网络一般
+    <color name="c_e62c30">#e62c30</color>//网络异常
+    <color name="c_e5e5e5">#e5e5e5</color>
+    <color name="c_666666">#666666</color>
+    <color name="translucent">#50000000</color>
+
+</resources>

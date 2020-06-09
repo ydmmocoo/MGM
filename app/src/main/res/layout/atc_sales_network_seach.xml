@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_search_red_common" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSearch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="257dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvFilter"
+                    style="@style/TextView_14sp_333333"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="45dp"
+                    android:drawableLeft="@drawable/sales_network_filter_ic"
+                    android:drawablePadding="5dp"
+                    android:text="@string/filter" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="27dp"
+                    android:layout_centerInParent="true"
+                    android:background="@color/divider_color" />
+
+                <TextView
+                    android:id="@+id/tvMap"
+                    style="@style/TextView_14sp_333333"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="45dp"
+                    android:drawableLeft="@drawable/sales_network_map_ic"
+                    android:drawablePadding="5dp"
+                    android:text="@string/gaode_map" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        class="com.google.android.gms.maps.SupportMapFragment"/>
+
+    <include layout="@layout/layout_search_red_common" />
+
+    <RelativeLayout
+        android:layout_width="257dp"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/sales_network_bottom_bg">
+
+        <TextView
+            android:id="@+id/tvFilter"
+            style="@style/TextView_14sp_333333"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="45dp"
+            android:drawableStart="@drawable/sales_network_filter_ic"
+            android:drawablePadding="5dp"
+            android:text="@string/filter" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="27dp"
+            android:layout_centerInParent="true"
+            android:background="@color/divider_color" />
+
+        <TextView
+            android:id="@+id/tvList"
+            style="@style/TextView_14sp_333333"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="45dp"
+            android:drawableStart="@drawable/sales_network_list_ic"
+            android:drawablePadding="5dp"
+            android:text="@string/sales_network_list" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/circle4"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="47dp"
+    android:layout_marginTop="1dp"
+    android:background="#F3F2F7"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <com.fjx.mg.moments.city.CommentListView
+        android:id="@+id/commentList"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        app:item_color="@color/bule_0049" />
+
+    <TextView
+        android:id="@+id/tvShowMore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:drawableRight="@drawable/arrow_right_new"
+        android:paddingTop="12dp"
+        android:text="@string/view_more"
+        android:textColor="@color/text_gray8e"
+        android:textSize="12sp" />
+
+</LinearLayout>

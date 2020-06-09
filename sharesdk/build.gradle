@@ -1,0 +1,80 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.mob.sdk'
+
+android {
+    compileSdkVersion config.compileSdkVersion
+    defaultConfig {
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+//sharesdk 配置
+MobSDK {
+    appKey "2b1317bdf85a0"
+    appSecret "9a92265aa4b111f45f83c56c267e0a51"
+    ShareSDK {
+        //平台配置信息
+        devInfo {
+            Wechat {
+                appId "wxe342a8e739a2fc93"
+                appSecret "90dd12a30ae41678c9810f34c01916eb"
+            }
+            WechatMoments {
+                appId "wxe342a8e739a2fc93"
+                appSecret "90dd12a30ae41678c9810f34c01916eb"
+            }
+            Facebook {
+                appKey "899172270510395"
+                appSecret "b869434ddab6694f3e592a1fe4e1bdd9"
+                callbackUri "https://mob.com"
+                shareByAppClient true
+                enable true
+            }
+        }
+    }
+
+    /*MobPush {
+        bradge true//设置是否开启角标开关
+        devInfo {
+            HUAWEI {
+                appId "100918789"
+            }
+            //小米推送配置信息
+            XIAOMI {
+                appId "2882303761518035227"
+                appKey "5181803596227"
+            }
+            FCM {
+                //设置默认推送通知显示图标
+                iconRes "@mipmap/app_logo"
+            }
+            VIVO {
+                appId "17135"
+                appKey "88bcdf61-6c65-4e98-996f-59f81f4dc49e"
+            }
+        }
+    }*/
+}
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    api project(':common')
+}

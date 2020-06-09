@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_more"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:textSize="12sp"
+        android:text="@string/take_out_food_more"
+        android:textColor="@color/black"
+        android:padding="10dp"
+        android:gravity="end"
+        android:drawablePadding="10dp"
+        android:drawableEnd="@drawable/arrow_right"
+        android:layout_height="wrap_content"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/line_color"/>
+
+</LinearLayout>

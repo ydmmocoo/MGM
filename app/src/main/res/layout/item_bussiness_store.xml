@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/tvImage"
+        android:layout_width="84dp"
+        android:layout_height="63dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvStoreName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:includeFontPadding="false"
+        tools:text="厦门探索酒店"
+        android:textColor="@color/textColorBlak"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/tvImage"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvItemType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        tools:text="酒店住宿"
+        android:textColor="@color/textColorGray"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/tvStoreName"
+        app:layout_constraintTop_toBottomOf="@+id/tvStoreName" />
+
+    <TextView
+        android:id="@+id/tvAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        tools:text="高崎机场/五缘湾附近"
+        android:textColor="@color/textColorGray"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/tvItemType"
+        app:layout_constraintTop_toBottomOf="@+id/tvItemType" />
+
+    <TextView
+        android:id="@+id/hint"
+        android:layout_width="18dp"
+        android:layout_height="14dp"
+        android:text="@string/month"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tvPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        tools:text="8888P"
+        android:textColor="@color/textColorAccent"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/hint"
+        app:layout_constraintEnd_toStartOf="@+id/hint" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="250dp"
+    android:layout_height="100dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/dialog_tips_bg_white">
+
+    <TextView
+        android:padding="15dp"
+        android:id="@+id/tvTitle"
+        android:text="仅群主可以编辑群头像"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textColor" />
+
+    <include layout="@layout/line" />
+
+    <TextView
+        android:textColor="@color/colorAccent"
+        android:id="@+id/tvSure"
+        android:padding="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sure" />
+
+</LinearLayout>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/id_toolbar"
+        layout="@layout/layout_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize" />
+
+    <include
+        android:layout_below="@id/id_toolbar"
+        android:id="@+id/line"
+        layout="@layout/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+    <com.library.common.view.refresh.CustomRefreshView
+        android:id="@+id/refreshView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/line">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCommon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    </com.library.common.view.refresh.CustomRefreshView>
+
+    <ImageView
+        android:id="@+id/ivPublisher"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="30dp"
+        android:clickable="false"
+        android:src="@drawable/friends_friend_circle_publisher_ic" />
+</RelativeLayout>

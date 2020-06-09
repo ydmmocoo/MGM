@@ -1,0 +1,5 @@
+<resources>
+    <string name="error_net">erreur de la connexion</string>
+    <string name="error_unknow">erreur inconnu</string>
+    <string name="error_socket_fail">net timeout</string>
+</resources>

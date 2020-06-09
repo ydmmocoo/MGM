@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="download_back">The app is downloaded in the background,please check the status bar</string>
+    <string name="hint_rank_no_privileges">Your membership level is insufficient, Upgrade or not？</string>
+    <string name="att">Prompt</string>
+    <string name="go_uplevel">Go to upgrade</string>
+    <string name="cancel">Cancel</string>
+    <string name="no_levelup">No upgrade for now</string>
+    <string name="buy_level">Purchase membership level</string>
+    <string name="invite_register">Invite friends to sign up</string>
+    <string name="close">Close</string>
+    <string name="hint_forbidden">Due to an incorrect operation , some functions of your account are disabled. Please contact customer service to manage it！</string>
+    <string name="fingerprint_payment">fingerprint payment</string>
+    <string name="please_pay_psw">Please enter the payment password</string>
+    <string name="complaint">Reclamation</string>
+    <string name="delete">To delete</string>
+</resources>

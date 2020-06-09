@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="71dp"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/line_color"/>
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_marginTop="18dp"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/black"
+        tools:text="抹茶千层"/>
+
+    <TextView
+        android:id="@+id/tv_attribute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/tv_name"
+        android:layout_alignStart="@id/tv_name"
+        android:textColor="@color/gray_text"
+        tools:text="抹茶千层"/>
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_centerInParent="true"
+        android:textColor="@color/black"
+        android:text="@string/goods_price"/>
+
+    <ImageView
+        android:id="@+id/iv_plus"
+        android:layout_width="40dp"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:contentDescription="@null"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:src="@mipmap/icon_plus" />
+
+    <TextView
+        android:id="@+id/tv_count"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_toStartOf="@+id/iv_plus"
+        android:gravity="center_vertical"
+        android:layout_centerVertical="true"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        tools:text="1" />
+
+    <ImageView
+        android:id="@+id/iv_less"
+        android:layout_width="40dp"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/tv_count"
+        android:contentDescription="@null"
+        android:src="@mipmap/icon_less" />
+
+</RelativeLayout>

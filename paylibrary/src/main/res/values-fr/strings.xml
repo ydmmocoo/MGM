@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">paylibrary</string>
+
+    <string name="errcode_success">envoi réussi</string>
+    <string name="errcode_cancel">envoi annulé</string>
+    <string name="errcode_deny">l’envoi a été réfusé</string>
+    <string name="errcode_unsupported">erreur non supporté</string>
+    <string name="errcode_unknown">renvoyer</string>
+
+</resources>

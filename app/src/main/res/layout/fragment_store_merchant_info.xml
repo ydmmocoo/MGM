@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tv_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/merchant_info"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_category_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_info"
+            android:layout_alignStart="@+id/tv_info"
+            android:layout_marginTop="15dp"
+            android:text="@string/category"
+            android:textColor="@color/text_color_gray" />
+
+        <TextView
+            android:id="@+id/tv_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_info"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/black"
+            tools:text="甜点蛋糕" />
+
+        <TextView
+            android:id="@+id/tv_merchant_address_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_category_text"
+            android:layout_alignStart="@+id/tv_info"
+            android:layout_marginTop="15dp"
+            android:text="@string/merchant_address"
+            android:textColor="@color/text_color_gray" />
+
+        <TextView
+            android:id="@+id/tv_merchant_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_category_text"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/black"
+            tools:text="厦门市湖里区钟宅路201号12室" />
+
+        <TextView
+            android:id="@+id/tv_merchant_phone_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_merchant_address_text"
+            android:layout_alignStart="@+id/tv_info"
+            android:layout_marginTop="15dp"
+            android:text="@string/merchant_phone"
+            android:textColor="@color/text_color_gray" />
+
+        <TextView
+            android:id="@+id/tv_merchant_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_merchant_address_text"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/textColorYellow5"
+            tools:text="0596-87675687" />
+
+        <TextView
+            android:id="@+id/tv_business_hours_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_merchant_phone_text"
+            android:layout_alignStart="@+id/tv_info"
+            android:layout_marginTop="15dp"
+            android:text="@string/business_hours"
+            android:textColor="@color/text_color_gray" />
+
+        <TextView
+            android:id="@+id/tv_business_hours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_merchant_phone_text"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/black"
+            tools:text="8:00-20:00" />
+
+        <TextView
+            android:id="@+id/tv_real_shop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_business_hours_text"
+            android:layout_alignStart="@+id/tv_info"
+            android:layout_marginTop="15dp"
+            android:text="@string/real_shop"
+            android:textColor="@color/text_color_gray" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_real_pic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_alignStart="@+id/tv_info"
+            android:layout_alignEnd="@+id/tv_business_hours"
+            android:layout_below="@+id/tv_real_shop"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_below="@+id/rv_real_pic"
+            android:layout_marginTop="16dp"
+            android:background="@color/gray_bg" />
+
+        <TextView
+            android:id="@+id/tv_business_qualification"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_below="@+id/rv_real_pic"
+            android:layout_marginTop="26dp"
+            android:drawableEnd="@drawable/arrow_right"
+            android:gravity="center_vertical"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="@string/business_qualification"
+            android:textColor="@color/black" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:background="@color/gray_bg"
+            android:layout_below="@+id/tv_business_qualification"/>
+
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>

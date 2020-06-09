@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:divider="@drawable/shape_line"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:showDividers="middle">
+
+    <include layout="@layout/layout_toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tvAreaCode"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:drawableEnd="@drawable/down_arrow"
+            android:drawablePadding="6dp"
+            android:gravity="center"
+            android:text="+86"
+            android:textColor="@color/textColor"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/etMobile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:background="@null"
+            android:hint="@string/hint_input_mibile_num"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:text="@string/smsCode"
+            android:textColor="@color/textColor" />
+
+        <EditText
+            android:id="@+id/etSmsCode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="@string/login_input_smscode"
+            android:inputType="number"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvGetSmsCode"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/getSmscode"
+            android:textColor="@color/textColorAccent" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/confirm"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="57dp"
+        android:background="@drawable/solid_shape_red"
+        android:gravity="center"
+        android:text="@string/confirm1"
+        android:textColor="@color/white" />
+
+</LinearLayout>

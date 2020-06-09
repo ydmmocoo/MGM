@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_33"
+    android:orientation="vertical"
+    tools:context=".scan.ScanSuccessfulActivity">
+
+    <ImageView
+        android:id="@+id/imgScanCancle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:src="@drawable/delete_white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="35dp"
+        android:background="@drawable/solid_black_corner10"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:src="@drawable/scan_recharge" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/whitdrawal_scan_hint"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:background="@drawable/scan_back"
+            android:gravity="bottom"
+            android:orientation="vertical"
+            android:paddingStart="20dp"
+            android:paddingBottom="20dp">
+
+            <TextView
+                android:id="@+id/tvScanPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="15dp"
+                android:textColor="@color/white"
+                android:textSize="27dp"
+                tools:text="167 8735 4679" />
+
+            <TextView
+                android:id="@+id/tvScanAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                tools:text="@string/whitdrawal_scan_hint" />
+
+            <TextView
+                android:id="@+id/tvScanPay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                tools:text="@string/whitdrawal_scan_hint" />
+
+            <TextView
+                android:id="@+id/tvScanPoundage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                tools:text="@string/whitdrawal_scan_hint" />
+
+            <TextView
+                android:id="@+id/tvScanOrderId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                tools:text="@string/scan_orderid" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvScanWithDrawal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/solid_shape_red_50dp"
+        android:gravity="center"
+        android:paddingStart="83dp"
+        android:paddingTop="15dp"
+        android:paddingEnd="83dp"
+        android:paddingBottom="15dp"
+        android:text="@string/whitdrlawal"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+</LinearLayout>

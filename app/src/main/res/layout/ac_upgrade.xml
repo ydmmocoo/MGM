@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_toolbar" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorGrayBg">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/level_hint"
+                android:textColor="@color/textColorGray"
+                android:textSize="15sp" />
+
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:stretchColumns="*">
+
+                <TableRow
+                    android:background="@color/colorGrayBg2"
+                    android:orientation="horizontal"
+                    android:padding="0.5dip">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorGrayBg"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/level"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0.5dp"
+                        android:background="@color/colorGrayBg"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/number_invitations"
+                        android:textSize="15sp" />
+                </TableRow>
+
+                <TableRow
+                    android:background="@color/colorGrayBg2"
+                    android:orientation="horizontal"
+                    android:paddingLeft="0.5dip"
+                    android:paddingEnd="0.5dp"
+                    android:paddingBottom="0.5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorGrayBg"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/level1"
+                        android:textColor="@color/textColor"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0.5dp"
+                        android:background="@color/colorGrayBg"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/upgrade_hint1"
+                        android:textColor="@color/textColor"
+                        android:textSize="15sp" />
+                </TableRow>
+
+                <TableRow
+                    android:background="@color/colorGrayBg2"
+                    android:orientation="horizontal"
+                    android:paddingLeft="0.5dip"
+                    android:paddingEnd="0.5dp"
+                    android:paddingBottom="0.5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorGrayBg"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/level2"
+                        android:textColor="@color/textColor"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tvHint2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0.5dp"
+                        android:background="@color/colorGrayBg"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/upgrade_hint2"
+                        android:textColor="@color/textColor"
+                        android:textSize="15sp" />
+                </TableRow>
+
+                <TableRow
+                    android:background="@color/colorGrayBg2"
+                    android:orientation="horizontal"
+                    android:paddingStart="0.5dip"
+                    android:paddingEnd="0.5dp"
+                    android:paddingBottom="0.5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorGrayBg"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/level3"
+                        android:textColor="@color/textColor"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tvHint3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0.5dp"
+                        android:background="@color/colorGrayBg"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/upgrade_hint3"
+                        android:textColor="@color/textColor"
+                        android:textSize="15sp" />
+                </TableRow>
+
+                <TableRow
+                    android:background="@color/colorGrayBg2"
+                    android:orientation="horizontal"
+                    android:paddingLeft="0.5dip"
+                    android:paddingEnd="0.5dp"
+                    android:paddingBottom="0.5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorGrayBg"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/level4"
+                        android:textColor="@color/textColor"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tvHint4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0.5dp"
+                        android:background="@color/colorGrayBg"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/upgrade_hint4"
+                        android:textColor="@color/textColor"
+                        android:textSize="15sp" />
+                </TableRow>
+
+                <TableRow
+                    android:background="@color/colorGrayBg2"
+                    android:orientation="horizontal"
+                    android:paddingLeft="0.5dip"
+                    android:paddingEnd="0.5dp"
+                    android:paddingBottom="0.5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorGrayBg"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/level5"
+                        android:textColor="@color/textColor"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tvHint5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0.5dp"
+                        android:background="@color/colorGrayBg"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/upgrade_hint5"
+                        android:textColor="@color/textColor"
+                        android:textSize="15sp" />
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</LinearLayout>

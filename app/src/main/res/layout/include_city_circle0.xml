@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/circle3"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="47dp"
+    android:layout_marginTop="10dp"
+    android:background="#F3F2F7"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <com.fjx.mg.moments.city.PraiseListView
+        android:padding="3dp"
+        android:id="@+id/praiseListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:lineSpacingMultiplier="1.1"
+        android:textColor="@color/bule_0049"
+        android:textSize="14sp"
+        app:item_color="@color/bule_0049" />
+
+</LinearLayout>

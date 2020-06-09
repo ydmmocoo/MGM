@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_toolbar" />
+
+    <include layout="@layout/line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivHeaderPic"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/food_default"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvUserName"
+                    style="@style/TextView_15sp_333333"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintLeft_toRightOf="@id/ivHeaderPic"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="一点点" />
+
+                <TextView
+                    android:id="@+id/tvCreateTime"
+                    style="@style/TextView_12sp_8e8e8e"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintBottom_toBottomOf="@id/ivHeaderPic"
+                    app:layout_constraintLeft_toLeftOf="@id/tvUserName"
+                    app:layout_constraintTop_toBottomOf="@id/tvUserName"
+                    tools:text="2天前" />
+
+                <TextView
+                    android:id="@+id/tvContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/textColor"
+                    android:textSize="15sp"
+                    app:layout_constraintLeft_toLeftOf="@id/ivHeaderPic"
+                    app:layout_constraintTop_toBottomOf="@id/ivHeaderPic"
+                    tools:text="＃房屋租售＃类类型：出租所在地区：思明区软件园二期装修情况：简装房子概况：有空调／热水器／餐桌齐全（为房东配备）、电视、小部分家具、沙发（可共用）部分厨具（锅碗瓢盆）为我自备，但欢迎共用。要出租的房间有：大床和床垫、衣柜、电脑桌，方便带衣即可入住，光线好，很温馨。交通方便：有路公交车到，周围有个菜市场。本栋楼层共层，所在楼层为楼！小区物业式管理，非常安全！干净舒适，房间光线足，通风性能良好。周一至周五晚上7：30－9：30看房比较好，周六日可随时看房。小区位置，眼界开阔，空气清新。楼下有农业、建设、工商、中行、邮政等多家银行，24保安值班，有停车场，安全、环境方面自然没得说，附近就是商业街、麦当劳、超市、农贸市场，离公交、超市很近。非常适合在附近上班的人。" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvDetailsPic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvContent"
+                    app:spanCount="3" />
+
+                <TextView
+                    android:id="@+id/tvType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/nearby_city_type_tv_bg"
+                    android:padding="5dp"
+                    android:textColor="#c3c2c7"
+                    android:textSize="13sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rvDetailsPic"
+                    tools:text="#二手汽车#" />
+
+                <View
+                    android:id="@+id/line1"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="19dp"
+                    android:background="@drawable/nearby_city_divider_bg"
+                    app:layout_constraintTop_toBottomOf="@id/tvType" />
+
+                <TextView
+                    android:id="@+id/tvCommentNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:textColor="@color/textColor"
+                    android:textSize="14sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line1"
+                    tools:text="评论70" />
+
+                <TextView
+                    android:id="@+id/tvLikeNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:textColor="@color/nearby_city_detail_tab_unselected"
+                    android:textSize="14sp"
+                    app:layout_constraintLeft_toRightOf="@+id/tvCommentNum"
+                    app:layout_constraintTop_toBottomOf="@id/line1"
+                    tools:text="点赞25" />
+
+                <TextView
+                    android:id="@+id/tvLookNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="15dp"
+                    android:textColor="@color/nearby_city_detail_tab_unselected"
+                    android:textSize="14sp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line1"
+                    tools:text="浏览25" />
+
+                <View
+                    android:id="@+id/line2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.7dp"
+                    android:layout_marginTop="15dp"
+                    android:background="#f1f0fb"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCommentNum" />
+
+                <com.fjx.mg.widget.viewpager.AutoHeightViewPager
+                    android:id="@+id/vpContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line2" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentBottom="true"
+            android:background="#f5f6f7">
+
+            <TextView
+                android:layout_marginStart="12dp"
+                android:id="@+id/tvComment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:drawableStart="@drawable/nearby_city_comment_ic"
+                android:drawablePadding="8dp"
+                android:padding="10dp"
+                android:text="@string/comment" />
+
+            <TextView
+                android:id="@+id/tvLike"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:drawableStart="@drawable/nearby_city_dianzan_ic"
+                android:drawablePadding="8dp"
+                android:padding="10dp"
+                android:text="@string/praise" />
+
+            <TextView
+                android:layout_marginEnd="12dp"
+                android:id="@+id/tvShare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:drawableStart="@drawable/nearby_city_shared"
+                android:drawablePadding="8dp"
+                android:padding="10dp"
+                android:text="@string/shared" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

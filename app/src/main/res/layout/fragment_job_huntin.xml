@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbarlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
+
+                <include
+                    layout="@layout/layout_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <include
+                    android:id="@+id/llSearch"
+                    layout="@layout/layout_search"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorGrayBg"
+                android:orientation="horizontal">
+
+                <com.library.common.view.dropmenu.DrapMenuTab
+                    android:id="@+id/dmtType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:hint="@string/job_type"
+                    android:paddingStart="10dp"
+                    android:paddingTop="15dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="15dp"
+                    android:textColorHint="@color/textColor"
+                    app:dmt_selectIcon="@drawable/select_up"
+                    app:dmt_selectTextColor="@color/colorAccent"
+                    app:dmt_un_selectIcon="@drawable/select_down"
+                    app:dmt_un_selectTextColor="@color/textColor"
+                    app:layout_constraintEnd_toStartOf="@+id/dmtArea"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.library.common.view.dropmenu.DrapMenuTab
+                    android:id="@+id/dmtArea"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:hint="@string/price_scope"
+                    android:paddingStart="10dp"
+                    android:paddingTop="15dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="15dp"
+                    android:textColorHint="@color/textColor"
+                    app:dmt_selectIcon="@drawable/select_up"
+                    app:dmt_selectTextColor="@color/colorAccent"
+                    app:dmt_un_selectIcon="@drawable/select_down"
+                    app:dmt_un_selectTextColor="@color/textColor"
+                    app:layout_constraintEnd_toStartOf="@+id/dmtExp"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/dmtType"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.library.common.view.dropmenu.DrapMenuTab
+                    android:id="@+id/dmtExp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:hint="@string/work_exp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="15dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="15dp"
+                    android:textColorHint="@color/textColor"
+                    app:dmt_selectIcon="@drawable/select_up"
+                    app:dmt_selectTextColor="@color/colorAccent"
+                    app:dmt_un_selectIcon="@drawable/select_down"
+                    app:dmt_un_selectTextColor="@color/textColor"
+                    app:layout_constraintEnd_toStartOf="@+id/dmtEdu"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/dmtArea"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.library.common.view.dropmenu.DrapMenuTab
+                    android:id="@+id/dmtEdu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:hint="@string/edu_require"
+                    android:paddingTop="15dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="15dp"
+                    android:textColorHint="@color/textColor"
+                    app:dmt_selectIcon="@drawable/select_up"
+                    app:dmt_selectTextColor="@color/colorAccent"
+                    app:dmt_un_selectIcon="@drawable/select_down"
+                    app:dmt_un_selectTextColor="@color/textColor"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/dmtExp"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <com.library.common.view.refresh.CustomRefreshView
+                android:id="@+id/refreshView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </com.library.common.view.refresh.CustomRefreshView>
+
+            <com.library.common.view.dropmenu.DropContentView
+                android:id="@+id/dcview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#88000000" />
+
+        </FrameLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

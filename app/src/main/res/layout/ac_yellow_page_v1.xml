@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_toolbar" />
+
+    <include
+        layout="@layout/lauout_search_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-10dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/colorGrayBg"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tvSelect"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:drawableStart="@drawable/select_black"
+            android:drawableEnd="@drawable/select_down"
+            android:drawablePadding="6dp"
+            android:gravity="center_vertical"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="@string/filter"
+            android:textColor="@color/textColor" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.library.common.view.refresh.CustomRefreshView
+            android:id="@+id/refreshView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible" />
+
+        </com.library.common.view.refresh.CustomRefreshView>
+
+        <include
+            android:id="@+id/dropMenu"
+            layout="@layout/layout_drop_menu"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+</LinearLayout>

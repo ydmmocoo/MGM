@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:paddingStart="36dp"
+        android:paddingEnd="36dp"
+        android:textColor="@color/black"
+        android:gravity="center_vertical"
+        tools:text="立即送出" />
+
+</LinearLayout>

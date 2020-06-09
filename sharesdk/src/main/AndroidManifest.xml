@@ -1,0 +1,29 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.common.sharesdk">
+
+    <application>
+
+        <activity android:name="cn.sharesdk.wechat.utils.WechatHandlerActivity"
+            android:theme="@android:style/Theme.Translucent"
+            android:exported="true"
+            android:launchMode="singleTop" />
+
+        <!--开启日志调试功能-->
+        <!--<meta-data
+            android:name="com.mob.mobpush.debugLevel"
+            android:value="4" />
+
+        <receiver
+            android:name="com.mob.pushsdk.plugins.huawei.PushHaiWeiRevicer">
+            <intent-filter>
+                <action android:name="com.huawei.android.push.intent.REGISTRATION" />
+                <action android:name="com.huawei.android.push.intent.RECEIVE" />
+                <action android:name="com.huawei.android.push.intent.CLICK" />
+                <action android:name="com.huawei.intent.action.PUSH_STATE" />
+                <action android:name="com.huawei.intent.action.PUSH_DELAY_NOTIFY" />
+            </intent-filter>
+        </receiver>-->
+
+    </application>
+
+</manifest>

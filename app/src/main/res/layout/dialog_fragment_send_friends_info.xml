@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="283dp"
+    android:layout_height="248dp"
+    android:background="@drawable/send_friends_bg">
+
+    <TextView
+        android:id="@+id/tvSend"
+        style="@style/TextView_15sp_333333"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/send_who"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.tencent.qcloud.uikit.business.session.view.SessionIconView
+        android:id="@+id/session_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintLeft_toLeftOf="@id/tvSend"
+        app:layout_constraintTop_toBottomOf="@id/tvSend" />
+
+    <TextView
+        android:id="@+id/session_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toRightOf="@id/session_icon"
+        app:layout_constraintTop_toTopOf="@id/session_icon"
+        tools:text="JustinBieber" />
+
+    <LinearLayout
+        android:layout_marginTop="8dp"
+        android:id="@+id/llContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@color/colorGrayBg"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/session_icon">
+
+        <TextView
+            android:id="@+id/tvContent"
+            style="@style/TextView_12sp_8e8e8e"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:padding="10dp"
+            tools:text="提前退休真的来了，6月1日实施！13种申请条件，最早45岁" />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/etLeaveAMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@null"
+        android:hint="@string/leave_a_message"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llContent" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="15dp"
+        android:background="@color/divider_color"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etLeaveAMessage" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/line">
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/send_friends_left_btn_bg"
+            android:text="@string/cancel_short"
+            android:textColor="@color/textColor"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/btnConfirm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/send_friends_right_btn_bg"
+            android:text="@string/confirm_short"
+            android:textColor="@android:color/white"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

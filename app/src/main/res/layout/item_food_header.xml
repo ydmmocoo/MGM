@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <com.fjx.mg.view.WrapContentGridView
+        android:id="@+id/gv_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="10dp"
+        android:horizontalSpacing="10dp"
+        android:numColumns="5"
+        android:verticalSpacing="10dp" />
+
+    <com.fjx.mg.view.WrapContentGridView
+        android:id="@+id/gv_second_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_below="@+id/gv_menu"
+        android:horizontalSpacing="10dp"
+        android:numColumns="5"
+        android:verticalSpacing="20dp" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvBanner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gv_second_menu"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp">
+
+        <com.library.common.view.BannerView
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="120dp" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tv_selected_good_store"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cvBanner"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:drawableStart="@drawable/gradient_line"
+        android:drawablePadding="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="@string/selected_good_store"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <com.fjx.mg.view.WrapContentGridView
+        android:id="@+id/gv_selected_good_store"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_selected_good_store"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:horizontalSpacing="10dp"
+        android:numColumns="2"
+        android:verticalSpacing="10dp" />
+
+    <TextView
+        android:id="@+id/tv_recommended_store"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gv_selected_good_store"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:drawableStart="@drawable/gradient_line"
+        android:drawablePadding="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="@string/recommended_store"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_recommended_store"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="@string/type"
+        android:drawablePadding="10dp"
+        android:drawableEnd="@mipmap/icon_arrow_down_black"/>
+
+    <TextView
+        android:id="@+id/tv_comprehensive_ranking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_recommended_store"
+        android:layout_toEndOf="@+id/tv_type"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="@string/comprehensive_ranking"
+        android:drawablePadding="10dp"
+        android:drawableEnd="@mipmap/icon_arrow_down_black"/>
+
+    <TextView
+        android:id="@+id/tv_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_recommended_store"
+        android:layout_toEndOf="@+id/tv_comprehensive_ranking"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="@string/distance" />
+
+</RelativeLayout>

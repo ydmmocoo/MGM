@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clTopTypeHeaderView"
+    android:layout_width="match_parent"
+    android:layout_height="118dp"
+    android:background="@drawable/nearby_cit_top_type_ic">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivTopIcon"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="14dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/food_default" />
+
+    <TextView
+        android:id="@+id/tvTopTag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivTopIcon"
+        tools:text="房屋出租" />
+
+    <TextView
+        android:id="@+id/tvNearbyCityNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTopTag"
+        tools:text="同城123456" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="60dp">
+
+            <View
+                android:id="@+id/v_shop_info"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/rounded_corner_bg_white"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.fjx.mg.view.RoundImageView
+                android:id="@+id/iv_store_logo"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/big_image_default"
+                app:layout_constraintLeft_toLeftOf="@+id/v_shop_info"
+                app:layout_constraintTop_toTopOf="@+id/v_shop_info" />
+
+            <TextView
+                android:id="@+id/tv_store_name"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:drawableEnd="@drawable/arrow_right"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toRightOf="@+id/iv_store_logo"
+                app:layout_constraintTop_toTopOf="@+id/v_shop_info"
+                tools:text="567蛋糕房" />
+
+            <View
+                android:id="@+id/v_line"
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/line_color"
+                app:layout_constraintLeft_toLeftOf="@+id/tv_store_name"
+                app:layout_constraintRight_toRightOf="@+id/v_shop_info"
+                app:layout_constraintTop_toBottomOf="@+id/iv_store_logo" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/v_shop_info"
+                app:layout_constraintLeft_toLeftOf="@+id/v_line"
+                app:layout_constraintTop_toTopOf="@+id/v_line"
+                tools:text="抹茶千层等2件商品" />
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/goods_price"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/v_shop_info"
+                app:layout_constraintRight_toRightOf="@+id/v_line"
+                app:layout_constraintTop_toTopOf="@+id/v_line" />
+
+            <View
+                android:id="@+id/v_score_bg"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rounded_corner_bg_white"
+                app:layout_constraintBottom_toBottomOf="@+id/gv_pic"
+                app:layout_constraintLeft_toLeftOf="@+id/v_shop_info"
+                app:layout_constraintRight_toRightOf="@+id/v_shop_info"
+                app:layout_constraintTop_toBottomOf="@+id/v_shop_info" />
+
+            <TextView
+                android:id="@+id/tv_in_general"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/in_general"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/rb_in_general"
+                app:layout_constraintLeft_toLeftOf="@+id/iv_store_logo"
+                app:layout_constraintTop_toTopOf="@+id/rb_in_general" />
+
+            <com.library.common.view.materialratingbar.MaterialRatingBar
+                android:id="@+id/rb_in_general"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="24dp"
+                android:maxHeight="26dp"
+                android:minHeight="26dp"
+                android:stepSize="1"
+                android:layout_marginEnd="60dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/tv_in_general"
+                app:layout_constraintTop_toTopOf="@+id/v_score_bg"
+                app:mrb_fillBackgroundStars="true"
+                app:mrb_indeterminateTint="@color/gray_bg"
+                app:mrb_progressTint="@color/textColorYellow5" />
+
+            <TextView
+                android:id="@+id/tv_flavor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/flavor"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/rb_flavor"
+                app:layout_constraintLeft_toLeftOf="@+id/iv_store_logo"
+                app:layout_constraintTop_toTopOf="@+id/rb_flavor" />
+
+            <com.library.common.view.materialratingbar.MaterialRatingBar
+                android:id="@+id/rb_flavor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="24dp"
+                android:maxHeight="22dp"
+                android:minHeight="22dp"
+                android:stepSize="1"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginEnd="90dp"
+                app:layout_constraintLeft_toRightOf="@+id/tv_in_general"
+                app:layout_constraintTop_toBottomOf="@+id/rb_in_general"
+                app:mrb_fillBackgroundStars="true"
+                app:mrb_indeterminateTint="@color/gray_bg"
+                app:mrb_progressTint="@color/textColorYellow5" />
+
+            <TextView
+                android:id="@+id/tv_flavor_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/rb_flavor"
+                app:layout_constraintLeft_toRightOf="@+id/rb_flavor"
+                app:layout_constraintTop_toTopOf="@+id/rb_flavor"
+                tools:text="还不错" />
+
+            <TextView
+                android:id="@+id/tv_packing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/packing"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/rb_packing"
+                app:layout_constraintLeft_toLeftOf="@+id/iv_store_logo"
+                app:layout_constraintTop_toTopOf="@+id/rb_packing" />
+
+            <com.library.common.view.materialratingbar.MaterialRatingBar
+                android:id="@+id/rb_packing"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
+                android:maxHeight="22dp"
+                android:minHeight="22dp"
+                android:stepSize="1"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginEnd="90dp"
+                app:layout_constraintLeft_toRightOf="@+id/tv_in_general"
+                app:layout_constraintTop_toBottomOf="@+id/rb_flavor"
+                app:mrb_fillBackgroundStars="true"
+                app:mrb_indeterminateTint="@color/gray_bg"
+                app:mrb_progressTint="@color/textColorYellow5" />
+
+            <TextView
+                android:id="@+id/tv_packing_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/rb_packing"
+                app:layout_constraintLeft_toRightOf="@+id/rb_packing"
+                app:layout_constraintTop_toTopOf="@+id/rb_packing"
+                tools:text="还不错" />
+
+            <TextView
+                android:id="@+id/tv_distribution"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/distribution"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/rb_distribution"
+                app:layout_constraintLeft_toLeftOf="@+id/iv_store_logo"
+                app:layout_constraintTop_toTopOf="@+id/rb_distribution" />
+
+            <com.library.common.view.materialratingbar.MaterialRatingBar
+                android:id="@+id/rb_distribution"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
+                android:maxHeight="22dp"
+                android:minHeight="22dp"
+                android:stepSize="1"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginEnd="90dp"
+                app:layout_constraintLeft_toRightOf="@+id/tv_in_general"
+                app:layout_constraintTop_toBottomOf="@+id/rb_packing"
+                app:mrb_fillBackgroundStars="true"
+                app:mrb_indeterminateTint="@color/gray_bg"
+                app:mrb_progressTint="@color/textColorYellow5" />
+
+            <TextView
+                android:id="@+id/tv_distribution_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/rb_distribution"
+                app:layout_constraintLeft_toRightOf="@+id/rb_distribution"
+                app:layout_constraintTop_toTopOf="@+id/rb_distribution"
+                tools:text="还不错" />
+
+            <EditText
+                android:id="@+id/et_content"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="25dp"
+                android:background="@null"
+                android:gravity="top"
+                android:hint="@string/input_goods_evaluate"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="@+id/iv_store_logo"
+                app:layout_constraintRight_toRightOf="@+id/v_line"
+                app:layout_constraintTop_toBottomOf="@+id/rb_distribution" />
+
+            <com.fjx.mg.view.WrapContentGridView
+                android:id="@+id/gv_pic"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:numColumns="3"
+                android:paddingBottom="14dp"
+                android:horizontalSpacing="10dp"
+                android:verticalSpacing="10dp"
+                app:layout_constraintLeft_toLeftOf="@+id/iv_store_logo"
+                app:layout_constraintRight_toRightOf="@+id/v_line"
+                app:layout_constraintTop_toBottomOf="@+id/et_content" />
+
+            <TextView
+                android:id="@+id/tv_commit"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/btn_corner_red_bg"
+                android:gravity="center"
+                android:text="@string/commit"
+                android:textColor="@color/white"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/v_score_bg" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</LinearLayout>

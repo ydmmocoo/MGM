@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.library.common.view.refresh.CustomRefreshView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/refreshView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvEntrance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="160dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintTop_toTopOf="@+id/image">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingTop="50dp"
+                        android:paddingBottom="15dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tvVoucherCenter"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawableTop="@drawable/ic_home_cz"
+                                android:drawablePadding="6dp"
+                                android:gravity="center"
+                                android:padding="10dp"
+                                android:text="@string/recharge_center" />
+
+                            <TextView
+                                android:id="@+id/tvNearbyCity"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawableTop="@drawable/nearby_city_ic"
+                                android:drawablePadding="6dp"
+                                android:gravity="center"
+                                android:padding="10dp"
+                                android:text="@string/my_nearby_city" />
+
+                            <TextView
+                                android:id="@+id/tvHousingSale"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawableTop="@drawable/ic_home_zs"
+                                android:drawablePadding="6dp"
+                                android:gravity="center"
+                                android:padding="10dp"
+                                android:text="@string/house_rent"
+                                android:visibility="gone" />
+
+                            <TextView
+                                android:id="@+id/tvTravel"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawableTop="@drawable/ic_home_jp"
+                                android:drawablePadding="6dp"
+                                android:gravity="center"
+                                android:padding="10dp"
+                                android:text="机票旅游"
+                                android:visibility="gone" />
+
+                            <TextView
+                                android:id="@+id/tvHotel"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawableTop="@drawable/ic_home_jd"
+                                android:drawablePadding="6dp"
+                                android:gravity="center"
+                                android:padding="10dp"
+                                android:text="酒店住宿"
+                                android:visibility="gone" />
+
+                            <TextView
+                                android:id="@+id/tvNetwork"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawableTop="@drawable/sales_network_ic"
+                                android:drawablePadding="6dp"
+                                android:gravity="center"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                android:text="@string/sales_network" />
+
+                            <TextView
+                                android:id="@+id/tvJobHunting"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawableTop="@drawable/ic_home_zp"
+                                android:drawablePadding="6dp"
+                                android:gravity="center"
+                                android:padding="10dp"
+                                android:text="@string/employment"
+                                android:visibility="gone" />
+
+                            <TextView
+                                android:id="@+id/tvYellowPage"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawableTop="@drawable/ic_home_hy"
+                                android:drawablePadding="6dp"
+                                android:gravity="center"
+                                android:padding="10dp"
+                                android:text="@string/yellow_page" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tvRateQuery"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawableTop="@drawable/ic_home_search"
+                                android:drawablePadding="6dp"
+                                android:gravity="center"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                android:text="@string/exchange_rate_inquiry" />
+
+                            <TextView
+                                android:id="@+id/tvTranslate"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawableTop="@drawable/ic_home_fy"
+                                android:drawablePadding="6dp"
+                                android:gravity="center"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                android:text="@string/translate_online" />
+
+                            <TextView
+                                android:id="@+id/tvNetSpeed"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawableTop="@drawable/ic_net_speed"
+                                android:drawablePadding="6dp"
+                                android:gravity="center"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                android:text="@string/net_speed" />
+
+                            <TextView
+                                android:id="@+id/tvfeedback"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawableTop="@drawable/home_feedback"
+                                android:drawablePadding="6dp"
+                                android:gravity="center"
+                                android:padding="10dp"
+                                android:text="@string/feedback" />
+
+                            <TextView
+                                android:id="@+id/tvMore"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawableTop="@drawable/ic_home_more"
+                                android:drawablePadding="6dp"
+                                android:enabled="false"
+                                android:gravity="center"
+                                android:padding="10dp"
+                                android:text="@string/more"
+                                android:visibility="gone" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <FrameLayout
+                    android:id="@+id/image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/home_top"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/llXMarqueeView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cvEntrance">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:src="@drawable/home_new_tag" />
+
+                    <com.stx.xmarqueeview.XMarqueeView
+                        android:id="@+id/XMarqueeView"
+                        android:layout_width="match_parent"
+                        android:layout_height="72dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_weight="1"
+                        app:isSetAnimDuration="true"
+                        app:isSingleLine="true"
+                        app:marquee_count="2" />
+
+                </LinearLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvBanner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:visibility="gone"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintTop_toBottomOf="@+id/cvEntrance">
+
+                    <com.library.common.view.BannerView
+                        android:id="@+id/homeBanner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/tvHint"
+                    style="@style/CommonPaddingStyle"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white"
+                    android:text="@string/hot_news"
+                    android:textColor="@color/textColor"
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cvBanner" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvHint" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <include
+            android:id="@+id/lsearch"
+            layout="@layout/layout_search_home" />
+
+    </FrameLayout>
+
+</com.library.common.view.refresh.CustomRefreshView>

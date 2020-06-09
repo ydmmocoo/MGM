@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_toolbar" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:id="@+id/llPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp">
+
+                <TextView
+                    android:id="@+id/tvAreaCode"
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:drawablePadding="6dp"
+                    android:drawableTint="@color/colorAccent"
+                    android:gravity="center"
+                    android:text="+261"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+
+                <EditText
+                    android:id="@+id/etPhoneNum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="@string/login_input_phone_tip"
+                    android:inputType="phone"
+                    android:maxLines="1"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:textSize="17sp" />
+
+
+                <ImageView
+                    android:id="@+id/tvPhomeMail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_phone_mail_list"
+                    android:tint="@color/colorAccent" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <include layout="@layout/nine_recharge"
+                    android:id="@+id/nines"/>
+
+                <TextView
+                    android:layout_below="@+id/nines"
+                    android:id="@+id/tvBuyNow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/solid_nomal_shape"
+                    android:gravity="center"
+                    android:padding="15dp"
+                    android:text="@string/pay_right"
+                    android:textColor="@color/white" />
+
+                <LinearLayout
+                    android:id="@+id/llCombo"
+                    android:layout_below="@+id/tvBuyNow"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvCharges"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="2dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/charges_package"
+                        android:textColor="@color/colorAccent" />
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="15dp"
+                        android:background="@color/black" />
+
+                    <TextView
+                        android:id="@+id/tvSearch"
+                        android:layout_width="0dp"
+                        android:layout_height="16dp"
+                        android:layout_marginEnd="2dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/search_mymoney"
+                        android:textColor="@color/colorAccent" />
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="15dp"
+                        android:background="@color/black" />
+
+                    <TextView
+                        android:id="@+id/tvInstructions"
+                        android:layout_width="0dp"
+                        android:layout_height="16dp"
+                        android:layout_marginEnd="2dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/charges_instructions"
+                        android:textColor="@color/colorAccent" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_below="@+id/llCombo"
+                    android:id="@+id/tvHint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/more_prepaid"
+                    android:textColor="@color/textColor"
+                    android:textSize="18sp"
+                    app:layout_constraintTop_toBottomOf="@+id/llXMarqueeView" />
+
+                <GridLayout
+                    android:layout_below="@+id/tvHint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:columnCount="4">
+
+                    <TextView
+                        android:id="@+id/tvNetBill"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:drawableTop="@drawable/recharge_net"
+                        android:drawablePadding="10dp"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/Pay_network_fee" />
+
+                    <TextView
+                        android:id="@+id/tvWaterBill"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:drawableTop="@drawable/recharge_water"
+                        android:drawablePadding="10dp"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/Pay_water_fee" />
+
+                    <TextView
+                        android:id="@+id/tvElectBill"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_row="0"
+                        android:layout_column="2"
+                        android:drawableTop="@drawable/recharge_light"
+                        android:drawablePadding="10dp"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/Pay_elect_fee" />
+
+                </GridLayout>
+
+                <FrameLayout
+                    android:id="@+id/flPhoneList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardElevation="5dp">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/phoneRecycler"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </androidx.cardview.widget.CardView>
+
+                </FrameLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

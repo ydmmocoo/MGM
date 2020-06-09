@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_toolbar" />
+
+    <include layout="@layout/line" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@drawable/shape_line"
+            android:orientation="vertical"
+            android:showDividers="middle">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/tvhint1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/operating_editor"
+                    android:textColor="@color/textColor"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <LinearLayout
+                    android:id="@+id/llJobType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorGrayBg"
+                    android:padding="5dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPay">
+
+                    <TextView
+                        android:id="@+id/tvJobTypeHint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorGrayBg"
+                        android:textColor="@color/textColor"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        tool:text="@string/job" />
+
+                    <TextView
+                        android:id="@+id/tvJobType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="5dp"
+                        android:textColor="@color/textColorGray"
+                        android:textSize="12sp"
+                        tool:text="文案编辑" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llWorkYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorGrayBg"
+                    android:padding="5dp"
+                    app:layout_constraintStart_toEndOf="@+id/llJobType"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPay">
+
+                    <TextView
+                        android:id="@+id/tvWorkYearHint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorGrayBg"
+                        android:textColor="@color/textColor"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        tool:text="@string/exp" />
+
+                    <TextView
+                        android:id="@+id/tvWorkYear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorGrayBg"
+                        android:textColor="@color/textColorGray"
+                        android:textSize="12sp"
+                        tool:text="文案编辑" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/llEducation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorGrayBg"
+                    android:padding="5dp"
+                    app:layout_constraintStart_toEndOf="@+id/llWorkYear"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPay">
+
+                    <TextView
+                        android:id="@+id/tvEducationHint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorGrayBg"
+                        android:textColor="@color/textColor"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        tool:text="@string/edu" />
+
+                    <TextView
+                        android:id="@+id/tvEducation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorGrayBg"
+                        android:textColor="@color/textColorGray"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toEndOf="@+id/llWorkYear"
+                        app:layout_constraintTop_toBottomOf="@+id/tvhint1"
+                        tool:text="文案编辑" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/llAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorGrayBg"
+                    android:padding="5dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/llJobType">
+
+                    <TextView
+                        android:id="@+id/tvAddressHint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorGrayBg"
+                        android:textColor="@color/textColor"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        tool:text="@string/address1" />
+
+                    <TextView
+                        android:id="@+id/tvAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorGrayBg"
+                        android:textColor="@color/textColorGray"
+                        android:textSize="12sp"
+                        tool:text="职位|文案编辑" />
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/tvPay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/textColorAccent"
+                    android:textSize="15sp"
+                    app:layout_constraintTop_toBottomOf="@+id/tvhint1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tool:text="面议" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/tvhint2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/job_describe"
+                    android:textColor="@color/textColor"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvJobDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/describe"
+                    android:textColor="@color/textColorGray"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvhint1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llCompanyDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvhint3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="公司简介"
+                    android:textColor="@color/textColor"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvCompanyDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="描述"
+                    android:textColor="@color/textColorGray"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvhint1" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvAdress"
+                style="@style/CommonPaddingStyle"
+                android:background="@color/white"
+                android:drawableStart="@drawable/job_location_blue"
+                android:gravity="end"
+                android:padding="15dp"
+                android:textColor="@color/textColor"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvPhone"
+                style="@style/CommonPaddingStyle"
+                android:background="@color/white"
+                android:drawableStart="@drawable/job_phone"
+                android:gravity="end"
+                android:padding="15dp"
+                android:textColor="@color/textColor"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvWechat"
+                style="@style/CommonPaddingStyle"
+                android:background="@color/white"
+                android:drawableStart="@drawable/job_wx"
+                android:gravity="end"
+                android:padding="15dp"
+                android:textColor="@color/textColor"
+                android:visibility="gone" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_weight="0">
+
+        <TextView
+            android:id="@+id/tvCallPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:text="@string/call_phone"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tvAddFriend"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/textColorYellow2"
+            android:gravity="center"
+            android:text="@string/add_mg_friend"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+
+</LinearLayout>

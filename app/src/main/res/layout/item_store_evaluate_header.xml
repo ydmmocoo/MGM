@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp">
+
+    <TextView
+        android:id="@+id/tv_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/textColorYellow5"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@+id/ratting_bar"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="4.7" />
+
+    <com.library.common.view.materialratingbar.MaterialRatingBar
+        android:id="@+id/ratting_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:isIndicator="true"
+        android:maxHeight="14dp"
+        android:minHeight="14dp"
+        android:stepSize="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_score"
+        app:mrb_fillBackgroundStars="true"
+        app:mrb_indeterminateTint="@color/gray_bg"
+        app:mrb_progressTint="@color/textColorYellow5" />
+
+    <View
+        android:id="@+id/v_line"
+        android:layout_width="0.5dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="18dp"
+        android:background="@color/line_color"
+        app:layout_constraintBottom_toBottomOf="@+id/ratting_bar"
+        app:layout_constraintLeft_toRightOf="@+id/ratting_bar"
+        app:layout_constraintTop_toTopOf="@+id/tv_score" />
+
+    <TextView
+        android:id="@+id/tv_evaluate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="15dp"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/v_line"
+        app:layout_constraintLeft_toRightOf="@+id/v_line"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/v_line"
+        tools:text="口味 4.3" />
+
+    <com.fjx.mg.view.WrapContentGridView
+        android:id="@+id/gv_tag"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:numColumns="3"
+        android:horizontalSpacing="10dp"
+        android:verticalSpacing="5dp"
+        app:layout_constraintLeft_toLeftOf="@+id/ratting_bar"
+        app:layout_constraintRight_toRightOf="@+id/tv_evaluate"
+        app:layout_constraintTop_toBottomOf="@+id/ratting_bar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

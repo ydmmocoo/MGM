@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/clRoot"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+<!--        <TextView-->
+<!--            android:textColor="#FFC107"-->
+<!--            android:layout_marginBottom="20dp"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="付款码数字金用于支付时间收银眼展示，请勿泄露以防诈骗" />-->
+
+        <TextView
+            android:layout_marginBottom="8dp"
+            android:id="@+id/tvNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12321321321321321" />
+
+        <ImageView
+            android:id="@+id/ivBarCode"
+            android:layout_width="318dp"
+            android:layout_height="114dp" />
+    </LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/flContainer"/>
+
+</RelativeLayout>

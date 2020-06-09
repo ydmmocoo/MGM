@@ -1,0 +1,44 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        jcenter()
+        google()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.0.0'
+        //Classpath "com.mob.sdk:MobSDK:2018.0319.1724"
+        classpath "com.mob.sdk:MobSDK:+"
+        // 注册google services 用于集成FCM，不集成FCM可不配置
+        classpath 'com.google.gms:google-services:4.3.3' //
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.3.0' // add plugin
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://jitpack.io" }
+        maven{ url "http://mvn.mob.com/android" }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+ext {
+    config = [
+            minSdkVersion    : 19,
+            targetSdkVersion : 28,
+            compileSdkVersion: 28
+    ]
+
+    support = [
+            supportLibraryVersion: "28.0.0"
+    ]
+}

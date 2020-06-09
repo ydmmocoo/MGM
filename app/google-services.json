@@ -1,0 +1,58 @@
+{
+  "project_info": {
+    "project_number": "1010668116050",
+    "firebase_url": "https://mgm-online-1576216474272.firebaseio.com",
+    "project_id": "mgm-online-1576216474272",
+    "storage_bucket": "mgm-online-1576216474272.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1010668116050:android:3caa322a2d3fdfc1d9e78b",
+        "android_client_info": {
+          "package_name": "com.fjx.mg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1010668116050-7m1psgerlpnk3dod6ehnh4s067v14it0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiDw0sqO0oYFmTTf6ykQMmc_uRhXUZSNM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1010668116050-7m1psgerlpnk3dod6ehnh4s067v14it0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1010668116050-rh0cr17ketgou0gign8cp1jcfppl833u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fjx.mg",
+                "app_store_id": "1465086225"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1",
+  "to": "APA91bHun4MxP5egoKMwt2KZFBaFUH-1RYqx...",
+  "notification": {
+    "body": "great match!",
+    "title": "Portugal vs. Denmark",
+    "icon": "myicon"
+  },
+  "data": {
+    "Nick": "Mario",
+    "Room": "PortugalVSDenmark"
+  }
+}

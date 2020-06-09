@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    
+    <com.fjx.mg.view.RoundImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="37dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/default_user_icon"/>
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/font_blue"
+        tools:text="用户3234"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="12dp"
+        android:layout_toEndOf="@+id/iv_avatar"/>
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_color_gray"
+        android:textSize="12sp"
+        android:layout_marginEnd="10dp"
+        android:layout_alignBaseline="@+id/tv_name"
+        android:layout_alignParentEnd="true"
+        tools:text="2019-04-27"/>
+
+    <TextView
+        android:id="@+id/tv_score"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:textSize="12sp"
+        android:gravity="center_vertical"
+        android:layout_alignStart="@+id/tv_name"
+        android:layout_below="@+id/tv_name"
+        android:textColor="@color/gray_text"
+        android:text="@string/score"/>
+
+    <com.library.common.view.materialratingbar.MaterialRatingBar
+        android:id="@+id/ratting_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:maxHeight="14dp"
+        android:minHeight="14dp"
+        android:stepSize="1"
+        android:isIndicator="true"
+        android:layout_below="@+id/tv_name"
+        android:layout_toEndOf="@+id/tv_score"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="90dp"
+        app:mrb_fillBackgroundStars="true"
+        app:mrb_indeterminateTint="@color/gray_bg"
+        app:mrb_progressTint="@color/textColorYellow5" />
+
+    <TextView
+        android:id="@+id/tv_evaluate_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_alignStart="@+id/tv_name"
+        android:layout_marginEnd="10dp"
+        tools:text="送餐很快，刚下单10分钟就送到啦，而且配菜很丰富，也很新鲜"
+        android:layout_below="@+id/ratting_bar"/>
+
+    <com.fjx.mg.view.WrapContentGridView
+        android:id="@+id/gv_pic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="4"
+        android:layout_marginTop="12dp"
+        android:layout_below="@+id/tv_evaluate_content"
+        android:layout_alignStart="@id/tv_evaluate_content"
+        android:layout_alignEnd="@id/tv_evaluate_content"/>
+
+    <TextView
+        android:id="@+id/tv_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_bg"
+        tools:text="巧克力镜面蛋糕"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_alignStart="@+id/tv_name"
+        android:layout_below="@+id/gv_pic"
+        android:textColor="@color/text_color_gray"
+        android:textSize="12sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/line_color"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_below="@+id/tv_tag"/>
+
+</RelativeLayout>

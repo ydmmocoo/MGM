@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/chat_item_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/chat_time_margin"
+    android:clickable="true"
+    android:paddingTop="10dp"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
+
+    <TextView
+        android:id="@+id/chat_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/chat_time_margin"
+        android:background="@drawable/chat_time_border"
+        android:clickable="true"
+        android:paddingLeft="5dp"
+        android:paddingTop="4dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="4dp"
+        android:textColor="#fff"
+        android:textSize="11sp" />
+
+    <LinearLayout
+        android:id="@+id/chat_info_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginRight="60dp"
+        android:clickable="true"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="5dp">
+
+            <ImageView
+                android:id="@+id/iv_user_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="top"
+                android:src="@drawable/default_user_image" />
+
+        </androidx.cardview.widget.CardView>
+
+        <!--<com.tencent.qcloud.uikit.business.chat.view.ChatIconView-->
+        <!--android:id="@+id/iv_user_icon"-->
+        <!--android:layout_width="50dp"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:layout_gravity="top"-->
+        <!--app:default_image="@drawable/default_user_image"-->
+        <!--app:image_radius="10dp" />-->
+
+        <LinearLayout
+            android:id="@+id/ll_content_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginLeft="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                tools:visibility="visible"
+                tools:text="12313213"
+                android:id="@+id/tv_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginRight="3dp"
+                android:textColor="@color/c_8e8e8e"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/image_data_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_user_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:adjustViewBounds="true"
+                    android:clickable="false"
+                    android:maxWidth="200dp"
+                    android:maxHeight="200dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/other_redpacket_default"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="14dp"
+                    android:src="@drawable/red_packet_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvTransferRemark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="55dp"
+                    android:paddingEnd="55dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_marginTop="12dp"
+                    android:includeFontPadding="false"
+                    android:text="@string/red_package_msg2"
+                    android:textColor="@color/white_color"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvTip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="55dp"
+                    android:layout_marginTop="34dp"
+                    android:text="@string/click_receiver"
+                    android:textColor="@color/white_color"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="4dp"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:text="@string/red_pack"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/message_sending"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="10dp" />
+
+        <ImageView
+            android:id="@+id/message_status"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/message_send_fail" />
+
+    </LinearLayout>
+
+</LinearLayout>

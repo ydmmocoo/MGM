@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="15dp"
+    android:layout_marginBottom="15dp"
+    android:background="@drawable/recycler_item_selector"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/llTime"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:text="@string/date"
+            android:textColor="@color/black_33"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_33"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_toEndOf="@id/llTime"
+        android:background="@color/friend_dynamic_bottom_color"
+        android:ellipsize="end"
+        android:padding="5dp"
+        android:textColor="@color/black_33"
+        android:textSize="14sp"
+        android:visibility="gone"
+        tools:maxLines="2"
+        tools:text="朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容" />
+
+    <LinearLayout
+        android:id="@+id/llNoShared"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/llTime"
+        android:orientation="horizontal">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="1dp">
+
+            <ImageView
+                android:id="@+id/img1_1"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:adjustViewBounds="true"
+                android:scaleType="center"
+                android:src="@drawable/food_default"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/tv_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="8dp"
+                android:src="@drawable/video_icon"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/view2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/img2_1"
+                android:layout_width="35dp"
+                android:layout_height="70dp"
+                android:adjustViewBounds="true"
+                android:scaleType="center"
+                android:src="@drawable/food_default" />
+
+            <ImageView
+                android:id="@+id/img2_2"
+                android:layout_width="35dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="1dp"
+                android:adjustViewBounds="true"
+                android:scaleType="center"
+                android:src="@drawable/food_default" />
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/view3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/img3_1"
+                android:layout_width="35dp"
+                android:layout_height="70dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/food_default"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/img3_2"
+                android:layout_width="35dp"
+                android:layout_height="34dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/food_default"
+                app:layout_constraintStart_toEndOf="@+id/img3_1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/img3_3"
+                android:layout_width="35dp"
+                android:layout_height="34dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/food_default"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/img3_1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/view4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/img4_1"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/food_default"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/img4_2"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/food_default"
+                app:layout_constraintStart_toEndOf="@+id/img4_1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/img4_3"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/food_default"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img4_1" />
+
+            <ImageView
+                android:id="@+id/img4_4"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/food_default"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/img4_3" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tvContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:ellipsize="end"
+            android:padding="5dp"
+            android:textColor="@color/black_33"
+            android:textSize="14sp"
+            tools:maxLines="4"
+            tools:text="朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容朋友圈内容" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlShared"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginEnd="10dp"
+        android:layout_toEndOf="@id/llTime"
+        android:background="@color/friend_dynamic_bottom_color"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvShareContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/friend_dynamic_top_color"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:padding="5dp"
+            android:textColor="@color/black_33"
+            android:textSize="14sp"
+            tools:text="12321321321321321" />
+
+        <ImageView
+            android:id="@+id/ivShared"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_below="@id/tvShareContent"
+            android:layout_centerVertical="true"
+            android:padding="5dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/food_default" />
+
+        <TextView
+            android:id="@+id/tvShareTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tvShareContent"
+            android:layout_marginStart="8dp"
+            android:layout_toRightOf="@+id/ivShared"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="2"
+            android:textColor="@color/black_33"
+            android:textSize="13sp"
+            tools:text="abcdefghijklmnopqrstuvwxyz" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_below="@+id/tvShareTitle" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

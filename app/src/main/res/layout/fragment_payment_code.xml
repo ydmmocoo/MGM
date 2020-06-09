@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/tvPasswor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/shape_dialog"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/spacing_large">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivClose"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/spacing_tiny"
+                android:src="@mipmap/icon_del" />
+
+            <TextView
+                style="@style/style_black_normal_text"
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:layout_height="@dimen/text_item_height"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="开启付款码" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_content"
+            style="@style/style_black_normal_text"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/text_item_height"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="请输入支付密码,以验证身份"/>
+
+        <View style="@style/style_separate_line" />
+
+        <com.library.common.view.editdialog.PayPwdView
+            android:id="@+id/payPwdView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_large"
+            android:layout_marginRight="@dimen/spacing_large"
+            android:background="@color/white" />
+
+        <TextView
+            android:id="@+id/tvfinger"
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:layout_gravity="right"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </LinearLayout>
+
+    <com.library.common.view.editdialog.PwdInputMethodView
+        android:id="@+id/inputMethodView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>

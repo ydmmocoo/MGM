@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="165dp"
+    android:background="@android:color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvReset"
+            style="@style/TextView_14sp_8c8c8c"
+            android:layout_marginLeft="11dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/reset"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvConfirm"
+            style="@style/TextView_15sp_333333"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="8dp"
+            android:text="@string/confirm_short"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvConversionMoeny"
+            style="@style/TextView_14sp_333333"
+            android:layout_marginLeft="11dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/conversion_money"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvConfirm" />
+
+        <LinearLayout
+            android:id="@+id/tvSearch"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="11dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="@color/colorGrayBg"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvConversionMoeny">
+
+            <EditText
+                android:id="@+id/etMoney"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:cursorVisible="false"
+                android:hint="@string/input_conversion_money"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                style="@style/TextView_15sp_333333"
+                android:layout_marginRight="12dp"
+                android:text="@string/ar" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
