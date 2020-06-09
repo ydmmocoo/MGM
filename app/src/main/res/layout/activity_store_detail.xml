@@ -206,7 +206,7 @@
                                 android:layout_toEndOf="@+id/iv_back"
                                 android:background="@drawable/rounded_corner_bg_white"
                                 android:drawableStart="@mipmap/icon_search_gray"
-                                android:hint="@string/input_store_name_or_goods_name"
+                                android:hint="@string/input_goods_name"
                                 android:textColor="@color/white"
                                 android:textSize="12sp" />
 

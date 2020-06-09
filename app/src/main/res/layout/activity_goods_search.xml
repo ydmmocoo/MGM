@@ -24,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="32dp"
         android:layout_marginTop="31dp"
+        android:layout_toStartOf="@+id/tv_search"
         android:layout_toEndOf="@+id/iv_back"
         android:background="@drawable/friends_tab_search_bg"
         android:drawableStart="@mipmap/icon_search_white"
@@ -31,43 +32,144 @@
         android:hint="@string/input_goods_name"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        android:layout_toStartOf="@+id/tv_search"
-        android:textColorHint="@color/white"
         android:textColor="@color/white"
+        android:textColorHint="@color/white"
         android:textSize="12sp" />
 
     <TextView
         android:id="@+id/tv_search"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:text="@string/search"
-        android:layout_marginTop="27dp"
-        android:paddingStart="10dp"
-        android:gravity="center_vertical"
-        android:paddingEnd="10dp"
         android:layout_alignParentEnd="true"
+        android:layout_marginTop="27dp"
+        android:gravity="center_vertical"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="@string/search"
         android:textColor="@color/white"
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
 
-    <com.scwang.smart.refresh.layout.SmartRefreshLayout
-        android:id="@+id/refresh_layout"
-        android:layout_marginTop="69dp"
+    <com.fjx.mg.view.bottomsheet.BottomSheetLayout
+        android:id="@+id/bottomSheetLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="69dp">
 
-        <com.scwang.smart.refresh.header.ClassicsHeader
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
+            android:id="@+id/refresh_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+            android:layout_below="@+id/rl_goods_info">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            <com.scwang.smart.refresh.header.ClassicsHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <com.scwang.smart.refresh.footer.ClassicsFooter
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white" />
 
-    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+            <com.scwang.smart.refresh.footer.ClassicsFooter
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+    </com.fjx.mg.view.bottomsheet.BottomSheetLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/shopCartMain"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/transparent">
+
+        <View
+            android:id="@+id/v_cart"
+            android:layout_width="0dp"
+            android:layout_height="49dp"
+            android:background="#50000000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_cart"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="12dp"
+            android:src="@mipmap/icon_shopping_cart"
+            app:layout_constraintLeft_toLeftOf="@+id/v_cart"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:background="@drawable/circle_red"
+            android:gravity="center"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:text="1"
+            android:textColor="#fff"
+            android:textSize="12sp"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="@+id/iv_cart"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/no_purchase"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@+id/iv_cart"
+            app:layout_constraintTop_toTopOf="@+id/v_cart" />
+
+        <TextView
+            android:id="@+id/tv_condition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/delivery_conditions"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_price"
+            app:layout_constraintTop_toBottomOf="@+id/tv_price" />
+
+        <TextView
+            android:id="@+id/tv_bottom_delivery_fee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:text="@string/free_delivery_fee"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/v_cart"
+            app:layout_constraintRight_toLeftOf="@+id/tv_to_settle"
+            app:layout_constraintTop_toTopOf="@+id/v_cart" />
+
+        <TextView
+            android:id="@+id/tv_to_settle"
+            android:layout_width="93dp"
+            android:layout_height="0dp"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:text="@string/to_settle"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/v_cart" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>

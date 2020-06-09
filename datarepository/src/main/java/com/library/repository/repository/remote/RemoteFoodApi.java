@@ -4,6 +4,7 @@ import com.common.paylibrary.model.WXPayModel;
 import com.library.repository.models.CouponBean;
 import com.library.repository.models.CreateOrderBean;
 import com.library.repository.models.GoodsDetailBean;
+import com.library.repository.models.GoodsSearchBean;
 import com.library.repository.models.HotShopBean;
 import com.library.repository.models.OrderBean;
 import com.library.repository.models.OrderDetailBean;
@@ -139,4 +140,9 @@ public interface RemoteFoodApi {
     @POST("goods/refuseOrder")
     @FormUrlEncoded
     Observable<ResponseModel<Object>> refuseOrder(@Field("orderId")String orderId, @Field("remark")String remark);
+
+    @POST("goods/getGoodsList")
+    @FormUrlEncoded
+    Observable<ResponseModel<GoodsSearchBean>> getGoodsList(@Field("sId")String sId, @Field("cId")String cId,@Field("isHot")String isHot,
+                                                            @Field("name")String name,@Field("page")int page);
 }

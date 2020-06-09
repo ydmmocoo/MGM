@@ -226,7 +226,7 @@ public class StoreDetailActivity extends BaseMvpActivity<StoreDetailPresenter>
                 finish();
                 break;
             case R.id.tv_search://搜索
-                startActivity(GoodsSearchActivity.newInstance(getCurContext()));
+                startActivity(GoodsSearchActivity.newInstance(getCurContext(),mId));
                 break;
             case R.id.iv_like://收藏
                 if (UserCenter.hasLogin()) {
