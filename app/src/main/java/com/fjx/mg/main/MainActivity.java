@@ -553,10 +553,10 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
 //                bottomTab.showMsg(2, friendRequestCount);
                 if (bottomTab != null) {
                     if (messageCount + friendRequestCount + mReplyListSize == 0) {
-                        bottomTab.hideMsg(2);
+                        bottomTab.hideMsg(3);
                         return;
                     }
-                    bottomTab.showMsg(2, messageCount + friendRequestCount + mReplyListSize);
+                    bottomTab.showMsg(3, messageCount + friendRequestCount + mReplyListSize);
                 }
                 initBottomCountParams();
             }

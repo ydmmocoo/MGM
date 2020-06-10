@@ -17,6 +17,8 @@ import com.fjx.mg.view.RoundImageView;
 import com.library.common.utils.CommonImageLoader;
 import com.library.common.utils.DimensionUtil;
 import com.library.repository.models.OrderBean;
+import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.interfaces.OnConfirmListener;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -60,7 +62,7 @@ public class RvOrderAdapter extends BaseQuickAdapter<OrderBean.OrderListBean, Ba
             helper.setVisible(R.id.btn_left, false);
             helper.setVisible(R.id.btn_right, true);
             helper.setBackgroundResource(R.id.btn_right, R.drawable.btn_gray_bg);
-            helper.setTextColor(R.id.btn_right,ContextCompat.getColor(getContext(),R.color.black));
+            helper.setTextColor(R.id.btn_right, ContextCompat.getColor(getContext(), R.color.black));
             helper.setText(R.id.btn_right, getContext().getResources().getString(R.string.another_one));
         } else {
             //判断退款状态
@@ -71,7 +73,7 @@ public class RvOrderAdapter extends BaseQuickAdapter<OrderBean.OrderListBean, Ba
                 helper.setVisible(R.id.btn_left, false);
                 helper.setVisible(R.id.btn_right, true);
                 helper.setBackgroundResource(R.id.btn_right, R.drawable.btn_gray_bg);
-                helper.setTextColor(R.id.btn_right,ContextCompat.getColor(getContext(),R.color.black));
+                helper.setTextColor(R.id.btn_right, ContextCompat.getColor(getContext(), R.color.black));
                 helper.setText(R.id.btn_right, getContext().getResources().getString(R.string.refund_detail));
             } else if ("2".equals(item.getRefundStatus())) {
                 helper.setTextColor(R.id.tv_order_status, ContextCompat.getColor(getContext(), R.color.gray_text));
@@ -80,7 +82,7 @@ public class RvOrderAdapter extends BaseQuickAdapter<OrderBean.OrderListBean, Ba
                 helper.setVisible(R.id.btn_right, true);
                 helper.setText(R.id.btn_left, getContext().getResources().getString(R.string.view_progress));
                 helper.setBackgroundResource(R.id.btn_right, R.drawable.btn_gray_bg);
-                helper.setTextColor(R.id.btn_right,ContextCompat.getColor(getContext(),R.color.black));
+                helper.setTextColor(R.id.btn_right, ContextCompat.getColor(getContext(), R.color.black));
                 helper.setText(R.id.btn_right, getContext().getResources().getString(R.string.cancel_refund));
             } else if ("3".equals(item.getRefundStatus())) {
                 helper.setTextColor(R.id.tv_order_status, ContextCompat.getColor(getContext(), R.color.gray_text));
@@ -89,7 +91,7 @@ public class RvOrderAdapter extends BaseQuickAdapter<OrderBean.OrderListBean, Ba
                 helper.setVisible(R.id.btn_right, true);
                 helper.setText(R.id.btn_left, getContext().getResources().getString(R.string.apply_for_refund));
                 helper.setBackgroundResource(R.id.btn_right, R.drawable.btn_red_bg);
-                helper.setTextColor(R.id.btn_right,ContextCompat.getColor(getContext(),R.color.black));
+                helper.setTextColor(R.id.btn_right, ContextCompat.getColor(getContext(), R.color.black));
                 helper.setText(R.id.btn_right, getContext().getResources().getString(R.string.confirm_receipt));
             } else {//订单不是退款状态
                 //设置订单状态 tv_order_status
@@ -100,7 +102,7 @@ public class RvOrderAdapter extends BaseQuickAdapter<OrderBean.OrderListBean, Ba
                     helper.setVisible(R.id.btn_left, false);
                     helper.setVisible(R.id.btn_right, true);
                     helper.setBackgroundResource(R.id.btn_right, R.drawable.btn_gray_bg);
-                    helper.setTextColor(R.id.btn_right,ContextCompat.getColor(getContext(),R.color.black));
+                    helper.setTextColor(R.id.btn_right, ContextCompat.getColor(getContext(), R.color.black));
                     helper.setText(R.id.btn_right, getContext().getResources().getString(R.string.cancellation_of_order));
                 } else if (item.getOrderStatus().equals("3")) {
                     helper.setTextColor(R.id.tv_order_status, ContextCompat.getColor(getContext(), R.color.colorGreen));
@@ -108,7 +110,7 @@ public class RvOrderAdapter extends BaseQuickAdapter<OrderBean.OrderListBean, Ba
                     helper.setVisible(R.id.btn_left, false);
                     helper.setVisible(R.id.btn_right, true);
                     helper.setBackgroundResource(R.id.btn_right, R.drawable.btn_gray_bg);
-                    helper.setTextColor(R.id.btn_right,ContextCompat.getColor(getContext(),R.color.black));
+                    helper.setTextColor(R.id.btn_right, ContextCompat.getColor(getContext(), R.color.black));
                     helper.setText(R.id.btn_right, getContext().getResources().getString(R.string.apply_for_refund));
                 } else if (item.getOrderStatus().equals("4")) {
                     helper.setTextColor(R.id.tv_order_status, ContextCompat.getColor(getContext(), R.color.colorGreen));
@@ -118,7 +120,7 @@ public class RvOrderAdapter extends BaseQuickAdapter<OrderBean.OrderListBean, Ba
                     helper.setBackgroundResource(R.id.btn_left, R.drawable.btn_gray_bg);
                     helper.setText(R.id.btn_left, getContext().getResources().getString(R.string.apply_for_refund));
                     helper.setBackgroundResource(R.id.btn_right, R.drawable.btn_gray_bg);
-                    helper.setTextColor(R.id.btn_right,ContextCompat.getColor(getContext(),R.color.black));
+                    helper.setTextColor(R.id.btn_right, ContextCompat.getColor(getContext(), R.color.black));
                     helper.setText(R.id.btn_right, getContext().getResources().getString(R.string.confirm_receipt));
                 } else if (item.getOrderStatus().equals("5")) {
                     helper.setTextColor(R.id.tv_order_status, ContextCompat.getColor(getContext(), R.color.gray_text));
@@ -126,7 +128,7 @@ public class RvOrderAdapter extends BaseQuickAdapter<OrderBean.OrderListBean, Ba
                     helper.setVisible(R.id.btn_left, false);
                     helper.setVisible(R.id.btn_right, true);
                     helper.setBackgroundResource(R.id.btn_right, R.drawable.btn_gray_bg);
-                    helper.setTextColor(R.id.btn_right,ContextCompat.getColor(getContext(),R.color.black));
+                    helper.setTextColor(R.id.btn_right, ContextCompat.getColor(getContext(), R.color.black));
                     helper.setText(R.id.btn_right, getContext().getResources().getString(R.string.another_one));
                 } else if (item.getOrderStatus().equals("6")) {
                     helper.setTextColor(R.id.tv_order_status, ContextCompat.getColor(getContext(), R.color.gray_text));
@@ -134,17 +136,21 @@ public class RvOrderAdapter extends BaseQuickAdapter<OrderBean.OrderListBean, Ba
                     helper.setVisible(R.id.btn_left, false);
                     helper.setVisible(R.id.btn_right, true);
                     helper.setBackgroundResource(R.id.btn_right, R.drawable.btn_gray_bg);
-                    helper.setTextColor(R.id.btn_right,ContextCompat.getColor(getContext(),R.color.black));
+                    helper.setTextColor(R.id.btn_right, ContextCompat.getColor(getContext(), R.color.black));
                     helper.setText(R.id.btn_right, getContext().getResources().getString(R.string.another_one));
                 } else {
                     helper.setTextColor(R.id.tv_order_status, ContextCompat.getColor(getContext(), R.color.gray_text));
                     helper.setText(R.id.tv_order_status, getContext().getResources().getString(R.string.order_completed));
-                    helper.setVisible(R.id.btn_left, true);
                     helper.setVisible(R.id.btn_right, true);
-                    helper.setBackgroundResource(R.id.btn_left, R.drawable.btn_gray_bg);
-                    helper.setText(R.id.btn_left, getContext().getResources().getString(R.string.to_evaluate));
+                    if ("1".equals(item.getEvaluateStatus())) {
+                        helper.setVisible(R.id.btn_left, false);
+                    } else {
+                        helper.setVisible(R.id.btn_left, true);
+                        helper.setBackgroundResource(R.id.btn_left, R.drawable.btn_gray_bg);
+                        helper.setText(R.id.btn_left, getContext().getResources().getString(R.string.to_evaluate));
+                    }
                     helper.setBackgroundResource(R.id.btn_right, R.drawable.btn_gray_bg);
-                    helper.setTextColor(R.id.btn_right,ContextCompat.getColor(getContext(),R.color.black));
+                    helper.setTextColor(R.id.btn_right, ContextCompat.getColor(getContext(), R.color.black));
                     helper.setText(R.id.btn_right, getContext().getResources().getString(R.string.another_one));
                 }
             }
@@ -152,7 +158,7 @@ public class RvOrderAdapter extends BaseQuickAdapter<OrderBean.OrderListBean, Ba
         //设置商品图片 iv_goods_pic
         RoundImageView ivPic = helper.getView(R.id.iv_goods_pic);
         ivPic.setRectAdius(DimensionUtil.dip2px(5));
-        CommonImageLoader.load(item.getGoodsList().get(0).getGId())
+        CommonImageLoader.load(item.getGoodsList().get(0).getImg())
                 .placeholder(R.drawable.food_default).into(ivPic);
         //设置商品名 tv_goods_name
         String goodsName;
@@ -190,17 +196,21 @@ public class RvOrderAdapter extends BaseQuickAdapter<OrderBean.OrderListBean, Ba
                 getContext().startActivity(intent);
             } else if (btnRight.getText().equals(getContext().getResources().getString(R.string.confirm_receipt))) {
                 //确认收货
-                mListener.confirmReceipt(item.getOrderId());
+                new XPopup.Builder(getContext())
+                        .asConfirm(getContext().getResources().getString(R.string.Tips), getContext().getResources().getString(R.string.confirm_receipt_tip),
+                                getContext().getResources().getString(R.string.cancel), getContext().getResources().getString(R.string.confirm_short),
+                                () -> mListener.confirmReceipt(item.getOrderId()), null, false)
+                        .show();
             } else if (btnRight.getText().equals(getContext().getResources().getString(R.string.another_one))) {
                 //再来一单
-                mListener.addAnotherOne(item.getOId(),item.getSId());
+                mListener.addAnotherOne(item.getOId(), item.getSId());
             } else if (btnRight.getText().equals(getContext().getResources().getString(R.string.refund_detail))) {
                 //退款详情
                 intent = new Intent(getContext(), RefundDetailsActivity.class);
                 intent.putExtra("refund_remark", item.getRefundRemark());
                 intent.putExtra("refund_status", item.getRefundStatus());
                 getContext().startActivity(intent);
-            }else if (btnRight.getText().equals(getContext().getResources().getString(R.string.apply_for_refund))){
+            } else if (btnRight.getText().equals(getContext().getResources().getString(R.string.apply_for_refund))) {
                 //申请退款
                 intent = new Intent(getContext(), ApplyForRefundActivity.class);
                 intent.putExtra("order_id", item.getOrderId());
@@ -212,10 +222,18 @@ public class RvOrderAdapter extends BaseQuickAdapter<OrderBean.OrderListBean, Ba
                 getContext().startActivity(intent);
             } else if (btnRight.getText().equals(getContext().getResources().getString(R.string.cancellation_of_order))) {
                 //取消订单
-                mListener.cancelOrder(item.getOrderId());
-            }else if (btnRight.getText().equals(getContext().getResources().getString(R.string.cancel_refund))){
+                new XPopup.Builder(getContext())
+                        .asConfirm(getContext().getResources().getString(R.string.Tips), getContext().getResources().getString(R.string.cancel_order_tip),
+                                getContext().getResources().getString(R.string.cancel), getContext().getResources().getString(R.string.confirm_short),
+                                () -> mListener.cancelOrder(item.getOrderId()), null, false)
+                        .show();
+            } else if (btnRight.getText().equals(getContext().getResources().getString(R.string.cancel_refund))) {
                 //取消退款
-                mListener.cancelRefund(item.getOrderId());
+                new XPopup.Builder(getContext())
+                        .asConfirm(getContext().getResources().getString(R.string.Tips), getContext().getResources().getString(R.string.cancel_refund_tip),
+                                getContext().getResources().getString(R.string.cancel), getContext().getResources().getString(R.string.confirm_short),
+                                () -> mListener.cancelRefund(item.getOrderId()), null, false)
+                        .show();
             }
         });
         //左边按钮点击事件 btn_left
@@ -244,10 +262,14 @@ public class RvOrderAdapter extends BaseQuickAdapter<OrderBean.OrderListBean, Ba
                 getContext().startActivity(intent);
             } else if (btnLeft.getText().equals(getContext().getResources().getString(R.string.cancellation_of_order))) {
                 //取消订单
-                mListener.cancelOrder(item.getOrderId());
-            }else if (btnLeft.getText().equals(getContext().getResources().getString(R.string.view_progress))){
+                new XPopup.Builder(getContext())
+                        .asConfirm(getContext().getResources().getString(R.string.Tips), getContext().getResources().getString(R.string.cancel_order_tip),
+                                getContext().getResources().getString(R.string.cancel), getContext().getResources().getString(R.string.confirm_short),
+                                () -> mListener.cancelOrder(item.getOrderId()), null, false)
+                        .show();
+            } else if (btnLeft.getText().equals(getContext().getResources().getString(R.string.view_progress))) {
                 getContext().startActivity(RefundDetailsActivity.newInstance(getContext(),
-                        item.getRefundStatus(),item.getRefundRemark(),item.getTotalPrice()));
+                        item.getRefundStatus(), item.getRefundRemark(), item.getTotalPrice()));
             }
         });
     }
@@ -258,7 +280,7 @@ public class RvOrderAdapter extends BaseQuickAdapter<OrderBean.OrderListBean, Ba
 
     public interface OnBtnClickListener {
 
-        void addAnotherOne(String orderId,String storeId);
+        void addAnotherOne(String orderId, String storeId);
 
         void confirmReceipt(String orderId);
 

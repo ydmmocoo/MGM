@@ -2,14 +2,10 @@ package com.fjx.mg.food;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Path;
-import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +16,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -33,14 +28,11 @@ import com.fjx.mg.food.adapter.RvShopCartAdapter;
 import com.fjx.mg.food.adapter.ShopFullReductionTagAdapter;
 import com.fjx.mg.food.contract.StoreDetailContract;
 import com.fjx.mg.food.presenter.StoreDetailPresenter;
-import com.fjx.mg.main.MainActivity;
 import com.fjx.mg.utils.AnimUtils;
 import com.fjx.mg.utils.DialogUtil;
 import com.fjx.mg.view.RoundImageView;
 import com.fjx.mg.view.bottomsheet.BottomSheetLayout;
 import com.fjx.mg.view.flowlayout.TagFlowLayout;
-import com.github.florent37.viewanimator.AnimationListener;
-import com.github.florent37.viewanimator.ViewAnimator;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
 import com.gyf.immersionbar.ImmersionBar;
@@ -48,16 +40,17 @@ import com.library.common.base.BaseMvpActivity;
 import com.library.common.pop.DensityUtil;
 import com.library.common.utils.CommonImageLoader;
 import com.library.common.utils.CommonToast;
+import com.library.common.utils.DimensionUtil;
 import com.library.common.view.BannerView;
 import com.library.repository.data.UserCenter;
 import com.library.repository.models.ShopingCartBean;
 import com.library.repository.models.StoreShopInfoBean;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -124,8 +117,8 @@ public class StoreDetailActivity extends BaseMvpActivity<StoreDetailPresenter>
     private List<ShopingCartBean.GoodsListBean> mList;
     private View mBottomSheet;
     private String mId;
-    private double mDeliveryConditions;
-    private double mTotalPrice;
+    private Double mDeliveryConditions;
+    private Double mTotalPrice;
     private StoreShopInfoBean mData;
     private boolean mIsCollect = false;
 
@@ -226,7 +219,7 @@ public class StoreDetailActivity extends BaseMvpActivity<StoreDetailPresenter>
                 finish();
                 break;
             case R.id.tv_search://搜索
-                startActivity(GoodsSearchActivity.newInstance(getCurContext(),mId));
+                startActivity(GoodsSearchActivity.newInstance(getCurContext(),mId,mDeliveryConditions));
                 break;
             case R.id.iv_like://收藏
                 if (UserCenter.hasLogin()) {
@@ -265,7 +258,9 @@ public class StoreDetailActivity extends BaseMvpActivity<StoreDetailPresenter>
     }
 
     public void getShopCartData() {
-        mPresenter.getShopCartData(mId);
+        if (UserCenter.hasLogin()) {
+            mPresenter.getShopCartData(mId);
+        }
     }
 
     public void setData(ShopingCartBean data) {
@@ -276,14 +271,16 @@ public class StoreDetailActivity extends BaseMvpActivity<StoreDetailPresenter>
             } else {
                 mTvCount.setVisibility(View.GONE);
             }
-            mTvPrice.setText(getResources().getString(R.string.goods_price,
-                    String.valueOf(data.getTotalPrice())));
+            DecimalFormat df = new DecimalFormat("#0.00");
             mTotalPrice = data.getTotalPrice();
+            String price=df.format(mTotalPrice);
+            mTvPrice.setText(getResources().getString(R.string.food_total).concat(getResources().getString(R.string.goods_price,
+                    price)));
             if (mDeliveryConditions <= mTotalPrice) {
                 mTvCondition.setText(getResources().getString(R.string.meet_delivery_conditions));
             } else {
                 mTvCondition.setText(getResources().getString(R.string.delivery_conditions,
-                        String.valueOf(mDeliveryConditions - mTotalPrice)));
+                        df.format(mDeliveryConditions - mTotalPrice)));
             }
         } else {
             mTvCount.setVisibility(View.GONE);
@@ -306,6 +303,7 @@ public class StoreDetailActivity extends BaseMvpActivity<StoreDetailPresenter>
         //店铺名称
         mTvStoreName.setText(data.getShopInfo().getShopName());
         //设置店铺logo图片
+        mIvStoreLogo.setRectAdius(DimensionUtil.dip2px(5));
         CommonImageLoader.load(data.getShopInfo().getShopLogo())
                 .placeholder(R.drawable.food_default).into(mIvStoreLogo);
         //设置评分
@@ -325,7 +323,7 @@ public class StoreDetailActivity extends BaseMvpActivity<StoreDetailPresenter>
         }
         //设置满减
         List<String> list = new ArrayList<>();
-        if ("0".equals(data.getShopInfo().getFirstReduction())) {
+        if (!"0".equals(data.getShopInfo().getFirstReduction())) {
             list.add(getResources().getString(R.string.first_reduction,
                     data.getShopInfo().getFirstReduction()));
         }

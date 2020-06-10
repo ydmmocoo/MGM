@@ -2,8 +2,6 @@ package com.fjx.mg.food;
 
 import android.content.Context;
 import android.content.Intent;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.fjx.mg.R;
@@ -11,12 +9,9 @@ import com.fjx.mg.ToolBarManager;
 import com.fjx.mg.food.adapter.LvCouponAdapter;
 import com.fjx.mg.food.contract.ChooseCouponContract;
 import com.fjx.mg.food.presenter.ChooseCouponPresenter;
-import com.fjx.mg.me.invite.InviteActivity;
-import com.library.common.base.BaseActivity;
 import com.library.common.base.BaseMvpActivity;
 import com.library.repository.models.CouponBean;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -31,6 +26,9 @@ public class ChooseCouponActivity extends BaseMvpActivity<ChooseCouponPresenter>
 
     private LvCouponAdapter mAdapter;
     private List<CouponBean.CouponListBean> mList;
+
+    private String mId;
+    private String mPrice;
 
     public static Intent newInstance(Context context) {
         return new Intent(context, ChooseCouponActivity.class);
@@ -51,7 +49,14 @@ public class ChooseCouponActivity extends BaseMvpActivity<ChooseCouponPresenter>
     @Override
     protected void initView() {
         //设置标题
-        ToolBarManager.with(this).setTitle(getString(R.string.coupon));
+        ToolBarManager.with(this).setTitle(getString(R.string.coupon))
+                .setRightText(getResources().getString(R.string.confirm),R.color.colorAccent, v -> {
+                    Intent intent=new Intent();
+                    intent.putExtra("cId",mId);
+                    intent.putExtra("price",mPrice);
+                    setResult(RESULT_OK,intent);
+                    finish();
+                });
         String price=getIntent().getStringExtra("price");
         String phone=getIntent().getStringExtra("phone");
 
@@ -59,11 +64,9 @@ public class ChooseCouponActivity extends BaseMvpActivity<ChooseCouponPresenter>
         mLvCoupon.setAdapter(mAdapter);
         //Item点击事件
         mLvCoupon.setOnItemClickListener((parent, view, position, id) -> {
-            Intent intent=new Intent();
-            intent.putExtra("cId",mList.get(position).getCId());
-            intent.putExtra("price",mList.get(position).getPrice());
-            setResult(RESULT_OK,intent);
-            finish();
+            mAdapter.setSelectPos(position);
+            mId=mList.get(position).getCId();
+            mPrice=mList.get(position).getPrice();
         });
 
         mPresenter.getCouponList(price,phone);

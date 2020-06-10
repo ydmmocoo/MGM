@@ -143,6 +143,9 @@ public class FoodPresenter extends FoodContract.Presenter {
 
     public List<ShopTypeBean.ShopTypeListBean> getMenuList(List<ShopTypeBean.ShopTypeListBean> list){
         List<ShopTypeBean.ShopTypeListBean> menuList=new ArrayList<>();
+        if (list==null){
+            return menuList;
+        }
         for (int i=0;i<5;i++){
             menuList.add(list.get(i));
         }

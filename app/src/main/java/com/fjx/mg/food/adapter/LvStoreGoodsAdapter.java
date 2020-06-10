@@ -126,7 +126,7 @@ public class LvStoreGoodsAdapter extends BaseAdapter implements StickyListHeader
         holder.mIvPlus.setOnClickListener(v -> {
             if (mList.get(position).getSpecialList().size() <=1
                     && mList.get(position).getAttrList().size() == 0) {
-                mListener.plusOne(mList.get(position).getGId(), mList.get(position).getGName(), "", "",
+                mListener.plusOne(mList.get(position).getGId(), mList.get(position).getGName(), mList.get(position).getSpecialList().get(0).getSId(), mList.get(position).getSpecialList().get(0).getName(),
                         "", "", mList.get(position).getPrice(), "1", mList.get(position).getGImg(),holder.mIvPlus);
             } else {
                 AddShopCartDialog dialog = new AddShopCartDialog(mContext);

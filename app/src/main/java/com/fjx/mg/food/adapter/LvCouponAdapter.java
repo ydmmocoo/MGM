@@ -1,6 +1,7 @@
 package com.fjx.mg.food.adapter;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -27,6 +28,7 @@ public class LvCouponAdapter extends BaseAdapter {
 
     private Context mContext;
     private List<CouponBean.CouponListBean> mList;
+    private int mSelectPos=-1;
 
     public LvCouponAdapter(Context context, List<CouponBean.CouponListBean> list) {
         mContext = context;
@@ -35,6 +37,11 @@ public class LvCouponAdapter extends BaseAdapter {
 
     public void setData(List<CouponBean.CouponListBean> list){
         mList = list;
+        notifyDataSetChanged();
+    }
+
+    public void setSelectPos(int pos){
+        this.mSelectPos=pos;
         notifyDataSetChanged();
     }
 
@@ -74,17 +81,30 @@ public class LvCouponAdapter extends BaseAdapter {
         holder.mTvCondition.setText(mContext.getResources().getString(R.string.coupon_condition,
                 mList.get(position).getFullPrice()));
         //状态,1:已经使用,2:等待使用,3:已失效
-        if (mList.get(position).getStatus()==1){
+        if (mList.get(position).isIsCanUse()){
             holder.mVLine.setVisibility(View.INVISIBLE);
-            holder.mTvReason.setText(View.GONE);
+            holder.mTvReason.setVisibility(View.GONE);
+            holder.mIvSelected.setVisibility(View.VISIBLE);
+            if (position==mSelectPos){
+                holder.mIvSelected.setImageResource(R.mipmap.icon_selected);
+            }else {
+                holder.mIvSelected.setImageResource(R.mipmap.icon_unselected);
+            }
             holder.mTvAmount.setTextColor(ContextCompat.getColor(mContext,R.color.colorAccent));
             holder.mTvUnit.setTextColor(ContextCompat.getColor(mContext,R.color.colorAccent));
             holder.mTvTitle.setTextColor(ContextCompat.getColor(mContext,R.color.black));
         }else {
             holder.mVLine.setVisibility(View.VISIBLE);
             holder.mTvReason.setVisibility(View.VISIBLE);
-            holder.mTvReason.setText(mContext.getResources().getString(R.string.reason_for_unavailability,
-                    mList.get(position).getRemark()));
+            holder.mIvSelected.setVisibility(View.INVISIBLE);
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                holder.mTvReason.setText(Html.fromHtml(mContext.getResources().getString(R.string.reason_for_unavailability,
+                        mList.get(position).getRemark()),Html.FROM_HTML_MODE_LEGACY));
+            } else {
+                holder.mTvReason.setText(Html.fromHtml(mContext.getResources().getString(R.string.reason_for_unavailability,
+                        mList.get(position).getRemark())));
+            }
+
             holder.mTvAmount.setTextColor(ContextCompat.getColor(mContext,R.color.gray_text));
             holder.mTvUnit.setTextColor(ContextCompat.getColor(mContext,R.color.gray_text));
             holder.mTvTitle.setTextColor(ContextCompat.getColor(mContext,R.color.gray_text));

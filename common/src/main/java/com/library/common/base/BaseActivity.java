@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.library.common.R;
+import com.library.common.callback.CActivityManager;
 import com.library.common.receiver.ForbiddenReceiver;
 import com.library.common.receiver.RankPermissionReceiver;
 import com.library.common.utils.MulLanguageUtil;
@@ -57,6 +58,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             mUnbinder = ButterKnife.bind(this);
             initView();
         }
+
+        CActivityManager.getAppManager().addActivity(this);
     }
 
     @Override

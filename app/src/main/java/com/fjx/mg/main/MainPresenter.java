@@ -22,6 +22,7 @@ import com.fjx.mg.utils.SharedPreferencesUtils;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.library.common.base.BaseApp;
 import com.library.common.base.BaseFragment;
+import com.library.common.callback.CActivityManager;
 import com.library.common.utils.CommonToast;
 import com.library.common.utils.GradientDrawableHelper;
 import com.library.repository.core.net.CommonObserver;
@@ -118,9 +119,10 @@ class MainPresenter extends MainContract.Presenter {
             CommonToast.toast(mView.getCurContext().getString(R.string.exit_app));
             mExitTime = System.currentTimeMillis();
         } else {
-//            System.exit(0);
-            int pid = android.os.Process.myPid(); //获取当前应用程序的PID
-            android.os.Process.killProcess(pid); //杀死当前进程
+            //System.exit(0);
+            //int pid = android.os.Process.myPid(); //获取当前应用程序的PID
+            //android.os.Process.killProcess(pid); //杀死当前进程
+            CActivityManager.finishAllActivity();
         }
     }
 

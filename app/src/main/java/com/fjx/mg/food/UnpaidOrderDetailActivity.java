@@ -4,12 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.fjx.mg.R;
-import com.fjx.mg.ToolBarManager;
 import com.fjx.mg.food.adapter.LvOrderDetailGoodsAdapter;
 import com.fjx.mg.food.contract.OrderDetailContract;
 import com.fjx.mg.food.presenter.OrderDetailPresenter;
@@ -57,6 +55,10 @@ public class UnpaidOrderDetailActivity extends BaseMvpActivity<OrderDetailPresen
     TextView mTvOrderTime;
     @BindView(R.id.tv_pay_type)
     TextView mTvPayType;
+    @BindView(R.id.tv_shop_full_reduction)
+    TextView mTvShopFullReduction;
+    @BindView(R.id.tv_first_reduction)
+    TextView mTvFirstReduction;
 
     private LvOrderDetailGoodsAdapter mAdapter;
     private List<OrderDetailBean.OrderInfoBean.GoodsListBean> mList;
@@ -92,10 +94,10 @@ public class UnpaidOrderDetailActivity extends BaseMvpActivity<OrderDetailPresen
     @Override
     public void getOrderDetailSuccess(OrderDetailBean data) {
         //设置倒计时
-        if (data.getOrderInfo().getExpireTime()>0) {
+        if (data.getOrderInfo().getExpireTime() > 0) {
             countDown(data.getOrderInfo().getExpireTime());
-        }else {
-            mTvCountDown.setText(getResources().getString(R.string.pay_count_down,"00:00"));
+        } else {
+            mTvCountDown.setText(getResources().getString(R.string.pay_count_down, "00:00"));
         }
         //设置店铺名
         mTvStoreName.setText(data.getOrderInfo().getShopName());
@@ -108,13 +110,19 @@ public class UnpaidOrderDetailActivity extends BaseMvpActivity<OrderDetailPresen
         //设置配送费
         mTvDeliveryFee.setText(getResources().getString(R.string.goods_price,
                 data.getOrderInfo().getDeliveryPrice()));
+        //设置店铺满减
+        mTvShopFullReduction.setText(getResources().getString(R.string.goods_price,
+                data.getOrderInfo().getFullReduction()));
+        //设置首单立减
+        mTvFirstReduction.setText(getResources().getString(R.string.goods_price,
+                data.getOrderInfo().getFirstReduction()));
         //设置红包金额
         mTvRedEnvelopes.setText(getResources().getString(R.string.red_envelopes_value,
                 data.getOrderInfo().getRedRrice()));
         //设置优惠券金额
         mTvCoupon.setText(getResources().getString(R.string.goods_price, "0"));
         //合计
-        mPrice=data.getOrderInfo().getTotalPrice();
+        mPrice = data.getOrderInfo().getTotalPrice();
         mTvPayValue.setText(getResources().getString(R.string.pay_value)
                 .concat(mPrice)
                 .concat("AR"));
@@ -170,7 +178,7 @@ public class UnpaidOrderDetailActivity extends BaseMvpActivity<OrderDetailPresen
 
     @OnClick({R.id.iv_back, R.id.tv_pay_right, R.id.tv_cancel, R.id.tv_store_name, R.id.iv_call})
     public void onViewClicked(View view) {
-        Intent intent=null;
+        Intent intent = null;
         switch (view.getId()) {
             case R.id.iv_back://返回
                 finish();
@@ -212,39 +220,46 @@ public class UnpaidOrderDetailActivity extends BaseMvpActivity<OrderDetailPresen
      * 倒计时显示
      */
     private void countDown(long time) {
-        mTimer = new CountDownTimer(time*1000, 1000) {
+        mTimer = new CountDownTimer(time * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                int second= (int) (millisUntilFinished/1000%60);
-                int min= (int) (millisUntilFinished/60000%60);
+                int second = (int) (millisUntilFinished / 1000 % 60);
+                int min = (int) (millisUntilFinished / 60000 % 60);
                 String minText;
                 String secondText;
-                if (min<10){
-                    minText="0".concat(String.valueOf(min));
-                }else {
-                    minText=String.valueOf(min);
+                if (min < 10) {
+                    minText = "0".concat(String.valueOf(min));
+                } else {
+                    minText = String.valueOf(min);
                 }
-                if (second<10){
-                    secondText="0".concat(String.valueOf(second));
-                }else {
-                    secondText=String.valueOf(second);
+                if (second < 10) {
+                    secondText = "0".concat(String.valueOf(second));
+                } else {
+                    secondText = String.valueOf(second);
                 }
-                String time=minText.concat(":").concat(secondText);
-                mTvCountDown.setText(getResources().getString(R.string.pay_count_down,time));
+                String time = minText.concat(":").concat(secondText);
+                mTvCountDown.setText(getResources().getString(R.string.pay_count_down, time));
             }
 
             @Override
             public void onFinish() {
-                mTvCountDown.setText(getResources().getString(R.string.pay_count_down,"00:00"));
+                mTvCountDown.setText(getResources().getString(R.string.pay_count_down, "00:00"));
             }
         }.start();
     }
 
     @Override
     protected void onDestroy() {
-        if (mTimer!=null){
+        if (mTimer != null) {
             mTimer.cancel();
         }
         super.onDestroy();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

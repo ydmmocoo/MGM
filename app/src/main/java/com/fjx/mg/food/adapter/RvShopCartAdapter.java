@@ -1,5 +1,6 @@
 package com.fjx.mg.food.adapter;
 
+import android.text.TextUtils;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -31,7 +32,11 @@ public class RvShopCartAdapter extends BaseQuickAdapter<ShopingCartBean.GoodsLis
         //设置名字
         helper.setText(R.id.tv_name,item.getGName());
         //设置规格属性
-        helper.setText(R.id.tv_attribute,item.getSeName()+"+"+item.getANames().replace(",","+"));
+        if (TextUtils.isEmpty(item.getANames())){
+            helper.setText(R.id.tv_attribute, item.getSeName());
+        }else {
+            helper.setText(R.id.tv_attribute, item.getSeName() + "+" + item.getANames().replace(",", "+"));
+        }
         //设置价格
         helper.setText(R.id.tv_price,getContext().getResources().getString(R.string.goods_price,item.getPirce()));
         //设置数量

@@ -51,11 +51,13 @@ public class OrderEvaluatePresenter extends OrderEvaluateContract.Presenter {
 
                     @Override
                     public void onError(ResponseModel data) {
+                        mView.hideLoading();
                         CommonToast.toast(data.getMsg());
                     }
 
                     @Override
                     public void onNetError(ResponseModel data) {
+                        mView.hideLoading();
                         CommonToast.toast(data.getMsg());
                     }
                 });

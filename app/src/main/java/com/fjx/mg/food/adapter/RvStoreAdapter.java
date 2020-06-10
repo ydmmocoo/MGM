@@ -44,7 +44,7 @@ public class RvStoreAdapter extends BaseQuickAdapter<HomeShopListBean.ShopListBe
                 String.valueOf(item.getSaleCount())));
         //设置标签 tv_tag
         String tag=getContext().getResources().getString(R.string.deliveries,item.getDeliveryPrice());
-        if (item.getDistributionFee().equals("0")){
+        if ("0".equals(item.getDistributionFee())){
             tag=tag.concat(" | ").concat(getContext().getResources().getString(R.string.free_delivery_fee));
         }else {
             tag=tag.concat(" | ").concat(getContext().getResources().getString(R.string.delivery_fee,

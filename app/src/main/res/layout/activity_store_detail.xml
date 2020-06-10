@@ -138,7 +138,7 @@
                                 <com.fjx.mg.view.flowlayout.TagFlowLayout
                                     android:id="@+id/fl_shop_full_reduction"
                                     android:layout_width="match_parent"
-                                    android:layout_height="20dp"
+                                    android:layout_height="wrap_content"
                                     android:layout_toEndOf="@+id/tv_shop_full_reduction"
                                     android:layout_below="@+id/tv_score"
                                     android:layout_marginTop="9dp"

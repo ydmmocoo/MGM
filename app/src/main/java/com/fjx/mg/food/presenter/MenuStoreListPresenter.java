@@ -25,7 +25,7 @@ public class MenuStoreListPresenter extends MenuStoreListContract.Presenter {
         String lng=RepositoryFactory.getLocalRepository().getLongitude();
         String lat=RepositoryFactory.getLocalRepository().getLatitude();
         RepositoryFactory.getRemoteFoodApi().getShopList(lng,lat,0,serviceId,secondServiceId,
-                order,1,1,"",page)
+                order,1,0,"",page)
                 .compose(RxScheduler.<ResponseModel<HomeShopListBean>>toMain())
                 .as(mView.<ResponseModel<HomeShopListBean>>bindAutoDispose())
                 .subscribe(new CommonObserver<HomeShopListBean>() {

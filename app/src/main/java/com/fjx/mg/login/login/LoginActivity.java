@@ -22,6 +22,7 @@ import com.fjx.mg.R;
 import com.fjx.mg.login.areacode.AreaCodeActivity;
 import com.fjx.mg.login.bind.BindMobileActivity;
 import com.fjx.mg.login.register.RegisterActivity;
+import com.fjx.mg.main.MainActivity;
 import com.fjx.mg.me.safe_center.lock.GestureLockActivity;
 import com.fjx.mg.utils.SharedPreferencesUtils;
 import com.fjx.mg.utils.ThirdUtils;
@@ -308,7 +309,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
             if (TextUtils.isEmpty(data.getGestureCode())) {
                 startActivity(GestureLockActivity.newInstance(getCurContext(), GestureLockActivity.TYPE_SETTING_GESTURE));
             } else {
-//                startActivity(MainActivity.newInstance(getCurContext()));
+                startActivity(MainActivity.newInstance(getCurContext()));
                 finish();
                 NetCode.isShowGestureLockActivity = false;
             }

@@ -75,6 +75,8 @@ public class ApplyForRefundActivity extends BaseMvpActivity<ApplyForRefundPresen
         mTvPrice.setText(getResources().getString(R.string.goods_price, price));
         //设置退款金额
         mTvRefundMoney.setText(getResources().getString(R.string.goods_price, price));
+        //默认退款原因
+        mRemark=getResources().getString(R.string.no_merchandise_received);
 
         //监听输入框获取焦点情况
         mEtCustomReason.setOnFocusChangeListener((v, hasFocus) -> {

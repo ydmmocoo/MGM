@@ -28,7 +28,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".food.UnpaidOrderDetailActivity"></activity>
+        <activity android:name=".food.UnpaidOrderDetailActivity" />
         <activity android:name=".food.GoodsSearchActivity" />
         <activity android:name=".food.MenuStoreListActivity" />
         <activity
@@ -211,27 +211,38 @@
         <activity
             android:name=".entrance.GuideActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
+
         <activity
             android:name=".main.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:launchMode="standard">
+            android:launchMode="singleTop">
 
-            <!-- sharesdk push默认跳转界面 -->
             <intent-filter>
-
                 <!-- <action android:name="${applicationId}.default.MAIN" /> -->
                 <action android:name="com.fjx.mg.MainActivity" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+
+            <!--需要添加下面的intent-filter配置-->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="fjxmg" />
+            </intent-filter>
         </activity>
+
         <activity
             android:name=".recharge.center.RechargeCenterActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".pay.PayActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
+
         <activity
             android:name=".recharge.ewnbill.BillActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />

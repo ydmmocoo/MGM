@@ -175,6 +175,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="@string/packing_fee"
+                android:visibility="gone"
                 android:textColor="@color/gray_text"
                 android:textSize="14sp"
                 app:layout_constraintLeft_toLeftOf="@+id/v_line_two"
@@ -186,6 +187,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="@string/goods_price"
+                android:visibility="gone"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintRight_toRightOf="@+id/v_line_two"
@@ -216,11 +218,53 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="@string/red_envelopes"
+                android:text="@string/shop_full_reduction"
                 android:textColor="@color/gray_text"
                 android:textSize="14sp"
                 app:layout_constraintLeft_toLeftOf="@+id/v_line_two"
                 app:layout_constraintTop_toBottomOf="@+id/tv_delivery_fee" />
+
+            <TextView
+                android:id="@+id/tv_shop_full_reduction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/goods_price"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintRight_toRightOf="@+id/v_line_two"
+                app:layout_constraintTop_toBottomOf="@+id/tv_delivery_fee" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/first_reduction_text"
+                android:textColor="@color/gray_text"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="@+id/v_line_two"
+                app:layout_constraintTop_toBottomOf="@+id/tv_shop_full_reduction" />
+
+            <TextView
+                android:id="@+id/tv_first_reduction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/goods_price"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintRight_toRightOf="@+id/v_line_two"
+                app:layout_constraintTop_toBottomOf="@+id/tv_shop_full_reduction" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/lucky_red_envelopes_coupons"
+                android:textColor="@color/gray_text"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="@+id/v_line_two"
+                app:layout_constraintTop_toBottomOf="@+id/tv_first_reduction" />
 
             <TextView
                 android:id="@+id/tv_red_envelopes"
@@ -231,13 +275,14 @@
                 android:textColor="@color/colorAccent"
                 android:textSize="14sp"
                 app:layout_constraintRight_toRightOf="@+id/v_line_two"
-                app:layout_constraintTop_toBottomOf="@+id/tv_delivery_fee" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_first_reduction" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="@string/coupon"
+                android:visibility="gone"
                 android:textColor="@color/gray_text"
                 android:textSize="14sp"
                 app:layout_constraintLeft_toLeftOf="@+id/v_line_two"
@@ -249,6 +294,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="@string/red_envelopes_value"
+                android:visibility="gone"
                 android:textColor="@color/colorAccent"
                 android:textSize="14sp"
                 app:layout_constraintRight_toRightOf="@+id/v_line_two"

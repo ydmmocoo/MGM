@@ -1,5 +1,6 @@
 package com.fjx.mg.food.adapter;
 
+import android.text.TextUtils;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -42,7 +43,12 @@ public class RvEvaluateAdapter extends BaseQuickAdapter<StoreEvaluateBean.Evalua
         //ratingBar.setProgress(Integer.parseInt(item.getGlobalScore()));
         ratingBar.setRating(Integer.parseInt(item.getGlobalScore()));
         //设置评论内容 tv_evaluate_content
-        helper.setText(R.id.tv_evaluate_content,item.getContent());
+        if (TextUtils.isEmpty(item.getContent())){
+            helper.setGone(R.id.tv_evaluate_content,true);
+        }else {
+            helper.setGone(R.id.tv_evaluate_content,false);
+            helper.setText(R.id.tv_evaluate_content, item.getContent());
+        }
         //设置商品图片 gv_pic
         WrapContentGridView gv=helper.getView(R.id.gv_pic);
         if (item.getImgs().size()>0) {

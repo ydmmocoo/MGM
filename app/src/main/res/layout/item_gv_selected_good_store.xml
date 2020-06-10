@@ -29,6 +29,14 @@
         android:layout_marginStart="8dp"
         android:src="@drawable/big_image_default"/>
 
+    <View
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="7dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/frame_white"/>
+
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"

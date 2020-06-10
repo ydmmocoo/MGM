@@ -487,10 +487,6 @@
                 app:layout_constraintRight_toRightOf="@+id/v_line_four"
                 app:layout_constraintTop_toBottomOf="@+id/tv_first_reduction" />
 
-
-
-
-
             <TextView
                 android:id="@+id/tv_lucky_red_envelopes_coupons_text"
                 android:layout_width="0dp"

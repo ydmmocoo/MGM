@@ -71,6 +71,6 @@
     <color name="c_e62c30">#e62c30</color>//网络异常
     <color name="c_e5e5e5">#e5e5e5</color>
     <color name="c_666666">#666666</color>
-    <color name="translucent">#50000000</color>
+    <color name="translucent">#70000000</color>
 
 </resources>

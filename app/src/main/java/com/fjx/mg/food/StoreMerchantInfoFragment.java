@@ -71,7 +71,9 @@ public class StoreMerchantInfoFragment extends BaseFragment {
         //设置商家地址
         mTvMerchantAddress.setText(mData.getShopInfo().getAddress());
         //设置商家电话
-        mTvMerchantPhone.setText(mData.getShopInfo().getTel());
+        if (mData.getShopInfo().getTels()!=null&&mData.getShopInfo().getTels().size()!=0) {
+            mTvMerchantPhone.setText(mData.getShopInfo().getTel());
+        }
         //设置营业时间
         if (mData.getShopInfo().getIsAll().equals("1")){
             mTvBusinessHours.setText(getResources().getString(R.string.open_24_hours_a_day));

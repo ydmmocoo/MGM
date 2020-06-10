@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 import com.fjx.mg.R;
@@ -89,6 +90,16 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
     TextView mTvCheckoutSuccess;
     @BindView(R.id.tv_waiting_for_order)
     TextView mTvWaitingForOrder;
+    @BindView(R.id.cl_order_status)
+    ConstraintLayout mClOrderStatus;
+    @BindView(R.id.tv_shop_full_reduction)
+    TextView mTvShopFullReduction;
+    @BindView(R.id.tv_first_reduction)
+    TextView mTvFirstReduction;
+    @BindView(R.id.tv_shop_full_reduction_text)
+    TextView mTvShopFullReductionText;
+    @BindView(R.id.tv_first_reduction_text)
+    TextView mTvFirstReductionText;
 
     private LvOrderDetailGoodsAdapter mAdapter;
     private List<OrderDetailBean.OrderInfoBean.GoodsListBean> mList;
@@ -126,7 +137,7 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
 
     @OnClick({R.id.tv_refund_detail, R.id.tv_store_name, R.id.iv_call, R.id.tv_left, R.id.tv_right})
     public void onViewClicked(View view) {
-        Intent intent =null;
+        Intent intent = null;
         switch (view.getId()) {
             case R.id.tv_refund_detail://退款详情
                 startActivity(RefundDetailsActivity.newInstance(getCurContext(),
@@ -150,7 +161,7 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
                         .show();
                 break;
             case R.id.tv_left://底部左边按钮
-                /*if (mTvLeft.getText().equals(getResources().getString(R.string.to_evaluate))) {
+                if (mTvLeft.getText().equals(getResources().getString(R.string.to_evaluate))) {
                     //去评价
                     intent = new Intent(getCurActivity(), OrderEvaluateActivity.class);
                     intent.putExtra("order_id", mOId);
@@ -163,23 +174,27 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
                 } else if (mTvLeft.getText().equals(getResources().getString(R.string.apply_for_refund))) {
                     //申请退款
                     intent = new Intent(getCurActivity(), ApplyForRefundActivity.class);
-                    intent.putExtra("order_id", item.getOrderId());
-                    intent.putExtra("store_id", item.getSId());
-                    intent.putExtra("store_name", item.getShopName());
-                    intent.putExtra("store_logo", item.getShopLogo());
-                    intent.putExtra("goods_name", goodsName);
-                    intent.putExtra("price", item.getTotalPrice());
+                    intent.putExtra("order_id", mOrderId);
+                    intent.putExtra("store_id", mStoreId);
+                    intent.putExtra("store_name", mStoreName);
+                    intent.putExtra("store_logo", mStoreLogo);
+                    intent.putExtra("goods_name", mGoodsName);
+                    intent.putExtra("price", mPrice);
                     startActivity(intent);
                 } else if (mTvLeft.getText().equals(getResources().getString(R.string.cancellation_of_order))) {
                     //取消订单
-                    mListener.cancelOrder(item.getOrderId());
-                }else if (btnLeft.getText().equals(getContext().getResources().getString(R.string.view_progress))){
-                    getContext().startActivity(RefundDetailsActivity.newInstance(getContext(),
-                            item.getRefundStatus(),item.getRefundRemark(),item.getTotalPrice()));
-                }*/
+                    new XPopup.Builder(getCurContext())
+                            .asConfirm(getResources().getString(R.string.Tips), getResources().getString(R.string.cancel_refund_tip),
+                                    getResources().getString(R.string.cancel), getResources().getString(R.string.confirm_short),
+                                    () -> mPresenter.cancelOrder(mOrderId), null, false)
+                            .show();
+                } else if (mTvLeft.getText().equals(getResources().getString(R.string.view_progress))) {
+                    startActivity(RefundDetailsActivity.newInstance(getCurContext(),
+                            mRefundStatus, mRefundRemark, mPrice));
+                }
                 break;
             case R.id.tv_right://底部右边按钮
-                /*if (mTvRight.getText().equals(getResources().getString(R.string.to_evaluate))) {
+                if (mTvRight.getText().equals(getResources().getString(R.string.to_evaluate))) {
                     //去评价
                     intent = new Intent(getCurActivity(), OrderEvaluateActivity.class);
                     intent.putExtra("order_id", mOId);
@@ -197,11 +212,15 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
                     startActivity(intent);
                 } else if (mTvRight.getText().equals(getResources().getString(R.string.confirm_receipt))) {
                     //确认收货
-                    mListener.confirmReceipt(item.getOrderId());
+                    new XPopup.Builder(getCurContext())
+                            .asConfirm(getResources().getString(R.string.Tips), getResources().getString(R.string.confirm_receipt_tip),
+                                    getResources().getString(R.string.cancel), getResources().getString(R.string.confirm_short),
+                                    () -> mPresenter.confirmOrder(mOrderId), null, false)
+                            .show();
                 } else if (mTvRight.getText().equals(getResources().getString(R.string.another_one))) {
                     //再来一单
-                    mListener.addAnotherOne(item.getOId(),item.getSId());
-                }else if (mTvRight.getText().equals(getResources().getString(R.string.apply_for_refund))){
+                    mPresenter.reBuy(mOrderId, mStoreId);
+                } else if (mTvRight.getText().equals(getResources().getString(R.string.apply_for_refund))) {
                     //申请退款
                     intent = new Intent(getCurActivity(), ApplyForRefundActivity.class);
                     intent.putExtra("order_id", mOrderId);
@@ -213,25 +232,33 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
                     startActivity(intent);
                 } else if (mTvRight.getText().equals(getResources().getString(R.string.cancellation_of_order))) {
                     //取消订单
-                    mListener.cancelOrder(item.getOrderId());
-                }else if (mTvRight.getText().equals(getResources().getString(R.string.cancel_refund))){
+                    new XPopup.Builder(getCurContext())
+                            .asConfirm(getResources().getString(R.string.Tips), getResources().getString(R.string.cancel_refund_tip),
+                                    getResources().getString(R.string.cancel), getResources().getString(R.string.confirm_short),
+                                    () -> mPresenter.cancelOrder(mOrderId), null, false)
+                            .show();
+                } else if (mTvRight.getText().equals(getResources().getString(R.string.cancel_refund))) {
                     //取消退款
-                    mListener.cancelRefund(item.getOrderId());
-                }*/
+                    new XPopup.Builder(getCurContext())
+                            .asConfirm(getResources().getString(R.string.Tips), getResources().getString(R.string.cancel_refund_tip),
+                                    getResources().getString(R.string.cancel), getResources().getString(R.string.confirm_short),
+                                    () -> mPresenter.cancelRefund(mOrderId), null, false)
+                            .show();
+                }
                 break;
         }
     }
 
     @Override
     public void getOrderDetailSuccess(OrderDetailBean data) {
-        mOId=data.getOrderInfo().getOId();
-        mStoreName=data.getOrderInfo().getShopName();
-        //mStoreLogo=data.getOrderInfo().getShopLogo;
-        if (data.getOrderInfo().getGoodsCount()>1){
-            mGoodsName=getResources().getString(R.string.order_goods_name,
+        mOId = data.getOrderInfo().getOId();
+        mStoreName = data.getOrderInfo().getShopName();
+        mStoreLogo=data.getOrderInfo().getShopLogo();
+        if (data.getOrderInfo().getGoodsCount() > 1) {
+            mGoodsName = getResources().getString(R.string.order_goods_name,
                     data.getOrderInfo().getGoodsList().get(0).getGName(),
                     String.valueOf(data.getOrderInfo().getGoodsCount()));
-        }else {
+        } else {
             mGoodsName = data.getOrderInfo().getGoodsList().get(0).getGName();
         }
         mOrderStatus = data.getOrderInfo().getOrderStatus();
@@ -257,6 +284,8 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
             mVStatusWaitingForOrder.setBackgroundColor(ContextCompat.getColor(getCurContext(), R.color.gray_text));
             mIvWaitingForOrder.setImageResource(R.drawable.circle_gray_bg);
             mTvWaitingForOrder.setTextColor(ContextCompat.getColor(getCurContext(), R.color.gray_text));
+            //隐藏顶部状态
+            mClOrderStatus.setVisibility(View.GONE);
         } else {
             //判断退款状态
             //退款状态1:同意，2:等待退款,3:拒绝
@@ -265,60 +294,28 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
                 mTvRefundStatus.setText(getResources().getString(R.string.merchant_agrees_to_refund));
                 mVBottomLine.setVisibility(View.GONE);
                 mLlBottom.setVisibility(View.GONE);
-                //订单状态:1:成功,2:等待接单,3:备餐中,4:配送中/通知取餐,5:退款完成,6:用户取消'
-                if (data.getOrderInfo().getOrderStatus().equals("1")){
-                    mVStatusDistribution.setBackgroundColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
-                    mIvDistributionInProgress.setImageResource(R.drawable.circle_red_bg);
-                    mTvDistributionInProgress.setTextColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
-                    mVStatusComplete.setBackgroundColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
-                    mIvComplete.setImageResource(R.drawable.circle_red_bg);
-                    mTvComplete.setTextColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
-                }else if(data.getOrderInfo().getOrderStatus().equals("4")){
-                    mVStatusDistribution.setBackgroundColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
-                    mIvDistributionInProgress.setImageResource(R.drawable.circle_red_bg);
-                    mTvDistributionInProgress.setTextColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
-                }
+
+                //隐藏顶部状态
+                mClOrderStatus.setVisibility(View.GONE);
             } else if ("2".equals(data.getOrderInfo().getRefundStatus())) {
                 mRlRefund.setVisibility(View.VISIBLE);
                 mTvRefundStatus.setText(getResources().getString(R.string.waiting_for_the_merchant_to_process));
                 mTvLeft.setVisibility(View.INVISIBLE);
                 mTvRight.setText(getResources().getString(R.string.cancel_refund));
-                if (data.getOrderInfo().getOrderStatus().equals("1")){
-                    mVStatusDistribution.setBackgroundColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
-                    mIvDistributionInProgress.setImageResource(R.drawable.circle_red_bg);
-                    mTvDistributionInProgress.setTextColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
-                    mVStatusComplete.setBackgroundColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
-                    mIvComplete.setImageResource(R.drawable.circle_red_bg);
-                    mTvComplete.setTextColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
-                }else if(data.getOrderInfo().getOrderStatus().equals("4")){
-                    mVStatusDistribution.setBackgroundColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
-                    mIvDistributionInProgress.setImageResource(R.drawable.circle_red_bg);
-                    mTvDistributionInProgress.setTextColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
-                }
+                //隐藏顶部状态
+                mClOrderStatus.setVisibility(View.GONE);
             } else if ("3".equals(data.getOrderInfo().getRefundStatus())) {
                 mRlRefund.setVisibility(View.VISIBLE);
                 mTvRefundStatus.setText(getResources().getString(R.string.merchant_rejects_refund));
                 mTvRight.setText(getResources().getString(R.string.apply_for_refund));
                 mTvRight.setText(getResources().getString(R.string.confirm_receipt));
-                if (data.getOrderInfo().getOrderStatus().equals("1")){
-                    mVStatusDistribution.setBackgroundColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
-                    mIvDistributionInProgress.setImageResource(R.drawable.circle_red_bg);
-                    mTvDistributionInProgress.setTextColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
-                    mVStatusComplete.setBackgroundColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
-                    mIvComplete.setImageResource(R.drawable.circle_red_bg);
-                    mTvComplete.setTextColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
-                }else if(data.getOrderInfo().getOrderStatus().equals("4")){
-                    mVStatusDistribution.setBackgroundColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
-                    mIvDistributionInProgress.setImageResource(R.drawable.circle_red_bg);
-                    mTvDistributionInProgress.setTextColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
-                }
-            } else {//订单不是退款状态
-                //设置订单状态 tv_order_status
+
                 //订单状态:1:成功,2:等待接单,3:备餐中,4:配送中/通知取餐,5:退款完成,6:用户取消'
                 if (data.getOrderInfo().getOrderStatus().equals("2")) {
                     mTvLeft.setVisibility(View.INVISIBLE);
                     mTvRight.setText(getResources().getString(R.string.cancellation_of_order));
                 } else if (mOrderStatus.equals("3")) {
+                    mTvWaitingForOrder.setText(getResources().getString(R.string.received_order));
                     mTvLeft.setText(getResources().getString(R.string.apply_for_refund));
                     mTvRight.setText(getResources().getString(R.string.confirm_receipt));
                 } else if (mOrderStatus.equals("4")) {
@@ -330,21 +327,65 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
                 } else if (mOrderStatus.equals("5")) {
                     mTvLeft.setVisibility(View.INVISIBLE);
                     mTvRight.setText(getResources().getString(R.string.another_one));
-                    mVStatusDistribution.setBackgroundColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
-                    mTvDistributionInProgress.setTextColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
-                    mIvDistributionInProgress.setImageResource(R.drawable.circle_red_bg);
+                    //隐藏顶部状态
+                    mClOrderStatus.setVisibility(View.GONE);
                 } else if (mOrderStatus.equals("6")) {
                     mVBottomLine.setVisibility(View.GONE);
                     mLlBottom.setVisibility(View.GONE);
+                    //隐藏顶部状态
+                    mClOrderStatus.setVisibility(View.GONE);
+                } else {
+                    mTvLeft.setText(getResources().getString(R.string.to_evaluate));
+                    mTvRight.setText(getResources().getString(R.string.another_one));
                     mVStatusDistribution.setBackgroundColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
                     mTvDistributionInProgress.setTextColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
                     mIvDistributionInProgress.setImageResource(R.drawable.circle_red_bg);
-                } else {
+                    mVStatusComplete.setBackgroundColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
+                    mTvComplete.setTextColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
+                    mIvComplete.setImageResource(R.drawable.circle_red_bg);
+                }
+            } else {//订单不是退款状态
+                //设置订单状态 tv_order_status
+                //订单状态:1:成功,2:等待接单,3:备餐中,4:配送中/通知取餐,5:退款完成,6:用户取消'
+                if (data.getOrderInfo().getOrderStatus().equals("2")) {
+                    mTvLeft.setVisibility(View.INVISIBLE);
+                    mTvRight.setText(getResources().getString(R.string.cancellation_of_order));
+                } else if (mOrderStatus.equals("3")) {
+                    mTvWaitingForOrder.setText(getResources().getString(R.string.received_order));
+                    mTvLeft.setText(getResources().getString(R.string.apply_for_refund));
+                    mTvRight.setText(getResources().getString(R.string.confirm_receipt));
+                } else if (mOrderStatus.equals("4")) {
                     mTvLeft.setText(getResources().getString(R.string.apply_for_refund));
                     mTvRight.setText(getResources().getString(R.string.confirm_receipt));
                     mVStatusDistribution.setBackgroundColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
                     mTvDistributionInProgress.setTextColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
                     mIvDistributionInProgress.setImageResource(R.drawable.circle_red_bg);
+                } else if (mOrderStatus.equals("5")) {
+                    mTvLeft.setVisibility(View.INVISIBLE);
+                    mTvRight.setText(getResources().getString(R.string.another_one));
+                    //隐藏顶部状态
+                    mClOrderStatus.setVisibility(View.GONE);
+                } else if (mOrderStatus.equals("6")) {
+                    mVBottomLine.setVisibility(View.GONE);
+                    mLlBottom.setVisibility(View.GONE);
+                    //隐藏顶部状态
+                    mClOrderStatus.setVisibility(View.GONE);
+                } else {
+                    ToolBarManager.with(this).setRightImage(R.mipmap.icon_red_envelopes, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        }
+                    });
+
+                    mTvLeft.setText(getResources().getString(R.string.to_evaluate));
+                    mTvRight.setText(getResources().getString(R.string.another_one));
+                    mVStatusDistribution.setBackgroundColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
+                    mTvDistributionInProgress.setTextColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
+                    mIvDistributionInProgress.setImageResource(R.drawable.circle_red_bg);
+                    mVStatusComplete.setBackgroundColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
+                    mTvComplete.setTextColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
+                    mIvComplete.setImageResource(R.drawable.circle_red_bg);
                 }
             }
         }
@@ -360,6 +401,22 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
         //设置配送费
         mTvDeliveryFee.setText(getResources().getString(R.string.goods_price,
                 data.getOrderInfo().getDeliveryPrice()));
+        //设置店铺满减
+        if ("0".equals(data.getOrderInfo().getFullReduction())) {
+            mTvShopFullReductionText.setVisibility(View.GONE);
+            mTvShopFullReduction.setVisibility(View.GONE);
+        } else {
+            mTvShopFullReduction.setText(getResources().getString(R.string.goods_price,
+                    data.getOrderInfo().getFullReduction()));
+        }
+        if ("0".equals(data.getOrderInfo().getFirstReduction())) {
+            mTvFirstReductionText.setVisibility(View.GONE);
+            mTvFirstReduction.setVisibility(View.GONE);
+        } else {
+            //设置首单立减
+            mTvFirstReduction.setText(getResources().getString(R.string.goods_price,
+                    data.getOrderInfo().getFirstReduction()));
+        }
         //设置红包金额
         mTvRedEnvelopes.setText(getResources().getString(R.string.red_envelopes_value,
                 data.getOrderInfo().getRedRrice()));
@@ -371,7 +428,8 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
         //设置收货信息
         mTvReceivingInformation.setText(data.getOrderInfo().getAddress().getName().concat(" ")
                 .concat(data.getOrderInfo().getAddress().getPhone()).concat("\n")
-                .concat(data.getOrderInfo().getAddress().getAddress()));
+                .concat(data.getOrderInfo().getAddress().getAddress())
+                .concat(data.getOrderInfo().getAddress().getRoomNo()));
         //设置期望送达时间
         mTvExpectedTime.setText(data.getOrderInfo().getExpectedDeliveryTime());
         //设置配送服务
@@ -396,17 +454,17 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
 
     @Override
     public void confirmOrderSuccess() {
-
+        mPresenter.getOrderDetail(mOrderId);
     }
 
     @Override
     public void cancelOrderSuccess() {
-
+        finish();
     }
 
     @Override
     public void cancelRefundSuccess() {
-
+        finish();
     }
 
     @Override
@@ -419,4 +477,10 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
         return new OrderDetailPresenter(this);
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

@@ -41,6 +41,7 @@ import com.library.repository.models.HotShopBean;
 import com.library.repository.models.ShopTypeBean;
 import com.library.repository.repository.RepositoryFactory;
 import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.enums.PopupPosition;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
@@ -142,6 +143,8 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
         LinearLayoutManager manager = new LinearLayoutManager(getCurContext());
         mRvContent.setLayoutManager(manager);
         mRvContent.setAdapter(mAdapter);
+        //分类筛选默认为全部美食
+        mTvType.setText(getResources().getString(R.string.all_delicacies));
 
         setListener();
     }
@@ -230,6 +233,9 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
                 }
                 break;
             case R.id.tv_distance://距离
+                mTvDistance.setTextColor(ContextCompat.getColor(getCurContext(),R.color.colorAccent));
+                mTvComprehensiveRanking.setTextColor(ContextCompat.getColor(getCurContext(),R.color.gray_text));
+                mTvComprehensiveRanking.setText(getResources().getString(R.string.comprehensive_ranking));
                 mOrder = "4";
                 mPage = 1;
                 mPresenter.getShopsList(mServiceId, mSecondServiceId, mOrder, mPage);
@@ -255,7 +261,7 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
                 mSecondMenuList.add(data.get(i));
             }
         }
-        mTypeList.add(0,getResources().getString(R.string.all));
+        mTypeList.add(0,getResources().getString(R.string.all_delicacies));
         mGvClassificationAdapter.setData(mClassificationList);
         mSecondMenuAdapter.setData(mSecondMenuList);
     }
@@ -347,8 +353,9 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
                     amapLocation.getLatitude();//获取纬度
                     amapLocation.getLongitude();//获取经度
                     amapLocation.getAccuracy();//获取精度信息
-                    String address = amapLocation.getCity();
+                    String address = amapLocation.getAddress();
                     SharedPreferencesUtils.setString(BaseApp.getInstance(), "address", address);
+                    mTvAddress.setText(address);
                     RepositoryFactory.getLocalRepository().saveLatitude(String.valueOf(amapLocation.getLatitude()));
                     RepositoryFactory.getLocalRepository().saveLongitude(String.valueOf(amapLocation.getLongitude()));
 
@@ -378,8 +385,9 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
                 mTvComprehensiveRanking.setText(list.get(pos));
             } else {
                 mOrder = String.valueOf(pos);
-                mTvComprehensiveRanking.setTextColor(ContextCompat.getColor(getCurContext(),R.color.gray_text));
+                mTvComprehensiveRanking.setTextColor(ContextCompat.getColor(getCurContext(),R.color.colorAccent));
                 mTvComprehensiveRanking.setText(list.get(pos));
+                mTvDistance.setTextColor(ContextCompat.getColor(getCurContext(),R.color.gray_text));
             }
             mPage = 1;
             mPresenter.getShopsList(mServiceId, mSecondServiceId, mOrder, mPage);
@@ -387,6 +395,7 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
         });
         new XPopup.Builder(getCurContext())
                 .atView(mTvComprehensiveRanking)
+                .popupPosition(PopupPosition.Bottom)
                 .maxWidth(DimensionUtil.getScreenWith())
                 .asCustom(mDialog)
                 .show();
@@ -409,6 +418,7 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
         });
         new XPopup.Builder(getCurContext())
                 .atView(mTvType)
+                .popupPosition(PopupPosition.Bottom)
                 .maxWidth(DimensionUtil.getScreenWith())
                 .asCustom(mTypeDialog)
                 .show();

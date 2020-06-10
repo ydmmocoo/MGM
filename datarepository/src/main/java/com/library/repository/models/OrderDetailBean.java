@@ -88,8 +88,9 @@ public class OrderDetailBean {
         private String payStatus;
         private String shopName;
         private String payType;
-        private String tels;
+        private List<TelsBean> tels;
         private int expireTime;
+        private String shopLogo;
         private List<GoodsListBean> goodsList;
 
         public String getOId() {
@@ -284,11 +285,11 @@ public class OrderDetailBean {
             this.payType = payType;
         }
 
-        public String getTels() {
+        public List<TelsBean> getTels() {
             return tels;
         }
 
-        public void setTels(String tels) {
+        public void setTels(List<TelsBean> tels) {
             this.tels = tels;
         }
 
@@ -300,12 +301,46 @@ public class OrderDetailBean {
             this.expireTime = expireTime;
         }
 
+        public String getShopLogo() {
+            return shopLogo;
+        }
+
+        public void setShopLogo(String shopLogo) {
+            this.shopLogo = shopLogo;
+        }
+
         public List<GoodsListBean> getGoodsList() {
             return goodsList;
         }
 
         public void setGoodsList(List<GoodsListBean> goodsList) {
             this.goodsList = goodsList;
+        }
+
+        public static class TelsBean {
+            /**
+             * tId :
+             * tel :
+             */
+
+            private String tId;
+            private String tel;
+
+            public String getTId() {
+                return tId;
+            }
+
+            public void setTId(String tId) {
+                this.tId = tId;
+            }
+
+            public String getTel() {
+                return tel;
+            }
+
+            public void setTel(String tel) {
+                this.tel = tel;
+            }
         }
 
         public static class AddressBean {
@@ -319,6 +354,8 @@ public class OrderDetailBean {
             private String name;
             private String address;
             private String phone;
+            private String sex;
+            private String roomNo;
             private String distance;
 
             public String getName() {
@@ -343,6 +380,22 @@ public class OrderDetailBean {
 
             public void setPhone(String phone) {
                 this.phone = phone;
+            }
+
+            public String getSex() {
+                return sex;
+            }
+
+            public void setSex(String sex) {
+                this.sex = sex;
+            }
+
+            public String getRoomNo() {
+                return roomNo;
+            }
+
+            public void setRoomNo(String roomNo) {
+                this.roomNo = roomNo;
             }
 
             public String getDistance() {

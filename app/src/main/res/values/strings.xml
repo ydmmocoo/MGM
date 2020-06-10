@@ -1033,8 +1033,8 @@
     <string name="specifications">规格：</string>
     <string name="store_goods_price">价格：</string>
     <string name="have_chosen">选好了</string>
-    <string name="first_reduction">首单立减%1$s</string>
-    <string name="first_reduction_text">首单立减</string>
+    <string name="first_reduction">新客立减%1$s</string>
+    <string name="first_reduction_text">新客立减</string>
     <string name="full_reduction">%1$s减%2$s</string>
     <string name="delivery">外卖配送</string>
     <string name="collect_by_yourself">到店自取</string>
@@ -1140,7 +1140,12 @@
     <string name="pay_value">支付：</string>
     <string name="pay_count_down">请在%1$s时间内完成付款，否则订单将失效</string>
     <string name="cancel_order_tip">是否取消订单？</string>
+    <string name="cancel_refund_tip">是否取消退款？</string>
     <string name="open_24_hours_a_day">24小时营业</string>
+    <string name="confirm_receipt_tip">请确认收到商品后才可“确认收货”，一旦确认之后，不可退款</string>
+    <string name="all_delicacies">全部美食</string>
+    <string name="received_order">已接单</string>
+    <string name="pay_back_tip">还未支付,是否放弃支付?</string>
 
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <bool name="bottomsheet_is_tablet">false</bool>

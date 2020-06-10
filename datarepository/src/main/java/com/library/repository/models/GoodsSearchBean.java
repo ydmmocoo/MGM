@@ -64,8 +64,9 @@ public class GoodsSearchBean {
         private String price;
         private int specialCount;
         private String minBuyNum;
+        private int count;
         private List<SpecialListBean> specialList;
-        private List<?> attrList;
+        private List<AttrListBean> attrList;
 
         public String getGId() {
             return gId;
@@ -123,6 +124,14 @@ public class GoodsSearchBean {
             this.minBuyNum = minBuyNum;
         }
 
+        public int getCount() {
+            return count;
+        }
+
+        public void setCount(int count) {
+            this.count = count;
+        }
+
         public List<SpecialListBean> getSpecialList() {
             return specialList;
         }
@@ -131,11 +140,11 @@ public class GoodsSearchBean {
             this.specialList = specialList;
         }
 
-        public List<?> getAttrList() {
+        public List<AttrListBean> getAttrList() {
             return attrList;
         }
 
-        public void setAttrList(List<?> attrList) {
+        public void setAttrList(List<AttrListBean> attrList) {
             this.attrList = attrList;
         }
 
@@ -182,6 +191,68 @@ public class GoodsSearchBean {
 
             public void setPrice(String price) {
                 this.price = price;
+            }
+        }
+
+        public static class AttrListBean {
+            /**
+             * gamId : 37
+             * name : 3211
+             * optList : [{"aId":"76","name":"123"},{"aId":"77","name":"12"}]
+             */
+
+            private String gamId;
+            private String name;
+            private List<GoodsDetailBean.GoodInfoBean.AttrListBean.OptListBean> optList;
+
+            public String getGamId() {
+                return gamId;
+            }
+
+            public void setGamId(String gamId) {
+                this.gamId = gamId;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public List<GoodsDetailBean.GoodInfoBean.AttrListBean.OptListBean> getOptList() {
+                return optList;
+            }
+
+            public void setOptList(List<GoodsDetailBean.GoodInfoBean.AttrListBean.OptListBean> optList) {
+                this.optList = optList;
+            }
+
+            public static class OptListBean {
+                /**
+                 * aId : 76
+                 * name : 123
+                 */
+
+                private String aId;
+                private String name;
+
+                public String getAId() {
+                    return aId;
+                }
+
+                public void setAId(String aId) {
+                    this.aId = aId;
+                }
+
+                public String getName() {
+                    return name;
+                }
+
+                public void setName(String name) {
+                    this.name = name;
+                }
             }
         }
     }

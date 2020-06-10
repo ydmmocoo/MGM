@@ -163,6 +163,9 @@ public class MenuStoreListActivity extends BaseMvpActivity<MenuStoreListPresente
                 }
                 break;
             case R.id.tv_distance://距离
+                mTvDistance.setTextColor(ContextCompat.getColor(getCurContext(),R.color.colorAccent));
+                mTvComprehensiveRanking.setTextColor(ContextCompat.getColor(getCurContext(),R.color.gray_text));
+                mTvComprehensiveRanking.setText(getResources().getString(R.string.comprehensive_ranking));
                 mOrder = "4";
                 mPresenter.getShopsList(mServiceId, mSecondServiceId, mOrder, mPage);
                 break;
@@ -214,6 +217,7 @@ public class MenuStoreListActivity extends BaseMvpActivity<MenuStoreListPresente
                 mOrder = String.valueOf(pos);
                 mTvComprehensiveRanking.setTextColor(ContextCompat.getColor(getCurContext(),R.color.colorAccent));
                 mTvComprehensiveRanking.setText(list.get(pos));
+                mTvDistance.setTextColor(ContextCompat.getColor(getCurContext(),R.color.gray_text));
             }
             mPage = 1;
             mPresenter.getShopsList(mServiceId, mSecondServiceId, mOrder, mPage);
