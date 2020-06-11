@@ -40,7 +40,7 @@
         android:drawableStart="@mipmap/icon_location_white"
         android:gravity="center_vertical"
         android:textColor="@color/white"
-        tools:text="金海湾财富中心3号楼"
+        android:text="@string/positioning"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

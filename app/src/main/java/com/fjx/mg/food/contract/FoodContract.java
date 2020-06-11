@@ -31,6 +31,8 @@ public interface FoodContract {
         void getShopListSuccess(List<HomeShopListBean.ShopListBean> data,boolean hasNext);
 
         void getShopListFailure();
+
+        void getAddressSuccess(String address);
     }
 
     public abstract class Presenter extends BasePresenter<FoodContract.View> {
@@ -47,6 +49,8 @@ public interface FoodContract {
 
         public abstract void getShopsList(String serviceId,String secondServiceId,String order,
         int page);
+
+        public abstract void getAddress(String lat,String lon);
 
     }
 }

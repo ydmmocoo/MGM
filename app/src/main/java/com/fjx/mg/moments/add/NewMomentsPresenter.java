@@ -5,17 +5,11 @@ import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.amap.api.location.AMapLocationClient;
-import com.amap.api.location.AMapLocationClientOption;
-import com.amap.api.services.core.LatLonPoint;
-import com.amap.api.services.core.PoiItem;
-import com.amap.api.services.geocoder.GeocodeResult;
-import com.amap.api.services.geocoder.GeocodeSearch;
-import com.amap.api.services.geocoder.RegeocodeAddress;
-import com.amap.api.services.geocoder.RegeocodeQuery;
-import com.amap.api.services.geocoder.RegeocodeResult;
 import com.fjx.mg.R;
-import com.fjx.mg.utils.FileCache;
+import com.fjx.mg.utils.HttpUtil;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
 import com.google.gson.JsonObject;
 import com.library.common.utils.CommonToast;
 import com.library.common.utils.ContextManager;
@@ -24,6 +18,7 @@ import com.library.common.utils.LogTUtil;
 import com.library.repository.core.net.CommonObserver;
 import com.library.repository.core.net.RxScheduler;
 import com.library.repository.data.MultipartBodyHBuilder;
+import com.library.repository.models.GoogleMapGeocodeSearchBean;
 import com.library.repository.models.ResponseModel;
 import com.library.repository.models.TypeListModel;
 import com.library.repository.repository.RepositoryFactory;
@@ -39,8 +34,6 @@ import java.util.Map;
 import okhttp3.MultipartBody;
 
 class NewMomentsPresenter extends NewMomentsContract.Presenter {
-    private AMapLocationClient mlocationClient;
-    private AMapLocationClientOption mLocationOption = null;
 
     NewMomentsPresenter(NewMomentsContract.View view) {
         super(view);
@@ -240,41 +233,6 @@ class NewMomentsPresenter extends NewMomentsContract.Presenter {
                         CommonToast.toast(data.getMsg());
                     }
                 });
-    }
-
-    private void poiSearch(double longitude, double latitude, int distances) {
-        LatLonPoint point = new LatLonPoint(latitude, longitude);
-        GeocodeSearch geocodeSearch = new GeocodeSearch(ContextManager.getContext());
-        RegeocodeQuery regeocodeQuery = new RegeocodeQuery(point, distances, geocodeSearch.AMAP);
-        geocodeSearch.getFromLocationAsyn(regeocodeQuery);
-        geocodeSearch.setOnGeocodeSearchListener(new GeocodeSearch.OnGeocodeSearchListener() {
-            @Override
-            public void onRegeocodeSearched(RegeocodeResult regeocodeResult, int rCode) {
-                Log.d(rCode + "", "rCode");
-                if (1000 == rCode) {
-                    RegeocodeAddress address = regeocodeResult.getRegeocodeAddress();
-                    StringBuffer stringBuffer = new StringBuffer();
-                    String area = address.getProvince();//省或直辖市
-                    String cityName = address.getCity();//地级市或直辖市
-                    String subLoc = address.getDistrict();//区或县或县级市
-                    List<PoiItem> pois = address.getPois();//获取周围兴趣点
-                    Log.e("" + area, cityName + subLoc + "");
-                    Log.e("pois长度", pois.size() + "");
-                    Log.e("pois详情", "null" + pois.get(0).getCityName());
-                    for (int i = 0; i < pois.size(); i++) {
-                        Log.e("获取周围兴趣点", pois.get(i).toString());
-                    }
-                }
-            }
-
-            @Override
-            public void onGeocodeSearched(GeocodeResult geocodeResult, int rCode) {
-                Log.d(rCode + "", "rCode");
-                Log.d(geocodeResult.getGeocodeAddressList().toString() + "", "getGeocodeAddressList");
-                Log.d(geocodeResult.getGeocodeQuery().toString() + "", "getGeocodeQuery");
-            }
-        });
-
     }
 }
 

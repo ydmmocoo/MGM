@@ -1146,6 +1146,7 @@
     <string name="all_delicacies">全部美食</string>
     <string name="received_order">已接单</string>
     <string name="pay_back_tip">还未支付,是否放弃支付?</string>
+    <string name="positioning">定位中...</string>
 
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <bool name="bottomsheet_is_tablet">false</bool>

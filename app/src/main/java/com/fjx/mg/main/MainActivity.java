@@ -427,9 +427,6 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
         if (requestCode == REQUESTCODE_STORAGE) {
             if (versionModel == null) return;
             UpdateAppManager.downloadApk(getCurContext(), versionModel.getDownUrl(), getString(R.string.version_update), getString(R.string.app_name));
-        } else {
-            HomeFragment homeFragment = ((HomeFragment) fragments.get(0));
-            homeFragment.location();
         }
     }
 
@@ -456,11 +453,11 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
         TimConfig.count = count;
         if (bottomTab == null) return;
         if (totalCount == 0) {
-            bottomTab.hideMsg(2);
+            bottomTab.hideMsg(3);
             return;
         }
 
-        bottomTab.showMsg(2, totalCount);
+        bottomTab.showMsg(3, totalCount);
         initBottomCountParams();
     }
 
@@ -470,10 +467,10 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
             mReplyListSize = data.getReplyList().size();
             if (bottomTab != null) {
                 if (messageCount + friendRequestCount + mReplyListSize == 0) {
-                    bottomTab.hideMsg(2);
+                    bottomTab.hideMsg(3);
                     return;
                 }
-                bottomTab.showMsg(2, messageCount + friendRequestCount + mReplyListSize);
+                bottomTab.showMsg(3, messageCount + friendRequestCount + mReplyListSize);
             }
 
             initBottomCountParams();
@@ -550,7 +547,6 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
                 List<TIMFriendPendencyItem> datas = response.getItems();
 
                 friendRequestCount = datas.size();
-//                bottomTab.showMsg(2, friendRequestCount);
                 if (bottomTab != null) {
                     if (messageCount + friendRequestCount + mReplyListSize == 0) {
                         bottomTab.hideMsg(3);

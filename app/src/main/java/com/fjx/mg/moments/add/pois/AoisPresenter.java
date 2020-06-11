@@ -1,20 +1,21 @@
 package com.fjx.mg.moments.add.pois;
 
-import com.amap.api.location.AMapLocation;
-import com.amap.api.location.AMapLocationClient;
-import com.amap.api.location.AMapLocationClientOption;
-import com.amap.api.location.AMapLocationListener;
-import com.amap.api.services.core.LatLonPoint;
-import com.amap.api.services.geocoder.GeocodeResult;
-import com.amap.api.services.geocoder.GeocodeSearch;
-import com.amap.api.services.geocoder.RegeocodeQuery;
-import com.amap.api.services.geocoder.RegeocodeResult;
-import com.library.common.utils.ContextManager;
+
+import com.fjx.mg.utils.HttpUtil;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.library.common.utils.JsonUtil;
+import com.library.repository.models.GoogleMapGeocodeSearchBean;
+import com.library.repository.repository.RepositoryFactory;
+
+import okhttp3.Response;
+
+import static com.library.common.utils.RxJavaUtls.runOnUiThread;
 
 class AoisPresenter extends AoisContract.Presenter {
-
-    private AMapLocationClient mlocationClient;
-    private AMapLocationClientOption mLocationOption = null;
 
     AoisPresenter(AoisContract.View view) {
         super(view);
@@ -22,53 +23,31 @@ class AoisPresenter extends AoisContract.Presenter {
 
     @Override
     void locationAddress() {
-        mView.createAndShowDialog();
-        mlocationClient = new AMapLocationClient(mView.getCurContext());
-        mLocationOption = new AMapLocationClientOption();
-        mlocationClient.setLocationListener(locationListener);
-        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
-        mLocationOption.setInterval(600000);
-        mLocationOption.setOnceLocationLatest(true);
-        mlocationClient.setLocationOption(mLocationOption);
-        mlocationClient.startLocation();
+        String lat=RepositoryFactory.getLocalRepository().getLatitude();
+        String lon=RepositoryFactory.getLocalRepository().getLongitude();
+        String language = RepositoryFactory.getLocalRepository().getLangugeType();
+        String url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lon + "+"
+                + "&key=AIzaSyAOtsgwEAwJ7SjsM1oHDVmp6oLfOS24Rj4&language=" + language;
 
-
-    }
-
-    private AMapLocationListener locationListener = new AMapLocationListener() {
-        @Override
-        public void onLocationChanged(AMapLocation amapLocation) {
-            if (amapLocation != null) {
-                if (amapLocation.getErrorCode() == 0) {
-                    mlocationClient.stopLocation();
-                    double lat = amapLocation.getLatitude();//获取纬度
-                    double lon = amapLocation.getLongitude();//获取经度
-                    poiSearch(amapLocation.getLongitude(), amapLocation.getLatitude(), 2000, "" + lat, "" + lon);
-                }
-            }
-        }
-
-    };
-
-    private void poiSearch(double longitude, double latitude, int distances, final String lat, final String lon) {
-        LatLonPoint point = new LatLonPoint(latitude, longitude);
-        GeocodeSearch geocodeSearch = new GeocodeSearch(ContextManager.getContext());
-        RegeocodeQuery regeocodeQuery = new RegeocodeQuery(point, distances, geocodeSearch.AMAP);
-        geocodeSearch.getFromLocationAsyn(regeocodeQuery);
-        geocodeSearch.setOnGeocodeSearchListener(new GeocodeSearch.OnGeocodeSearchListener() {
+        new HttpUtil().sendPost(url, new HttpUtil.OnRequestListener() {
             @Override
-            public void onRegeocodeSearched(RegeocodeResult regeocodeResult, int rCode) {
-                if (1000 == rCode) {
-                    mView.destoryAndDismissDialog();
-                    mView.LocationSuccess(regeocodeResult.getRegeocodeAddress().getPois(), lat, lon);
-                }
+            public void onSuccess(String json) {
+                runOnUiThread(() -> {
+                    GoogleMapGeocodeSearchBean data= JsonUtil.strToModel(json,GoogleMapGeocodeSearchBean.class);
+                    if (data!=null) {
+                        mView.LocationSuccess(data.getResults());
+                    }
+                });
             }
 
             @Override
-            public void onGeocodeSearched(GeocodeResult geocodeResult, int rCode) {
+            public void onFailed() {
+            }
+
+            @Override
+            public void onSuccess(Response response) {
             }
         });
-
     }
 }
 

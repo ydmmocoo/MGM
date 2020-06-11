@@ -1,9 +1,9 @@
 package com.fjx.mg.food;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,10 +15,6 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.amap.api.location.AMapLocation;
-import com.amap.api.location.AMapLocationClient;
-import com.amap.api.location.AMapLocationClientOption;
-import com.amap.api.location.AMapLocationListener;
 import com.fjx.mg.R;
 import com.fjx.mg.dialog.FilterDialog;
 import com.fjx.mg.food.adapter.GvClassificationAdapter;
@@ -27,9 +23,18 @@ import com.fjx.mg.food.adapter.GvSelectedGoodStoreAdapter;
 import com.fjx.mg.food.adapter.RvStoreAdapter;
 import com.fjx.mg.food.contract.FoodContract;
 import com.fjx.mg.food.presenter.FoodPresenter;
+import com.fjx.mg.moments.add.pois.AoisActivity;
 import com.fjx.mg.setting.address.list.AddressListActivity;
 import com.fjx.mg.utils.SharedPreferencesUtils;
 import com.fjx.mg.view.WrapContentGridView;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.hjq.permissions.OnPermission;
+import com.hjq.permissions.Permission;
+import com.hjq.permissions.XXPermissions;
 import com.library.common.base.BaseApp;
 import com.library.common.base.BaseMvpFragment;
 import com.library.common.utils.DimensionUtil;
@@ -85,13 +90,13 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
     private String mServiceId = "";
     private String mSecondServiceId = "";
 
-    //声明mlocationClient对象
-    private AMapLocationClient mlocationClient;
-    //声明mLocationOption对象
-    private AMapLocationClientOption mLocationOption = null;
+    private boolean mIsFirst=true;
+    private FusedLocationProviderClient mClient;
+    private LocationRequest mLocationRequest;
+    private LocationCallback mLocationCallback;
 
     private FilterDialog mTypeDialog;
-    private List<String> mTypeList=new ArrayList<>();
+    private List<String> mTypeList = new ArrayList<>();
     private FilterDialog mDialog;
     private String mOrder = "";
     private Drawable mDrawable;
@@ -111,10 +116,11 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        mDrawable= ContextCompat.getDrawable(getCurContext(),R.mipmap.icon_arrow_down_black);
-        mDrawable.setBounds(0,0,mDrawable.getMinimumWidth(),mDrawable.getMinimumHeight());
-        mSelectedDrawable= ContextCompat.getDrawable(getCurContext(),R.mipmap.icon_arrow_up_red);
-        mSelectedDrawable.setBounds(0,0,mSelectedDrawable.getMinimumWidth(),mSelectedDrawable.getMinimumHeight());
+        locationAddress();
+        mDrawable = ContextCompat.getDrawable(getCurContext(), R.mipmap.icon_arrow_down_black);
+        mDrawable.setBounds(0, 0, mDrawable.getMinimumWidth(), mDrawable.getMinimumHeight());
+        mSelectedDrawable = ContextCompat.getDrawable(getCurContext(), R.mipmap.icon_arrow_up_red);
+        mSelectedDrawable.setBounds(0, 0, mSelectedDrawable.getMinimumWidth(), mSelectedDrawable.getMinimumHeight());
         //设置地址
         String address = SharedPreferencesUtils.getString(getCurContext(), "address", "");
         mTvAddress.setText(address);
@@ -138,13 +144,17 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
         //初始化RecyclerView
         mAdapter = new RvStoreAdapter(R.layout.item_rv_store, mList);
         mAdapter.addHeaderView(headView);
-        View footerView=View.inflate(getCurContext(),R.layout.item_rv_store_list_footer,null);
+        View footerView = View.inflate(getCurContext(), R.layout.item_rv_store_list_footer, null);
         mAdapter.addFooterView(footerView);
         LinearLayoutManager manager = new LinearLayoutManager(getCurContext());
         mRvContent.setLayoutManager(manager);
         mRvContent.setAdapter(mAdapter);
         //分类筛选默认为全部美食
         mTvType.setText(getResources().getString(R.string.all_delicacies));
+
+        mPresenter.getShopTypeList("");
+        mPresenter.getAd();
+        mPresenter.getHotShops();
 
         setListener();
     }
@@ -211,7 +221,7 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
             case R.id.iv_back://返回
                 break;
             case R.id.tv_address://选择地址
-                intent = new Intent(getCurContext(), AddressListActivity.class);
+                intent = new Intent(getCurContext(), AoisActivity.class);
                 startActivity(intent);
                 break;
             case R.id.v_search://搜索
@@ -219,22 +229,22 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
                 startActivity(intent);
                 break;
             case R.id.tv_type://类型
-                if (mTypeDialog==null||!mTypeDialog.isShow()) {
+                if (mTypeDialog == null || !mTypeDialog.isShow()) {
                     showTypeDialog();
-                }else {
+                } else {
                     mTypeDialog.dismiss();
                 }
                 break;
             case R.id.tv_comprehensive_ranking://综合排序
-                if (mDialog==null||!mDialog.isShow()) {
+                if (mDialog == null || !mDialog.isShow()) {
                     showDialog();
-                }else {
+                } else {
                     mDialog.dismiss();
                 }
                 break;
             case R.id.tv_distance://距离
-                mTvDistance.setTextColor(ContextCompat.getColor(getCurContext(),R.color.colorAccent));
-                mTvComprehensiveRanking.setTextColor(ContextCompat.getColor(getCurContext(),R.color.gray_text));
+                mTvDistance.setTextColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
+                mTvComprehensiveRanking.setTextColor(ContextCompat.getColor(getCurContext(), R.color.gray_text));
                 mTvComprehensiveRanking.setText(getResources().getString(R.string.comprehensive_ranking));
                 mOrder = "4";
                 mPage = 1;
@@ -261,14 +271,14 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
                 mSecondMenuList.add(data.get(i));
             }
         }
-        mTypeList.add(0,getResources().getString(R.string.all_delicacies));
+        mTypeList.add(0, getResources().getString(R.string.all_delicacies));
         mGvClassificationAdapter.setData(mClassificationList);
         mSecondMenuAdapter.setData(mSecondMenuList);
     }
 
     @Override
     public void getBannerDataSuccess(List<AdModel> data) {
-        if (data==null){
+        if (data == null) {
             return;
         }
         List<String> imageUrl = new ArrayList<>();
@@ -316,60 +326,46 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        locationAddress();
+    public void getAddressSuccess(String address) {
+        SharedPreferencesUtils.setString(BaseApp.getInstance(), "address", address);
+        mTvAddress.setText(address);
     }
 
     private void locationAddress() {
-        mlocationClient = new AMapLocationClient(getCurActivity());
-        //初始化定位参数
-        mLocationOption = new AMapLocationClientOption();
-        //设置定位监听
-        mlocationClient.setLocationListener(locationListener);
-        //设置定位模式为高精度模式，Battery_Saving为低功耗模式，Device_Sensors是仅设备模式
-        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
-        //设置定位间隔,单位毫秒,默认为2000ms
-        mLocationOption.setInterval(600000);
-        //设置定位参数
-        mlocationClient.setLocationOption(mLocationOption);
-        // 此方法为每隔固定时间会发起一次定位请求，为了减少电量消耗或网络流量消耗，
-        // 注意设置合适的定位时间的间隔（最小间隔支持为1000ms），并且在合适时间调用stopLocation()方法来取消定位请求
-        // 在定位结束后，在合适的生命周期调用onDestroy()方法
-        // 在单次定位情况下，定位无论成功与否，都无需调用stopLocation()方法移除请求，定位sdk内部会移除
-        //启动定位
-        mlocationClient.startLocation();
-    }
-
-    private AMapLocationListener locationListener = new AMapLocationListener() {
-        @Override
-        public void onLocationChanged(AMapLocation amapLocation) {
-            Log.d("locationListener", JsonUtil.moderToString(amapLocation));
-            if (amapLocation != null) {
-                if (amapLocation.getErrorCode() == 0) {
-                    mlocationClient.stopLocation();
-                    //定位成功回调信息，设置相关消息
-                    amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
-                    amapLocation.getLatitude();//获取纬度
-                    amapLocation.getLongitude();//获取经度
-                    amapLocation.getAccuracy();//获取精度信息
-                    String address = amapLocation.getAddress();
-                    SharedPreferencesUtils.setString(BaseApp.getInstance(), "address", address);
-                    mTvAddress.setText(address);
-                    RepositoryFactory.getLocalRepository().saveLatitude(String.valueOf(amapLocation.getLatitude()));
-                    RepositoryFactory.getLocalRepository().saveLongitude(String.valueOf(amapLocation.getLongitude()));
-
+        //定位相关
+        mClient = LocationServices.getFusedLocationProviderClient(getCurActivity());
+        mLocationRequest = new LocationRequest()
+                .setInterval(1000)
+                .setFastestInterval(5000)
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+                double latitude = locationResult.getLastLocation().getLatitude();
+                double longitude = locationResult.getLastLocation().getLongitude();
+                if (mIsFirst) {
+                    mIsFirst=false;
+                    RepositoryFactory.getLocalRepository().saveLatitude(String.valueOf(latitude));
+                    RepositoryFactory.getLocalRepository().saveLongitude(String.valueOf(longitude));
                     mPage = 1;
-                    mPresenter.getShopTypeList("");
-                    mPresenter.getAd();
-                    mPresenter.getHotShops();
                     mPresenter.getShopsList(mServiceId, mSecondServiceId, mOrder, mPage);
-                } else {
-                    //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
+                    mPresenter.getAddress(String.valueOf(latitude), String.valueOf(longitude));
+                }
+
+                String saveLat=RepositoryFactory.getLocalRepository().getLatitude();
+                String saveLon=RepositoryFactory.getLocalRepository().getLongitude();
+                if (!saveLat.equals(String.valueOf(latitude))||!saveLon.equals(String.valueOf(longitude))) {
+                    RepositoryFactory.getLocalRepository().saveLatitude(String.valueOf(latitude));
+                    RepositoryFactory.getLocalRepository().saveLongitude(String.valueOf(longitude));
+
+                    mPresenter.getAddress(String.valueOf(latitude), String.valueOf(longitude));
                 }
             }
-        }
-    };
+        };
+
+        requestLocationUpdate();
+    }
 
     private void showDialog() {
         List<String> list = new ArrayList<>();
@@ -381,13 +377,13 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
         mDialog.setOnFilterClickListener(pos -> {
             if (pos == 0) {
                 mOrder = "";
-                mTvComprehensiveRanking.setTextColor(ContextCompat.getColor(getCurContext(),R.color.gray_text));
+                mTvComprehensiveRanking.setTextColor(ContextCompat.getColor(getCurContext(), R.color.gray_text));
                 mTvComprehensiveRanking.setText(list.get(pos));
             } else {
                 mOrder = String.valueOf(pos);
-                mTvComprehensiveRanking.setTextColor(ContextCompat.getColor(getCurContext(),R.color.colorAccent));
+                mTvComprehensiveRanking.setTextColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
                 mTvComprehensiveRanking.setText(list.get(pos));
-                mTvDistance.setTextColor(ContextCompat.getColor(getCurContext(),R.color.gray_text));
+                mTvDistance.setTextColor(ContextCompat.getColor(getCurContext(), R.color.gray_text));
             }
             mPage = 1;
             mPresenter.getShopsList(mServiceId, mSecondServiceId, mOrder, mPage);
@@ -404,13 +400,13 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
     private void showTypeDialog() {
         mTypeDialog = new FilterDialog(getCurActivity(), mTypeList);
         mTypeDialog.setOnFilterClickListener(pos -> {
-            if (pos==0){
-                mSecondServiceId="";
-                mTvType.setTextColor(ContextCompat.getColor(getCurContext(),R.color.gray_text));
+            if (pos == 0) {
+                mSecondServiceId = "";
+                mTvType.setTextColor(ContextCompat.getColor(getCurContext(), R.color.gray_text));
                 mTvType.setText(mTypeList.get(pos));
-            }else {
+            } else {
                 mSecondServiceId = mSecondMenuList.get(pos).getSecondId();
-                mTvType.setTextColor(ContextCompat.getColor(getCurContext(),R.color.colorAccent));
+                mTvType.setTextColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
                 mTvType.setText(mTypeList.get(pos));
             }
             mPresenter.getShopsList(mServiceId, mSecondServiceId, mOrder, mPage);
@@ -422,5 +418,26 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
                 .maxWidth(DimensionUtil.getScreenWith())
                 .asCustom(mTypeDialog)
                 .show();
+    }
+
+    @SuppressLint("MissingPermission")
+    private void requestLocationUpdate() {
+        XXPermissions.with(getCurActivity())
+                .permission(Permission.Group.LOCATION)
+                .request(new OnPermission() {
+
+                    @Override
+                    public void hasPermission(List<String> granted, boolean all) {
+                        if (all) {
+                            //启动定位
+                            mClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
+                        } else {
+                        }
+                    }
+
+                    @Override
+                    public void noPermission(List<String> denied, boolean quick) {
+                    }
+                });
     }
 }

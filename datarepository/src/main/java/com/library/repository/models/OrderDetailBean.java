@@ -88,6 +88,7 @@ public class OrderDetailBean {
         private String payStatus;
         private String shopName;
         private String payType;
+        private String evaluateStatus;
         private List<TelsBean> tels;
         private int expireTime;
         private String shopLogo;
@@ -283,6 +284,14 @@ public class OrderDetailBean {
 
         public void setPayType(String payType) {
             this.payType = payType;
+        }
+
+        public String getEvaluateStatus() {
+            return evaluateStatus;
+        }
+
+        public void setEvaluateStatus(String evaluateStatus) {
+            this.evaluateStatus = evaluateStatus;
         }
 
         public List<TelsBean> getTels() {

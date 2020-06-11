@@ -1,13 +1,15 @@
 package com.fjx.mg.setting.address.edit;
 
+import android.location.Geocoder;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.amap.api.location.AMapLocation;
-import com.amap.api.location.AMapLocationClient;
-import com.amap.api.location.AMapLocationClientOption;
-import com.amap.api.location.AMapLocationListener;
 import com.fjx.mg.R;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
 import com.library.common.utils.CommonToast;
 import com.library.common.utils.JsonUtil;
 import com.library.repository.core.net.CommonObserver;
@@ -15,11 +17,13 @@ import com.library.repository.core.net.RxScheduler;
 import com.library.repository.models.ResponseModel;
 import com.library.repository.repository.RepositoryFactory;
 
+import java.util.Locale;
+
 public class EditAddressPresenter extends EditAddressContract.Presenter {
-    //声明mlocationClient对象
-    private AMapLocationClient mlocationClient;
-    //声明mLocationOption对象
-    private AMapLocationClientOption mLocationOption = null;
+
+    private FusedLocationProviderClient mClient;
+    private LocationRequest mLocationRequest;
+    private LocationCallback mLocationCallback;
 
     public EditAddressPresenter(EditAddressContract.View view) {
         super(view);
@@ -112,57 +116,31 @@ public class EditAddressPresenter extends EditAddressContract.Presenter {
     @Override
     void locationAddress() {
         mView.showLoading();
-        mlocationClient = new AMapLocationClient(mView.getCurContext());
-        //初始化定位参数
-        mLocationOption = new AMapLocationClientOption();
-        //设置定位监听
-        mlocationClient.setLocationListener(locationListener);
-        //设置定位模式为高精度模式，Battery_Saving为低功耗模式，Device_Sensors是仅设备模式
-        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
-        //设置定位间隔,单位毫秒,默认为2000ms
-        mLocationOption.setInterval(600000);
-        //设置定位参数
-        mlocationClient.setLocationOption(mLocationOption);
-        // 此方法为每隔固定时间会发起一次定位请求，为了减少电量消耗或网络流量消耗，
-        // 注意设置合适的定位时间的间隔（最小间隔支持为1000ms），并且在合适时间调用stopLocation()方法来取消定位请求
-        // 在定位结束后，在合适的生命周期调用onDestroy()方法
-        // 在单次定位情况下，定位无论成功与否，都无需调用stopLocation()方法移除请求，定位sdk内部会移除
-        //启动定位
-        mlocationClient.startLocation();
+        //定位相关
+        mClient = LocationServices.getFusedLocationProviderClient(mView.getCurActivity());
+        mLocationRequest = new LocationRequest()
+                .setInterval(1000)
+                .setFastestInterval(5000)
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+                double latitude=locationResult.getLastLocation().getLatitude();
+                double longitude=locationResult.getLastLocation().getLongitude();
+
+                /*String address = amapLocation.getProvince().concat(amapLocation.getCity());
+                String la = String.valueOf(amapLocation.getLatitude());
+                String lo = String.valueOf(amapLocation.getLongitude());
+                mView.locationResult(address, lo, la);*/
+            }
+        };
     }
 
     @Override
     void stopLocation() {
-        if (mlocationClient == null) return;
-        mlocationClient.stopLocation();
+        if (mClient == null) return;
+        //停止定位
+        mClient.removeLocationUpdates(mLocationCallback);
     }
-
-    private AMapLocationListener locationListener = new AMapLocationListener() {
-        @Override
-        public void onLocationChanged(AMapLocation amapLocation) {
-            mView.hideLoading();
-            Log.d("locationListener", JsonUtil.moderToString(amapLocation));
-            if (amapLocation != null) {
-                if (amapLocation.getErrorCode() == 0) {
-                    //定位成功回调信息，设置相关消息
-                    amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
-                    amapLocation.getLatitude();//获取纬度
-                    amapLocation.getLongitude();//获取经度
-                    amapLocation.getAccuracy();//获取精度信息
-                    String address = amapLocation.getProvince().concat(amapLocation.getCity());
-                    String la = String.valueOf(amapLocation.getLatitude());
-                    String lo = String.valueOf(amapLocation.getLongitude());
-                    mView.locationResult(address, lo, la);
-                } else {
-                    //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
-                    Log.e("AmapError", "location Error, ErrCode:"
-                            + amapLocation.getErrorCode() + ", errInfo:"
-                            + amapLocation.getErrorInfo());
-                }
-            }
-        }
-
-    };
-
-
 }

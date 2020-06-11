@@ -1,15 +1,15 @@
 package com.fjx.mg.main.fragment.home;
 
+import android.location.Geocoder;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.amap.api.location.AMapLocation;
-import com.amap.api.location.AMapLocationClient;
-import com.amap.api.location.AMapLocationClientOption;
-import com.amap.api.location.AMapLocationListener;
-import com.fjx.mg.R;
-import com.fjx.mg.utils.SharedPreferencesHelper;
 import com.fjx.mg.utils.SharedPreferencesUtils;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
 import com.library.common.base.BaseApp;
 import com.library.common.utils.CommonToast;
 import com.library.common.utils.JsonUtil;
@@ -28,12 +28,9 @@ import com.lxj.xpopup.enums.PopupAnimation;
 import com.lxj.xpopup.interfaces.OnSelectListener;
 import com.tencent.qcloud.uikit.TimConfig;
 
-class HomePresenter extends HomeContract.Presenter {
+import java.util.Locale;
 
-    //声明mlocationClient对象
-    private AMapLocationClient mlocationClient;
-    //声明mLocationOption对象
-    private AMapLocationClientOption mLocationOption = null;
+class HomePresenter extends HomeContract.Presenter {
 
     HomePresenter(HomeContract.View view) {
         super(view);
@@ -87,27 +84,6 @@ class HomePresenter extends HomeContract.Presenter {
                         CommonToast.toast(data.getMsg());
                     }
                 });
-    }
-
-    @Override
-    void locationAddress() {
-        mlocationClient = new AMapLocationClient(mView.getCurContext());
-        //初始化定位参数
-        mLocationOption = new AMapLocationClientOption();
-        //设置定位监听
-        mlocationClient.setLocationListener(locationListener);
-        //设置定位模式为高精度模式，Battery_Saving为低功耗模式，Device_Sensors是仅设备模式
-        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
-        //设置定位间隔,单位毫秒,默认为2000ms
-        mLocationOption.setInterval(600000);
-        //设置定位参数
-        mlocationClient.setLocationOption(mLocationOption);
-        // 此方法为每隔固定时间会发起一次定位请求，为了减少电量消耗或网络流量消耗，
-        // 注意设置合适的定位时间的间隔（最小间隔支持为1000ms），并且在合适时间调用stopLocation()方法来取消定位请求
-        // 在定位结束后，在合适的生命周期调用onDestroy()方法
-        // 在单次定位情况下，定位无论成功与否，都无需调用stopLocation()方法移除请求，定位sdk内部会移除
-        //启动定位
-        mlocationClient.startLocation();
     }
 
     @Override
@@ -186,31 +162,4 @@ class HomePresenter extends HomeContract.Presenter {
                     }
                 });
     }
-
-    private AMapLocationListener locationListener = new AMapLocationListener() {
-        @Override
-        public void onLocationChanged(AMapLocation amapLocation) {
-            Log.d("locationListener", JsonUtil.moderToString(amapLocation));
-            if (amapLocation != null) {
-                if (amapLocation.getErrorCode() == 0) {
-                    mlocationClient.stopLocation();
-                    //定位成功回调信息，设置相关消息
-                    amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
-                    amapLocation.getLatitude();//获取纬度
-                    amapLocation.getLongitude();//获取经度
-                    amapLocation.getAccuracy();//获取精度信息
-                    String address = amapLocation.getCity();
-                    SharedPreferencesUtils.setString(BaseApp.getInstance(),"address",address);
-                    RepositoryFactory.getLocalRepository().saveLatitude(String.valueOf(amapLocation.getLatitude()));
-                    RepositoryFactory.getLocalRepository().saveLongitude(String.valueOf(amapLocation.getLongitude()));
-//                    mView.showLocation(address);
-                } else {
-                    //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
-                    Log.e("AmapError", "location Error, ErrCode:"
-                            + amapLocation.getErrorCode() + ", errInfo:"
-                            + amapLocation.getErrorInfo());
-                }
-            }
-        }
-    };
 }

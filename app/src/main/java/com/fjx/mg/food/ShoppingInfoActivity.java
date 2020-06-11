@@ -100,7 +100,7 @@ public class ShoppingInfoActivity extends BaseMvpActivity<ShoppingInfoPresenter>
 
     private LvGoodsAdapter mAdapter;
     private List<ShoppingInfoBean.GoodsListBean> mList;
-    private String mTotalPrice;
+    private long mTotalPrice;
     private String mPhone;
     private String mCouponId;
     private String mCouponAmount;
@@ -197,7 +197,7 @@ public class ShoppingInfoActivity extends BaseMvpActivity<ShoppingInfoPresenter>
                         .show();
                 break;
             case R.id.tv_lucky_red_envelopes_coupons_text://红包、优惠券
-                startActivityForResult(ChooseCouponActivity.newInstance(getCurContext(), mTotalPrice, mPhone), 1);
+                startActivityForResult(ChooseCouponActivity.newInstance(getCurContext(), String.valueOf(mTotalPrice), mPhone), 1);
                 break;
             case R.id.tv_remark_text://备注
                 startActivityForResult(RemarksActivity.newInstance(getCurContext()), 3);
@@ -256,29 +256,29 @@ public class ShoppingInfoActivity extends BaseMvpActivity<ShoppingInfoPresenter>
         mTvDeliveryFee.setText(getResources().getString(R.string.goods_price,
                 data.getShopInfo().getDistributionFee()));
         //设置店铺满减
-        if (TextUtils.isEmpty(data.getShopInfo().getFullReduction())){
+        if (TextUtils.isEmpty(data.getShopInfo().getFullReduction())) {
             mTvShopFullReduction.setVisibility(View.GONE);
             mTvShopFullReductionText.setVisibility(View.GONE);
             mVLineEight.setVisibility(View.GONE);
-        }else {
+        } else {
             mTvShopFullReduction.setText(getResources().getString(R.string.red_envelopes_value,
                     data.getShopInfo().getFullReduction()));
         }
         //设置首单立减
-        if (data.getShopInfo().getFirstReduction()==0){
+        if (data.getShopInfo().getFirstReduction() == 0) {
             mTvFirstReductionText.setVisibility(View.GONE);
             mTvFirstReduction.setVisibility(View.GONE);
             mVLine.setVisibility(View.GONE);
-        }else {
+        } else {
             mTvFirstReduction.setText(getResources().getString(R.string.red_envelopes_value,
                     String.valueOf(data.getShopInfo().getFirstReduction())));
         }
         //设置总金额
-        mTotalPrice = String.valueOf(data.getTotalPrice());
+        mTotalPrice = data.getTotalPrice();
         mTvTotalPrice.setText(getResources().getString(R.string.goods_price,
-                mTotalPrice));
+                String.valueOf(mTotalPrice)));
         mTvTotal.setText(getResources().getString(R.string.goods_price,
-                mTotalPrice));
+                String.valueOf(mTotalPrice)));
 
         //到店自取信息
         //设置店铺地址
@@ -307,8 +307,14 @@ public class ShoppingInfoActivity extends BaseMvpActivity<ShoppingInfoPresenter>
         if (requestCode == 1 && resultCode == RESULT_OK) {//红包
             mCouponId = data.getStringExtra("cId");
             mCouponAmount = data.getStringExtra("price");
-            mTvLuckyRedEnvelopesCoupons.setText(getResources().getString(R.string.red_envelopes_value,
-                    mCouponAmount));
+            if (TextUtils.isEmpty(mCouponId)) {
+                mTvTotal.setText(getResources().getString(R.string.goods_price, String.valueOf(mTotalPrice)));
+                mTvLuckyRedEnvelopesCoupons.setText(getResources().getString(R.string.not_selected));
+            } else {
+                mTvLuckyRedEnvelopesCoupons.setText(getResources().getString(R.string.red_envelopes_value,
+                        mCouponAmount));
+                mTvTotal.setText(getResources().getString(R.string.goods_price, String.valueOf(mTotalPrice - Integer.parseInt(mCouponAmount))));
+            }
         } else if (requestCode == 2 && resultCode == RESULT_OK) {//地址
             mAddressId = data.getStringExtra("addressId");
             mPhone = data.getStringExtra("phone");

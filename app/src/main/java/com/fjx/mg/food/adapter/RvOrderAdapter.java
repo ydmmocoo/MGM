@@ -80,19 +80,70 @@ public class RvOrderAdapter extends BaseQuickAdapter<OrderBean.OrderListBean, Ba
                 helper.setText(R.id.tv_order_status, getContext().getResources().getString(R.string.refund_processing));
                 helper.setVisible(R.id.btn_left, true);
                 helper.setVisible(R.id.btn_right, true);
-                helper.setText(R.id.btn_left, getContext().getResources().getString(R.string.view_progress));
+                helper.setText(R.id.btn_left, getContext().getResources().getString(R.string.refund_detail));
                 helper.setBackgroundResource(R.id.btn_right, R.drawable.btn_gray_bg);
                 helper.setTextColor(R.id.btn_right, ContextCompat.getColor(getContext(), R.color.black));
                 helper.setText(R.id.btn_right, getContext().getResources().getString(R.string.cancel_refund));
             } else if ("3".equals(item.getRefundStatus())) {
                 helper.setTextColor(R.id.tv_order_status, ContextCompat.getColor(getContext(), R.color.gray_text));
                 helper.setText(R.id.tv_order_status, getContext().getResources().getString(R.string.merchant_rejects_refund));
-                helper.setVisible(R.id.btn_left, true);
-                helper.setVisible(R.id.btn_right, true);
-                helper.setText(R.id.btn_left, getContext().getResources().getString(R.string.apply_for_refund));
-                helper.setBackgroundResource(R.id.btn_right, R.drawable.btn_red_bg);
-                helper.setTextColor(R.id.btn_right, ContextCompat.getColor(getContext(), R.color.black));
-                helper.setText(R.id.btn_right, getContext().getResources().getString(R.string.confirm_receipt));
+                if (item.getOrderStatus().equals("2")) {
+                    helper.setTextColor(R.id.tv_order_status, ContextCompat.getColor(getContext(), R.color.textColorYellow5));
+                    helper.setText(R.id.tv_order_status, getContext().getResources().getString(R.string.waiting_for_order));
+                    helper.setVisible(R.id.btn_left, false);
+                    helper.setVisible(R.id.btn_right, true);
+                    helper.setBackgroundResource(R.id.btn_right, R.drawable.btn_gray_bg);
+                    helper.setTextColor(R.id.btn_right, ContextCompat.getColor(getContext(), R.color.black));
+                    helper.setText(R.id.btn_right, getContext().getResources().getString(R.string.cancellation_of_order));
+                } else if (item.getOrderStatus().equals("3")) {
+                    helper.setTextColor(R.id.tv_order_status, ContextCompat.getColor(getContext(), R.color.colorGreen));
+                    helper.setText(R.id.tv_order_status, getContext().getResources().getString(R.string.in_preparation));
+                    helper.setVisible(R.id.btn_left, false);
+                    helper.setVisible(R.id.btn_right, true);
+                    helper.setBackgroundResource(R.id.btn_right, R.drawable.btn_gray_bg);
+                    helper.setTextColor(R.id.btn_right, ContextCompat.getColor(getContext(), R.color.black));
+                    helper.setText(R.id.btn_right, getContext().getResources().getString(R.string.apply_for_refund));
+                } else if (item.getOrderStatus().equals("4")) {
+                    helper.setTextColor(R.id.tv_order_status, ContextCompat.getColor(getContext(), R.color.colorGreen));
+                    helper.setText(R.id.tv_order_status, getContext().getResources().getString(R.string.distribution_in_progress));
+                    helper.setVisible(R.id.btn_left, true);
+                    helper.setVisible(R.id.btn_right, true);
+                    helper.setBackgroundResource(R.id.btn_left, R.drawable.btn_gray_bg);
+                    helper.setText(R.id.btn_left, getContext().getResources().getString(R.string.apply_for_refund));
+                    helper.setBackgroundResource(R.id.btn_right, R.drawable.btn_gray_bg);
+                    helper.setTextColor(R.id.btn_right, ContextCompat.getColor(getContext(), R.color.black));
+                    helper.setText(R.id.btn_right, getContext().getResources().getString(R.string.confirm_receipt));
+                } else if (item.getOrderStatus().equals("5")) {
+                    helper.setTextColor(R.id.tv_order_status, ContextCompat.getColor(getContext(), R.color.gray_text));
+                    helper.setText(R.id.tv_order_status, getContext().getResources().getString(R.string.refund_complete));
+                    helper.setVisible(R.id.btn_left, false);
+                    helper.setVisible(R.id.btn_right, true);
+                    helper.setBackgroundResource(R.id.btn_right, R.drawable.btn_gray_bg);
+                    helper.setTextColor(R.id.btn_right, ContextCompat.getColor(getContext(), R.color.black));
+                    helper.setText(R.id.btn_right, getContext().getResources().getString(R.string.another_one));
+                } else if (item.getOrderStatus().equals("6")) {
+                    helper.setTextColor(R.id.tv_order_status, ContextCompat.getColor(getContext(), R.color.gray_text));
+                    helper.setText(R.id.tv_order_status, getContext().getResources().getString(R.string.user_cancel));
+                    helper.setVisible(R.id.btn_left, false);
+                    helper.setVisible(R.id.btn_right, true);
+                    helper.setBackgroundResource(R.id.btn_right, R.drawable.btn_gray_bg);
+                    helper.setTextColor(R.id.btn_right, ContextCompat.getColor(getContext(), R.color.black));
+                    helper.setText(R.id.btn_right, getContext().getResources().getString(R.string.another_one));
+                } else {
+                    helper.setTextColor(R.id.tv_order_status, ContextCompat.getColor(getContext(), R.color.gray_text));
+                    helper.setText(R.id.tv_order_status, getContext().getResources().getString(R.string.order_completed));
+                    helper.setVisible(R.id.btn_right, true);
+                    if ("1".equals(item.getEvaluateStatus())) {
+                        helper.setVisible(R.id.btn_left, false);
+                    } else {
+                        helper.setVisible(R.id.btn_left, true);
+                        helper.setBackgroundResource(R.id.btn_left, R.drawable.btn_gray_bg);
+                        helper.setText(R.id.btn_left, getContext().getResources().getString(R.string.to_evaluate));
+                    }
+                    helper.setBackgroundResource(R.id.btn_right, R.drawable.btn_gray_bg);
+                    helper.setTextColor(R.id.btn_right, ContextCompat.getColor(getContext(), R.color.black));
+                    helper.setText(R.id.btn_right, getContext().getResources().getString(R.string.another_one));
+                }
             } else {//订单不是退款状态
                 //设置订单状态 tv_order_status
                 //订单状态:1:成功,2:等待接单,3:备餐中,4:配送中/通知取餐,5:退款完成,6:用户取消'
@@ -209,6 +260,7 @@ public class RvOrderAdapter extends BaseQuickAdapter<OrderBean.OrderListBean, Ba
                 intent = new Intent(getContext(), RefundDetailsActivity.class);
                 intent.putExtra("refund_remark", item.getRefundRemark());
                 intent.putExtra("refund_status", item.getRefundStatus());
+                intent.putExtra("price", item.getTotalPrice());
                 getContext().startActivity(intent);
             } else if (btnRight.getText().equals(getContext().getResources().getString(R.string.apply_for_refund))) {
                 //申请退款
@@ -267,10 +319,10 @@ public class RvOrderAdapter extends BaseQuickAdapter<OrderBean.OrderListBean, Ba
                                 getContext().getResources().getString(R.string.cancel), getContext().getResources().getString(R.string.confirm_short),
                                 () -> mListener.cancelOrder(item.getOrderId()), null, false)
                         .show();
-            } else if (btnLeft.getText().equals(getContext().getResources().getString(R.string.view_progress))) {
+            } /*else if (btnLeft.getText().equals(getContext().getResources().getString(R.string.view_progress))) {
                 getContext().startActivity(RefundDetailsActivity.newInstance(getContext(),
                         item.getRefundStatus(), item.getRefundRemark(), item.getTotalPrice()));
-            }
+            }*/
         });
     }
 

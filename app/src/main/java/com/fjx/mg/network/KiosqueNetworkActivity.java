@@ -2,6 +2,7 @@ package com.fjx.mg.network;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -10,10 +11,6 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.amap.api.location.AMapLocation;
-import com.amap.api.location.AMapLocationClient;
-import com.amap.api.location.AMapLocationClientOption;
-import com.amap.api.location.AMapLocationListener;
 import com.fjx.mg.R;
 import com.fjx.mg.network.adapter.GoogleMapsInfoWindowAdapter;
 import com.fjx.mg.network.fragment.FilterDialogFragment;
@@ -45,6 +42,7 @@ import com.library.repository.models.SearchAgentListModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -60,8 +58,6 @@ public class KiosqueNetworkActivity extends BaseMvpActivity<MvolaNetworkPresente
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
     private GoogleMap mMap;
-    private AMapLocationClient mlocationClient;
-    private AMapLocationClientOption mLocationOption = null;
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private LocationRequest mLocationRequest;
     private LocationCallback mLocationCallback;
@@ -107,27 +103,26 @@ public class KiosqueNetworkActivity extends BaseMvpActivity<MvolaNetworkPresente
 
     private void location() {
         showLoading();
-        mlocationClient = new AMapLocationClient(this);
-        mLocationOption = new AMapLocationClientOption();
-        mlocationClient.setLocationListener(locationListener);
-        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
-        mLocationOption.setInterval(600000);
-        mLocationOption.setOnceLocationLatest(true);
-        mlocationClient.setLocationOption(mLocationOption);
-        mlocationClient.startLocation();
-//        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-//        mLocationRequest = LocationRequest.create();
-//        mLocationRequest.setInterval(600000);
-//        mLocationRequest.setFastestInterval(300000);
-//        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-////        mLocationRequest
-//        mLocationCallback = new LocationCallback(){
-//            @Override
-//            public void onLocationResult(LocationResult locationResult) {
-//                super.onLocationResult(locationResult);
-//
-//            }
-//        };
+        //定位相关
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getCurActivity());
+        mLocationRequest = new LocationRequest()
+                .setInterval(1000)
+                .setFastestInterval(5000)
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+                double latitude=locationResult.getLastLocation().getLatitude();
+                double longitude=locationResult.getLastLocation().getLongitude();
+
+                //sName = amapLocation.getAddress();
+                LatLng appointLoc = new LatLng(lat, lng);
+                // 移动地图到指定经度的位置
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(appointLoc, 15f));
+                mPresenter.requestAgentList(lng + "", lat + "", "4", "", "");
+            }
+        };
     }
 
     @Override
@@ -136,34 +131,7 @@ public class KiosqueNetworkActivity extends BaseMvpActivity<MvolaNetworkPresente
         mMap.setMyLocationEnabled(true);
         // Set listener for marker click event.  See the bottom of this class for its behavior.
         mMap.setOnMarkerClickListener(this);
-
-
     }
-
-    private AMapLocationListener locationListener = new AMapLocationListener() {
-        @Override
-        public void onLocationChanged(AMapLocation amapLocation) {
-            if (amapLocation != null) {
-                if (amapLocation.getErrorCode() == 0) {
-                    mlocationClient.stopLocation();
-
-                    lat = amapLocation.getLatitude();
-                    lng = amapLocation.getLongitude();
-                    sName = amapLocation.getAddress();
-                    LatLng appointLoc = new LatLng(lat, lng);
-                    // 移动地图到指定经度的位置
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(appointLoc, 15f));
-//                    //添加标记到指定经纬度
-//                    mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).title("Marker")
-//                            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)));
-                    mPresenter.requestAgentList(lng + "", lat + "", "4", "", "");
-                } else {
-
-                }
-            }
-        }
-
-    };
 
     @Override
     protected MvolaNetworkPresenter createPresenter() {

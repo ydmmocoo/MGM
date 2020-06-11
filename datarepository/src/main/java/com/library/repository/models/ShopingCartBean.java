@@ -16,15 +16,15 @@ public class ShopingCartBean {
      * goodsList : [{"gId":"13","gName":"666","seId":"18","seName":"666","aIds":"64","aNames":"312331","pirce":"666","num":"1","img":"http://139.9.38.218:8080/Uploads/image/2020-05-24/5eca73e882ada.png"},{"gId":"13","gName":"666","seId":"18","seName":"666","aIds":"3123216564","aNames":"312331","pirce":"666","num":"1","img":"http://139.9.38.218:8080/Uploads/image/2020-05-24/5eca73e882ada.png"}]
      */
 
-    private Double totalPrice;
+    private long totalPrice;
     private int totalNum;
     private List<GoodsListBean> goodsList;
 
-    public Double getTotalPrice() {
+    public long getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(double totalPrice) {
+    public void setTotalPrice(long totalPrice) {
         this.totalPrice = totalPrice;
     }
 

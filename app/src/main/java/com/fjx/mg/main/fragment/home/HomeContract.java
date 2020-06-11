@@ -32,10 +32,7 @@ public interface HomeContract {
 
         void showMarqueeView(List<String> datas);
 
-
         void showNewsList(NewsItemModel newsListModel);
-
-        void showLocation(String address);
 
         void showCheckLanguage(int position, String text);
 
@@ -50,10 +47,7 @@ public interface HomeContract {
 
         abstract void getRecommendStore();
 
-
         abstract void getNewsList(int page);
-
-        abstract void locationAddress();
 
         abstract void recUseApp(String appId);
 

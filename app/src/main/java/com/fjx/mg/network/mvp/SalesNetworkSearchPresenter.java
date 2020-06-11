@@ -1,20 +1,26 @@
 package com.fjx.mg.network.mvp;
 
 
-import com.amap.api.location.AMapLocation;
-import com.amap.api.location.AMapLocationClient;
-import com.amap.api.location.AMapLocationClientOption;
-import com.amap.api.location.AMapLocationListener;
+import android.location.Geocoder;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
 import com.library.repository.core.net.CommonObserver;
 import com.library.repository.core.net.RxScheduler;
 import com.library.repository.models.ResponseModel;
 import com.library.repository.models.SearchAgentModel;
 import com.library.repository.repository.RepositoryFactory;
 
+import java.util.Locale;
+
 public class SalesNetworkSearchPresenter extends SalesNetworkSearchContract.Presenter {
 
-    private AMapLocationClient mlocationClient;
-    private AMapLocationClientOption mLocationOption = null;
+    private FusedLocationProviderClient mClient;
+    private LocationRequest mLocationRequest;
+    private LocationCallback mLocationCallback;
 
     public SalesNetworkSearchPresenter(SalesNetworkSearchContract.View view) {
         super(view);
@@ -59,36 +65,26 @@ public class SalesNetworkSearchPresenter extends SalesNetworkSearchContract.Pres
         if (mView != null) {
             mView.showLoading();
         }
-        mlocationClient = new AMapLocationClient(mView.getCurContext());
-        mLocationOption = new AMapLocationClientOption();
-        mlocationClient.setLocationListener(locationListener);
-        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
-        mLocationOption.setInterval(600000);
-        mLocationOption.setOnceLocationLatest(true);
-        mlocationClient.setLocationOption(mLocationOption);
-        mlocationClient.startLocation();
-    }
+        //定位相关
+        mClient = LocationServices.getFusedLocationProviderClient(mView.getCurActivity());
+        mLocationRequest = new LocationRequest()
+                .setInterval(1000)
+                .setFastestInterval(5000)
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+                double latitude=locationResult.getLastLocation().getLatitude();
+                double longitude=locationResult.getLastLocation().getLongitude();
 
-    private AMapLocationListener locationListener = new AMapLocationListener() {
-        @Override
-        public void onLocationChanged(AMapLocation amapLocation) {
-            if (amapLocation != null) {
-                if (amapLocation.getErrorCode() == 0) {
-                    mlocationClient.stopLocation();
-                    double lat = amapLocation.getLatitude();//获取纬度
-                    double lon = amapLocation.getLongitude();//获取经度
-                    String sName = amapLocation.getAddress();
-                    if (mView != null) {
-                        mView.responseLocationAddress(lon + "", lat + "", sName);
-                    }
-                } else {
-                    if (mView != null) {
-                        mView.responseFailed(null);
-
-                    }
-                }
+                /*double lat = amapLocation.getLatitude();//获取纬度
+                double lon = amapLocation.getLongitude();//获取经度
+                String sName = amapLocation.getAddress();
+                if (mView != null) {
+                    mView.responseLocationAddress(lon + "", lat + "", sName);
+                }*/
             }
-        }
-
-    };
+        };
+    }
 }

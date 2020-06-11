@@ -1,1 +1,1 @@
-include ':app', ':common', ':datarepository', ':sharesdk', ':tuikit', ':paylibrary', ':amap'
+include ':app', ':common', ':datarepository', ':sharesdk', ':tuikit', ':paylibrary'

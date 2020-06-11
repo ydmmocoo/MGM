@@ -117,8 +117,8 @@ public class StoreDetailActivity extends BaseMvpActivity<StoreDetailPresenter>
     private List<ShopingCartBean.GoodsListBean> mList;
     private View mBottomSheet;
     private String mId;
-    private Double mDeliveryConditions;
-    private Double mTotalPrice;
+    private long mDeliveryConditions;
+    private long mTotalPrice;
     private StoreShopInfoBean mData;
     private boolean mIsCollect = false;
 
@@ -271,16 +271,14 @@ public class StoreDetailActivity extends BaseMvpActivity<StoreDetailPresenter>
             } else {
                 mTvCount.setVisibility(View.GONE);
             }
-            DecimalFormat df = new DecimalFormat("#0.00");
             mTotalPrice = data.getTotalPrice();
-            String price=df.format(mTotalPrice);
             mTvPrice.setText(getResources().getString(R.string.food_total).concat(getResources().getString(R.string.goods_price,
-                    price)));
+                    String.valueOf(mTotalPrice))));
             if (mDeliveryConditions <= mTotalPrice) {
                 mTvCondition.setText(getResources().getString(R.string.meet_delivery_conditions));
             } else {
                 mTvCondition.setText(getResources().getString(R.string.delivery_conditions,
-                        df.format(mDeliveryConditions - mTotalPrice)));
+                        String.valueOf(mDeliveryConditions - mTotalPrice)));
             }
         } else {
             mTvCount.setVisibility(View.GONE);
@@ -355,7 +353,7 @@ public class StoreDetailActivity extends BaseMvpActivity<StoreDetailPresenter>
                     .into(mIvStoreBg);
         }
         //获取配送条件
-        mDeliveryConditions = Double.parseDouble(data.getShopInfo().getDeliveryPrice());
+        mDeliveryConditions = Long.parseLong(data.getShopInfo().getDeliveryPrice());
         //设置商家信息
         mStoreMerchantInfoFragment.setData(mData);
     }

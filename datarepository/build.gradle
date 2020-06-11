@@ -40,6 +40,5 @@ dependencies {
     api project(':sharesdk')
     api project(':tuikit')
     api project(':paylibrary')
-    api project(':amap')
     implementation 'com.orhanobut:logger:2.2.0'
 }

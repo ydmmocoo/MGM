@@ -1,8 +1,6 @@
 package com.fjx.mg.main.fragment.home;
 
-import android.Manifest;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -18,7 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -83,7 +80,6 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.OnClick;
 import okhttp3.Response;
-import pub.devrel.easypermissions.EasyPermissions;
 
 import static java.util.Locale.ENGLISH;
 import static java.util.Locale.FRENCH;
@@ -196,12 +192,6 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
         params.height = width / 4;
         bannerView.setLayoutParams(params);
 
-
-        if (EasyPermissions.hasPermissions(getActivity(), Manifest.permission.READ_PHONE_STATE,
-                Manifest.permission.ACCESS_COARSE_LOCATION)) {
-            location();
-        }
-
         getUnReadPoint();
 
         List<NewsListModel> dataList = DBDaoFactory.getNewsListDao().queryList(1);
@@ -237,7 +227,6 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
 
     @Override
     public void onDestroy() {
-
         super.onDestroy();
     }
 
@@ -259,16 +248,9 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
 
     }
 
-
     @Override
     public void doLoadVisible() {
         ((MainActivity) getCurActivity()).getPendencyList();
-    }
-
-    public void location() {
-        if (mPresenter != null) {
-            mPresenter.locationAddress();
-        }
     }
 
     @Override
@@ -279,11 +261,6 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
     public void showNewsList(NewsItemModel newsItemModel) {
         refreshView.noticeAdapterData(adapter, newsItemModel.getNewsList(), newsItemModel.isHasNext());
         tvHint.setVisibility(adapter.getData().size() == 0 ? View.GONE : View.VISIBLE);
-    }
-
-    @Override
-    public void showLocation(String address) {
-        tvLocation.setText(address);
     }
 
     @Override

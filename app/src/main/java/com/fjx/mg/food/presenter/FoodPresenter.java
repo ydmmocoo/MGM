@@ -3,22 +3,36 @@ package com.fjx.mg.food.presenter;
 import android.util.Log;
 
 import com.fjx.mg.food.contract.FoodContract;
+import com.fjx.mg.utils.HttpUtil;
+import com.google.gson.Gson;
 import com.library.common.utils.CommonToast;
 import com.library.common.utils.JsonUtil;
 import com.library.common.utils.SharedPreferencesUtil;
 import com.library.common.utils.StringUtil;
+import com.library.repository.Constant;
 import com.library.repository.core.net.CommonObserver;
 import com.library.repository.core.net.RxScheduler;
 import com.library.repository.models.AdListModel;
+import com.library.repository.models.GoogleMapGeocodeSearchBean;
 import com.library.repository.models.HotShopBean;
 import com.library.repository.models.ResponseModel;
 import com.library.repository.models.HomeShopListBean;
 import com.library.repository.models.ShopTypeBean;
 import com.library.repository.repository.RepositoryFactory;
+import com.library.repository.util.LogUtil;
 import com.tencent.qcloud.uikit.TimConfig;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import static com.library.common.utils.RxJavaUtls.runOnUiThread;
 
 /**
  * @author yedeman
@@ -139,6 +153,33 @@ public class FoodPresenter extends FoodContract.Presenter {
                         CommonToast.toast(data.getMsg());
                     }
                 });
+    }
+
+    @Override
+    public void getAddress(String lat, String lon) {
+        String language = RepositoryFactory.getLocalRepository().getLangugeType();
+        String url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lon + "+"
+                + "&key=AIzaSyAOtsgwEAwJ7SjsM1oHDVmp6oLfOS24Rj4&language=" + language;
+
+        new HttpUtil().sendPost(url, new HttpUtil.OnRequestListener() {
+            @Override
+            public void onSuccess(String json) {
+                runOnUiThread(() -> {
+                    GoogleMapGeocodeSearchBean data=JsonUtil.strToModel(json,GoogleMapGeocodeSearchBean.class);
+                    if (data!=null) {
+                        mView.getAddressSuccess(data.getResults().get(0).getFormatted_address());
+                    }
+                });
+            }
+
+            @Override
+            public void onFailed() {
+            }
+
+            @Override
+            public void onSuccess(Response response) {
+            }
+        });
     }
 
     public List<ShopTypeBean.ShopTypeListBean> getMenuList(List<ShopTypeBean.ShopTypeListBean> list){
