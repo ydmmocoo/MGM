@@ -4,6 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,7 +28,7 @@ import com.fjx.mg.food.adapter.RvStoreAdapter;
 import com.fjx.mg.food.contract.FoodContract;
 import com.fjx.mg.food.presenter.FoodPresenter;
 import com.fjx.mg.moments.add.pois.AoisActivity;
-import com.fjx.mg.setting.address.list.AddressListActivity;
+import com.fjx.mg.utils.HttpUtil;
 import com.fjx.mg.utils.SharedPreferencesUtils;
 import com.fjx.mg.view.WrapContentGridView;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -41,6 +45,7 @@ import com.library.common.utils.DimensionUtil;
 import com.library.common.utils.JsonUtil;
 import com.library.common.view.BannerView;
 import com.library.repository.models.AdModel;
+import com.library.repository.models.GoogleMapGeocodeSearchBean;
 import com.library.repository.models.HomeShopListBean;
 import com.library.repository.models.HotShopBean;
 import com.library.repository.models.ShopTypeBean;
@@ -55,6 +60,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import okhttp3.Response;
 
 public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View.OnClickListener, FoodContract.View {
 
@@ -90,7 +96,7 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
     private String mServiceId = "";
     private String mSecondServiceId = "";
 
-    private boolean mIsFirst=true;
+    private boolean mIsFirst = true;
     private FusedLocationProviderClient mClient;
     private LocationRequest mLocationRequest;
     private LocationCallback mLocationCallback;
@@ -123,7 +129,9 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
         mSelectedDrawable.setBounds(0, 0, mSelectedDrawable.getMinimumWidth(), mSelectedDrawable.getMinimumHeight());
         //设置地址
         String address = SharedPreferencesUtils.getString(getCurContext(), "address", "");
-        mTvAddress.setText(address);
+        if (!TextUtils.isEmpty(address)) {
+            mTvAddress.setText(address);
+        }
         View headView = View.inflate(getCurContext(), R.layout.item_food_header, null);
         mGvMenu = headView.findViewById(R.id.gv_menu);
         mGvSecondMenu = headView.findViewById(R.id.gv_second_menu);
@@ -133,6 +141,12 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
         mTvType = headView.findViewById(R.id.tv_type);
         mTvComprehensiveRanking = headView.findViewById(R.id.tv_comprehensive_ranking);
         mTvDistance = headView.findViewById(R.id.tv_distance);
+        //宽高5：1
+        CardView.LayoutParams params = (CardView.LayoutParams) mBanner.getLayoutParams();
+        int width = DimensionUtil.getScreenWith() - DimensionUtil.dip2px(20);
+        params.width = width;
+        params.height = width / 4;
+        mBanner.setLayoutParams(params);
         //初始化分类
         mGvClassificationAdapter = new GvClassificationAdapter(getCurContext(), mClassificationList);
         mGvMenu.setAdapter(mGvClassificationAdapter);
@@ -152,9 +166,11 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
         //分类筛选默认为全部美食
         mTvType.setText(getResources().getString(R.string.all_delicacies));
 
+        mRefreshLayout.setEnableLoadMore(false);
         mPresenter.getShopTypeList("");
         mPresenter.getAd();
         mPresenter.getHotShops();
+        mPresenter.getShopsList(mServiceId, mSecondServiceId, mOrder, mPage);
 
         setListener();
     }
@@ -209,7 +225,11 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
                 mPresenter.getShopTypeList("");
                 mPresenter.getAd();
                 mPresenter.getHotShops();
-                mPresenter.getShopsList(mServiceId, mSecondServiceId, mOrder, mPage);
+                if (!mIsFirst) {
+                    mPresenter.getShopsList(mServiceId, mSecondServiceId, mOrder, mPage);
+                } else {
+                    mRefreshLayout.finishRefresh();
+                }
             }
         });
     }
@@ -221,8 +241,7 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
             case R.id.iv_back://返回
                 break;
             case R.id.tv_address://选择地址
-                intent = new Intent(getCurContext(), AoisActivity.class);
-                startActivity(intent);
+                startActivityForResult(AoisActivity.newInstance(getCurContext()), 9);
                 break;
             case R.id.v_search://搜索
                 intent = new Intent(getCurContext(), TakeOutFoodSearchActivity.class);
@@ -247,8 +266,10 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
                 mTvComprehensiveRanking.setTextColor(ContextCompat.getColor(getCurContext(), R.color.gray_text));
                 mTvComprehensiveRanking.setText(getResources().getString(R.string.comprehensive_ranking));
                 mOrder = "4";
-                mPage = 1;
-                mPresenter.getShopsList(mServiceId, mSecondServiceId, mOrder, mPage);
+                if (TextUtils.isEmpty(mAddress)) {
+                    mPage = 1;
+                    mPresenter.getShopsList(mServiceId, mSecondServiceId, mOrder, mPage);
+                }
                 break;
         }
     }
@@ -344,23 +365,10 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
                 super.onLocationResult(locationResult);
                 double latitude = locationResult.getLastLocation().getLatitude();
                 double longitude = locationResult.getLastLocation().getLongitude();
-                if (mIsFirst) {
-                    mIsFirst=false;
-                    RepositoryFactory.getLocalRepository().saveLatitude(String.valueOf(latitude));
-                    RepositoryFactory.getLocalRepository().saveLongitude(String.valueOf(longitude));
-                    mPage = 1;
-                    mPresenter.getShopsList(mServiceId, mSecondServiceId, mOrder, mPage);
-                    mPresenter.getAddress(String.valueOf(latitude), String.valueOf(longitude));
-                }
+                RepositoryFactory.getLocalRepository().saveLatitude(String.valueOf(latitude));
+                RepositoryFactory.getLocalRepository().saveLongitude(String.valueOf(longitude));
 
-                String saveLat=RepositoryFactory.getLocalRepository().getLatitude();
-                String saveLon=RepositoryFactory.getLocalRepository().getLongitude();
-                if (!saveLat.equals(String.valueOf(latitude))||!saveLon.equals(String.valueOf(longitude))) {
-                    RepositoryFactory.getLocalRepository().saveLatitude(String.valueOf(latitude));
-                    RepositoryFactory.getLocalRepository().saveLongitude(String.valueOf(longitude));
-
-                    mPresenter.getAddress(String.valueOf(latitude), String.valueOf(longitude));
-                }
+                getAddress(String.valueOf(latitude),String.valueOf(longitude));
             }
         };
 
@@ -385,8 +393,10 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
                 mTvComprehensiveRanking.setText(list.get(pos));
                 mTvDistance.setTextColor(ContextCompat.getColor(getCurContext(), R.color.gray_text));
             }
-            mPage = 1;
-            mPresenter.getShopsList(mServiceId, mSecondServiceId, mOrder, mPage);
+            if (TextUtils.isEmpty(mAddress)) {
+                mPage = 1;
+                mPresenter.getShopsList(mServiceId, mSecondServiceId, mOrder, mPage);
+            }
             mDialog.dismiss();
         });
         new XPopup.Builder(getCurContext())
@@ -409,7 +419,10 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
                 mTvType.setTextColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
                 mTvType.setText(mTypeList.get(pos));
             }
-            mPresenter.getShopsList(mServiceId, mSecondServiceId, mOrder, mPage);
+            if (TextUtils.isEmpty(mAddress)) {
+                mPage = 1;
+                mPresenter.getShopsList(mServiceId, mSecondServiceId, mOrder, mPage);
+            }
             mTypeDialog.dismiss();
         });
         new XPopup.Builder(getCurContext())
@@ -439,5 +452,55 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
                     public void noPermission(List<String> denied, boolean quick) {
                     }
                 });
+    }
+
+    private void getAddress(String lat, String lon) {
+        String language = RepositoryFactory.getLocalRepository().getLangugeType();
+        String url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lon + "+"
+                + "&key=AIzaSyAOtsgwEAwJ7SjsM1oHDVmp6oLfOS24Rj4&language=" + language;
+
+        new HttpUtil().sendPost(url, new HttpUtil.OnRequestListener() {
+            @Override
+            public void onSuccess(String json) {
+                GoogleMapGeocodeSearchBean data = JsonUtil.strToModel(json, GoogleMapGeocodeSearchBean.class);
+                mAddress = data.getResults().get(0).getFormatted_address();
+                mHandler.sendEmptyMessage(1);
+            }
+
+            @Override
+            public void onFailed() {
+            }
+
+            @Override
+            public void onSuccess(Response response) {
+            }
+        });
+    }
+
+    private String mAddress;
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            SharedPreferencesUtils.setString(BaseApp.getInstance(), "address", mAddress);
+            mTvAddress.setText(mAddress);
+
+            mPresenter.getShopsList(mServiceId, mSecondServiceId, mOrder, mPage);
+        }
+    };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 9 && resultCode == 9) {
+            mAddress=data.getStringExtra("adr");
+            SharedPreferencesUtils.setString(BaseApp.getInstance(), "address", mAddress);
+            mTvAddress.setText(mAddress);
+            String lng = data.getStringExtra("lng");//经度
+            String lat = data.getStringExtra("lat");//纬度
+            RepositoryFactory.getLocalRepository().saveLatitude(lat);
+            RepositoryFactory.getLocalRepository().saveLongitude(lng);
+        }
     }
 }

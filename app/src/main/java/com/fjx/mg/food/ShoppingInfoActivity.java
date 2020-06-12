@@ -309,8 +309,10 @@ public class ShoppingInfoActivity extends BaseMvpActivity<ShoppingInfoPresenter>
             mCouponAmount = data.getStringExtra("price");
             if (TextUtils.isEmpty(mCouponId)) {
                 mTvTotal.setText(getResources().getString(R.string.goods_price, String.valueOf(mTotalPrice)));
+                mTvLuckyRedEnvelopesCoupons.setTextColor(ContextCompat.getColor(getCurContext(),R.color.black));
                 mTvLuckyRedEnvelopesCoupons.setText(getResources().getString(R.string.not_selected));
             } else {
+                mTvLuckyRedEnvelopesCoupons.setTextColor(ContextCompat.getColor(getCurContext(),R.color.colorAccent));
                 mTvLuckyRedEnvelopesCoupons.setText(getResources().getString(R.string.red_envelopes_value,
                         mCouponAmount));
                 mTvTotal.setText(getResources().getString(R.string.goods_price, String.valueOf(mTotalPrice - Integer.parseInt(mCouponAmount))));

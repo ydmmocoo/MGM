@@ -145,6 +145,13 @@ public class StoreDetailActivity extends BaseMvpActivity<StoreDetailPresenter>
         mStoreGoodsFragment.setId(mId);
         mStoreEvaluateFragment.setId(mId);
 
+        //宽高5：1
+        CardView.LayoutParams params = (CardView.LayoutParams) mBanner.getLayoutParams();
+        int width = DimensionUtil.getScreenWith() - DimensionUtil.dip2px(20);
+        params.width = width;
+        params.height = width / 4;
+        mBanner.setLayoutParams(params);
+
         mTitles.add(getResources().getString(R.string.order));
         mTitles.add(getResources().getString(R.string.evaluate));
         mTitles.add(getResources().getString(R.string.merchant));

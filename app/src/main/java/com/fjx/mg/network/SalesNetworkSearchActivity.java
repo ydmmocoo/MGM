@@ -1,8 +1,11 @@
 package com.fjx.mg.network;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -18,18 +21,33 @@ import com.fjx.mg.network.fragment.FilterDialogFragment;
 import com.fjx.mg.network.fragment.MapDialogFragment;
 import com.fjx.mg.network.mvp.SalesNetworkSearchContract;
 import com.fjx.mg.network.mvp.SalesNetworkSearchPresenter;
+import com.fjx.mg.utils.HttpUtil;
 import com.fjx.mg.utils.MapNaviUtils;
+import com.fjx.mg.utils.SharedPreferencesUtils;
 import com.fjx.mg.widget.recyclerview.LinearManagerItemDecaration;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.hjq.permissions.OnPermission;
+import com.hjq.permissions.Permission;
+import com.hjq.permissions.XXPermissions;
+import com.library.common.base.BaseApp;
 import com.library.common.base.BaseMvpActivity;
+import com.library.common.utils.JsonUtil;
 import com.library.common.utils.StatusBarManager;
+import com.library.repository.models.GoogleMapGeocodeSearchBean;
 import com.library.repository.models.ResponseModel;
 import com.library.repository.models.SearchAgentListModel;
+import com.library.repository.repository.RepositoryFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.Response;
 
 /**
  * Author    by hanlz
@@ -50,6 +68,10 @@ public class SalesNetworkSearchActivity extends BaseMvpActivity<SalesNetworkSear
     private String lng;
     private String lat;
     private String sName;
+
+    private FusedLocationProviderClient mClient;
+    private LocationRequest mLocationRequest;
+    private LocationCallback mLocationCallback;
 
     public static Intent newIntent(Context context, ArrayList<SearchAgentListModel> items, String sName, String lat, String lng) {
         Intent intent = new Intent(context, SalesNetworkSearchActivity.class);
@@ -74,22 +96,12 @@ public class SalesNetworkSearchActivity extends BaseMvpActivity<SalesNetworkSear
         StatusBarManager.setLightFontColor(this, R.color.colorAccent);
         mRvSearch.addItemDecoration(new LinearManagerItemDecaration(1, LinearManagerItemDecaration.VERTICAL_LIST));
         mAdapter = new SalesNetworkSearchAdapter();
-
-
-
-        //mAdapter.bindToRecyclerView(mRvSearch);
-
-
-
-
-
-
         mAdapter.setEmptyView(R.layout.layout_empty);
         mAdapter.setOnItemClickListener(this);
         mAdapter.setOnItemClickListener(this);
         mTvSearchGo.setVisibility(View.VISIBLE);
         if (getIntent() == null) {
-            mPresenter.requestLocationAddress();
+            requestLocationAddress();
         } else {
             Bundle ext = getIntent().getBundleExtra("ext");
             sName = ext.getString("name");
@@ -99,8 +111,7 @@ public class SalesNetworkSearchActivity extends BaseMvpActivity<SalesNetworkSear
                 ArrayList<SearchAgentListModel> items = ext.getParcelableArrayList("items");
                 mAdapter.setList(items);
             } else {
-                mPresenter.requestLocationAddress();
-
+                requestLocationAddress();
             }
         }
     }
@@ -132,7 +143,7 @@ public class SalesNetworkSearchActivity extends BaseMvpActivity<SalesNetworkSear
             public void onFilter(String money) {
                 mPrice = money;
                 mRemark = "";
-                mPresenter.requestLocationAddress();
+                requestLocationAddress();
             }
         });
     }
@@ -141,7 +152,7 @@ public class SalesNetworkSearchActivity extends BaseMvpActivity<SalesNetworkSear
     private void search() {
         mRemark = mEtSearch.getText().toString();
         mPrice = "";
-        mPresenter.requestLocationAddress();
+        requestLocationAddress();
     }
 
 
@@ -149,13 +160,6 @@ public class SalesNetworkSearchActivity extends BaseMvpActivity<SalesNetworkSear
     protected SalesNetworkSearchPresenter createPresenter() {
         return new SalesNetworkSearchPresenter(this);
     }
-
-
-    @Override
-    public void responseLocationAddress(String lng, String lat, String sName) {
-        mPresenter.requestAgentList(lng, lat, "4", mRemark, mPrice, sName);
-    }
-
 
     @Override
     public void responseAgentList(List<SearchAgentListModel> items, String lng, String lat, String sName) {
@@ -167,7 +171,6 @@ public class SalesNetworkSearchActivity extends BaseMvpActivity<SalesNetworkSear
 
     @Override
     public void responseFailed(ResponseModel data) {
-
     }
 
     @Override
@@ -204,5 +207,78 @@ public class SalesNetworkSearchActivity extends BaseMvpActivity<SalesNetworkSear
                 }
             }
         });
+    }
+
+    private void requestLocationAddress(){
+        //定位相关
+        mClient = LocationServices.getFusedLocationProviderClient(getCurActivity());
+        mLocationRequest = new LocationRequest()
+                .setInterval(1000)
+                .setFastestInterval(5000)
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+                lat=String.valueOf(locationResult.getLastLocation().getLatitude());
+                lng=String.valueOf(locationResult.getLastLocation().getLongitude());
+
+                getAddress(lat,lng);
+            }
+        };
+
+        requestLocationUpdate();
+    }
+
+    private void getAddress(String lat, String lon) {
+        String language = RepositoryFactory.getLocalRepository().getLangugeType();
+        String url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lon + "+"
+                + "&key=AIzaSyAOtsgwEAwJ7SjsM1oHDVmp6oLfOS24Rj4&language=" + language;
+
+        new HttpUtil().sendPost(url, new HttpUtil.OnRequestListener() {
+            @Override
+            public void onSuccess(String json) {
+                GoogleMapGeocodeSearchBean data = JsonUtil.strToModel(json, GoogleMapGeocodeSearchBean.class);
+                sName = data.getResults().get(0).getFormatted_address();
+                mHandler.sendEmptyMessage(1);
+            }
+
+            @Override
+            public void onFailed() {
+            }
+
+            @Override
+            public void onSuccess(Response response) {
+            }
+        });
+    }
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            mPresenter.requestAgentList(lng, lat, "4", mRemark, mPrice, sName);
+        }
+    };
+
+    @SuppressLint("MissingPermission")
+    private void requestLocationUpdate() {
+        XXPermissions.with(getCurActivity())
+                .permission(Permission.Group.LOCATION)
+                .request(new OnPermission() {
+
+                    @Override
+                    public void hasPermission(List<String> granted, boolean all) {
+                        if (all) {
+                            //启动定位
+                            mClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
+                        } else {
+                        }
+                    }
+
+                    @Override
+                    public void noPermission(List<String> denied, boolean quick) {
+                    }
+                });
     }
 }

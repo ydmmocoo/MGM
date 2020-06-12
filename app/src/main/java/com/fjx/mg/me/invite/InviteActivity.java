@@ -45,7 +45,6 @@ import cn.bingoogolapple.qrcode.zxing.QRCodeEncoder;
 
 public class InviteActivity extends BaseMvpActivity<InvitePresenter> implements InviteContract.View {
 
-
     @BindView(R.id.tvInviteCode)
     TextView tvInviteCode;
     @BindView(R.id.tvCopy)

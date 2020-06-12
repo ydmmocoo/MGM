@@ -46,6 +46,7 @@ public class Constant {
 
     public static final String DOWNLOAD_URL = HOST.concat("invite/index");
     public static final String INVITE_URL = HOST.concat("invite/register?iv=");
+    public static final String RED_ENVELOPE_URL = HOST.concat("invite/redEnvelope?oId=");
     public static float limitAmount = 1;
 
     public interface RecordType {

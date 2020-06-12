@@ -2,23 +2,16 @@ package com.fjx.mg.moments.add.pois;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.fjx.mg.R;
 import com.fjx.mg.ToolBarManager;
 import com.fjx.mg.utils.HttpUtil;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -26,8 +19,6 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
@@ -44,10 +35,7 @@ import com.library.repository.repository.RepositoryFactory;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import okhttp3.Response;
-
-import static com.library.common.utils.RxJavaUtls.runOnUiThread;
 
 public class AoisActivity extends BaseMvpActivity<AoisPresenter>
         implements AoisContract.View, OnMapReadyCallback {
@@ -115,7 +103,7 @@ public class AoisActivity extends BaseMvpActivity<AoisPresenter>
             Intent intent = new Intent();
             intent.putExtra("lng", mList.get(position).getGeometry().getLocation().getLng());
             intent.putExtra("lat", mList.get(position).getGeometry().getLocation().getLat());
-            intent.putExtra("adr", aoisAdapter.getData().get(position).toString());
+            intent.putExtra("adr", mList.get(position).getFormatted_address());
             setResult(9, intent);
             finish();
         });
@@ -139,6 +127,8 @@ public class AoisActivity extends BaseMvpActivity<AoisPresenter>
                     mMarker.remove();
                 }
                 mMarker =googleMap.addMarker(new MarkerOptions().position(target));
+
+                getAddress(String.valueOf(latitude),String.valueOf(longitude));
             }
         });
         String lat = RepositoryFactory.getLocalRepository().getLatitude();

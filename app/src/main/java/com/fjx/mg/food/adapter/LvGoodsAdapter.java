@@ -77,14 +77,14 @@ public class LvGoodsAdapter extends BaseAdapter {
         holder.mTvCount.setText("X"+mList.get(position).getNum());
         //设置属性规格
         if (!TextUtils.isEmpty(mList.get(position).getSeName())&&
-                !TextUtils.isEmpty(mList.get(position).getSeName())) {
+                !TextUtils.isEmpty(mList.get(position).getANames())) {
             holder.mTvAttribute.setText(mList.get(position).getSeName().concat("+")
                     .concat(mList.get(position).getANames()));
         }else if (!TextUtils.isEmpty(mList.get(position).getSeName())&&
-                TextUtils.isEmpty(mList.get(position).getSeName())){
+                TextUtils.isEmpty(mList.get(position).getANames())){
             holder.mTvAttribute.setText(mList.get(position).getSeName());
         }else if (TextUtils.isEmpty(mList.get(position).getSeName())&&
-                !TextUtils.isEmpty(mList.get(position).getSeName())){
+                !TextUtils.isEmpty(mList.get(position).getANames())){
             holder.mTvAttribute.setText(mList.get(position).getANames());
         }else {
             holder.mTvAttribute.setText("");

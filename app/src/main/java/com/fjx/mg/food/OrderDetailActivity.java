@@ -14,13 +14,17 @@ import androidx.core.content.ContextCompat;
 
 import com.fjx.mg.R;
 import com.fjx.mg.ToolBarManager;
-import com.fjx.mg.dialog.ShareDialog;
+import com.fjx.mg.dialog.ShareDialog2;
 import com.fjx.mg.food.adapter.LvOrderDetailGoodsAdapter;
 import com.fjx.mg.food.contract.OrderDetailContract;
 import com.fjx.mg.food.presenter.OrderDetailPresenter;
 import com.library.common.base.BaseMvpActivity;
 import com.library.common.view.WrapContentListView;
+import com.library.repository.Constant;
+import com.library.repository.data.UserCenter;
 import com.library.repository.models.OrderDetailBean;
+import com.library.repository.models.UserInfoModel;
+import com.library.repository.repository.RepositoryFactory;
 import com.lxj.xpopup.XPopup;
 
 import java.util.List;
@@ -101,6 +105,8 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
     TextView mTvShopFullReductionText;
     @BindView(R.id.tv_first_reduction_text)
     TextView mTvFirstReductionText;
+    @BindView(R.id.tv_red_envelopes_text)
+    TextView mTvRedEnvelopesText;
 
     private LvOrderDetailGoodsAdapter mAdapter;
     private List<OrderDetailBean.OrderInfoBean.GoodsListBean> mList;
@@ -116,6 +122,8 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
     private String mStoreName;
     private String mStoreLogo;
     private String mGoodsName;
+
+    private String mShareTitle, mShareDesc;
 
     @Override
     protected int layoutId() {
@@ -252,6 +260,8 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
 
     @Override
     public void getOrderDetailSuccess(OrderDetailBean data) {
+        mShareTitle = data.getShareInfo().getTitle();
+        mShareDesc = data.getShareInfo().getContent();
         mOId = data.getOrderInfo().getOId();
         mStoreName = data.getOrderInfo().getShopName();
         mStoreLogo = data.getOrderInfo().getShopLogo();
@@ -270,13 +280,19 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
         //判断是不是未付款订单
         //支付状态:1:成功,2:等待付款,3:取消
         if ("2".equals(data.getOrderInfo().getPayStatus())) {
-            mTvLeft.setText(getResources().getString(R.string.cancellation_of_order));
-            mTvRight.setText(getResources().getString(R.string.order_to_pay));
-            mIvCheckoutSuccess.setImageResource(R.drawable.circle_gray_bg);
-            mTvCheckoutSuccess.setTextColor(ContextCompat.getColor(getCurContext(), R.color.gray_text));
-            mVStatusWaitingForOrder.setBackgroundColor(ContextCompat.getColor(getCurContext(), R.color.gray_text));
-            mIvWaitingForOrder.setImageResource(R.drawable.circle_gray_bg);
-            mTvWaitingForOrder.setTextColor(ContextCompat.getColor(getCurContext(), R.color.gray_text));
+            if ("6".equals(data.getOrderInfo().getOrderStatus())) {
+                mTvLeft.setVisibility(View.INVISIBLE);
+                mTvRight.setText(getResources().getString(R.string.another_one));
+
+                //隐藏顶部状态
+                mClOrderStatus.setVisibility(View.GONE);
+            }else {
+                mIvCheckoutSuccess.setImageResource(R.drawable.circle_gray_bg);
+                mTvCheckoutSuccess.setTextColor(ContextCompat.getColor(getCurContext(), R.color.gray_text));
+                mVStatusWaitingForOrder.setBackgroundColor(ContextCompat.getColor(getCurContext(), R.color.gray_text));
+                mIvWaitingForOrder.setImageResource(R.drawable.circle_gray_bg);
+                mTvWaitingForOrder.setTextColor(ContextCompat.getColor(getCurContext(), R.color.gray_text));
+            }
         } else if ("3".equals(data.getOrderInfo().getPayStatus())) {
             mTvLeft.setVisibility(View.INVISIBLE);
             mTvRight.setText(getResources().getString(R.string.another_one));
@@ -323,7 +339,6 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
                     mTvLeft.setText(getResources().getString(R.string.apply_for_refund));
                     mTvRight.setText(getResources().getString(R.string.confirm_receipt));
                     mTvWaitingForOrder.setText(getResources().getString(R.string.received_order));
-                    mTvWaitingForOrder.setText(getResources().getString(R.string.received_order));
                     mVStatusDistribution.setBackgroundColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
                     mTvDistributionInProgress.setTextColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
                     mIvDistributionInProgress.setImageResource(R.drawable.circle_red_bg);
@@ -344,7 +359,6 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
                         mTvLeft.setVisibility(View.INVISIBLE);
                     }
                     mTvRight.setText(getResources().getString(R.string.another_one));
-                    mTvWaitingForOrder.setText(getResources().getString(R.string.received_order));
                     mTvWaitingForOrder.setText(getResources().getString(R.string.received_order));
                     mVStatusDistribution.setBackgroundColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
                     mTvDistributionInProgress.setTextColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
@@ -366,6 +380,7 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
                 } else if (mOrderStatus.equals("4")) {
                     mTvLeft.setText(getResources().getString(R.string.apply_for_refund));
                     mTvRight.setText(getResources().getString(R.string.confirm_receipt));
+                    mTvWaitingForOrder.setText(getResources().getString(R.string.received_order));
                     mVStatusDistribution.setBackgroundColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
                     mTvDistributionInProgress.setTextColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
                     mIvDistributionInProgress.setImageResource(R.drawable.circle_red_bg);
@@ -383,7 +398,7 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
                     ToolBarManager.with(this).setRightImage(R.mipmap.icon_red_envelopes, new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            showShareDialog(data.getShareInfo().getTitle(),data.getShareInfo().getContent());
+                            showShareDialog();
                         }
                     });
                     if ("0".equals(data.getOrderInfo().getEvaluateStatus())) {
@@ -392,6 +407,7 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
                         mTvLeft.setVisibility(View.INVISIBLE);
                     }
                     mTvRight.setText(getResources().getString(R.string.another_one));
+                    mTvWaitingForOrder.setText(getResources().getString(R.string.received_order));
                     mVStatusDistribution.setBackgroundColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
                     mTvDistributionInProgress.setTextColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
                     mIvDistributionInProgress.setImageResource(R.drawable.circle_red_bg);
@@ -430,8 +446,14 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
                     data.getOrderInfo().getFirstReduction()));
         }
         //设置红包金额
-        mTvRedEnvelopes.setText(getResources().getString(R.string.red_envelopes_value,
-                data.getOrderInfo().getRedRrice()));
+        //设置红包金额
+        if ("0".equals(data.getOrderInfo().getRedRrice())) {
+            mTvRedEnvelopes.setVisibility(View.GONE);
+            mTvRedEnvelopesText.setVisibility(View.GONE);
+        } else {
+            mTvRedEnvelopes.setText(getResources().getString(R.string.red_envelopes_value,
+                    data.getOrderInfo().getRedRrice()));
+        }
         //设置优惠券金额
         mTvCoupon.setText(getResources().getString(R.string.goods_price, "0"));
         //合计
@@ -491,12 +513,24 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
         return new OrderDetailPresenter(this);
     }
 
-    private void showShareDialog(String title,String desc) {
-        ShareDialog shareDialog = new ShareDialog(getCurContext());
-        shareDialog.setShareParams(title, desc, "", "https://www.baidu.com");
-        shareDialog.setShareType(ShareDialog.ShareType.web);
+    private void showShareDialog() {
+        UserInfoModel userInfo = UserCenter.getUserInfo();
+        String code = userInfo.getInviteCode();
+        String imageUrl = "";
+        String webview = Constant.RED_ENVELOPE_URL.concat(mOId).concat("&iv=").concat(code).concat("&l=").concat(RepositoryFactory.getLocalRepository().getLangugeType());
+
+        ShareDialog2 shareDialog = new ShareDialog2(getCurContext());
+        shareDialog.setShareParams(mShareTitle, mShareDesc, imageUrl, webview);
+        shareDialog.setShareType(ShareDialog2.ShareType.web);
         new XPopup.Builder(getCurContext())
                 .asCustom(shareDialog)
                 .show();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

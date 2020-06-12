@@ -215,6 +215,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_packing_fee" />
 
             <TextView
+                android:id="@+id/tv_shop_full_reduction_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -230,12 +231,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="@string/goods_price"
-                android:textColor="@color/black"
+                android:textColor="@color/colorAccent"
                 android:textSize="14sp"
                 app:layout_constraintRight_toRightOf="@+id/v_line_two"
                 app:layout_constraintTop_toBottomOf="@+id/tv_delivery_fee" />
 
             <TextView
+                android:id="@+id/tv_first_reduction_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -251,12 +253,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="@string/goods_price"
-                android:textColor="@color/black"
+                android:textColor="@color/colorAccent"
                 android:textSize="14sp"
                 app:layout_constraintRight_toRightOf="@+id/v_line_two"
                 app:layout_constraintTop_toBottomOf="@+id/tv_shop_full_reduction" />
 
             <TextView
+                android:id="@+id/tv_red_envelopes_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"

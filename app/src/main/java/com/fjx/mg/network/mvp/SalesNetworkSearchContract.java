@@ -14,8 +14,6 @@ public interface SalesNetworkSearchContract {
         void responseFailed(ResponseModel data);
 
         void responseAgentList(List<SearchAgentListModel> items,String lng, String lat,String sName);
-
-        void responseLocationAddress(String lng, String lat,String sName);
     }
 
     abstract class Presenter extends BasePresenter<SalesNetworkSearchContract.View> {
@@ -31,8 +29,6 @@ public interface SalesNetworkSearchContract {
          * @param remark 备注搜索
          */
         public abstract void requestAgentList(String lng, String lat, String type, String remark,String price,String sName);
-
-        public abstract void requestLocationAddress();
 
     }
 

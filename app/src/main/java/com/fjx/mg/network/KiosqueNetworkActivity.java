@@ -1,9 +1,12 @@
 package com.fjx.mg.network;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -17,7 +20,9 @@ import com.fjx.mg.network.fragment.FilterDialogFragment;
 import com.fjx.mg.network.fragment.MapDialogFragment;
 import com.fjx.mg.network.mvp.MvolaNetworkContract;
 import com.fjx.mg.network.mvp.MvolaNetworkPresenter;
+import com.fjx.mg.utils.HttpUtil;
 import com.fjx.mg.utils.MapNaviUtils;
+import com.fjx.mg.utils.SharedPreferencesUtils;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -33,12 +38,19 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.hjq.permissions.OnPermission;
+import com.hjq.permissions.Permission;
+import com.hjq.permissions.XXPermissions;
+import com.library.common.base.BaseApp;
 import com.library.common.base.BaseMvpActivity;
 import com.library.common.constant.IntentConstants;
 import com.library.common.utils.CommonToast;
 import com.library.common.utils.ContextManager;
+import com.library.common.utils.JsonUtil;
+import com.library.repository.models.GoogleMapGeocodeSearchBean;
 import com.library.repository.models.ResponseModel;
 import com.library.repository.models.SearchAgentListModel;
+import com.library.repository.repository.RepositoryFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +58,7 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.Response;
 
 
 /**
@@ -58,7 +71,7 @@ public class KiosqueNetworkActivity extends BaseMvpActivity<MvolaNetworkPresente
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
     private GoogleMap mMap;
-    private FusedLocationProviderClient mFusedLocationProviderClient;
+    private FusedLocationProviderClient mClient;
     private LocationRequest mLocationRequest;
     private LocationCallback mLocationCallback;
     private Marker mSelectedMarker;
@@ -104,7 +117,7 @@ public class KiosqueNetworkActivity extends BaseMvpActivity<MvolaNetworkPresente
     private void location() {
         showLoading();
         //定位相关
-        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getCurActivity());
+        mClient = LocationServices.getFusedLocationProviderClient(getCurActivity());
         mLocationRequest = new LocationRequest()
                 .setInterval(1000)
                 .setFastestInterval(5000)
@@ -113,16 +126,18 @@ public class KiosqueNetworkActivity extends BaseMvpActivity<MvolaNetworkPresente
             @Override
             public void onLocationResult(LocationResult locationResult) {
                 super.onLocationResult(locationResult);
-                double latitude=locationResult.getLastLocation().getLatitude();
-                double longitude=locationResult.getLastLocation().getLongitude();
+                lat=locationResult.getLastLocation().getLatitude();
+                lng=locationResult.getLastLocation().getLongitude();
 
-                //sName = amapLocation.getAddress();
                 LatLng appointLoc = new LatLng(lat, lng);
                 // 移动地图到指定经度的位置
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(appointLoc, 15f));
                 mPresenter.requestAgentList(lng + "", lat + "", "4", "", "");
+                getAddress(String.valueOf(lat),String.valueOf(lng));
             }
         };
+
+        requestLocationUpdate();
     }
 
     @Override
@@ -131,6 +146,49 @@ public class KiosqueNetworkActivity extends BaseMvpActivity<MvolaNetworkPresente
         mMap.setMyLocationEnabled(true);
         // Set listener for marker click event.  See the bottom of this class for its behavior.
         mMap.setOnMarkerClickListener(this);
+    }
+
+    @SuppressLint("MissingPermission")
+    private void requestLocationUpdate() {
+        XXPermissions.with(getCurActivity())
+                .permission(Permission.Group.LOCATION)
+                .request(new OnPermission() {
+
+                    @Override
+                    public void hasPermission(List<String> granted, boolean all) {
+                        if (all) {
+                            //启动定位
+                            mClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
+                        } else {
+                        }
+                    }
+
+                    @Override
+                    public void noPermission(List<String> denied, boolean quick) {
+                    }
+                });
+    }
+
+    private void getAddress(String lat, String lon) {
+        String language = RepositoryFactory.getLocalRepository().getLangugeType();
+        String url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lon + "+"
+                + "&key=AIzaSyAOtsgwEAwJ7SjsM1oHDVmp6oLfOS24Rj4&language=" + language;
+
+        new HttpUtil().sendPost(url, new HttpUtil.OnRequestListener() {
+            @Override
+            public void onSuccess(String json) {
+                GoogleMapGeocodeSearchBean data = JsonUtil.strToModel(json, GoogleMapGeocodeSearchBean.class);
+                sName = data.getResults().get(0).getFormatted_address();
+            }
+
+            @Override
+            public void onFailed() {
+            }
+
+            @Override
+            public void onSuccess(Response response) {
+            }
+        });
     }
 
     @Override

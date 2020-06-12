@@ -75,12 +75,13 @@ public class OrderFragment extends BaseMvpFragment<OrderPresenter>
 
         //点击Item跳转订单详情
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            if ("2".equals(mList.get(position).getPayStatus())){
+            if ("2".equals(mList.get(position).getPayStatus()) &&
+                    !"6".equals(mList.get(position).getOrderStatus())) {
                 Intent intent = new Intent(getCurContext(), UnpaidOrderDetailActivity.class);
                 intent.putExtra("id", mList.get(position).getOId());
                 intent.putExtra("store_id", mList.get(position).getSId());
                 startActivity(intent);
-            }else {
+            } else {
                 Intent intent = new Intent(getCurContext(), OrderDetailActivity.class);
                 intent.putExtra("id", mList.get(position).getOId());
                 intent.putExtra("store_id", mList.get(position).getSId());

@@ -59,6 +59,12 @@ public class UnpaidOrderDetailActivity extends BaseMvpActivity<OrderDetailPresen
     TextView mTvShopFullReduction;
     @BindView(R.id.tv_first_reduction)
     TextView mTvFirstReduction;
+    @BindView(R.id.tv_shop_full_reduction_text)
+    TextView mTvShopFullReductionText;
+    @BindView(R.id.tv_first_reduction_text)
+    TextView mTvFirstReductionText;
+    @BindView(R.id.tv_red_envelopes_text)
+    TextView mTvRedEnvelopesText;
 
     private LvOrderDetailGoodsAdapter mAdapter;
     private List<OrderDetailBean.OrderInfoBean.GoodsListBean> mList;
@@ -111,14 +117,29 @@ public class UnpaidOrderDetailActivity extends BaseMvpActivity<OrderDetailPresen
         mTvDeliveryFee.setText(getResources().getString(R.string.goods_price,
                 data.getOrderInfo().getDeliveryPrice()));
         //设置店铺满减
-        mTvShopFullReduction.setText(getResources().getString(R.string.goods_price,
-                data.getOrderInfo().getFullReduction()));
+        if ("0".equals(data.getOrderInfo().getFullReduction())) {
+            mTvShopFullReduction.setVisibility(View.GONE);
+            mTvShopFullReductionText.setVisibility(View.GONE);
+        } else {
+            mTvShopFullReduction.setText(getResources().getString(R.string.red_envelopes_value,
+                    data.getOrderInfo().getFullReduction()));
+        }
         //设置首单立减
-        mTvFirstReduction.setText(getResources().getString(R.string.goods_price,
-                data.getOrderInfo().getFirstReduction()));
+        if ("0".equals(data.getOrderInfo().getFirstReduction())) {
+            mTvFirstReduction.setVisibility(View.GONE);
+            mTvFirstReductionText.setVisibility(View.GONE);
+        } else {
+            mTvFirstReduction.setText(getResources().getString(R.string.red_envelopes_value,
+                    data.getOrderInfo().getFirstReduction()));
+        }
         //设置红包金额
-        mTvRedEnvelopes.setText(getResources().getString(R.string.red_envelopes_value,
-                data.getOrderInfo().getRedRrice()));
+        if ("0".equals(data.getOrderInfo().getRedRrice())) {
+            mTvRedEnvelopes.setVisibility(View.GONE);
+            mTvRedEnvelopesText.setVisibility(View.GONE);
+        } else {
+            mTvRedEnvelopes.setText(getResources().getString(R.string.red_envelopes_value,
+                    data.getOrderInfo().getRedRrice()));
+        }
         //设置优惠券金额
         mTvCoupon.setText(getResources().getString(R.string.goods_price, "0"));
         //合计

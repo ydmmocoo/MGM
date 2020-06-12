@@ -8,9 +8,14 @@ import android.widget.EditText;
 
 import com.fjx.mg.R;
 import com.fjx.mg.ToolBarManager;
+import com.fjx.mg.food.adapter.RemarkTagAdapter;
+import com.fjx.mg.view.flowlayout.FlowLayout;
 import com.fjx.mg.view.flowlayout.TagFlowLayout;
 import com.library.common.base.BaseActivity;
 import com.library.common.utils.CommonToast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -49,6 +54,31 @@ public class RemarksActivity extends BaseActivity {
                 intent.putExtra("content",remark);
                 setResult(RESULT_OK,intent);
                 finish();
+            }
+        });
+
+        //设置默认标签
+        List<String> list=new ArrayList<>();
+        list.add(getResources().getString(R.string.no_spice));
+        list.add(getResources().getString(R.string.less_spicy));
+        list.add(getResources().getString(R.string.more_spicy));
+        list.add(getResources().getString(R.string.no_garlic));
+        list.add(getResources().getString(R.string.no_onions));
+        list.add(getResources().getString(R.string.no_coriander));
+        RemarkTagAdapter adapter=new RemarkTagAdapter(getCurContext(),list);
+        mFlRemarksTag.setAdapter(adapter);
+        mFlRemarksTag.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
+            @Override
+            public boolean onTagClick(View view, int position, FlowLayout parent) {
+                String remark=mEtRemarks.getText().toString();
+                if (!TextUtils.isEmpty(remark)){
+                    mEtRemarks.setText(remark.concat(",").concat(list.get(position)));
+                    mEtRemarks.setSelection(mEtRemarks.getText().toString().length());
+                }else {
+                    mEtRemarks.setText(list.get(position));
+                    mEtRemarks.setSelection(list.get(position).length());
+                }
+                return true;
             }
         });
     }

@@ -1,8 +1,6 @@
 package com.fjx.mg.network.mvp;
 
 
-import android.location.Geocoder;
-
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -14,13 +12,7 @@ import com.library.repository.models.ResponseModel;
 import com.library.repository.models.SearchAgentModel;
 import com.library.repository.repository.RepositoryFactory;
 
-import java.util.Locale;
-
 public class SalesNetworkSearchPresenter extends SalesNetworkSearchContract.Presenter {
-
-    private FusedLocationProviderClient mClient;
-    private LocationRequest mLocationRequest;
-    private LocationCallback mLocationCallback;
 
     public SalesNetworkSearchPresenter(SalesNetworkSearchContract.View view) {
         super(view);
@@ -58,33 +50,5 @@ public class SalesNetworkSearchPresenter extends SalesNetworkSearchContract.Pres
                         }
                     }
                 });
-    }
-
-    @Override
-    public void requestLocationAddress() {
-        if (mView != null) {
-            mView.showLoading();
-        }
-        //定位相关
-        mClient = LocationServices.getFusedLocationProviderClient(mView.getCurActivity());
-        mLocationRequest = new LocationRequest()
-                .setInterval(1000)
-                .setFastestInterval(5000)
-                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationCallback = new LocationCallback() {
-            @Override
-            public void onLocationResult(LocationResult locationResult) {
-                super.onLocationResult(locationResult);
-                double latitude=locationResult.getLastLocation().getLatitude();
-                double longitude=locationResult.getLastLocation().getLongitude();
-
-                /*double lat = amapLocation.getLatitude();//获取纬度
-                double lon = amapLocation.getLongitude();//获取经度
-                String sName = amapLocation.getAddress();
-                if (mView != null) {
-                    mView.responseLocationAddress(lon + "", lat + "", sName);
-                }*/
-            }
-        };
     }
 }

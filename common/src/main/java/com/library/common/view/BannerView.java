@@ -37,8 +37,8 @@ public class BannerView extends Banner {
     class GlideImageLoader extends ImageLoader {
         @Override
         public void displayImage(Context context, Object path, ImageView imageView) {
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            CommonImageLoader.load(path).placeholder(R.drawable.banner_logo_ic).into(imageView);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            CommonImageLoader.load(path).resize(710,170).placeholder(R.drawable.banner_logo_ic).into(imageView);
         }
     }
 

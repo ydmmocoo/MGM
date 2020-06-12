@@ -26,8 +26,8 @@ public class TakeOutFoodSearchPresenter extends TakeOutFoodSearchContract.Presen
     public void getShopsList(String title, int page) {
         String lng=RepositoryFactory.getLocalRepository().getLongitude();
         String lat=RepositoryFactory.getLocalRepository().getLatitude();
-        RepositoryFactory.getRemoteFoodApi().getShopList(lng,lat,0,"","",
-                "",1,0,title,page)
+        RepositoryFactory.getRemoteFoodApi().getShopList(lng,lat,"","",
+                "",title,page)
                 .compose(RxScheduler.<ResponseModel<HomeShopListBean>>toMain())
                 .as(mView.<ResponseModel<HomeShopListBean>>bindAutoDispose())
                 .subscribe(new CommonObserver<HomeShopListBean>() {

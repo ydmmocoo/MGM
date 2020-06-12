@@ -111,7 +111,7 @@ public class StoreEvaluateFragment extends BaseMvpFragment<StoreEvaluatePresente
 
     @Override
     public void getEvaluateListSuccess(StoreEvaluateBean data) {
-        if (data==null){
+        if (data==null||data.getShopInfo()==null||data.getEvaluateList()==null){
             return;
         }
         //设置评分
