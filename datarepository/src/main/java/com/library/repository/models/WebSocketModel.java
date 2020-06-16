@@ -1,10 +1,5 @@
 package com.library.repository.models;
 
-import com.google.gson.annotations.SerializedName;
-
-import org.greenrobot.greendao.annotation.Generated;
-import org.greenrobot.greendao.annotation.Id;
-
 public class WebSocketModel extends BaseM {
 
     private String type;

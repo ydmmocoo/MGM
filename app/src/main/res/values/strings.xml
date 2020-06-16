@@ -931,6 +931,7 @@
     <string name="service_tel">电话：</string>
     <string name="serivice_wechat">微信：</string>
     <string name="dialog_1_google_play">1.您未安装google play,请自行安装后使用</string>
+    <string name="dialog_google_play">您未安装google play,请自行安装后使用</string>
     <string name="form">-来自</string>
     <string name="to">-转给</string>
     <string name="rp_form">-发给</string>
@@ -1154,6 +1155,12 @@
     <string name="no_onions">不吃葱</string>
     <string name="no_coriander">不吃香菜</string>
     <string name="cancelled">已取消</string>
+    <string name="input_address">请输入地址</string>
+    <string name="no">无</string>
+    <string name="have_eaten">已出餐</string>
+    <string name="self_information">自提信息</string>
+    <string name="merchant_has_no_phone_set">商家未设置电话</string>
+    <string name="call_phone_tip">请到设置中打开"拨打电话电话"权限</string>
 
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <bool name="bottomsheet_is_tablet">false</bool>

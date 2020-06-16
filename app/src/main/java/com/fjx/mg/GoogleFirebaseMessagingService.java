@@ -63,7 +63,6 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
                     @Override
                     public void onComplete(@NonNull Task<InstanceIdResult> task) {
                         if (!task.isSuccessful()) {
-                            Log.e("55555", "getInstanceId failed", task.getException());
                             return;
                         }
                         String token = task.getResult().getToken();

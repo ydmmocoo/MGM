@@ -142,7 +142,7 @@ public class LvStoreGoodsAdapter extends BaseAdapter implements StickyListHeader
         //移除商品
         holder.mIvLess.setOnClickListener(v -> {
             boolean hasAttr=false;
-            if (mList.get(position).getSpecialList().size() > 0 || mList.get(position).getAttrList().size() > 0) {
+            if (mList.get(position).getSpecialList().size() > 1 || mList.get(position).getAttrList().size() > 1) {
                 if (mList.get(position).getCount() > 1) {
                     CommonToast.toast(mContext.getResources().getString(R.string.goods_less_tips));
                     return;

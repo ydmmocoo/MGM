@@ -8,6 +8,7 @@ import com.fjx.mg.view.flowlayout.TagFlowLayout;
 import com.library.common.utils.CommonImageLoader;
 import com.library.common.utils.DimensionUtil;
 import com.library.repository.models.HomeShopListBean;
+import com.library.repository.repository.RepositoryFactory;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -58,7 +59,13 @@ public class RvStoreAdapter extends BaseQuickAdapter<HomeShopListBean.ShopListBe
         helper.setText(R.id.tv_tag,tag);
         //设置优惠 fl_discount
         List<String> list=new ArrayList<>();
-        int size= Math.min(item.getReductionList().size(), 4);
+        String language = RepositoryFactory.getLocalRepository().getLangugeType();
+        int size=0;
+        if (language.equals("zh-ch")||language.equals("zh-tw")) {
+            size = Math.min(item.getReductionList().size(), 4);
+        }else {
+            size = Math.min(item.getReductionList().size(), 3);
+        }
         for (int i=0;i<size;i++){
             list.add(getContext().getResources().getString(R.string.full_reduction,
                     item.getReductionList().get(i).getFullPrice(),

@@ -64,7 +64,7 @@ public class OrderActivity extends BaseMvpActivity<OrderPresenter>
 
     @Override
     protected void initView() {
-        mType = getIntent().getIntExtra("type", 1);
+        mType = getIntent().getIntExtra("type", 0);
         if (mType == 1) {
             mPayStatus = "1";
             mOrderStatus = "";

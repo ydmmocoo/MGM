@@ -34,7 +34,6 @@ import static com.tencent.imsdk.TIMUserProfile.TIM_PROFILE_TYPE_KEY_NICK;
 
 public class UserCenter {
 
-
     public static void saveUserInfo(UserInfoModel userInfo) {
         RepositoryFactory.getLocalRepository().saveUserInfo(userInfo);
     }

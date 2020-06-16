@@ -389,7 +389,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="@string/goods_price"
-                android:textColor="@color/black"
+                android:textColor="@color/colorAccent"
                 android:textSize="14sp"
                 app:layout_constraintRight_toRightOf="@+id/v_line_two"
                 app:layout_constraintTop_toBottomOf="@+id/tv_delivery_fee" />
@@ -411,7 +411,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="@string/goods_price"
-                android:textColor="@color/black"
+                android:textColor="@color/colorAccent"
                 android:textSize="14sp"
                 app:layout_constraintRight_toRightOf="@+id/v_line_two"
                 app:layout_constraintTop_toBottomOf="@+id/tv_shop_full_reduction" />
@@ -510,7 +510,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
                 android:gravity="center_vertical"
-                android:text="@string/distribution_service"
+                android:text="@string/distribution_information"
                 app:layout_constraintLeft_toLeftOf="@+id/v_distribution_information"
                 app:layout_constraintRight_toRightOf="@+id/v_distribution_information"
                 app:layout_constraintTop_toTopOf="@+id/v_distribution_information" />
@@ -552,6 +552,7 @@
                 tools:text="陈女士 14576898374\n福建省厦门市思明区软件园二期XXXXX" />
 
             <TextView
+                android:id="@+id/tv_expected_time_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -573,6 +574,7 @@
                 tools:text="12:00" />
 
             <TextView
+                android:id="@+id/tv_distribution_service_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"

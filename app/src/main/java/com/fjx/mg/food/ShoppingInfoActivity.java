@@ -2,6 +2,7 @@ package com.fjx.mg.food;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -18,13 +19,18 @@ import com.fjx.mg.food.contract.ShoppingInfoContract;
 import com.fjx.mg.food.presenter.ShoppingInfoPresenter;
 import com.fjx.mg.setting.address.list.AddressListActivity;
 import com.gyf.immersionbar.ImmersionBar;
+import com.hjq.permissions.OnPermission;
+import com.hjq.permissions.Permission;
+import com.hjq.permissions.XXPermissions;
 import com.library.common.base.BaseMvpActivity;
 import com.library.common.view.WrapContentListView;
 import com.library.repository.models.CreateOrderBean;
 import com.library.repository.models.ShoppingInfoBean;
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.interfaces.OnConfirmListener;
+import com.lxj.xpopup.interfaces.OnSelectListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -110,6 +116,7 @@ public class ShoppingInfoActivity extends BaseMvpActivity<ShoppingInfoPresenter>
     private String mSelfExtractingTime;
     private String mReservedPhone;
     private List<String> mTimeList;
+    private List<String> mPhoneList=new ArrayList<>();
 
     @Override
     protected int layoutId() {
@@ -182,19 +189,43 @@ public class ShoppingInfoActivity extends BaseMvpActivity<ShoppingInfoPresenter>
                 finish();
                 break;
             case R.id.iv_call://拨打电话
-                new XPopup.Builder(getCurContext())
-                        .asConfirm(getResources().getString(R.string.Tips), getResources().getString(R.string.hint_confirm_contact),
-                                getResources().getString(R.string.cancel), getResources().getString(R.string.confirm_short),
-                                new OnConfirmListener() {
-                                    @Override
-                                    public void onConfirm() {
-                                        /*Intent callIntent = new Intent(Intent.ACTION_CALL);
-                                    Uri data = Uri.parse("tel:" + );
-                                    callIntent.setData(data);
-                                    startActivity(callIntent);*/
-                                    }
-                                }, null, false)
-                        .show();
+                XXPermissions.with(getCurActivity())
+                        .permission(Permission.CALL_PHONE)
+                        .request(new OnPermission() {
+
+                            @Override
+                            public void hasPermission(List<String> granted, boolean all) {
+                                if (all) {
+                                    new XPopup.Builder(getCurContext())
+                                            .asConfirm(getResources().getString(R.string.Tips), getResources().getString(R.string.hint_confirm_contact),
+                                                    getResources().getString(R.string.cancel), getResources().getString(R.string.confirm_short),
+                                                    () -> {
+                                                        if (mPhoneList.size() > 0) {
+                                                            String[] strings = new String[mPhoneList.size()];
+                                                            mPhoneList.toArray(strings);
+                                                            new XPopup.Builder(getCurActivity())
+                                                                    .isDarkTheme(true)
+                                                                    .asBottomList("", strings,
+                                                                            (position, text) -> {
+                                                                                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                                                                                Uri data = Uri.parse("tel:" +mPhoneList.get(position));
+                                                                                callIntent.setData(data);
+                                                                                startActivity(callIntent);
+                                                                            })
+                                                                    .show();
+                                                        } else {
+
+                                                        }
+                                                    }, null, false)
+                                            .show();
+                                } else {
+                                }
+                            }
+
+                            @Override
+                            public void noPermission(List<String> denied, boolean quick) {
+                            }
+                        });
                 break;
             case R.id.tv_lucky_red_envelopes_coupons_text://红包、优惠券
                 startActivityForResult(ChooseCouponActivity.newInstance(getCurContext(), String.valueOf(mTotalPrice), mPhone), 1);
@@ -256,7 +287,7 @@ public class ShoppingInfoActivity extends BaseMvpActivity<ShoppingInfoPresenter>
         mTvDeliveryFee.setText(getResources().getString(R.string.goods_price,
                 data.getShopInfo().getDistributionFee()));
         //设置店铺满减
-        if (TextUtils.isEmpty(data.getShopInfo().getFullReduction())) {
+        if (TextUtils.isEmpty(data.getFullReduction())) {
             mTvShopFullReduction.setVisibility(View.GONE);
             mTvShopFullReductionText.setVisibility(View.GONE);
             mVLineEight.setVisibility(View.GONE);
@@ -279,6 +310,12 @@ public class ShoppingInfoActivity extends BaseMvpActivity<ShoppingInfoPresenter>
                 String.valueOf(mTotalPrice)));
         mTvTotal.setText(getResources().getString(R.string.goods_price,
                 String.valueOf(mTotalPrice)));
+
+        if (data.getShopInfo().getTels()!=null) {
+            for (int i = 0; i < data.getShopInfo().getTels().size(); i++) {
+                mPhoneList.add(data.getShopInfo().getTels().get(i).getTel());
+            }
+        }
 
         //到店自取信息
         //设置店铺地址
@@ -316,6 +353,7 @@ public class ShoppingInfoActivity extends BaseMvpActivity<ShoppingInfoPresenter>
                 mTvLuckyRedEnvelopesCoupons.setText(getResources().getString(R.string.red_envelopes_value,
                         mCouponAmount));
                 mTvTotal.setText(getResources().getString(R.string.goods_price, String.valueOf(mTotalPrice - Integer.parseInt(mCouponAmount))));
+                mTvTotalPrice.setText(getResources().getString(R.string.goods_price, String.valueOf(mTotalPrice - Integer.parseInt(mCouponAmount))));
             }
         } else if (requestCode == 2 && resultCode == RESULT_OK) {//地址
             mAddressId = data.getStringExtra("addressId");
@@ -357,6 +395,18 @@ public class ShoppingInfoActivity extends BaseMvpActivity<ShoppingInfoPresenter>
         new XPopup.Builder(getCurContext())
                 .dismissOnTouchOutside(false)
                 .asCustom(pop)
+                .show();
+    }
+
+    private void showPhoneDialog(){
+        new XPopup.Builder(getCurContext())
+                .isDarkTheme(true)
+                .asBottomList("", new String[]{"条目1", "条目2", "条目3", "条目4", "条目5"},
+                        new OnSelectListener() {
+                            @Override
+                            public void onSelect(int position, String text) {
+                            }
+                        })
                 .show();
     }
 }

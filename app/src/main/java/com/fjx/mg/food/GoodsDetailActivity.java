@@ -23,12 +23,14 @@ import com.fjx.mg.food.adapter.RvShopCartAdapter;
 import com.fjx.mg.food.contract.GoodsDetailContract;
 import com.fjx.mg.food.presenter.GoodsDetailPresenter;
 import com.fjx.mg.utils.AnimUtils;
+import com.fjx.mg.utils.DialogUtil;
 import com.fjx.mg.view.bottomsheet.BottomSheetLayout;
 import com.gyf.immersionbar.ImmersionBar;
 import com.library.common.base.BaseMvpActivity;
 import com.library.common.utils.CommonImageLoader;
 import com.library.common.utils.CommonToast;
 import com.library.common.utils.DimensionUtil;
+import com.library.repository.data.UserCenter;
 import com.library.repository.models.GoodsDetailBean;
 import com.library.repository.models.ShopingCartBean;
 import com.library.repository.models.StoreEvaluateBean;
@@ -154,10 +156,17 @@ public class GoodsDetailActivity extends BaseMvpActivity<GoodsDetailPresenter>
                 finish();
                 break;
             case R.id.iv_plus://增加商品
-                if (mData.getGoodInfo().getSpecialList().size() == 0
-                        && mData.getGoodInfo().getAttrList().size() == 0) {
+                if (!UserCenter.hasLogin()) {
+                    new DialogUtil().showAlertDialog(getCurContext(), R.string.tips, R.string.not_login_forward_login, (dialog, which) -> {
+                        dialog.dismiss();
+                        UserCenter.goLoginActivity();
+                    });
+                    return;
+                }
+                if (mData.getGoodInfo().getSpecialList().size() <= 1
+                        && mData.getGoodInfo().getAttrList().size() ==0) {
                     mPresenter.addShopCart(mId, mGoodsId, mData.getGoodInfo().getName(),
-                            "", "", "", "", mData.getGoodInfo().getPrice(), "1", mData.getGoodInfo().getImg());
+                            mData.getGoodInfo().getSpecialList().get(0).getSId(), mData.getGoodInfo().getSpecialList().get(0).getName(), "", "", mData.getGoodInfo().getPrice(), "1", mData.getGoodInfo().getImg());
                 } else {
                     List<StoreGoodsBean.CateListBean.GoodsListBean.SpecialListBean> specialList = new ArrayList<>();
                     List<StoreGoodsBean.CateListBean.GoodsListBean.AttrListBean> attrList = new ArrayList<>();
@@ -194,8 +203,15 @@ public class GoodsDetailActivity extends BaseMvpActivity<GoodsDetailPresenter>
                 }
                 break;
             case R.id.iv_less://减少商品
+                if (!UserCenter.hasLogin()) {
+                    new DialogUtil().showAlertDialog(getCurContext(), R.string.tips, R.string.not_login_forward_login, (dialog, which) -> {
+                        dialog.dismiss();
+                        UserCenter.goLoginActivity();
+                    });
+                    return;
+                }
                 boolean hasAttr = false;
-                if (mData.getGoodInfo().getSpecialList().size() > 0 || mData.getGoodInfo().getAttrList().size() > 0) {
+                if (mData.getGoodInfo().getSpecialList().size() > 1 || mData.getGoodInfo().getAttrList().size() > 0) {
                     if (mData.getGoodInfo().getCount() > 1) {
                         CommonToast.toast(getResources().getString(R.string.goods_less_tips));
                         return;
@@ -226,6 +242,13 @@ public class GoodsDetailActivity extends BaseMvpActivity<GoodsDetailPresenter>
                 showBottomSheet();
                 break;
             case R.id.tv_to_settle://去结算
+                if (!UserCenter.hasLogin()) {
+                    new DialogUtil().showAlertDialog(getCurContext(), R.string.tips, R.string.not_login_forward_login, (dialog, which) -> {
+                        dialog.dismiss();
+                        UserCenter.goLoginActivity();
+                    });
+                    return;
+                }
                 Intent intent = new Intent(getCurContext(), ShoppingInfoActivity.class);
                 intent.putExtra("id", mId);
                 startActivity(intent);
@@ -271,7 +294,9 @@ public class GoodsDetailActivity extends BaseMvpActivity<GoodsDetailPresenter>
     @Override
     public void getGoodsInfoSuccess(GoodsDetailBean data) {
         mData = data;
-        mPresenter.getShopCartData(mId);
+        if (UserCenter.hasLogin()) {
+            mPresenter.getShopCartData(mId);
+        }
         //设置商品图片
         CommonImageLoader.load(data.getGoodInfo().getImg())
                 .placeholder(R.drawable.food_default).into(mIvGoodsPic);

@@ -55,12 +55,15 @@
 
     <TextView
         android:id="@+id/tv_tag"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="起送500AR | 免配送费 | 支持自取"
         android:textSize="10sp"
         android:drawablePadding="5dp"
         android:layout_marginStart="10dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:layout_toStartOf="@+id/tv_distance"
         android:layout_toEndOf="@+id/iv_logo"
         android:layout_below="@+id/tv_score"
         android:textColor="@color/gray_text" />

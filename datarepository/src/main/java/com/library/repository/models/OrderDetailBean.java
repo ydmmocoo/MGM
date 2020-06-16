@@ -92,6 +92,9 @@ public class OrderDetailBean {
         private List<TelsBean> tels;
         private int expireTime;
         private String shopLogo;
+        private String shopAddress;
+        private String lng;
+        private String lat;
         private List<GoodsListBean> goodsList;
 
         public String getOId() {
@@ -316,6 +319,30 @@ public class OrderDetailBean {
 
         public void setShopLogo(String shopLogo) {
             this.shopLogo = shopLogo;
+        }
+
+        public String getShopAddress() {
+            return shopAddress;
+        }
+
+        public void setShopAddress(String shopAddress) {
+            this.shopAddress = shopAddress;
+        }
+
+        public String getLng() {
+            return lng;
+        }
+
+        public void setLng(String lng) {
+            this.lng = lng;
+        }
+
+        public String getLat() {
+            return lat;
+        }
+
+        public void setLat(String lat) {
+            this.lat = lat;
         }
 
         public List<GoodsListBean> getGoodsList() {

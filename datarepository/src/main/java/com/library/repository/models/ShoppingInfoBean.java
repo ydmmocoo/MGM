@@ -25,6 +25,7 @@ public class ShoppingInfoBean {
     private ShopInfoBean shopInfo;
     private List<GoodsListBean> goodsList;
     private List<String> sendTime;
+    private String fullReduction;
 
     public long getTotalPrice() {
         return totalPrice;
@@ -154,7 +155,7 @@ public class ShoppingInfoBean {
         private String shopName;
         private String distance;
         private String address;
-        private Object tels;
+        private List<TelsBean> tels;
         private int firstReduction;
         private String deliveryPrice;
         private String distributionFee;
@@ -185,11 +186,11 @@ public class ShoppingInfoBean {
             this.address = address;
         }
 
-        public Object getTels() {
+        public List<TelsBean> getTels() {
             return tels;
         }
 
-        public void setTels(Object tels) {
+        public void setTels(List<TelsBean> tels) {
             this.tels = tels;
         }
 
@@ -199,6 +200,32 @@ public class ShoppingInfoBean {
 
         public void setFirstReduction(int firstReduction) {
             this.firstReduction = firstReduction;
+        }
+
+        public static class TelsBean {
+            /**
+             * tId :
+             * tel :
+             */
+
+            private String tId;
+            private String tel;
+
+            public String getTId() {
+                return tId;
+            }
+
+            public void setTId(String tId) {
+                this.tId = tId;
+            }
+
+            public String getTel() {
+                return tel;
+            }
+
+            public void setTel(String tel) {
+                this.tel = tel;
+            }
         }
 
         public String getDeliveryPrice() {
@@ -328,5 +355,13 @@ public class ShoppingInfoBean {
         public void setImg(String img) {
             this.img = img;
         }
+    }
+
+    public String getFullReduction() {
+        return fullReduction;
+    }
+
+    public void setFullReduction(String fullReduction) {
+        this.fullReduction = fullReduction;
     }
 }

@@ -14,11 +14,14 @@ import androidx.annotation.NonNull;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.library.common.base.BaseActivity;
+import com.library.common.base.BaseApp;
 import com.library.common.callback.CActivityManager;
 import com.library.common.utils.ContextManager;
 import com.library.common.utils.JsonUtil;
 import com.library.common.utils.LogTUtil;
 import com.library.common.utils.NotifyUtil;
+import com.library.common.utils.SharedPreferencesUtil;
 import com.library.common.view.shortcutbadger.ShortcutBadger;
 import com.tencent.imsdk.TIMCustomElem;
 import com.tencent.imsdk.TIMElem;
@@ -38,6 +41,8 @@ import com.tencent.qcloud.uikit.business.chat.model.CacheUtil;
 import com.tencent.qcloud.uikit.business.chat.model.ElemExtModel;
 import com.tencent.qcloud.uikit.business.chat.model.MessageInfoUtil;
 import com.tencent.qcloud.uikit.common.utils.SoundPlayUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -146,9 +151,10 @@ public class TimConfig {
                 .setUserStatusListener(new TIMUserStatusListener() {
                     @Override
                     public void onForceOffline() {
+                        EventBus.getDefault().post(true);
                         final Activity activity = CActivityManager.getAppManager().currentActivity();
                         if (activity == null) return;
-
+                        SharedPreferencesUtil.name("user_data").put("UserInfoModel", "").apply();
                         dialog = new MaterialDialog.Builder(activity)
                                 .title(R.string.attention)
                                 .content(R.string.force_logout)
@@ -176,7 +182,9 @@ public class TimConfig {
                                 })
                                 .negativeText("").build();
 
-                        dialog.show();
+                        if (!activity.isFinishing()) {
+                            dialog.show();
+                        }
                     }
 
                     @Override
@@ -242,10 +250,7 @@ public class TimConfig {
                 }
             }
         });
-
-
     }
-
 
     public static String getMessage(TIMMessage timMessage) {
         if (timMessage == null || timMessage.status() == TIMMessageStatus.HasDeleted)
@@ -321,7 +326,6 @@ public class TimConfig {
                     CacheUtil.getInstance().saveTransferMessageId(dataModel.getBeReceivedMessageId());
                 }
             }
-
         }
     }
 }

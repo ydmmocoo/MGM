@@ -152,6 +152,9 @@ public class StoreGoodsFragment extends BaseMvpFragment<StoreGoodsPresenter>
 
     public void getShopCartData(List<ShopingCartBean.GoodsListBean> list) {
         mShopCartList = list;
+        for (int i=0;i<mGoodsList.size();i++){
+            mGoodsList.get(i).setCount(0);
+        }
         for (int i = 0; i < mGoodsList.size(); i++) {
             int count = 0;
             for (int j = 0; j < mShopCartList.size(); j++) {

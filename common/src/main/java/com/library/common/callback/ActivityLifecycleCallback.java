@@ -10,6 +10,7 @@ import android.util.Log;
  * 生命周期管理类
  */
 public class ActivityLifecycleCallback implements Application.ActivityLifecycleCallbacks {
+
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
         Log.d("ActivityLifecycle", "onActivityCreated");

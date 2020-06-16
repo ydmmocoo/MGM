@@ -39,7 +39,7 @@ public interface RemoteFoodApi {
 
     @POST("shops/getShopsList")
     @FormUrlEncoded
-    Observable<ResponseModel<HomeShopListBean>> getShopList(@Field("lng") String lng, @Field("lat") String lat, @Field("serviceId") String serviceId, @Field("secondServiceId") String secondServiceId,
+    Observable<ResponseModel<HomeShopListBean>> getShopList(@Field("lng") String lng, @Field("lat") String lat,@Field("isRecommend")String isRecommend, @Field("serviceId") String serviceId, @Field("secondServiceId") String secondServiceId,
                                                             @Field("order") String order,@Field("title") String title, @Field("page") int page);
 
     @POST("goods/getAllGoodsList")

@@ -38,7 +38,7 @@ public class BannerView extends Banner {
         @Override
         public void displayImage(Context context, Object path, ImageView imageView) {
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            CommonImageLoader.load(path).resize(710,170).placeholder(R.drawable.banner_logo_ic).into(imageView);
+            CommonImageLoader.load(path).placeholder(R.drawable.banner_logo_ic).into(imageView);
         }
     }
 

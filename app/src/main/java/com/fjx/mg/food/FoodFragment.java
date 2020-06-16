@@ -3,6 +3,7 @@ package com.fjx.mg.food;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -28,9 +29,13 @@ import com.fjx.mg.food.adapter.RvStoreAdapter;
 import com.fjx.mg.food.contract.FoodContract;
 import com.fjx.mg.food.presenter.FoodPresenter;
 import com.fjx.mg.moments.add.pois.AoisActivity;
+import com.fjx.mg.setting.address.list.AddressListActivity;
+import com.fjx.mg.utils.GPSUtils;
 import com.fjx.mg.utils.HttpUtil;
 import com.fjx.mg.utils.SharedPreferencesUtils;
 import com.fjx.mg.view.WrapContentGridView;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -122,7 +127,6 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        locationAddress();
         mDrawable = ContextCompat.getDrawable(getCurContext(), R.mipmap.icon_arrow_down_black);
         mDrawable.setBounds(0, 0, mDrawable.getMinimumWidth(), mDrawable.getMinimumHeight());
         mSelectedDrawable = ContextCompat.getDrawable(getCurContext(), R.mipmap.icon_arrow_up_red);
@@ -166,11 +170,13 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
         //分类筛选默认为全部美食
         mTvType.setText(getResources().getString(R.string.all_delicacies));
 
+        requestLocationUpdate();
+
         mRefreshLayout.setEnableLoadMore(false);
         mPresenter.getShopTypeList("");
         mPresenter.getAd();
         mPresenter.getHotShops();
-        mPresenter.getShopsList(mServiceId, mSecondServiceId, mOrder, mPage);
+        //mPresenter.getShopsList(mServiceId, mSecondServiceId, mOrder, mPage);
 
         setListener();
     }
@@ -225,11 +231,7 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
                 mPresenter.getShopTypeList("");
                 mPresenter.getAd();
                 mPresenter.getHotShops();
-                if (!mIsFirst) {
-                    mPresenter.getShopsList(mServiceId, mSecondServiceId, mOrder, mPage);
-                } else {
-                    mRefreshLayout.finishRefresh();
-                }
+                mPresenter.getShopsList(mServiceId, mSecondServiceId, mOrder, mPage);
             }
         });
     }
@@ -241,7 +243,7 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
             case R.id.iv_back://返回
                 break;
             case R.id.tv_address://选择地址
-                startActivityForResult(AoisActivity.newInstance(getCurContext()), 9);
+                startActivityForResult(AddressListActivity.newInstance(getCurContext(), true), 9);
                 break;
             case R.id.v_search://搜索
                 intent = new Intent(getCurContext(), TakeOutFoodSearchActivity.class);
@@ -322,14 +324,14 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
     public void getShopListSuccess(List<HomeShopListBean.ShopListBean> data, boolean mHasNext) {
         if (!mHasNext) {
             mRefreshLayout.setEnableLoadMore(false);
-            mRefreshLayout.setNoMoreData(true);
         } else {
             mRefreshLayout.setEnableLoadMore(true);
-            mRefreshLayout.setNoMoreData(false);
         }
         if (mPage == 1) {
             mList = data;
-            mRefreshLayout.finishRefresh();
+            if (mRefreshLayout.isRefreshing()) {
+                mRefreshLayout.finishRefresh();
+            }
         } else {
             mList.addAll(data);
             mRefreshLayout.finishLoadMore();
@@ -352,27 +354,55 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
         mTvAddress.setText(address);
     }
 
+    @SuppressLint("MissingPermission")
     private void locationAddress() {
-        //定位相关
-        mClient = LocationServices.getFusedLocationProviderClient(getCurActivity());
-        mLocationRequest = new LocationRequest()
-                .setInterval(1000)
-                .setFastestInterval(5000)
-                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationCallback = new LocationCallback() {
+        GoogleApiAvailability googleApiAvailability = GoogleApiAvailability.getInstance();
+        int resultCode = googleApiAvailability.isGooglePlayServicesAvailable(getActivity());
+        GPSUtils.getInstance(getCurContext()).getLngAndLat(new GPSUtils.OnLocationResultListener() {
             @Override
-            public void onLocationResult(LocationResult locationResult) {
-                super.onLocationResult(locationResult);
-                double latitude = locationResult.getLastLocation().getLatitude();
-                double longitude = locationResult.getLastLocation().getLongitude();
+            public void onLocationResult(Location location) {
+                double latitude = location.getLatitude();
+                double longitude = location.getLongitude();
+
                 RepositoryFactory.getLocalRepository().saveLatitude(String.valueOf(latitude));
                 RepositoryFactory.getLocalRepository().saveLongitude(String.valueOf(longitude));
 
-                getAddress(String.valueOf(latitude),String.valueOf(longitude));
+                mPresenter.getShopsList(mServiceId, mSecondServiceId, mOrder, mPage);
             }
-        };
 
-        requestLocationUpdate();
+            @Override
+            public void OnLocationChange(Location location) {
+                double latitude = location.getLatitude();
+                double longitude = location.getLongitude();
+
+                RepositoryFactory.getLocalRepository().saveLatitude(String.valueOf(latitude));
+                RepositoryFactory.getLocalRepository().saveLongitude(String.valueOf(longitude));
+
+                mPresenter.getShopsList(mServiceId, mSecondServiceId, mOrder, mPage);
+            }
+        });
+        if (resultCode == ConnectionResult.SUCCESS) {
+            //定位相关
+            mClient = LocationServices.getFusedLocationProviderClient(getCurActivity());
+            mLocationRequest = new LocationRequest()
+                    .setInterval(1000)
+                    .setFastestInterval(5000)
+                    .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+            mLocationCallback = new LocationCallback() {
+                @Override
+                public void onLocationResult(LocationResult locationResult) {
+                    super.onLocationResult(locationResult);
+                    double latitude = locationResult.getLastLocation().getLatitude();
+                    double longitude = locationResult.getLastLocation().getLongitude();
+                    RepositoryFactory.getLocalRepository().saveLatitude(String.valueOf(latitude));
+                    RepositoryFactory.getLocalRepository().saveLongitude(String.valueOf(longitude));
+
+                    getAddress(String.valueOf(latitude), String.valueOf(longitude));
+                }
+            };
+
+            mClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
+        }
     }
 
     private void showDialog() {
@@ -385,14 +415,12 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
         mDialog.setOnFilterClickListener(pos -> {
             if (pos == 0) {
                 mOrder = "";
-                mTvComprehensiveRanking.setTextColor(ContextCompat.getColor(getCurContext(), R.color.gray_text));
-                mTvComprehensiveRanking.setText(list.get(pos));
             } else {
                 mOrder = String.valueOf(pos);
-                mTvComprehensiveRanking.setTextColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
-                mTvComprehensiveRanking.setText(list.get(pos));
-                mTvDistance.setTextColor(ContextCompat.getColor(getCurContext(), R.color.gray_text));
             }
+            mTvComprehensiveRanking.setTextColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
+            mTvComprehensiveRanking.setText(list.get(pos));
+            mTvDistance.setTextColor(ContextCompat.getColor(getCurContext(), R.color.gray_text));
             if (TextUtils.isEmpty(mAddress)) {
                 mPage = 1;
                 mPresenter.getShopsList(mServiceId, mSecondServiceId, mOrder, mPage);
@@ -442,8 +470,7 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
                     @Override
                     public void hasPermission(List<String> granted, boolean all) {
                         if (all) {
-                            //启动定位
-                            mClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
+                            locationAddress();
                         } else {
                         }
                     }
@@ -494,7 +521,7 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 9 && resultCode == 9) {
-            mAddress=data.getStringExtra("adr");
+            mAddress = data.getStringExtra("adr");
             SharedPreferencesUtils.setString(BaseApp.getInstance(), "address", mAddress);
             mTvAddress.setText(mAddress);
             String lng = data.getStringExtra("lng");//经度

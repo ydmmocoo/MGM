@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class LocalApiImpl implements LocalApi {
+
     private final String ENVIRONMENT_FILENAME = "environment_data";//测试用，环境信息
     private final String USER_FILENAME = "user_data";//用户信息
     private final String PHONELIST_FILENAME = "phonelist_filename";//充值手机号码

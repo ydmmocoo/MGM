@@ -506,6 +506,5 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
         if (data == null) return;
         if (resultCode == -1 && requestCode == 1) {
         }
-
     }
 }

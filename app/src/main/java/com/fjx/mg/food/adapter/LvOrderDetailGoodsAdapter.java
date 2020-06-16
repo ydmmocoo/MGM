@@ -77,14 +77,14 @@ public class LvOrderDetailGoodsAdapter extends BaseAdapter {
         holder.mTvCount.setText("X"+mList.get(position).getNum());
         //设置属性规格
         if (!TextUtils.isEmpty(mList.get(position).getSeName())&&
-                !TextUtils.isEmpty(mList.get(position).getSeName())) {
+                !TextUtils.isEmpty(mList.get(position).getAName())) {
             holder.mTvAttribute.setText(mList.get(position).getSeName().concat("+")
                     .concat(mList.get(position).getAName()));
         }else if (!TextUtils.isEmpty(mList.get(position).getSeName())&&
-                TextUtils.isEmpty(mList.get(position).getSeName())){
+                TextUtils.isEmpty(mList.get(position).getAName())){
             holder.mTvAttribute.setText(mList.get(position).getSeName());
         }else if (TextUtils.isEmpty(mList.get(position).getSeName())&&
-                !TextUtils.isEmpty(mList.get(position).getSeName())){
+                !TextUtils.isEmpty(mList.get(position).getAName())){
             holder.mTvAttribute.setText(mList.get(position).getAName());
         }else {
             holder.mTvAttribute.setText("");

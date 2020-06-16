@@ -1,25 +1,40 @@
 package com.fjx.mg.setting.address.edit;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.fjx.mg.R;
 import com.fjx.mg.ToolBarManager;
+import com.fjx.mg.moments.add.pois.AoisActivity;
+import com.fjx.mg.network.KiosqueNetworkActivity;
+import com.fjx.mg.utils.SharedPreferencesUtils;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.hjq.permissions.OnPermission;
+import com.hjq.permissions.Permission;
+import com.hjq.permissions.XXPermissions;
+import com.library.common.base.BaseApp;
 import com.library.common.base.BaseMvpActivity;
 import com.library.common.utils.CommonToast;
 import com.library.common.utils.GradientDrawableHelper;
 import com.library.common.utils.JsonUtil;
 import com.library.repository.Constant;
 import com.library.repository.models.AddressModel;
+import com.library.repository.repository.RepositoryFactory;
+import com.tencent.qcloud.uikit.common.utils.ScreenUtil;
 
 import java.util.List;
 
@@ -29,7 +44,6 @@ import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class EditAddressActivity extends BaseMvpActivity<EditAddressPresenter> implements EditAddressContract.View {
-
 
     @BindView(R.id.etName)
     EditText etName;
@@ -47,7 +61,6 @@ public class EditAddressActivity extends BaseMvpActivity<EditAddressPresenter> i
     TextView tvConfirm;
 
     private String longitude, latitude;
-
 
     private AddressModel.AddressListBean addressModel;
 
@@ -72,7 +85,6 @@ public class EditAddressActivity extends BaseMvpActivity<EditAddressPresenter> i
 
     @Override
     protected void initView() {
-
         String address = getIntent().getStringExtra("address");
         addressModel = JsonUtil.strToModel(address, AddressModel.AddressListBean.class);
         String title = getString(R.string.add_address);
@@ -81,11 +93,9 @@ public class EditAddressActivity extends BaseMvpActivity<EditAddressPresenter> i
             initShow();
         }
 
-
         ToolBarManager.with(this).setTitle(title);
         GradientDrawableHelper.whit(tvConfirm).setColor(R.color.colorAccent).setCornerRadius(50);
         initGender(gender);
-
     }
 
     private void initShow() {
@@ -116,9 +126,7 @@ public class EditAddressActivity extends BaseMvpActivity<EditAddressPresenter> i
             GradientDrawableHelper.whit(tvMan).setColor(R.color.trans).setStroke(1, R.color.text_color_gray).setCornerRadius(0);
             tvMan.setTextColor(ContextCompat.getColor(getCurContext(), R.color.textColorGray));
         }
-
     }
-
 
     @OnClick({R.id.tvMan, R.id.tvWoman, R.id.tvLocation, R.id.tvConfirm})
     public void onViewClicked(View view) {
@@ -155,14 +163,44 @@ public class EditAddressActivity extends BaseMvpActivity<EditAddressPresenter> i
     }
 
     private void location() {
-        if (EasyPermissions.hasPermissions(this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
-            mPresenter.locationAddress();
+        GoogleApiAvailability googleApiAvailability = GoogleApiAvailability.getInstance();
+        int resultCode = googleApiAvailability.isGooglePlayServicesAvailable(getCurContext());
+        if (resultCode != ConnectionResult.SUCCESS) {
+            //未安装谷歌服务
+            final Dialog dialog = new Dialog(getCurActivity());
+            View v = LayoutInflater.from(getCurContext()).inflate(R.layout.dialog_gms_tips, null);
+            v.findViewById(R.id.tvOk).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                }
+            });
+            dialog.setContentView(v);
+            dialog.show();
+            WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+            int w = ScreenUtil.getScreenWidth(getCurActivity());
+            params.width = w / 5 * 4;
+            dialog.getWindow().setAttributes(params);
+            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         } else {
-            EasyPermissions.requestPermissions(this, getString(R.string.permission_location_message), 1,
-                    Manifest.permission.ACCESS_COARSE_LOCATION);
+            XXPermissions.with(getCurActivity())
+                    .permission(Permission.Group.LOCATION)
+                    .request(new OnPermission() {
+
+                        @Override
+                        public void hasPermission(List<String> granted, boolean all) {
+                            if (all) {
+                                startActivityForResult(AoisActivity.newInstance(getCurContext()), 9);
+                            } else {
+                            }
+                        }
+
+                        @Override
+                        public void noPermission(List<String> denied, boolean quick) {
+                        }
+                    });
         }
     }
-
 
     @Override
     public void editSuccess() {
@@ -177,25 +215,26 @@ public class EditAddressActivity extends BaseMvpActivity<EditAddressPresenter> i
         this.latitude = latitude;
     }
 
-    @Override
-    public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
-        //弹窗拒绝是调用
-        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms))
-            new AppSettingsDialog.Builder(this).build().show();
-    }
-
-
-    @Override
-    public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
-        mPresenter.locationAddress();
-    }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE)
-            location();
+        /*if (requestCode == AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE)
+            location();*/
+
+        if (requestCode == 9 && resultCode == 9) {
+            String address = data.getStringExtra("adr");
+            SharedPreferencesUtils.setString(BaseApp.getInstance(), "address", address);
+
+            String lng = data.getStringExtra("lng");//经度
+            String lat = data.getStringExtra("lat");//纬度
+            this.longitude = lng;
+            this.latitude = lat;
+            RepositoryFactory.getLocalRepository().saveLatitude(lat);
+            RepositoryFactory.getLocalRepository().saveLongitude(lng);
+
+            tvLocation.setText(address);
+        }
     }
 
     @Override

@@ -5,7 +5,6 @@ import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.Color;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +45,6 @@ import com.library.repository.data.UserCenter;
 import com.library.repository.models.ShopingCartBean;
 import com.library.repository.models.StoreShopInfoBean;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -277,6 +275,10 @@ public class StoreDetailActivity extends BaseMvpActivity<StoreDetailPresenter>
                 mTvCount.setText(String.valueOf(data.getTotalNum()));
             } else {
                 mTvCount.setVisibility(View.GONE);
+                if (mBottomSheetLayout.isSheetShowing()) {
+                    mBottomSheetLayout.dismissSheet();
+                }
+                mStoreGoodsFragment.clearCount();
             }
             mTotalPrice = data.getTotalPrice();
             mTvPrice.setText(getResources().getString(R.string.food_total).concat(getResources().getString(R.string.goods_price,

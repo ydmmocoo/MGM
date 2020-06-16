@@ -73,6 +73,8 @@ public class StoreMerchantInfoFragment extends BaseFragment {
         //设置商家电话
         if (mData.getShopInfo().getTels()!=null&&mData.getShopInfo().getTels().size()!=0) {
             mTvMerchantPhone.setText(mData.getShopInfo().getTel());
+        }else {
+            mTvMerchantPhone.setText(getResources().getString(R.string.no));
         }
         //设置营业时间
         if (mData.getShopInfo().getIsAll().equals("1")){
@@ -84,18 +86,13 @@ public class StoreMerchantInfoFragment extends BaseFragment {
                     if (i==0){
                         openTime=mData.getShopInfo().getOpenTimeList().get(i).getOpenTime();
                     }else {
-                        if (i%2==0) {
-                            openTime = openTime.concat(" ")
-                                    .concat(mData.getShopInfo().getOpenTimeList().get(i).getOpenTime());
-                        }else {
-                            openTime = openTime.concat("-")
-                                    .concat(mData.getShopInfo().getOpenTimeList().get(i).getOpenTime());
-                        }
+                        openTime = openTime.concat(" ")
+                                .concat(mData.getShopInfo().getOpenTimeList().get(i).getOpenTime());
                     }
                 }
                 mTvBusinessHours.setText(openTime);
             }else {
-                mTvBusinessHours.setText(getResources().getString(R.string.unsetting));
+                mTvBusinessHours.setText(getResources().getString(R.string.no));
             }
         }
         //设置实景图片

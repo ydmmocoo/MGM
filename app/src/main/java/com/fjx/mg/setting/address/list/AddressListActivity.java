@@ -69,13 +69,20 @@ public class AddressListActivity extends BaseMvpActivity<AddressListPresenter> i
         recycler.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             Intent intent=new Intent();
-            intent.putExtra("addressId",mAdapter.getItem(position).getAddressId());
-            intent.putExtra("phone",mAdapter.getItem(position).getPhone());
-            intent.putExtra("name",mAdapter.getItem(position).getName());
-            intent.putExtra("address",mAdapter.getItem(position).getAddress());
-            intent.putExtra("roomNo",mAdapter.getItem(position).getRoomNo());
-            intent.putExtra("sex",mAdapter.getItem(position).getSex());
-            setResult(RESULT_OK,intent);
+            if (isFood){
+                intent.putExtra("adr", mAdapter.getItem(position).getAddress());
+                intent.putExtra("lat", mAdapter.getItem(position).getLatitude());
+                intent.putExtra("lng", mAdapter.getItem(position).getLongitude());
+                setResult(9,intent);
+            }else {
+                intent.putExtra("addressId", mAdapter.getItem(position).getAddressId());
+                intent.putExtra("phone", mAdapter.getItem(position).getPhone());
+                intent.putExtra("name", mAdapter.getItem(position).getName());
+                intent.putExtra("address", mAdapter.getItem(position).getAddress());
+                intent.putExtra("roomNo", mAdapter.getItem(position).getRoomNo());
+                intent.putExtra("sex", mAdapter.getItem(position).getSex());
+                setResult(RESULT_OK,intent);
+            }
             finish();
         });
         mAdapter.setOnClickEditListener(position -> {

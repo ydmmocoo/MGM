@@ -1,6 +1,5 @@
 package com.fjx.mg.moments.add.pois;
 
-import android.util.Log;
 
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.fjx.mg.R;

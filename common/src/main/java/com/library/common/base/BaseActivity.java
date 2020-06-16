@@ -22,12 +22,17 @@ import com.library.common.callback.CActivityManager;
 import com.library.common.receiver.ForbiddenReceiver;
 import com.library.common.receiver.RankPermissionReceiver;
 import com.library.common.utils.MulLanguageUtil;
+import com.library.common.utils.SharedPreferencesUtil;
 import com.library.common.utils.SoftInputUtil;
 import com.library.common.utils.StatusBarManager;
 import com.library.common.utils.StringUtil;
 import com.uber.autodispose.AutoDispose;
 import com.uber.autodispose.AutoDisposeConverter;
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 import java.util.Locale;
@@ -99,8 +104,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         IntentFilter forbiddenFilter = new IntentFilter();
         forbiddenFilter.addAction(ForbiddenReceiver.MG_FORBIDDEN_ACTION);
         registerReceiver(forbiddenReceiver, forbiddenFilter);
-
-
     }
 
     @Override
@@ -188,6 +191,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     protected void onDestroy() {
         hideLoading();
         if (mUnbinder != null) mUnbinder.unbind();
+        EventBus.getDefault().unregister(this);
         super.onDestroy();
     }
 
@@ -217,7 +221,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     protected void attachBaseContext(Context newBase) {
         Context context = languageWork(newBase);
         super.attachBaseContext(context);
-
     }
 
     private Context languageWork(Context context) {

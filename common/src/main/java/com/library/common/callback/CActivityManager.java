@@ -81,7 +81,6 @@ public class CActivityManager {
                 activity.finish();
             }
         }
-
     }
 
     /**
@@ -117,7 +116,6 @@ public class CActivityManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     /**

@@ -46,7 +46,7 @@ public class StoreEvaluateFragment extends BaseMvpFragment<StoreEvaluatePresente
     private WrapContentGridView mGvTag;
 
     private RvEvaluateAdapter mAdapter;
-    private List<StoreEvaluateBean.EvaluateListBean> mList = new ArrayList<>();
+    private List<StoreEvaluateBean.EvaluateListBean> mList;
     private GvEvaluateAdapter mEvaluateAdapter;
     private List<String> mTagList = new ArrayList<>();
 

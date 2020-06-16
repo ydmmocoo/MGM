@@ -81,12 +81,14 @@ public class StoreGoodsPresenter extends StoreGoodsContract.Presenter {
 
     public List<StoreGoodsGroupBean> getGroupList(List<StoreGoodsBean.CateListBean> data){
         List<StoreGoodsGroupBean> list=new ArrayList<>();
-        for (int i=0;i<data.size();i++){
-            StoreGoodsGroupBean bean=new StoreGoodsGroupBean();
-            bean.setCount(0);
-            bean.setName(data.get(i).getCateName());
-            bean.setGroupId(i);
-            list.add(bean);
+        if (data!=null) {
+            for (int i = 0; i < data.size(); i++) {
+                StoreGoodsGroupBean bean = new StoreGoodsGroupBean();
+                bean.setCount(0);
+                bean.setName(data.get(i).getCateName());
+                bean.setGroupId(i);
+                list.add(bean);
+            }
         }
         return list;
     }

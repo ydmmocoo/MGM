@@ -1,6 +1,7 @@
 package com.fjx.mg.food;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -18,6 +19,9 @@ import com.fjx.mg.dialog.ShareDialog2;
 import com.fjx.mg.food.adapter.LvOrderDetailGoodsAdapter;
 import com.fjx.mg.food.contract.OrderDetailContract;
 import com.fjx.mg.food.presenter.OrderDetailPresenter;
+import com.hjq.permissions.OnPermission;
+import com.hjq.permissions.Permission;
+import com.hjq.permissions.XXPermissions;
 import com.library.common.base.BaseMvpActivity;
 import com.library.common.view.WrapContentListView;
 import com.library.repository.Constant;
@@ -26,7 +30,9 @@ import com.library.repository.models.OrderDetailBean;
 import com.library.repository.models.UserInfoModel;
 import com.library.repository.repository.RepositoryFactory;
 import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.interfaces.OnSelectListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -107,6 +113,14 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
     TextView mTvFirstReductionText;
     @BindView(R.id.tv_red_envelopes_text)
     TextView mTvRedEnvelopesText;
+    @BindView(R.id.tv_distribution_information)
+    TextView mTvDistributionInformation;
+    @BindView(R.id.tv_receiving_information_text)
+    TextView mTvReceivingInformationText;
+    @BindView(R.id.tv_expected_time_text)
+    TextView mTvExpectedTimeText;
+    @BindView(R.id.tv_distribution_service_text)
+    TextView mTvDistributionServiceText;
 
     private LvOrderDetailGoodsAdapter mAdapter;
     private List<OrderDetailBean.OrderInfoBean.GoodsListBean> mList;
@@ -114,7 +128,6 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
     private String mOrderId;
     private String mOId;
     private String mStoreId;
-    private String mStorePhone;
     private String mOrderStatus;
     private String mRefundStatus;
     private String mRefundRemark;
@@ -124,6 +137,7 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
     private String mGoodsName;
 
     private String mShareTitle, mShareDesc;
+    private List<String> mPhoneList = new ArrayList<>();
 
     @Override
     protected int layoutId() {
@@ -134,14 +148,14 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
     protected void initView() {
         //设置标题
         ToolBarManager.with(this).setTitle(getString(R.string.order_detail));
-        mOrderId = getIntent().getStringExtra("id");
+        mOId = getIntent().getStringExtra("id");
         mStoreId = getIntent().getStringExtra("store_id");
 
         //初始化商品列表
         mAdapter = new LvOrderDetailGoodsAdapter(getCurContext(), mList);
         mLvGoods.setAdapter(mAdapter);
 
-        mPresenter.getOrderDetail(mOrderId);
+        mPresenter.getOrderDetail(mOId);
     }
 
     @OnClick({R.id.tv_refund_detail, R.id.tv_store_name, R.id.iv_call, R.id.tv_left, R.id.tv_right})
@@ -158,16 +172,42 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
                 startActivity(intent);
                 break;
             case R.id.iv_call://拨打电话
-                new XPopup.Builder(getCurContext())
-                        .asConfirm(getResources().getString(R.string.Tips), getResources().getString(R.string.hint_confirm_contact),
-                                getResources().getString(R.string.cancel), getResources().getString(R.string.confirm_short),
-                                () -> {
-                                    /*Intent callIntent = new Intent(Intent.ACTION_CALL);
-                                    Uri data = Uri.parse("tel:" + );
-                                    callIntent.setData(data);
-                                    startActivity(callIntent);*/
-                                }, null, false)
-                        .show();
+                XXPermissions.with(getCurActivity())
+                        .permission(Permission.CALL_PHONE)
+                        .request(new OnPermission() {
+
+                            @Override
+                            public void hasPermission(List<String> granted, boolean all) {
+                                if (all) {
+                                    new XPopup.Builder(getCurContext())
+                                            .asConfirm(getResources().getString(R.string.Tips), getResources().getString(R.string.hint_confirm_contact),
+                                                    getResources().getString(R.string.cancel), getResources().getString(R.string.confirm_short),
+                                                    () -> {
+                                                        if (mPhoneList.size() > 0) {
+                                                            String[] strings = new String[mPhoneList.size()];
+                                                            mPhoneList.toArray(strings);
+                                                            new XPopup.Builder(getCurActivity())
+                                                                    .isDarkTheme(true)
+                                                                    .asBottomList("", strings,
+                                                                            (position, text) -> {
+                                                                                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                                                                                Uri data = Uri.parse("tel:" +mPhoneList.get(position));
+                                                                                callIntent.setData(data);
+                                                                                startActivity(callIntent);
+                                                                            })
+                                                                    .show();
+                                                        } else {
+                                                        }
+                                                    }, null, false)
+                                            .show();
+                                } else {
+                                }
+                            }
+
+                            @Override
+                            public void noPermission(List<String> denied, boolean quick) {
+                            }
+                        });
                 break;
             case R.id.tv_left://底部左边按钮
                 if (mTvLeft.getText().equals(getResources().getString(R.string.to_evaluate))) {
@@ -193,7 +233,7 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
                 } else if (mTvLeft.getText().equals(getResources().getString(R.string.cancellation_of_order))) {
                     //取消订单
                     new XPopup.Builder(getCurContext())
-                            .asConfirm(getResources().getString(R.string.Tips), getResources().getString(R.string.cancel_refund_tip),
+                            .asConfirm(getResources().getString(R.string.Tips), getResources().getString(R.string.cancel_order_tip),
                                     getResources().getString(R.string.cancel), getResources().getString(R.string.confirm_short),
                                     () -> mPresenter.cancelOrder(mOrderId), null, false)
                             .show();
@@ -242,7 +282,7 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
                 } else if (mTvRight.getText().equals(getResources().getString(R.string.cancellation_of_order))) {
                     //取消订单
                     new XPopup.Builder(getCurContext())
-                            .asConfirm(getResources().getString(R.string.Tips), getResources().getString(R.string.cancel_refund_tip),
+                            .asConfirm(getResources().getString(R.string.Tips), getResources().getString(R.string.cancel_order_tip),
                                     getResources().getString(R.string.cancel), getResources().getString(R.string.confirm_short),
                                     () -> mPresenter.cancelOrder(mOrderId), null, false)
                             .show();
@@ -262,7 +302,7 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
     public void getOrderDetailSuccess(OrderDetailBean data) {
         mShareTitle = data.getShareInfo().getTitle();
         mShareDesc = data.getShareInfo().getContent();
-        mOId = data.getOrderInfo().getOId();
+        mOrderId = data.getOrderInfo().getOrderId();
         mStoreName = data.getOrderInfo().getShopName();
         mStoreLogo = data.getOrderInfo().getShopLogo();
         if (data.getOrderInfo().getGoodsCount() > 1) {
@@ -286,7 +326,7 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
 
                 //隐藏顶部状态
                 mClOrderStatus.setVisibility(View.GONE);
-            }else {
+            } else {
                 mIvCheckoutSuccess.setImageResource(R.drawable.circle_gray_bg);
                 mTvCheckoutSuccess.setTextColor(ContextCompat.getColor(getCurContext(), R.color.gray_text));
                 mVStatusWaitingForOrder.setBackgroundColor(ContextCompat.getColor(getCurContext(), R.color.gray_text));
@@ -375,6 +415,12 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
                     mTvRight.setText(getResources().getString(R.string.cancellation_of_order));
                 } else if (mOrderStatus.equals("3")) {
                     mTvWaitingForOrder.setText(getResources().getString(R.string.received_order));
+                    if (!TextUtils.isEmpty(data.getOrderInfo().getReservedTelephone())) {
+                        mTvDistributionInProgress.setText(getResources().getString(R.string.have_eaten));
+                        mVStatusDistribution.setBackgroundColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
+                        mTvDistributionInProgress.setTextColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
+                        mIvDistributionInProgress.setImageResource(R.drawable.circle_red_bg);
+                    }
                     mTvLeft.setText(getResources().getString(R.string.apply_for_refund));
                     mTvRight.setText(getResources().getString(R.string.confirm_receipt));
                 } else if (mOrderStatus.equals("4")) {
@@ -421,7 +467,9 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
         //设置店铺名
         mTvStoreName.setText(mStoreName);
         //店铺电话
-        //mStorePhone=data.getOrderInfo().getTels();
+        for (int i = 0; i < data.getOrderInfo().getTels().size(); i++) {
+            mPhoneList.add(data.getOrderInfo().getTels().get(i).getTel());
+        }
         //设置商品
         mAdapter.setData(data.getOrderInfo().getGoodsList());
         //设置包装费
@@ -434,7 +482,7 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
             mTvShopFullReductionText.setVisibility(View.GONE);
             mTvShopFullReduction.setVisibility(View.GONE);
         } else {
-            mTvShopFullReduction.setText(getResources().getString(R.string.goods_price,
+            mTvShopFullReduction.setText(getResources().getString(R.string.red_envelopes_value,
                     data.getOrderInfo().getFullReduction()));
         }
         if ("0".equals(data.getOrderInfo().getFirstReduction())) {
@@ -442,7 +490,7 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
             mTvFirstReduction.setVisibility(View.GONE);
         } else {
             //设置首单立减
-            mTvFirstReduction.setText(getResources().getString(R.string.goods_price,
+            mTvFirstReduction.setText(getResources().getString(R.string.red_envelopes_value,
                     data.getOrderInfo().getFirstReduction()));
         }
         //设置红包金额
@@ -459,36 +507,48 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
         //合计
         mTvTotalPrice.setText(getResources().getString(R.string.goods_price,
                 data.getOrderInfo().getTotalPrice()));
-        //设置收货信息
-        mTvReceivingInformation.setText(data.getOrderInfo().getAddress().getName().concat(" ")
-                .concat(data.getOrderInfo().getAddress().getPhone()).concat("\n")
-                .concat(data.getOrderInfo().getAddress().getAddress())
-                .concat(data.getOrderInfo().getAddress().getRoomNo()));
-        //设置期望送达时间
-        mTvExpectedTime.setText(data.getOrderInfo().getExpectedDeliveryTime());
-        //设置配送服务
-        mTvDistributionService.setText(getResources().getString(R.string.merchant_distribution));
+        if (TextUtils.isEmpty(data.getOrderInfo().getReservedTelephone())) {//外卖
+            //设置收货信息
+            if (!TextUtils.isEmpty(data.getOrderInfo().getAddress().getAddress())) {
+                mTvReceivingInformation.setText(data.getOrderInfo().getAddress().getName().concat(" ")
+                        .concat(data.getOrderInfo().getAddress().getPhone()).concat("\n")
+                        .concat(data.getOrderInfo().getAddress().getAddress())
+                        .concat(data.getOrderInfo().getAddress().getRoomNo()));
+            }
+            //设置期望送达时间
+            mTvExpectedTime.setText(data.getOrderInfo().getExpectedDeliveryTime());
+            //设置配送服务
+            mTvDistributionService.setText(getResources().getString(R.string.merchant_distribution));
+        } else {//自提
+            mTvDistributionInformation.setText(getResources().getString(R.string.self_information));
+            mTvReceivingInformationText.setText(getResources().getString(R.string.merchant_address));
+            mTvReceivingInformation.setText(data.getOrderInfo().getShopAddress());
+            mTvExpectedTimeText.setText(getResources().getString(R.string.self_extracting_time));
+            mTvExpectedTime.setText(data.getOrderInfo().getExpectedDeliveryTime());
+            mTvDistributionServiceText.setText(getResources().getString(R.string.reserved_telephone));
+            mTvDistributionService.setText(data.getOrderInfo().getReservedTelephone());
+        }
         //设置订单号码
         mTvOrderNumber.setText(data.getOrderInfo().getOrderId());
         //设置下单时间
         mTvOrderTime.setText(data.getOrderInfo().getCreateTime());
         //设置付款方式
         if (!TextUtils.isEmpty(data.getOrderInfo().getPayType())) {
-            String payType;
+            /*String payType;
             if (data.getOrderInfo().getPayType().equals("2")) {
                 payType = getResources().getString(R.string.ali_apy);
             } else if (data.getOrderInfo().getPayType().equals("3")) {
                 payType = getResources().getString(R.string.wechat_pay);
             } else {
                 payType = getResources().getString(R.string.balance_pay);
-            }
-            mTvPayType.setText(payType);
+            }*/
+            mTvPayType.setText(data.getOrderInfo().getPayType());
         }
     }
 
     @Override
     public void confirmOrderSuccess() {
-        mPresenter.getOrderDetail(mOrderId);
+        mPresenter.getOrderDetail(mOId);
     }
 
     @Override
@@ -525,12 +585,5 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
         new XPopup.Builder(getCurContext())
                 .asCustom(shareDialog)
                 .show();
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }

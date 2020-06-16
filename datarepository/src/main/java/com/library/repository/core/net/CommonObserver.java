@@ -50,7 +50,7 @@ public abstract class CommonObserver<T> implements Observer<ResponseModel<T>> {
     @Override
     public void onNext(ResponseModel<T> response) {
         LogUtil.printJson("netLog", JsonUtil.moderToString(response), "" + response.getCode());
-
+        Log.e("Common Observer",JsonUtil.moderToString(response)+"   code:"+response.getCode());
         if (mView != null) mView.destoryAndDismissDialog();
         if (response.getCode() == NetCode.SUCCESS) {
             onSuccess(response.getData());
@@ -73,7 +73,21 @@ public abstract class CommonObserver<T> implements Observer<ResponseModel<T>> {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
+        }else if(response.getCode() == NetCode.LOGIN_OTHER_DEVICE_TIP){
+            try {
+                UserCenter.logout();
+                BaseActivity activity = (BaseActivity) CActivityManager.getAppManager().currentActivity();
+                if (activity == null) return;
+                activity.destoryAndDismissDialog();
+                NetCode.isShowGestureLockActivity = false;
+                onFinish();
+            } catch (IndexOutOfBoundsException e) {
+                e.printStackTrace();
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else if (response.getCode() == NetCode.PERMISSION_DENIED) {
             //等级不足
             Intent intent = new Intent();

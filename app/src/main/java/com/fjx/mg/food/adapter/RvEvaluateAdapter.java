@@ -59,6 +59,8 @@ public class RvEvaluateAdapter extends BaseQuickAdapter<StoreEvaluateBean.Evalua
             gv.setVisibility(View.GONE);
         }
         //设置商品名
-        helper.setText(R.id.tv_tag,item.getGoodsList().get(0).getGName());
+        if (item.getGoodsList()!=null&&item.getGoodsList().size()>0) {
+            helper.setText(R.id.tv_tag, item.getGoodsList().get(0).getGName());
+        }
     }
 }

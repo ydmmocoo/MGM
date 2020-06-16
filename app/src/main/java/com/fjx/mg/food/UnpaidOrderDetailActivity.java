@@ -69,6 +69,7 @@ public class UnpaidOrderDetailActivity extends BaseMvpActivity<OrderDetailPresen
     private LvOrderDetailGoodsAdapter mAdapter;
     private List<OrderDetailBean.OrderInfoBean.GoodsListBean> mList;
 
+    private String mOId;
     private String mOrderId;
     private String mStoreId;
     private String mPrice;
@@ -87,18 +88,19 @@ public class UnpaidOrderDetailActivity extends BaseMvpActivity<OrderDetailPresen
                 .transparentStatusBar()
                 .statusBarDarkFont(true)
                 .init();
-        mOrderId = getIntent().getStringExtra("id");
+        mOId = getIntent().getStringExtra("id");
         mStoreId = getIntent().getStringExtra("store_id");
 
         //初始化商品列表
         mAdapter = new LvOrderDetailGoodsAdapter(getCurContext(), mList);
         mLvGoods.setAdapter(mAdapter);
 
-        mPresenter.getOrderDetail(mOrderId);
+        mPresenter.getOrderDetail(mOId);
     }
 
     @Override
     public void getOrderDetailSuccess(OrderDetailBean data) {
+        mOrderId=data.getOrderInfo().getOrderId();
         //设置倒计时
         if (data.getOrderInfo().getExpireTime() > 0) {
             countDown(data.getOrderInfo().getExpireTime());
@@ -275,12 +277,5 @@ public class UnpaidOrderDetailActivity extends BaseMvpActivity<OrderDetailPresen
             mTimer.cancel();
         }
         super.onDestroy();
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }

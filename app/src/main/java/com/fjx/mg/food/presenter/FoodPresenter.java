@@ -1,5 +1,6 @@
 package com.fjx.mg.food.presenter;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.fjx.mg.food.contract.FoodContract;
@@ -126,7 +127,11 @@ public class FoodPresenter extends FoodContract.Presenter {
     public void getShopsList(String serviceId, String secondServiceId, String order,int page) {
         String lng=RepositoryFactory.getLocalRepository().getLongitude();
         String lat=RepositoryFactory.getLocalRepository().getLatitude();
-        RepositoryFactory.getRemoteFoodApi().getShopList(lng,lat,serviceId,secondServiceId,
+        Log.e("Food Presenter","执行了");
+        /*if (TextUtils.isEmpty(lat)||TextUtils.isEmpty(lng)){
+            return;
+        }*/
+        RepositoryFactory.getRemoteFoodApi().getShopList(lng,lat,"1",serviceId,secondServiceId,
                 order,"",page)
                 .compose(RxScheduler.<ResponseModel<HomeShopListBean>>toMain())
                 .as(mView.<ResponseModel<HomeShopListBean>>bindAutoDispose())
