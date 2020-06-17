@@ -62,39 +62,14 @@ public class HouseFragment extends BaseFragment {
         mAdapter = new HouseLeaseAdapter();
         recycler.setAdapter(mAdapter);
 
-
-
-        //mAdapter.bindToRecyclerView(recycler);
-
-
-
-
         mAdapter.setEmptyView(R.layout.layout_empty);
 
         refreshView.doRefresh();
-        refreshView.setRefreshListener(new CustomRefreshListener() {
-            @Override
-            public void onRefreshData(int page, int pageSize) {
-                getHouseList(page);
-            }
-        });
+        refreshView.setRefreshListener((page, pageSize) -> getHouseList(page));
 
-        mAdapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-                startForResult(HouseDetailActivity.newInstance(getCurContext(), mAdapter.getItem(position).getHid(), true), 111);
-            }
-        });
+        mAdapter.setOnItemClickListener((adapter, view1, position) -> startForResult(HouseDetailActivity.newInstance(getCurContext(), mAdapter.getItem(position).getHid(), true), 111));
 
-//        mAdapter.setOnItemLongClickListener(new BaseQuickAdapter.OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(BaseQuickAdapter adapter, View view, int position) {
-//                showActionDialog(mAdapter.getItem(position), position);
-//                return true;
-//            }
-//        });
     }
-
 
     private void getHouseList(int page) {
         RepositoryFactory.getRemoteJobApi().myHouseList(page)
@@ -116,7 +91,6 @@ public class HouseFragment extends BaseFragment {
 
                     @Override
                     public void onNetError(ResponseModel data) {
-
                     }
                 });
     }
@@ -144,7 +118,6 @@ public class HouseFragment extends BaseFragment {
 
                     @Override
                     public void onNetError(ResponseModel data) {
-
                     }
                 });
 
@@ -173,7 +146,6 @@ public class HouseFragment extends BaseFragment {
 
                     @Override
                     public void onNetError(ResponseModel data) {
-
                     }
                 });
 

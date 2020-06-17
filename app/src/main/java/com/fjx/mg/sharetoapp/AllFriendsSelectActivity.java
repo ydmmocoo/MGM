@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -149,16 +150,10 @@ public class AllFriendsSelectActivity extends BaseMvpActivity<AllFriendsSelectPr
         super.initView();
         mAdapter = new AllFriendsListAdapter();
         mRvFriends.addItemDecoration(new LinearManagerItemDecaration(1, LinearManagerItemDecaration.VERTICAL_LIST));
+        mRvFriends.setLayoutManager(new LinearLayoutManager(getCurContext()));
         mRvFriends.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
         mPresenter.requestAllFriends();
-
-
-
-        //mAdapter.bindToRecyclerView(mRvFriends);
-
-
-
 
         mAdapter.setEmptyView(R.layout.empty_all_moments_message);
         mEtSearch.addTextChangedListener(this);

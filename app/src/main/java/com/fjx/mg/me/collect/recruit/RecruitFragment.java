@@ -66,10 +66,6 @@ public class RecruitFragment extends BaseMvpFragment<RecruitPresenter> implement
             }
         });
 
-
-        //adapter.bindToRecyclerView(recycler);
-
-
         adapter.setEmptyView(R.layout.layout_empty);
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override

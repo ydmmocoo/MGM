@@ -318,9 +318,8 @@ public class PayPresenter extends PayContract.Presenter {
 //                        CommonToast.toast("充值成功");
 //                        mView.getCurActivity().finish();
                         //转账或者余额
-                        PayExtModel extModel = new PayExtModel(UsagePayMode.phone_recharge);
+                        PayExtModel extModel = new PayExtModel(UsagePayMode.phone_recharge,"");
                         PayConfig.sendPayReceiver(extModel.toString());
-
                     }
 
                     @Override
@@ -424,7 +423,7 @@ public class PayPresenter extends PayContract.Presenter {
                     public void onSuccess(Object data) {
                         mView.hideLoading();
                         //转账或者余额
-                        PayExtModel extModel = new PayExtModel(UsagePayMode.im_transfer);
+                        PayExtModel extModel = new PayExtModel(UsagePayMode.im_transfer,"");
                         PayConfig.sendPayReceiver(extModel.toString());
                         //支付成功删除存储本地转账信息
                         String unique = (String) map.get("outOrderId");
@@ -636,7 +635,7 @@ public class PayPresenter extends PayContract.Presenter {
                     public void onSuccess(Object data) {
                         mView.hideLoading();
                         //转账或者余额
-                        PayExtModel extModel = new PayExtModel(UsagePayMode.net_recharge);
+                        PayExtModel extModel = new PayExtModel(UsagePayMode.net_recharge,"");
                         PayConfig.sendPayReceiver(extModel.toString());
                     }
 
@@ -828,7 +827,8 @@ public class PayPresenter extends PayContract.Presenter {
                             @Override
                             public void onSuccess(ThreeScanPayModel url) {//成功跳转的地址
 //                                CommonToast.toast(mView.getCurActivity().getString(R.string.hint_pay_resultx));
-                                PayExtModel extModel = new PayExtModel(UsagePayMode.three_scan_pay);
+
+                                PayExtModel extModel = new PayExtModel(UsagePayMode.three_scan_pay,"");
                                 PayConfig.sendPayReceiver(extModel.toString());
                             }
 
@@ -865,7 +865,7 @@ public class PayPresenter extends PayContract.Presenter {
                     @Override
                     public void onSuccess(GroupRedPacketModel data) {
                         mView.hideLoading();
-                        PayExtModel extModel = new PayExtModel(UsagePayMode.im_group_red_packet);
+                        PayExtModel extModel = new PayExtModel(UsagePayMode.im_group_red_packet,"");
                         extModel.setMessage(data.getrId());
                         PayConfig.sendPayReceiver(extModel.toString());
                     }
@@ -963,7 +963,7 @@ public class PayPresenter extends PayContract.Presenter {
                     @Override
                     public void onSuccess(Object data) {
                         mView.hideLoading();
-                        PayExtModel extModel = new PayExtModel(UsagePayMode.agent_shop);
+                        PayExtModel extModel = new PayExtModel(UsagePayMode.agent_shop,"");
                         PayConfig.sendPayReceiver(extModel.toString());
                     }
 
@@ -1048,7 +1048,7 @@ public class PayPresenter extends PayContract.Presenter {
                     @Override
                     public void onSuccess(Object data) {
                         mView.hideLoading();
-                        PayExtModel extModel = new PayExtModel(UsagePayMode.levle_recharge);
+                        PayExtModel extModel = new PayExtModel(UsagePayMode.levle_recharge,"");
                         PayConfig.sendPayReceiver(extModel.toString());
                     }
 

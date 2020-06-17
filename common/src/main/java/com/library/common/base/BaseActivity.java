@@ -22,7 +22,6 @@ import com.library.common.callback.CActivityManager;
 import com.library.common.receiver.ForbiddenReceiver;
 import com.library.common.receiver.RankPermissionReceiver;
 import com.library.common.utils.MulLanguageUtil;
-import com.library.common.utils.SharedPreferencesUtil;
 import com.library.common.utils.SoftInputUtil;
 import com.library.common.utils.StatusBarManager;
 import com.library.common.utils.StringUtil;
@@ -31,8 +30,6 @@ import com.uber.autodispose.AutoDisposeConverter;
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 import java.util.Locale;
@@ -79,21 +76,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         super.onResume();
     }
 
-    @Override
-    protected void onStop() {
-        try {
-            if (rankPermissionReceiver != null)
-                unregisterReceiver(rankPermissionReceiver);
-
-            if (forbiddenReceiver != null)
-                unregisterReceiver(forbiddenReceiver);
-        } catch (Exception e) {
-
-        }
-
-        super.onStop();
-    }
-
     private void registReceiver() {
         rankPermissionReceiver = new RankPermissionReceiver();
         IntentFilter intentFilter = new IntentFilter();
@@ -131,19 +113,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Override
     public void showLoading() {
-//        if (mDialog == null) {
-//            mDialog = new MaterialDialog.Builder(this)
-//                    .backgroundColor(ContextCompat.getColor(this, android.R.color.transparent))
-//                    .customView(R.layout.dialog_loading, false)
-//                    .build();
-//            Window window = mDialog.getWindow();
-//            if (window == null) return;
-//            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//            window.setDimAmount(0);
-//        }
-//
-//        if (mDialog.isShowing()) return;
-//        mDialog.show();
         if (dialog == null) {
             dialog = new Dialog(getCurActivity());
         }
@@ -154,14 +123,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         if (!dialog.isShowing() && dialog != null) {
             dialog.show();
         }
-
     }
 
     @Override
     public void hideLoading() {
-//        if (mDialog != null && mDialog.isShowing()) mDialog.dismiss();
         if (dialog != null && dialog.isShowing() && !isFinishing()) dialog.dismiss();
-
     }
 
     public void createAndShowDialog() {
@@ -189,6 +155,14 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Override
     protected void onDestroy() {
+        try {
+            if (rankPermissionReceiver != null)
+                unregisterReceiver(rankPermissionReceiver);
+
+            if (forbiddenReceiver != null)
+                unregisterReceiver(forbiddenReceiver);
+        } catch (Exception e) {
+        }
         hideLoading();
         if (mUnbinder != null) mUnbinder.unbind();
         EventBus.getDefault().unregister(this);

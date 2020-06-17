@@ -115,7 +115,6 @@ public class KiosqueNetworkActivity extends BaseMvpActivity<MvolaNetworkPresente
     }
 
     private void location() {
-        showLoading();
         //定位相关
         mClient = LocationServices.getFusedLocationProviderClient(getCurActivity());
         mLocationRequest = new LocationRequest()
@@ -146,6 +145,7 @@ public class KiosqueNetworkActivity extends BaseMvpActivity<MvolaNetworkPresente
         mMap.setMyLocationEnabled(true);
         // Set listener for marker click event.  See the bottom of this class for its behavior.
         mMap.setOnMarkerClickListener(this);
+        //googleMap.setMinZoomPreference(14);
     }
 
     @SuppressLint("MissingPermission")

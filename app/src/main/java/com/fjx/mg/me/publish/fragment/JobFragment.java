@@ -55,19 +55,11 @@ public class JobFragment extends BaseFragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
         recycler.setLayoutManager(new LinearLayoutManager(getCurContext()));
         recycler.addItemDecoration(new SpacesItemDecoration(10));
         mAdapter = new JobHuntinAdapter();
         mAdapter.setSelfPadding(false);
         recycler.setAdapter(mAdapter);
-
-
-
-        //mAdapter.bindToRecyclerView(recycler);
-
-
-
 
         mAdapter.setEmptyView(R.layout.layout_empty);
 

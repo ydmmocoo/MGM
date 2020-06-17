@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -155,15 +156,9 @@ public class FriendsSelectActivity extends BaseMvpActivity<FriendsSelectPresente
         type = getIntent().getStringExtra(IntentConstants.TYPE);
         mAdapter = new NearChatListAdapter();
         mRvFriends.addItemDecoration(new LinearManagerItemDecaration(1, LinearManagerItemDecaration.VERTICAL_LIST));
+        mRvFriends.setLayoutManager(new LinearLayoutManager(getCurContext()));
         mRvFriends.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
-
-
-
-        //mAdapter.bindToRecyclerView(mRvFriends);
-
-
-
 
         mAdapter.setEmptyView(R.layout.empty_all_moments_message);
         String messageTyp = getIntent().getStringExtra(IntentConstants.MESSAGE_TYPE);
@@ -319,6 +314,4 @@ public class FriendsSelectActivity extends BaseMvpActivity<FriendsSelectPresente
 
     }
     /*-----------------------------end EditText监听输入内容-----------------------------*/
-
-
 }

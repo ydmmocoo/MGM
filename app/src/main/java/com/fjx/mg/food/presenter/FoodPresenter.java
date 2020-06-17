@@ -127,10 +127,9 @@ public class FoodPresenter extends FoodContract.Presenter {
     public void getShopsList(String serviceId, String secondServiceId, String order,int page) {
         String lng=RepositoryFactory.getLocalRepository().getLongitude();
         String lat=RepositoryFactory.getLocalRepository().getLatitude();
-        Log.e("Food Presenter","执行了");
-        /*if (TextUtils.isEmpty(lat)||TextUtils.isEmpty(lng)){
+        if (TextUtils.isEmpty(lat)||TextUtils.isEmpty(lng)){
             return;
-        }*/
+        }
         RepositoryFactory.getRemoteFoodApi().getShopList(lng,lat,"1",serviceId,secondServiceId,
                 order,"",page)
                 .compose(RxScheduler.<ResponseModel<HomeShopListBean>>toMain())

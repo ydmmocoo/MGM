@@ -193,22 +193,13 @@ public class CityMomentsTypeActivityx extends BaseMvpActivity<CityMomentsTypePre
             }
         });
 
-
-
-        //cityCircleAdapter.bindToRecyclerView(recycler);
-
-
-
         refreshView.autoRefresh();
-        refreshView.setRefreshListener(new CustomRefreshListener() {
-            @Override
-            public void onRefreshData(int page, int pageSize) {
-                mPage = page;
-                String v1 = getIntent().getStringExtra("type");
-                if (StringUtil.isNotEmpty(v1)) {
-                    int type = Integer.parseInt(v1);
-                    mPresenter.getCityCircleList(type, "1");//请求数据
-                }
+        refreshView.setRefreshListener((page, pageSize) -> {
+            mPage = page;
+            String v1 = getIntent().getStringExtra("type");
+            if (StringUtil.isNotEmpty(v1)) {
+                int type = Integer.parseInt(v1);
+                mPresenter.getCityCircleList(type, "1");//请求数据
             }
         });
 //        mPresenter.getCityCircleList(Integer.parseInt(getIntent().getStringExtra("type")), "1");//请求数据
@@ -217,43 +208,40 @@ public class CityMomentsTypeActivityx extends BaseMvpActivity<CityMomentsTypePre
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void setAppBarListener() {
         measureHeight();
-        appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if (verticalOffset == 0) {
-                    if (state != CollapsingToolbarLayoutState.EXPANDED) {
-                        state = CollapsingToolbarLayoutState.EXPANDED;//修改为展开状态
-                        titleTv.setVisibility(View.GONE);
-                        toolbar.setNavigationIcon(R.drawable.iv_back);
-                        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_VISIBLE);
-                    }
-                } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
+        appbar.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
+            if (verticalOffset == 0) {
+                if (state != CollapsingToolbarLayoutState.EXPANDED) {
+                    state = CollapsingToolbarLayoutState.EXPANDED;//修改为展开状态
+                    titleTv.setVisibility(View.GONE);
+                    toolbar.setNavigationIcon(R.drawable.iv_back);
+                    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_VISIBLE);
+                }
+            } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
+                titleTv.setVisibility(View.VISIBLE);
+                toolbar.setNavigationIcon(R.drawable.ic_back_black);
+                state = CollapsingToolbarLayoutState.COLLAPSED;//修改为折叠状态
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                }
+            } else {
+                if (Math.abs(verticalOffset) > height) {
                     titleTv.setVisibility(View.VISIBLE);
-                    toolbar.setNavigationIcon(R.drawable.ic_back_black);
-                    state = CollapsingToolbarLayoutState.COLLAPSED;//修改为折叠状态
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                    }
-                } else {
-                    if (Math.abs(verticalOffset) > height) {
-                        titleTv.setVisibility(View.VISIBLE);
-                        float scale = 1 - height / (float) Math.abs(verticalOffset);
-                        if (state != CollapsingToolbarLayoutState.INTERNEDIATE) {
-                            if (state == CollapsingToolbarLayoutState.COLLAPSED && scale < 0.55) {//由折叠变为展开
-                                toolbar.setNavigationIcon(R.drawable.ic_back_black);
-                                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_VISIBLE);
-                            } else {
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                                }
+                    float scale = 1 - height / (float) Math.abs(verticalOffset);
+                    if (state != CollapsingToolbarLayoutState.INTERNEDIATE) {
+                        if (state == CollapsingToolbarLayoutState.COLLAPSED && scale < 0.55) {//由折叠变为展开
+                            toolbar.setNavigationIcon(R.drawable.ic_back_black);
+                            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_VISIBLE);
+                        } else {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                             }
-                            state = CollapsingToolbarLayoutState.INTERNEDIATE;
                         }
-                        toolbar.setNavigationIcon(R.drawable.ic_back_black);
-                    } else {
-                        titleTv.setVisibility(View.GONE);
-                        toolbar.setNavigationIcon(R.drawable.ic_back_black);
+                        state = CollapsingToolbarLayoutState.INTERNEDIATE;
                     }
+                    toolbar.setNavigationIcon(R.drawable.ic_back_black);
+                } else {
+                    titleTv.setVisibility(View.GONE);
+                    toolbar.setNavigationIcon(R.drawable.ic_back_black);
                 }
             }
         });

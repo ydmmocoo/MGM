@@ -59,31 +59,16 @@ public class NewFriendRequestActivity extends BaseMvpActivity<NewFriendRequestPr
         mRvNewFriendRequest.addItemDecoration(new SpacesItemDecoration(1));
         mRvNewFriendRequest.setAdapter(mAdapter);
 
-
-
-
-        //mAdapter.bindToRecyclerView(mRvNewFriendRequest);
-
-
-
-
-
-
-
-
         mAdapter.setEmptyView(R.layout.layout_empty);
-        mAdapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-                DBFriendRequestModel model = mAdapter.getItem(position);
-                if (model == null || model.getStatus() == 2) return;
-                if (model.getStatus() == 1) {
-                    ChatActivity.startC2CChat(getCurContext(), model.getIdentityId(), model.getNickName());
-                    return;
-                }
-                startActivityForResult(RequestDetailActivity.newInstance(getCurContext(),
-                        model.getIdentityId(), model.getAddWording()), 1212);
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            DBFriendRequestModel model = mAdapter.getItem(position);
+            if (model == null || model.getStatus() == 2) return;
+            if (model.getStatus() == 1) {
+                ChatActivity.startC2CChat(getCurContext(), model.getIdentityId(), model.getNickName());
+                return;
             }
+            startActivityForResult(RequestDetailActivity.newInstance(getCurContext(),
+                    model.getIdentityId(), model.getAddWording()), 1212);
         });
     }
 

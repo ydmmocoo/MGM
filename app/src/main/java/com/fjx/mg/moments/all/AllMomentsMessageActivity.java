@@ -3,6 +3,7 @@ package com.fjx.mg.moments.all;
 import android.content.Context;
 import android.content.Intent;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fjx.mg.R;
@@ -56,14 +57,8 @@ public class AllMomentsMessageActivity extends BaseMvpActivity<AllMomentsMessage
         mAdapter = new AllMomentsMessageAdapter();
         mRvMessage.setAdapter(mAdapter);
         mRvMessage.addItemDecoration(new LinearManagerItemDecaration(1, LinearManagerItemDecaration.VERTICAL_LIST));
-
-
-
-        //mAdapter.bindToRecyclerView(mRvMessage);
-
-
-
-
+        mRvMessage.setLayoutManager(new LinearLayoutManager(getCurContext()));
+        mRvMessage.setAdapter(mAdapter);
         mAdapter.setEmptyView(R.layout.empty_all_moments_message);
         mPresenter.MomentsReplyList("1", "", "2");
     }

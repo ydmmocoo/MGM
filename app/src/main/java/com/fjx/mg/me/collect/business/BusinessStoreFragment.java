@@ -49,23 +49,12 @@ public class BusinessStoreFragment extends BaseMvpFragment<BusinessStorePresente
         recycler.setLayoutManager(new LinearLayoutManager(getCurContext()));
         recycler.addItemDecoration(new SpacesItemDecoration(0, 10));
         recycler.setAdapter(adapter);
-
-
-
-
-        //adapter.bindToRecyclerView(recycler);
-
-
-
-
         adapter.setEmptyView(R.layout.layout_empty);
-        refreshView.setRefreshListener(new CustomRefreshListener() {
-            @Override
-            public void onRefreshData(int page, int pageSize) {
-                mPresenter.getData();
-                recycler.invalidateItemDecorations();
-                refreshView.finishLoading();
-            }
+
+        refreshView.setRefreshListener((page, pageSize) -> {
+            mPresenter.getData();
+            recycler.invalidateItemDecorations();
+            refreshView.finishLoading();
         });
 
     }

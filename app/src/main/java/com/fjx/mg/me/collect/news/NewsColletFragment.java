@@ -54,30 +54,11 @@ public class NewsColletFragment extends BaseMvpFragment<NewsColletPresenter> imp
         recycler.setLayoutManager(new LinearLayoutManager(getCurContext()));
         recycler.setAdapter(adapter);
         recycler.addItemDecoration(new SpacesItemDecoration(0, 10));
-        refreshView.setRefreshListener(new CustomRefreshListener() {
-            @Override
-            public void onRefreshData(int page, int pageSize) {
-                mPresenter.getMyCollectNews(page);
-            }
-        });
-
-
-
-        //adapter.bindToRecyclerView(recycler);
-
-
-
-
-
+        refreshView.setRefreshListener((page, pageSize) -> mPresenter.getMyCollectNews(page));
 
         adapter.setEmptyView(R.layout.layout_empty);
 
-        adapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-                startActivity(NewsDetailActivity.newInstance(getCurContext(), ((NewsListModel)adapter.getItem(position)).getNewsId()));
-            }
-        });
+        adapter.setOnItemClickListener((adapter, view1, position) -> startActivity(NewsDetailActivity.newInstance(getCurContext(), ((NewsListModel)adapter.getItem(position)).getNewsId())));
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.common.paylibrary.listener.PayCallback;
 import com.common.paylibrary.model.PayExtModel;
@@ -24,7 +25,7 @@ public class PayCallbackReceiver extends BroadcastReceiver {
         String action = intent.getAction();
         if (TextUtils.equals(action, MG_PAY_ACTION)) {
             String ext = intent.getStringExtra("ext");
-            PayExtModel extModel = JsonUtil.strToModel(ext==null?"":ext, PayExtModel.class);
+            PayExtModel extModel = JsonUtil.strToModel(TextUtils.isEmpty(ext)?"":ext, PayExtModel.class);
             payCallback.payResult(extModel);
         }
 

@@ -20,7 +20,6 @@ public class SalesNetworkSearchAdapter extends BaseAdapter<SearchAgentListModel>
         super(R.layout.item_sales_network_search);
     }
 
-
     @Override
     protected void convert(BaseViewHolder helper, SearchAgentListModel item) {
         helper.setText(R.id.tvNetworkName, item.getNickName())

@@ -198,30 +198,13 @@ public class CityMomentFragment extends BaseMvpFragment<CityMomentsPresenter> im
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
         }
-//        imageAdapter = new MomentsTypeAdapter();
         cityCircleAdapter = new CityMomentsAdapter();
         cityCircleAdapter.setCirclePresenter(mPresenter);
-
-//        recyclerType.setLayoutManager(new LinearLayoutManager(getCurContext(), LinearLayoutManager.HORIZONTAL, false));
-//        recyclerType.addItemDecoration(new SpacesItemDecoration(0, 0));
-//        ((SimpleItemAnimator) recyclerType.getItemAnimator()).setSupportsChangeAnimations(false);
-//        recyclerType.setAdapter(imageAdapter);
-//        imageAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {//根据列表获取数据
-//                TypeListModel.TypeListBean bean = imageAdapter.getData().get(position);
-//                startActivity(CityMomentsTypeActivity.newInstance(getCurContext(), bean.gettId(), bean.getImg(), bean.getTypeName()));
-//            }
-//        });
-
 
         recycler.setLayoutManager(new LinearLayoutManager(getCurContext(), LinearLayoutManager.VERTICAL, false));
         recycler.addItemDecoration(new SpacesItemDecoration(0, 0));
         ((SimpleItemAnimator) recycler.getItemAnimator()).setSupportsChangeAnimations(false);
         recycler.setAdapter(cityCircleAdapter);
-
-//        mPresenter.getTypeList();
-
 
         recycler.setOnTouchListener(new View.OnTouchListener() {//列表触碰收回输入框
             @Override
@@ -231,31 +214,10 @@ public class CityMomentFragment extends BaseMvpFragment<CityMomentsPresenter> im
             }
         });
 
-
-
-
-        //暂时隐藏
-        //cityCircleAdapter.bindToRecyclerView(recycler);
-
-
-
-
-
-
-
-
-
-
-
-
-
-        refreshView.setRefreshListener(new CustomRefreshListener() {
-            @Override
-            public void onRefreshData(int page, int pageSize) {
-                mPage = page;
-                mPresenter.getCityCircleList("" + page);//请求数据
-                EventBus.getDefault().post(new UnReadCountEvent("1", "0", true));
-            }
+        refreshView.setRefreshListener((page, pageSize) -> {
+            mPage = page;
+            mPresenter.getCityCircleList("" + page);//请求数据
+            EventBus.getDefault().post(new UnReadCountEvent("1", "0", true));
         });
 
         try {
@@ -271,7 +233,6 @@ public class CityMomentFragment extends BaseMvpFragment<CityMomentsPresenter> im
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override

@@ -50,7 +50,6 @@ public abstract class CommonObserver<T> implements Observer<ResponseModel<T>> {
     @Override
     public void onNext(ResponseModel<T> response) {
         LogUtil.printJson("netLog", JsonUtil.moderToString(response), "" + response.getCode());
-        Log.e("Common Observer",JsonUtil.moderToString(response)+"   code:"+response.getCode());
         if (mView != null) mView.destoryAndDismissDialog();
         if (response.getCode() == NetCode.SUCCESS) {
             onSuccess(response.getData());

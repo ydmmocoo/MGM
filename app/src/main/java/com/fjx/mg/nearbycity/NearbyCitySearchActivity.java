@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -69,14 +70,8 @@ public class NearbyCitySearchActivity extends BaseMvpActivity<TopTypeDetailPrese
         });
         mAdapter = new TopTypeDetailAdapter();
         mRvTopType.addItemDecoration(new ItemDecoration(this, ItemDecoration.VERTICAL_LIST));
+        mRvTopType.setLayoutManager(new LinearLayoutManager(getCurContext()));
         mRvTopType.setAdapter(mAdapter);
-
-
-
-        //mAdapter.bindToRecyclerView(mRvTopType);
-
-
-
 
         mAdapter.setEmptyView(R.layout.empty_all_moments_message);
 

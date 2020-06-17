@@ -195,13 +195,6 @@ public class CityMomentsTypeActivity extends BaseMvpActivity<CityMomentsTypePres
             }
         });
 
-
-
-        //cityCircleAdapter.bindToRecyclerView(recycler);
-
-
-
-
         refreshView.autoRefresh();
         refreshView.setRefreshListener(new CustomRefreshListener() {
             @Override

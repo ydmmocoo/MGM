@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -95,10 +96,12 @@ public class SalesNetworkSearchActivity extends BaseMvpActivity<SalesNetworkSear
         super.initView();
         StatusBarManager.setLightFontColor(this, R.color.colorAccent);
         mRvSearch.addItemDecoration(new LinearManagerItemDecaration(1, LinearManagerItemDecaration.VERTICAL_LIST));
+        mRvSearch.setLayoutManager(new LinearLayoutManager(getCurContext()));
         mAdapter = new SalesNetworkSearchAdapter();
         mAdapter.setEmptyView(R.layout.layout_empty);
         mAdapter.setOnItemClickListener(this);
         mAdapter.setOnItemClickListener(this);
+        mRvSearch.setAdapter(mAdapter);
         mTvSearchGo.setVisibility(View.VISIBLE);
         if (getIntent() == null) {
             requestLocationAddress();

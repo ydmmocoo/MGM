@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -49,14 +50,7 @@ public class GroupChatListActivity extends BaseActivity implements OnItemClickLi
         ToolBarManager.with(this).setTitle(getString(R.string.group_chat_list));
         mAdapter = new GroupChatListAdapter();
         mRvGroupChatList.setAdapter(mAdapter);
-
-
-
-
-        //mAdapter.bindToRecyclerView(mRvGroupChatList);
-
-
-
+        mRvGroupChatList.setLayoutManager(new LinearLayoutManager(getCurContext()));
 
         mAdapter.setEmptyView(R.layout.empty_all_moments_message);
         mAdapter.setOnItemClickListener(this);

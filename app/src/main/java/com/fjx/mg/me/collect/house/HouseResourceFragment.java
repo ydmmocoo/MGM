@@ -55,10 +55,6 @@ public class HouseResourceFragment extends BaseMvpFragment<HouseResourcePresente
         recycler.addItemDecoration(new SpacesItemDecoration(0, 10));
         recycler.setAdapter(adapter);
 
-
-        //adapter.bindToRecyclerView(recycler);
-
-
         adapter.setEmptyView(R.layout.layout_empty);
         refreshView.setRefreshListener(new CustomRefreshListener() {
             @Override

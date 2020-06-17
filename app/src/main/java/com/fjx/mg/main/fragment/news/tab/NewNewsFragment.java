@@ -71,31 +71,18 @@ public class NewNewsFragment extends BaseMvpFragment<NewsTabPresenter> implement
         recyclerView.setLayoutManager(new LinearLayoutManager(getCurContext()));
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new SpacesItemDecoration(1));
-        //adapter.bindToRecyclerView(recyclerView);
         adapter.setEmptyView(R.layout.layout_empty);
-        refreshView.setRefreshListener(new CustomRefreshListener() {
-            @Override
-            public void onRefreshData(int page, int pageSize) {
-                mPresenter.getNewsList(typeId, page, "");
-            }
-        });
+
+        refreshView.setRefreshListener((page, pageSize) -> mPresenter.getNewsList(typeId, page, ""));
         refreshView.autoRefresh();
-        adapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-                startActivity(NewsDetailActivity.newInstance(getCurContext(), ((NewsListModel)adapter.getItem(position)).getNewsId()));
-            }
-        });
+
+        adapter.setOnItemClickListener((adapter, view1, position) -> startActivity(NewsDetailActivity.newInstance(getCurContext(), ((NewsListModel)adapter.getItem(position)).getNewsId())));
+
         List<NewsListModel> dataList = DBDaoFactory.getNewsListDao().queryList(typeId);
         if (dataList.isEmpty()) return;
         adapter.setList(dataList);
 
     }
-
-//    @Override
-//    protected void lazyLoadData() {
-//        refreshView.autoRefresh();
-//    }
 
     @Override
     protected int layoutId() {

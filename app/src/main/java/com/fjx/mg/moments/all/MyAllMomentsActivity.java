@@ -114,35 +114,17 @@ public class MyAllMomentsActivity extends BaseMvpActivity<AllMomentsPresenter> i
 
         CommonImageLoader.load(getIntent().getStringExtra("Img")).placeholder(R.drawable.default_user_image).round().into(headView);
 
-
         recyclerView.setLayoutManager(new LinearLayoutManager(getCurContext()));
         recyclerView.addItemDecoration(new SpacesItemDecoration(1));
         recyclerView.setAdapter(adapter);
 
-
-
-        //adapter.bindToRecyclerView(recyclerView);
-
-
-
-
-
-
         refreshView.autoRefresh();
-        refreshView.setRefreshListener(new CustomRefreshListener() {
-            @Override
-            public void onRefreshData(int page, int pageSize) {
-                mPresenter.personalMomentList(identifier, page);
-            }
-        });
+        refreshView.setRefreshListener((page, pageSize) -> mPresenter.personalMomentList(identifier, page));
 
-        adapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-                PersonalMomentListModel.MomentsListBean momentsListBean = (PersonalMomentListModel.MomentsListBean) adapter.getItem(position);
-                startActivity(MomentsDetailActivity.newInstance(getCurContext(), ((PersonalMomentListModel.MomentsListBean)adapter.getItem(position)).getMId()
-                        , JsonUtil.moderToString(momentsListBean)));
-            }
+        adapter.setOnItemClickListener((adapter, view, position) -> {
+            PersonalMomentListModel.MomentsListBean momentsListBean = (PersonalMomentListModel.MomentsListBean) adapter.getItem(position);
+            startActivity(MomentsDetailActivity.newInstance(getCurContext(), ((PersonalMomentListModel.MomentsListBean)adapter.getItem(position)).getMId()
+                    , JsonUtil.moderToString(momentsListBean)));
         });
 
     }
@@ -157,43 +139,40 @@ public class MyAllMomentsActivity extends BaseMvpActivity<AllMomentsPresenter> i
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void setAppBarListener() {
         measureHeight();
-        appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if (verticalOffset == 0) {
-                    if (state != CollapsingToolbarLayoutState.EXPANDED) {
-                        state = CollapsingToolbarLayoutState.EXPANDED;//修改为展开状态
-                        titleTv.setVisibility(View.GONE);
-                        toolbar.setNavigationIcon(R.drawable.iv_back);
-                        MyAllMomentsActivity.this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_VISIBLE);
-                    }
-                } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
+        appbar.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
+            if (verticalOffset == 0) {
+                if (state != CollapsingToolbarLayoutState.EXPANDED) {
+                    state = CollapsingToolbarLayoutState.EXPANDED;//修改为展开状态
+                    titleTv.setVisibility(View.GONE);
+                    toolbar.setNavigationIcon(R.drawable.iv_back);
+                    MyAllMomentsActivity.this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_VISIBLE);
+                }
+            } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
+                titleTv.setVisibility(View.VISIBLE);
+                toolbar.setNavigationIcon(R.drawable.ic_back_black);
+                state = CollapsingToolbarLayoutState.COLLAPSED;//修改为折叠状态
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    MyAllMomentsActivity.this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                }
+            } else {
+                if (Math.abs(verticalOffset) > height) {
                     titleTv.setVisibility(View.VISIBLE);
-                    toolbar.setNavigationIcon(R.drawable.ic_back_black);
-                    state = CollapsingToolbarLayoutState.COLLAPSED;//修改为折叠状态
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        MyAllMomentsActivity.this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                    }
-                } else {
-                    if (Math.abs(verticalOffset) > height) {
-                        titleTv.setVisibility(View.VISIBLE);
-                        float scale = 1 - height / (float) Math.abs(verticalOffset);
-                        if (state != CollapsingToolbarLayoutState.INTERNEDIATE) {
-                            if (state == CollapsingToolbarLayoutState.COLLAPSED && scale < 0.55) {//由折叠变为展开
-                                toolbar.setNavigationIcon(R.drawable.ic_back_black);
-                                MyAllMomentsActivity.this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_VISIBLE);
-                            } else {
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                    MyAllMomentsActivity.this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                                }
+                    float scale = 1 - height / (float) Math.abs(verticalOffset);
+                    if (state != CollapsingToolbarLayoutState.INTERNEDIATE) {
+                        if (state == CollapsingToolbarLayoutState.COLLAPSED && scale < 0.55) {//由折叠变为展开
+                            toolbar.setNavigationIcon(R.drawable.ic_back_black);
+                            MyAllMomentsActivity.this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_VISIBLE);
+                        } else {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                MyAllMomentsActivity.this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                             }
-                            state = CollapsingToolbarLayoutState.INTERNEDIATE;
                         }
-                        toolbar.setNavigationIcon(R.drawable.ic_back_black);
-                    } else {
-                        titleTv.setVisibility(View.GONE);
-                        toolbar.setNavigationIcon(R.drawable.ic_back_black);
+                        state = CollapsingToolbarLayoutState.INTERNEDIATE;
                     }
+                    toolbar.setNavigationIcon(R.drawable.ic_back_black);
+                } else {
+                    titleTv.setVisibility(View.GONE);
+                    toolbar.setNavigationIcon(R.drawable.ic_back_black);
                 }
             }
         });
@@ -202,16 +181,14 @@ public class MyAllMomentsActivity extends BaseMvpActivity<AllMomentsPresenter> i
     private void measureHeight() {
         ViewTreeObserver vto = coordinatorlayout.getViewTreeObserver();
 
-        vto.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-            public boolean onPreDraw() {
-                if (hasMeasured == false) {
+        vto.addOnPreDrawListener(() -> {
+            if (hasMeasured == false) {
 
-                    height = toolbar.getMeasuredHeight();
-                    hasMeasured = true;
+                height = toolbar.getMeasuredHeight();
+                hasMeasured = true;
 
-                }
-                return true;
             }
+            return true;
         });
     }
 
