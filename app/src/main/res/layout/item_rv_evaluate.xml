@@ -12,6 +12,7 @@
         android:layout_height="37dp"
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
+        android:scaleType="centerCrop"
         android:src="@drawable/user_default"/>
 
     <TextView

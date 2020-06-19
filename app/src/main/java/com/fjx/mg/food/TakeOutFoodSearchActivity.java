@@ -104,9 +104,9 @@ public class TakeOutFoodSearchActivity extends BaseMvpActivity<TakeOutFoodSearch
         }
         for (int i = 0; i < data.size(); i++) {
             if (i == 0) {
-                mList.add(new SearchEntity("点外卖", SearchEntity.TYPE_HEADER));
+                mList.add(new SearchEntity(getResources().getString(R.string.take_out), SearchEntity.TYPE_HEADER));
             }
-            mList.add(new SearchEntity("点外卖", data.get(i), SearchEntity.TYPE_TAKE_OUT_FOOD));
+            mList.add(new SearchEntity(getResources().getString(R.string.take_out), data.get(i), SearchEntity.TYPE_TAKE_OUT_FOOD));
             if (i == data.size() - 1) {
                 mList.add(new SearchEntity(SearchEntity.TYPE_FOOTER));
             }

@@ -8,7 +8,6 @@ import com.library.common.utils.CommonToast;
 import com.library.repository.core.net.CommonObserver;
 import com.library.repository.core.net.RxScheduler;
 import com.library.repository.models.ResponseModel;
-import com.library.repository.models.ShopingCartBean;
 import com.library.repository.models.StoreGoodsBean;
 import com.library.repository.repository.RepositoryFactory;
 
@@ -56,7 +55,7 @@ public class StoreGoodsPresenter extends StoreGoodsContract.Presenter {
 
     @Override
     public void addShopCart(String sId, String gId, String gName, String seId, String seName, String aIds, String aNames, String price, String num, String img, ImageView ivAdd) {
-        RepositoryFactory.getRemoteFoodApi().addShopCart(sId,gId,gName,seId,seName,aIds,aNames,price,num,img)
+        RepositoryFactory.getRemoteFoodApi().addShopCart(sId, gId, gName, seId, seName, aIds, aNames, price, num, img)
                 .compose(RxScheduler.<ResponseModel<Object>>toMain())
                 .as(mView.<ResponseModel<Object>>bindAutoDispose())
                 .subscribe(new CommonObserver<Object>() {
@@ -79,9 +78,9 @@ public class StoreGoodsPresenter extends StoreGoodsContract.Presenter {
                 });
     }
 
-    public List<StoreGoodsGroupBean> getGroupList(List<StoreGoodsBean.CateListBean> data){
-        List<StoreGoodsGroupBean> list=new ArrayList<>();
-        if (data!=null) {
+    public List<StoreGoodsGroupBean> getGroupList(List<StoreGoodsBean.CateListBean> data) {
+        List<StoreGoodsGroupBean> list = new ArrayList<>();
+        if (data != null) {
             for (int i = 0; i < data.size(); i++) {
                 StoreGoodsGroupBean bean = new StoreGoodsGroupBean();
                 bean.setCount(0);
@@ -93,14 +92,16 @@ public class StoreGoodsPresenter extends StoreGoodsContract.Presenter {
         return list;
     }
 
-    public List<StoreGoodsBean.CateListBean.GoodsListBean> getGoodsList(List<StoreGoodsBean.CateListBean> data){
-        List<StoreGoodsBean.CateListBean.GoodsListBean> list=new ArrayList<>();
-        for (int i=0;i<data.size();i++){
-            for (int j=0;j<data.get(i).getGoodsList().size();j++){
-                StoreGoodsBean.CateListBean.GoodsListBean bean=data.get(i).getGoodsList().get(j);
-                bean.setGroupId(i);
-                bean.setGroupName(data.get(i).getCateName());
-                list.add(bean);
+    public List<StoreGoodsBean.CateListBean.GoodsListBean> getGoodsList(List<StoreGoodsBean.CateListBean> data) {
+        List<StoreGoodsBean.CateListBean.GoodsListBean> list = new ArrayList<>();
+        if (data != null) {
+            for (int i = 0; i < data.size(); i++) {
+                for (int j = 0; j < data.get(i).getGoodsList().size(); j++) {
+                    StoreGoodsBean.CateListBean.GoodsListBean bean = data.get(i).getGoodsList().get(j);
+                    bean.setGroupId(i);
+                    bean.setGroupName(data.get(i).getCateName());
+                    list.add(bean);
+                }
             }
         }
         return list;

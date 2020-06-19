@@ -33,7 +33,7 @@
             android:layout_toEndOf="@+id/tv_amount"
             android:textColor="@color/colorAccent"
             android:textSize="16sp"
-            tools:text="AR" />
+            android:text="AR" />
 
         <TextView
             android:id="@+id/tv_condition"

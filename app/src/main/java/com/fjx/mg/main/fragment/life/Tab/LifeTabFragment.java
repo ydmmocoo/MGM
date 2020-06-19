@@ -62,7 +62,6 @@ public class LifeTabFragment extends BaseMvpFragment<LifeTabPresenter> implement
         storeAdapter = new RecommendStoreAdapter();
         recycler.setLayoutManager(new LinearLayoutManager(getCurContext()));
         recycler.setAdapter(storeAdapter);
-        storeAdapter.setList(goodLit);
-
+        //storeAdapter.setList(goodLit);
     }
 }

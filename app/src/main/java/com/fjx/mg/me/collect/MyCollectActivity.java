@@ -17,6 +17,7 @@ import java.util.List;
 import butterknife.BindView;
 
 public class MyCollectActivity extends BaseMvpActivity<MyCollectPresenter> implements MyCollectContract.View {
+
     @BindView(R.id.s_tab)
     SlidingTabLayout sTab;
     @BindView(R.id.viewPager)

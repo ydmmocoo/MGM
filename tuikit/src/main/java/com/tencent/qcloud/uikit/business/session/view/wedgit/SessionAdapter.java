@@ -33,6 +33,7 @@ import com.tencent.qcloud.uikit.common.utils.DateTimeUtil;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * description:好友聊天列表适配器
@@ -48,6 +49,7 @@ public class SessionAdapter extends ISessionAdapter {
 
     public void setDataProvider(ISessionProvider provider) {
         mDataSource = provider.getDataSource();
+        mDataSource = removeDuplicate(mDataSource);
         if (provider instanceof SessionProvider) {
             provider.attachAdapter(this);
         }
@@ -221,5 +223,15 @@ public class SessionAdapter extends ISessionAdapter {
 
     public interface onRightItemClickListener {
         void onRightItemClick(View v, int position);
+    }
+
+    private static List<SessionInfo> removeDuplicate(List<SessionInfo> list){
+        List<SessionInfo> listTemp = new ArrayList();
+        for(int i=0;i<list.size();i++){
+            if(!listTemp.contains(list.get(i))){
+                listTemp.add(list.get(i));
+            }
+        }
+        return listTemp;
     }
 }

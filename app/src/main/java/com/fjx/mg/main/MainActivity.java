@@ -336,9 +336,9 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
 
     private void initBottomCountParams() {
         try {
-            msgView = bottomTab.getMsgView(2);
+            msgView = bottomTab.getMsgView(3);
             msgView.setStrokeWidth(1);
-            bottomTab.setMsgMargin(2, -5, 0);
+            bottomTab.setMsgMargin(3, -5, 0);
             msgView.setMinWidth(DimensionUtil.dip2px(14));
             msgView.setMinHeight(DimensionUtil.dip2px(14));
             msgView.setBackgroundColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
@@ -440,9 +440,6 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
     @Override
     public void updateUnread(int count) {
         messageCount = count;
-//        startService(new Intent(CashListActivity.this,
-//                BadgeIntentService.class).putExtra("badgeCount", count));
-//        ShortcutBadger.applyNotification(ContextManager.getContext(), null, count);
         int totalCount = messageCount + friendRequestCount + mReplyListSize;
         if (count == 0) {
             EventBus.getDefault().post(new RedPointEvent(0));
@@ -695,8 +692,6 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == resultCode && requestCode == 222) {
-//            mViewPager.setCurrentItem(lastPosition, false);
-//            bottomTab.setCurrentTab(lastPosition);
             bottomTab.setCurrentTab(0);
             mViewPager.setCurrentItem(0, false);
         }

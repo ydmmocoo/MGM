@@ -128,10 +128,9 @@ class MainPresenter extends MainContract.Presenter {
 
     @Override
     void requestPermission() {
-        if (!EasyPermissions.hasPermissions(mView.getCurActivity(), Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_COARSE_LOCATION)) {
+        if (!EasyPermissions.hasPermissions(mView.getCurActivity(), Manifest.permission.READ_PHONE_STATE)) {
             EasyPermissions.requestPermissions(mView.getCurActivity(), mView.getCurContext().getString(R.string.permission_contacts_message), 1,
-                    Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_COARSE_LOCATION,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE);
+                    Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE);
         }
     }
 

@@ -1083,6 +1083,7 @@
     <string name="view_all_comments">查看全部評價</string>
     <string name="deliveries">起送%1$sAR</string>
     <string name="support_self_mention">支持自提</string>
+    <string name="take_out">點外賣</string>
     <string name="type_take_out_food">外賣</string>
     <string name="type_to_the_store">到店</string>
     <string name="praise_first">好評優先</string>
@@ -1140,4 +1141,12 @@
     <string name="no_onions">不吃蔥</string>
     <string name="no_coriander">不吃香菜</string>
     <string name="cancelled">已取消</string>
+    <string name="input_address">請輸入地址</string>
+    <string name="no">無</string>
+    <string name="have_eaten">已出餐</string>
+    <string name="self_information">自提信息</string>
+    <string name="merchant_has_no_phone_set">商家未設置電話</string>
+    <string name="call_phone_tip">請到設置中打開"撥打電話電話"權限</string>
+    <string name="shop">店鋪</string>
+
 </resources>

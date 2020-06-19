@@ -108,7 +108,6 @@ public class NewFriendFragment extends BaseFragment implements SessionClickListe
         UserCenter.imLogin();
         sessionPanel.mTitleBar.setVisibility(View.GONE);
         sessionPanel.setSessionClick(this);
-
     }
 
     @Override

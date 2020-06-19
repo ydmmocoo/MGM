@@ -5,6 +5,7 @@ import com.fjx.mg.food.contract.StoreDetailContract;
 import com.library.common.utils.CommonToast;
 import com.library.repository.core.net.CommonObserver;
 import com.library.repository.core.net.RxScheduler;
+import com.library.repository.models.CheckGoodsBean;
 import com.library.repository.models.CreateOrderBean;
 import com.library.repository.models.ResponseModel;
 import com.library.repository.models.ShopingCartBean;
@@ -59,6 +60,41 @@ public class ShoppingInfoPresenter extends ShoppingInfoContract.Presenter {
                     public void onSuccess(CreateOrderBean data) {
                         if (mView != null) {
                             mView.createOrderSuccess(data);
+                        }
+                    }
+
+                    @Override
+                    public void onError(ResponseModel data) {
+                        CommonToast.toast(data.getMsg());
+                    }
+
+                    @Override
+                    public void onNetError(ResponseModel data) {
+                        CommonToast.toast(data.getMsg());
+                    }
+                });
+    }
+
+    @Override
+    public void checkGoods(String sId, String type, String addressId, String expectedDeliveryTime, String cId, String remark, String scId, String reservedTelephone) {
+        RepositoryFactory.getRemoteFoodApi().checkGoods(sId)
+                .compose(RxScheduler.<ResponseModel<CheckGoodsBean>>toMain())
+                .as(mView.<ResponseModel<CheckGoodsBean>>bindAutoDispose())
+                .subscribe(new CommonObserver<CheckGoodsBean>() {
+                    @Override
+                    public void onSuccess(CheckGoodsBean data) {
+                        if (data.getErrors()!=null&&data.getErrors().size()>0) {
+                            String s="";
+                            for (int i=0;i<data.getErrors().size();i++){
+                                if (i==0){
+                                    s=data.getErrors().get(i).getGName().concat(data.getErrors().get(i).getTip());
+                                }else {
+                                    s=s.concat("\n").concat(data.getErrors().get(i).getGName().concat(data.getErrors().get(i).getTip()));
+                                }
+                            }
+                            CommonToast.toast(s);
+                        }else {
+                            createOrder(sId, type, addressId, expectedDeliveryTime, cId, remark, scId, reservedTelephone);
                         }
                     }
 

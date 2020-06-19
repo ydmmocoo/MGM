@@ -417,9 +417,6 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
                     mTvWaitingForOrder.setText(getResources().getString(R.string.received_order));
                     if (!TextUtils.isEmpty(data.getOrderInfo().getReservedTelephone())) {
                         mTvDistributionInProgress.setText(getResources().getString(R.string.have_eaten));
-                        mVStatusDistribution.setBackgroundColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
-                        mTvDistributionInProgress.setTextColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
-                        mIvDistributionInProgress.setImageResource(R.drawable.circle_red_bg);
                     }
                     mTvLeft.setText(getResources().getString(R.string.apply_for_refund));
                     mTvRight.setText(getResources().getString(R.string.confirm_receipt));

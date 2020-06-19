@@ -1,5 +1,6 @@
 package com.fjx.mg.login.login;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -39,6 +40,8 @@ import com.library.common.utils.StringUtil;
 import com.library.repository.core.net.NetCode;
 import com.library.repository.data.UserCenter;
 import com.library.repository.models.UserInfoModel;
+
+import java.util.Stack;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -224,13 +227,11 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
     @OnClick(R.id.tvRegister)
     public void clickRegister() {
         startActivity(RegisterActivity.newInstance(getCurContext()));
-
     }
 
     @OnClick(R.id.tvIdentifyingCode)
     public void clickIdentifyingCode() {
         startActivity(IdentifyLoginActivity.newInstance(getCurContext()));
-
     }
 
     @OnClick(R.id.ivLoginFacebook)
@@ -269,15 +270,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
 
     @OnClick(R.id.tvAreaCode)
     public void clickAreaCode() {
-
         startActivityForResult(AreaCodeActivity.newInstance(getCurContext()), 111);
-
-//        CommonDialogHelper.showAreaCodeDialog(this, new OnSelectListener() {
-//            @Override
-//            public void onSelect(int position, String text) {
-//                tvAreaCode.setText(text);
-//            }
-//        });
     }
 
 
@@ -288,7 +281,6 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
             CommonToast.toast(getString(R.string.login_input_phone));
             return;
         }
-
 
         String code = mTvAreaCode.getText().toString().trim();//获取sn号
         if (code.contains("261")) {
@@ -309,7 +301,10 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
             if (TextUtils.isEmpty(data.getGestureCode())) {
                 startActivity(GestureLockActivity.newInstance(getCurContext(), GestureLockActivity.TYPE_SETTING_GESTURE));
             } else {
-                startActivity(MainActivity.newInstance(getCurContext()));
+                Stack<Activity> activityStack = CActivityManager.getAppManager().getActivityStack();
+                if (activityStack==null||activityStack.size()<=1) {
+                    startActivity(MainActivity.newInstance(getCurContext()));
+                }
                 finish();
                 NetCode.isShowGestureLockActivity = false;
             }

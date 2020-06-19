@@ -77,8 +77,6 @@ public class TabFriendFragment extends BaseMvpFragment<TabFriendPresenter> imple
 
     @BindView(R.id.tabs)
     SlidingTabLayout slidingTabLayout;
-    //    PagerSlidingTabStrip slidingTabLayout;
-//    private String[] TITLES = {"同城", "朋友圈", "聊天"};
     private String[] TITLES;
     @BindView(R.id.viewPager)
     ViewPager viewPager;
@@ -150,11 +148,6 @@ public class TabFriendFragment extends BaseMvpFragment<TabFriendPresenter> imple
         });
         slidingTabLayout.setViewPager(viewPager, TITLES);
         viewPager.setCurrentItem(0);
-//        for (int i = 0; i < slidingTabLayout.getTabCount(); i++) {
-////            TextView titleView = slidingTabLayout.getTitleView(i);
-////            titleView.setMaxEms(4);
-////            titleView.setMaxLines(1);
-////        }
     }
 
 
@@ -192,7 +185,6 @@ public class TabFriendFragment extends BaseMvpFragment<TabFriendPresenter> imple
                 this.showMsg(position, 40, 5);
             }
         }
-
     }
 
     private void hideMsg(int position) {
@@ -205,14 +197,6 @@ public class TabFriendFragment extends BaseMvpFragment<TabFriendPresenter> imple
         String momentsFriendCount = bean.getMomentsFriendCount();
         String momentsRecCount = bean.getMomentsRecCount();
         mPresenter.requestFriendsMomentsReply("1", "", "2", momentsFriendCount);
-//        if (StringUtil.equals("0", momentsFriendCount)) {//TODO 新增小红点外的评论提示个数 此处不管是否有朋友发布朋友圈也要走此接口
-////            hideMsg(1);
-//            mPresenter.requestFriendsMomentsReply("1", "", "2", momentsFriendCount);
-//        } else {
-////            showMsg(1);
-//            mPresenter.requestFriendsMomentsReply("1", "", "2", momentsFriendCount);
-////            EventBus.getDefault().post(new RefreshEvent());//有新消息通知FriendsMomentFragment刷新内容
-//        }
 
         if (StringUtil.equals("0", momentsRecCount)) {
             hideMsg(2);

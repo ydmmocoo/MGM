@@ -12,10 +12,14 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.fjx.mg.R;
 import com.fjx.mg.food.adapter.RvRealPicAdapter;
+import com.fjx.mg.image.NewImageActivity;
 import com.library.common.base.BaseFragment;
 import com.library.common.utils.CommonImageLoader;
+import com.library.common.utils.JsonUtil;
 import com.library.repository.models.StoreShopInfoBean;
 
 import java.util.ArrayList;
@@ -61,9 +65,15 @@ public class StoreMerchantInfoFragment extends BaseFragment {
         mRvRealPic.setLayoutManager(manager);
         mAdapter=new RvRealPicAdapter(R.layout.item_rv_real_pic,mPicList);
         mRvRealPic.setAdapter(mAdapter);
+
+        //店铺实景图片查看大图
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            Intent intent = NewImageActivity.newInstance(getCurContext(), JsonUtil.moderToString(mPicList), position);
+            startActivity(intent);
+        });
     }
 
-    @Override
+   @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //设置类别名称

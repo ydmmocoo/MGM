@@ -1,16 +1,15 @@
 package com.fjx.mg.me.collect.business;
 
-import com.fjx.mg.me.collect.MyCollectContract;
-import com.library.common.base.BaseFragment;
 import com.library.common.base.BasePresenter;
 import com.library.common.base.BaseView;
+import com.library.repository.models.CollectShopsBean;
 
 import java.util.List;
 
 public interface BusinessStoreContract {
     interface View extends BaseView {
 
-        void showDatas(List<Object> datas);
+        void showDatas(List<CollectShopsBean.ShopListBean> list,boolean hasNext);
     }
 
     public abstract class Presenter extends BasePresenter<BusinessStoreContract.View> {
@@ -19,7 +18,7 @@ public interface BusinessStoreContract {
             super(view);
         }
 
-        abstract void getData();
+        abstract void getData(int page);
     }
 
 }

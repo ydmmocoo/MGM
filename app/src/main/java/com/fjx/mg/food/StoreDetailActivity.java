@@ -142,6 +142,12 @@ public class StoreDetailActivity extends BaseMvpActivity<StoreDetailPresenter>
         mFragments.add(mStoreMerchantInfoFragment);
         mStoreGoodsFragment.setId(mId);
         mStoreEvaluateFragment.setId(mId);
+        //月售
+        mTvMonthlySales.setText(getResources().getString(R.string.monthly_sales,
+                ""));
+        //起送条件
+        mTvCondition.setText(getResources().getString(R.string.delivery_conditions,
+                "0"));
 
         //宽高5：1
         CardView.LayoutParams params = (CardView.LayoutParams) mBanner.getLayoutParams();

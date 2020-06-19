@@ -1082,6 +1082,7 @@
     <string name="view_all_comments">Voir tous les avis</string>
     <string name="deliveries">Livraison %1$sAR</string>
     <string name="support_self_mention">Soutenir la récupération auprès du magasin</string>
+    <string name="take_out">Vente à emporter</string>
     <string name="type_take_out_food">Vente à emporter</string>
     <string name="type_to_the_store">Sur place</string>
     <string name="praise_first">Les opinions favorables sont les priorités</string>
@@ -1138,7 +1139,13 @@
     <string name="no_garlic">Je veux pas d\'ail</string>
     <string name="no_onions">Je veux pas de la ciboulette</string>
     <string name="no_coriander">Je veux pas de coriandre</string>
-    <string name="cancelled">已取消</string>
-    <string name="input_address">请输入地址</string>
+    <string name="cancelled">Annulé</string>
+    <string name="input_address">Veuillez entrer l\'adresse</string>
+    <string name="no">Sans</string>
+    <string name="have_eaten">Déjà livré</string>
+    <string name="self_information">Information sur la récupération</string>
+    <string name="merchant_has_no_phone_set">Le marchand n\'a pas défini le No.Tèl</string>
+    <string name="call_phone_tip">Veuillez accéder aux paramètres pour ouvrir l\'autorisation Appel</string>
+    <string name="shop">Boutique</string>
 
 </resources>

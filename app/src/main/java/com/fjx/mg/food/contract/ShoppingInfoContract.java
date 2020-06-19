@@ -32,5 +32,8 @@ public interface ShoppingInfoContract {
         public abstract void createOrder(String sId,String type,String addressId,
                                          String expectedDeliveryTime,String cId,String remark,
                                          String scId,String reservedTelephone);
+
+        public abstract void checkGoods(String sId, String type, String addressId, String expectedDeliveryTime, String cId, String remark, String scId, String reservedTelephone);
+
     }
 }

@@ -19,7 +19,7 @@ public class MyCollectPresenter extends MyCollectContract.Presenter {
     @Override
     void initData() {
         String[] titles = new String[]{
-//                "外卖商家",
+                mView.getCurContext().getString(R.string.shop),
                 mView.getCurContext().getString(R.string.news)
 //                ,
 //                mView.getCurContext().getString(R.string.employment),
@@ -27,12 +27,10 @@ public class MyCollectPresenter extends MyCollectContract.Presenter {
         };
 
         List<BaseFragment> fragments = new ArrayList<>();
-//        fragments.add(BusinessStoreFragment.newInstance());
+        fragments.add(BusinessStoreFragment.newInstance());
         fragments.add(NewsColletFragment.newInstance());
 //        fragments.add(RecruitFragment.newInstance());
 //        fragments.add(HouseResourceFragment.newInstance());
         mView.showTabAndFragment(titles, fragments);
-
-
     }
 }

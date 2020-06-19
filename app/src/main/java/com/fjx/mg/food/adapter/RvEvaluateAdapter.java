@@ -1,14 +1,18 @@
 package com.fjx.mg.food.adapter;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.fjx.mg.R;
+import com.fjx.mg.image.NewImageActivity;
 import com.fjx.mg.view.RatingBar;
 import com.fjx.mg.view.WrapContentGridView;
 import com.library.common.utils.CommonImageLoader;
+import com.library.common.utils.JsonUtil;
 import com.library.common.view.materialratingbar.MaterialRatingBar;
 import com.library.repository.models.StoreEvaluateBean;
 
@@ -55,6 +59,10 @@ public class RvEvaluateAdapter extends BaseQuickAdapter<StoreEvaluateBean.Evalua
             gv.setVisibility(View.VISIBLE);
             GvImageAdapter adapter = new GvImageAdapter(getContext(), item.getImgs());
             gv.setAdapter(adapter);
+            gv.setOnItemClickListener((parent, view, position, id) -> {
+                Intent intent = NewImageActivity.newInstance(getContext(), JsonUtil.moderToString(item.getImgs()), position);
+                getContext().startActivity(intent);
+            });
         }else {
             gv.setVisibility(View.GONE);
         }

@@ -24,6 +24,10 @@ public class CActivityManager {
         return instance;
     }
 
+    public Stack<Activity> getActivityStack(){
+        return activityStack;
+    }
+
     /**
      * 添加Activity到栈
      */

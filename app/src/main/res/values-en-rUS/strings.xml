@@ -1078,6 +1078,7 @@
     <string name="view_all_comments">See all review</string>
     <string name="deliveries">Delivery %1$sAR</string>
     <string name="support_self_mention">Support pick up</string>
+    <string name="take_out">Takeaway</string>
     <string name="type_take_out_food">Takeaway</string>
     <string name="type_to_the_store">In-store</string>
     <string name="praise_first">Favorable opinions are priorities</string>
@@ -1134,7 +1135,13 @@
     <string name="no_garlic">I don\'t want garlic</string>
     <string name="no_onions">I don\'t want chives</string>
     <string name="no_coriander">I don\'t want coriander</string>
-    <string name="cancelled">已取消</string>
-    <string name="input_address">请输入地址</string>
+    <string name="cancelled">Cancelled</string>
+    <string name="input_address">Please add adress</string>
+    <string name="no">Without</string>
+    <string name="have_eaten">Already delivered</string>
+    <string name="self_information">Pick up information</string>
+    <string name="merchant_has_no_phone_set">The merchant has not set up the No.Tel</string>
+    <string name="call_phone_tip">Please go to the settings to open the "Call" authorization</string>
+    <string name="shop">Shop</string>
 
 </resources>

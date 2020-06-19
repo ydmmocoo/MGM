@@ -235,9 +235,9 @@ public class ShoppingInfoActivity extends BaseMvpActivity<ShoppingInfoPresenter>
                 break;
             case R.id.tv_pay://去支付
                 if (mIsDelivery) {
-                    mPresenter.createOrder(mId, "1", mAddressId, mTimeOfDelivery, mCouponId, mRemark, "", "");
+                    mPresenter.checkGoods(mId, "1", mAddressId, mTimeOfDelivery, mCouponId, mRemark, "", "");
                 } else {
-                    mPresenter.createOrder(mId, "2", "", mSelfExtractingTime, mCouponId, mRemark, "", mReservedPhone);
+                    mPresenter.checkGoods(mId, "2", "", mSelfExtractingTime, mCouponId, mRemark, "", mReservedPhone);
                 }
                 break;
         }

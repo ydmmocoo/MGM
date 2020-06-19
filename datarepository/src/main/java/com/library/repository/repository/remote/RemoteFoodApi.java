@@ -1,6 +1,8 @@
 package com.library.repository.repository.remote;
 
 import com.common.paylibrary.model.WXPayModel;
+import com.library.repository.models.CheckGoodsBean;
+import com.library.repository.models.CollectShopsBean;
 import com.library.repository.models.CouponBean;
 import com.library.repository.models.CreateOrderBean;
 import com.library.repository.models.GoodsDetailBean;
@@ -73,9 +75,17 @@ public interface RemoteFoodApi {
     @FormUrlEncoded
     Observable<ResponseModel<Object>> cancelCollect(@Field("sId") String sId);
 
+    @POST("user/myCollectShops")
+    @FormUrlEncoded
+    Observable<ResponseModel<CollectShopsBean>> getCollectShops(@Field("lng") String lng, @Field("lat")String lat, @Field("page")int page);
+
     @POST("user/getShopingInfo")
     @FormUrlEncoded
     Observable<ResponseModel<ShoppingInfoBean>> getShoppingInfo(@Field("sId") String sId);
+
+    @POST("goods/checkGoods")
+    @FormUrlEncoded
+    Observable<ResponseModel<CheckGoodsBean>> checkGoods(@Field("sId") String sId);
 
     @POST("user/getCouponList")
     @FormUrlEncoded

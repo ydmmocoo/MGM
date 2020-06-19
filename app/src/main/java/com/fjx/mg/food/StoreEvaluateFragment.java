@@ -132,7 +132,7 @@ public class StoreEvaluateFragment extends BaseMvpFragment<StoreEvaluatePresente
         mTagList.clear();
         mTagList.add(getResources().getString(R.string.publish_comments_through_pictures)
                 .concat(" ")
-                .concat(String.valueOf(data.getShopInfo().getEvaluateCount())));
+                .concat(String.valueOf(data.getShopInfo().getSlideShowCount())));
         mTagList.add(getResources().getString(R.string.favorable_comments)
                 .concat(" ")
                 .concat(String.valueOf(data.getShopInfo().getGoodsEvaluateCount())));

@@ -1098,6 +1098,7 @@
     <string name="view_all_comments">查看全部评价</string>
     <string name="deliveries">起送%1$sAR</string>
     <string name="support_self_mention">支持自提</string>
+    <string name="take_out">点外卖</string>
     <string name="type_take_out_food">外卖</string>
     <string name="type_to_the_store">到店</string>
     <string name="praise_first">好评优先</string>
@@ -1161,6 +1162,7 @@
     <string name="self_information">自提信息</string>
     <string name="merchant_has_no_phone_set">商家未设置电话</string>
     <string name="call_phone_tip">请到设置中打开"拨打电话电话"权限</string>
+    <string name="shop">店铺</string>
 
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <bool name="bottomsheet_is_tablet">false</bool>
