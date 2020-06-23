@@ -1164,6 +1164,7 @@
     <string name="call_phone_tip">请到设置中打开"拨打电话电话"权限</string>
     <string name="shop">店铺</string>
     <string name="no_products">暂无商品</string>
+    <string name="business_phone">商家电话</string>
 
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <bool name="bottomsheet_is_tablet">false</bool>

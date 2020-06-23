@@ -204,8 +204,8 @@ public class ShoppingInfoActivity extends BaseMvpActivity<ShoppingInfoPresenter>
                                                             String[] strings = new String[mPhoneList.size()];
                                                             mPhoneList.toArray(strings);
                                                             new XPopup.Builder(getCurActivity())
-                                                                    .isDarkTheme(true)
-                                                                    .asBottomList("", strings,
+                                                                    .isDarkTheme(false)
+                                                                    .asBottomList(getResources().getString(R.string.business_phone), strings,
                                                                             (position, text) -> {
                                                                                 Intent callIntent = new Intent(Intent.ACTION_CALL);
                                                                                 Uri data = Uri.parse("tel:" +mPhoneList.get(position));

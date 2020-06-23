@@ -1144,5 +1144,6 @@
     <string name="call_phone_tip">Please go to the settings to open the "Call" authorization</string>
     <string name="shop">Shop</string>
     <string name="no_products">No products</string>
+    <string name="business_phone">Business phone</string>
 
 </resources>

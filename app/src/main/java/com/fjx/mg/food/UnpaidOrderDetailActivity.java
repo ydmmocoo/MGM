@@ -1,6 +1,7 @@
 package com.fjx.mg.food;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.TextUtils;
@@ -12,11 +13,15 @@ import com.fjx.mg.food.adapter.LvOrderDetailGoodsAdapter;
 import com.fjx.mg.food.contract.OrderDetailContract;
 import com.fjx.mg.food.presenter.OrderDetailPresenter;
 import com.gyf.immersionbar.ImmersionBar;
+import com.hjq.permissions.OnPermission;
+import com.hjq.permissions.Permission;
+import com.hjq.permissions.XXPermissions;
 import com.library.common.base.BaseMvpActivity;
 import com.library.common.view.WrapContentListView;
 import com.library.repository.models.OrderDetailBean;
 import com.lxj.xpopup.XPopup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -74,6 +79,7 @@ public class UnpaidOrderDetailActivity extends BaseMvpActivity<OrderDetailPresen
     private String mStoreId;
     private String mPrice;
 
+    private List<String> mPhoneList = new ArrayList<>();
     private CountDownTimer mTimer;
 
     @Override
@@ -110,7 +116,9 @@ public class UnpaidOrderDetailActivity extends BaseMvpActivity<OrderDetailPresen
         //设置店铺名
         mTvStoreName.setText(data.getOrderInfo().getShopName());
         //店铺电话
-        //mStorePhone=data.getOrderInfo().getTels();
+        for (int i = 0; i < data.getOrderInfo().getTels().size(); i++) {
+            mPhoneList.add(data.getOrderInfo().getTels().get(i).getTel());
+        }
         //设置商品
         mAdapter.setData(data.getOrderInfo().getGoodsList());
         //设置包装费
@@ -225,16 +233,42 @@ public class UnpaidOrderDetailActivity extends BaseMvpActivity<OrderDetailPresen
                 startActivity(intent);
                 break;
             case R.id.iv_call://拨打电话
-                new XPopup.Builder(getCurContext())
-                        .asConfirm(getResources().getString(R.string.Tips), getResources().getString(R.string.hint_confirm_contact),
-                                getResources().getString(R.string.cancel), getResources().getString(R.string.confirm_short),
-                                () -> {
-                                    /*Intent callIntent = new Intent(Intent.ACTION_CALL);
-                                    Uri data = Uri.parse("tel:" + );
-                                    callIntent.setData(data);
-                                    startActivity(callIntent);*/
-                                }, null, false)
-                        .show();
+                XXPermissions.with(getCurActivity())
+                        .permission(Permission.CALL_PHONE)
+                        .request(new OnPermission() {
+
+                            @Override
+                            public void hasPermission(List<String> granted, boolean all) {
+                                if (all) {
+                                    new XPopup.Builder(getCurContext())
+                                            .asConfirm(getResources().getString(R.string.Tips), getResources().getString(R.string.hint_confirm_contact),
+                                                    getResources().getString(R.string.cancel), getResources().getString(R.string.confirm_short),
+                                                    () -> {
+                                                        if (mPhoneList.size() > 0) {
+                                                            String[] strings = new String[mPhoneList.size()];
+                                                            mPhoneList.toArray(strings);
+                                                            new XPopup.Builder(getCurActivity())
+                                                                    .isDarkTheme(false)
+                                                                    .asBottomList(getResources().getString(R.string.business_phone), strings,
+                                                                            (position, text) -> {
+                                                                                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                                                                                Uri data = Uri.parse("tel:" +mPhoneList.get(position));
+                                                                                callIntent.setData(data);
+                                                                                startActivity(callIntent);
+                                                                            })
+                                                                    .show();
+                                                        } else {
+                                                        }
+                                                    }, null, false)
+                                            .show();
+                                } else {
+                                }
+                            }
+
+                            @Override
+                            public void noPermission(List<String> denied, boolean quick) {
+                            }
+                        });
                 break;
         }
     }

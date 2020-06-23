@@ -1149,5 +1149,6 @@
     <string name="call_phone_tip">請到設置中打開"撥打電話電話"權限</string>
     <string name="shop">店鋪</string>
     <string name="no_products">暫無商品</string>
+    <string name="business_phone">商家電話</string>
 
 </resources>

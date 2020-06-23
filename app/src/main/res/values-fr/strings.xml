@@ -1021,7 +1021,7 @@
     <string name="first_reduction">Réduction pour le nouveau client %1$s</string>
     <string name="first_reduction_text">Réduction pour le nouveau client</string>
     <string name="full_reduction">%1$s smoins %2$s</string>
-    <string name="delivery">à emporter et livre r</string>
+    <string name="delivery">à emporter et\nlivre r</string>
     <string name="collect_by_yourself">Retrait sur place</string>
     <string name="expected_delivery_time">Temps d\'arrivé souhaitée</string>
     <string name="delivery_method">Mode de livraison</string>
@@ -1148,5 +1148,6 @@
     <string name="call_phone_tip">Veuillez accéder aux paramètres pour ouvrir l\'autorisation Appel</string>
     <string name="shop">Boutique</string>
     <string name="no_products">Pas de produits</string>
+    <string name="business_phone">Téléphone de travail</string>
 
 </resources>
