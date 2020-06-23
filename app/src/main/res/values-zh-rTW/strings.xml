@@ -1148,5 +1148,6 @@
     <string name="merchant_has_no_phone_set">商家未設置電話</string>
     <string name="call_phone_tip">請到設置中打開"撥打電話電話"權限</string>
     <string name="shop">店鋪</string>
+    <string name="no_products">暫無商品</string>
 
 </resources>

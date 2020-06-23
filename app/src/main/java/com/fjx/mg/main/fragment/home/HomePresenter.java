@@ -1,22 +1,12 @@
 package com.fjx.mg.main.fragment.home;
 
-import android.location.Geocoder;
-import android.util.Log;
 import android.widget.TextView;
 
-import com.fjx.mg.utils.SharedPreferencesUtils;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.location.LocationServices;
-import com.library.common.base.BaseApp;
 import com.library.common.utils.CommonToast;
 import com.library.common.utils.JsonUtil;
 import com.library.common.utils.SharedPreferencesUtil;
 import com.library.repository.core.net.CommonObserver;
 import com.library.repository.core.net.RxScheduler;
-import com.library.repository.data.UserCenter;
 import com.library.repository.db.DBDaoFactory;
 import com.library.repository.models.AdListModel;
 import com.library.repository.models.NewsItemModel;
@@ -25,10 +15,7 @@ import com.library.repository.models.ResponseModel;
 import com.library.repository.repository.RepositoryFactory;
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.enums.PopupAnimation;
-import com.lxj.xpopup.interfaces.OnSelectListener;
 import com.tencent.qcloud.uikit.TimConfig;
-
-import java.util.Locale;
 
 class HomePresenter extends HomeContract.Presenter {
 

@@ -113,7 +113,6 @@ public class BarCodeActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 
 
@@ -130,7 +129,6 @@ public class BarCodeActivity extends AppCompatActivity {
     protected void attachBaseContext(Context newBase) {
         Context context = languageWork(newBase);
         super.attachBaseContext(context);
-
     }
 
     private Context languageWork(Context context) {

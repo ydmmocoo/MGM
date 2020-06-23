@@ -126,6 +126,10 @@ public class GoodsDetailActivity extends BaseMvpActivity<GoodsDetailPresenter>
         mEvaluateAdapter.addFooterView(footerView);
         mRvContent.setAdapter(mEvaluateAdapter);
 
+        //起送条件
+        mTvCondition.setText(getResources().getString(R.string.delivery_conditions,
+                "0"));
+
         //监听RecyclerView滑动,设置图片显示高度
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mIvGoodsPic.getLayoutParams();
         mRvContent.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -349,6 +353,10 @@ public class GoodsDetailActivity extends BaseMvpActivity<GoodsDetailPresenter>
             mAdapter.setList(mList);
             mBottomSheetLayout.dismissSheet();
         }
+        mData.getGoodInfo().setCount(0);
+        mTvGoodsCount.setVisibility(View.INVISIBLE);
+        mTvGoodsCount.setText("0");
+        mIvLess.setVisibility(View.INVISIBLE);
     }
 
     @Override

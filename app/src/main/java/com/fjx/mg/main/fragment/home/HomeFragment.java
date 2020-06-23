@@ -133,16 +133,19 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
         ViewUtil.setDrawableLeft(tvLocation, 0);
         ViewUtil.drawableRight(tvLocation, R.drawable.arrow_down);
         Locale locale = MulLanguageUtil.getLocalLanguage();
-        if (locale.equals(SIMPLIFIED_CHINESE)) {
-            tvLocation.setText("简体");
-        } else if (locale.equals(TRADITIONAL_CHINESE)) {
-            tvLocation.setText("繁体");
-        } else if (locale.equals(FRENCH)) {
+        if (locale.getLanguage().equals("zh")) {
+            if (locale.getCountry().equals("HK")||locale.getCountry().equals("TW")
+                    ||locale.getCountry().equals("MO")){
+                tvLocation.setText("繁體");
+            }else {
+                tvLocation.setText("简体");
+            }
+        }else if (locale.getLanguage().equals("fr")) {
             tvLocation.setText("Français");
-        } else if (locale.equals(ENGLISH)) {
+        } else if (locale.getLanguage().equals("en")) {
             tvLocation.setText("English");
         }else {
-            tvLocation.setText("English");
+            tvLocation.setText("简体");
         }
 
         mPresenter.getRecommendStore();

@@ -996,7 +996,7 @@
     <string name="to_settle">To pay</string>
     <string name="total_money">Total%1$sAR</string>
     <string name="delivery_conditions">It\'s missing %1$sAR Delivery</string>
-    <string name="meet_delivery_conditions">Havi been fulfilled the condition of delivery</string>
+    <string name="meet_delivery_conditions">Fulfilled the conditions</string>
     <string name="shopping_cart">Basket</string>
     <string name="shop_cart_clear">Clear</string>
     <string name="no_purchase">No selected items</string>
@@ -1017,8 +1017,8 @@
     <string name="first_reduction">First order reduction %1$s</string>
     <string name="first_reduction_text">First order reduction</string>
     <string name="full_reduction">%1$s deduction %2$s</string>
-    <string name="delivery">Take away and delivery</string>
-    <string name="collect_by_yourself">In-store pick up</string>
+    <string name="delivery">Take away，delivery</string>
+    <string name="collect_by_yourself">Pick up</string>
     <string name="expected_delivery_time">Prefereed delivery time</string>
     <string name="delivery_method">Delivery method</string>
     <string name="merchant_distribution">Merchant delivery</string>
@@ -1055,7 +1055,7 @@
     <string name="red_envelopes">red packet</string>
     <string name="red_envelopes_value">-%1$sAR</string>
     <string name="distribution_information">Delivery information</string>
-    <string name="receiving_information">Good reception information</string>
+    <string name="receiving_information">Receipt information</string>
     <string name="expected_time">Prefereed time</string>
     <string name="distribution_service">Delivery service</string>
     <string name="order_information">Order information</string>
@@ -1143,5 +1143,6 @@
     <string name="merchant_has_no_phone_set">The merchant has not set up the No.Tel</string>
     <string name="call_phone_tip">Please go to the settings to open the "Call" authorization</string>
     <string name="shop">Shop</string>
+    <string name="no_products">No products</string>
 
 </resources>

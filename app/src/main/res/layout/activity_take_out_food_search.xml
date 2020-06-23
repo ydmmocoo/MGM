@@ -16,7 +16,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="27dp"
         android:contentDescription="@null"
-        android:padding="10dp"
+        android:padding="12dp"
         android:src="@drawable/iv_back" />
 
     <EditText
@@ -31,6 +31,9 @@
         android:hint="@string/input_store_name_or_goods_name"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
+        android:imeOptions="actionSearch"
+        android:singleLine="true"
+        android:maxLines="1"
         android:layout_toStartOf="@+id/tv_search"
         android:textColorHint="@color/white"
         android:textColor="@color/white"

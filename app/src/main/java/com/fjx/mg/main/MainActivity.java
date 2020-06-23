@@ -68,6 +68,7 @@ import com.library.common.utils.StringUtil;
 import com.library.common.view.shortcutbadger.ShortcutBadger;
 import com.library.repository.Constant;
 import com.library.repository.core.net.CommonObserver;
+import com.library.repository.core.net.NetCode;
 import com.library.repository.core.net.RxScheduler;
 import com.library.repository.data.UserCenter;
 import com.library.repository.db.base.DBHelper;
@@ -160,6 +161,8 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
             if (TextUtils.isEmpty(infoModel.getUId())) {
                 UserCenter.saveUserInfo(null);
             }
+        }else {
+            NetCode.isShowGestureLockActivity = false;
         }
 
         IntentFilter filters = new IntentFilter(broadcast_tocpatureac);

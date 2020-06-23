@@ -2,7 +2,9 @@ package com.fjx.mg.food.presenter;
 
 import android.widget.ImageView;
 
+import com.fjx.mg.R;
 import com.fjx.mg.food.contract.GoodsSearchContract;
+import com.library.common.base.BaseApp;
 import com.library.common.utils.CommonToast;
 import com.library.repository.core.net.CommonObserver;
 import com.library.repository.core.net.RxScheduler;
@@ -32,6 +34,9 @@ public class GoodsSearchPresenter extends GoodsSearchContract.Presenter {
                     @Override
                     public void onSuccess(GoodsSearchBean data) {
                         if (mView != null) {
+                            if (data.getGoodsList()==null||data.getGoodsList().size()==0){
+                                CommonToast.toast(BaseApp.getInstance().getResources().getString(R.string.no_products));
+                            }
                             mView.getGoodsListSuccess(data.getGoodsList(),data.isHasNext());
                         }
                     }

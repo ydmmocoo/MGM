@@ -45,13 +45,6 @@ public class MulLanguageUtil {
     public static Locale getLocalLanguage() {
         String str = SharedPreferencesUtil.name(LANGUAGE_FILE).getString(LOCAL_LANGUAGE, "");
         if (TextUtils.isEmpty(str)){
-            /*if (locale!=Locale.CHINA&&locale!=Locale.TAIWAN&&
-                    locale!=Locale.FRENCH&&locale!=Locale.ENGLISH){
-                locale=Locale.ENGLISH;
-            }*/
-            if (Locale.getDefault().toString().equals("zh_CN_#Hans")){
-                return Locale.SIMPLIFIED_CHINESE;
-            }
             return Locale.getDefault();
         }
         return JsonUtil.strToModel(str, Locale.class);

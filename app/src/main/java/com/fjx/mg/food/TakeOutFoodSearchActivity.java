@@ -3,6 +3,7 @@ package com.fjx.mg.food;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -71,6 +72,15 @@ public class TakeOutFoodSearchActivity extends BaseMvpActivity<TakeOutFoodSearch
     }
 
     private void setListener() {
+        mEtSearch.setOnEditorActionListener((v, actionId, event) -> {
+            if ((actionId == EditorInfo.IME_ACTION_SEARCH)) {//如果是搜索按钮
+                mPage = 1;
+                mPresenter.getShopsList(mContent, mPage);
+                SoftInputUtil.hideSoftInput(TakeOutFoodSearchActivity.this);
+                return true;
+            }
+            return false;
+        });
         //点击Item跳转店铺详情
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             if (mList.get(position).getItemType() == SearchEntity.TYPE_TAKE_OUT_FOOD) {

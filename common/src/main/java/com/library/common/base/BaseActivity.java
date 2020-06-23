@@ -155,14 +155,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Override
     protected void onDestroy() {
-        try {
-            if (rankPermissionReceiver != null)
-                unregisterReceiver(rankPermissionReceiver);
-
-            if (forbiddenReceiver != null)
-                unregisterReceiver(forbiddenReceiver);
-        } catch (Exception e) {
-        }
+        if (rankPermissionReceiver != null)
+            unregisterReceiver(rankPermissionReceiver);
+        if (forbiddenReceiver != null)
+            unregisterReceiver(forbiddenReceiver);
         hideLoading();
         if (mUnbinder != null) mUnbinder.unbind();
         EventBus.getDefault().unregister(this);

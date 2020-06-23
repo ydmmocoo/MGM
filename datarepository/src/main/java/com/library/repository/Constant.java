@@ -23,7 +23,7 @@ public class Constant {
 
     public static String getHost() {
         if (TimConfig.isRelease) {
-            return "https://www.messageglobal-online.com/";
+            return "https://www.mgm-online.com/";
         } else {
             return "http://139.9.38.218/";//测试服务器
         }
@@ -31,7 +31,7 @@ public class Constant {
 
     public static String getUrl(){
         if (TimConfig.isRelease){
-            return "https://www.messageglobal-online.com/";
+            return "https://www.mgm-online.com/";
         } else {
             return "http://139.9.38.218/";//测试服务器
         }
@@ -54,7 +54,6 @@ public class Constant {
         int ELECT = 1;
         int WATER = 2;
         int NET = 3;
-
     }
 
     public interface RecordPhoneType {
@@ -84,7 +83,6 @@ public class Constant {
         String WX = "1";
         String ZFB = "2";
         String FACEBOOK = "3";
-
     }
 
 
@@ -96,10 +94,12 @@ public class Constant {
         String man = "1";
         String woman = "2";
     }
+
     public interface SuccessfullShowType {
         int WD = 1;
         int RC = 2;
     }
+
     /**
      * 获取服务费类型
      */
@@ -107,6 +107,7 @@ public class Constant {
         String USERWITHDRAWAL = "1";//用户提现
         String AGENTWITHDRAWAL = "2";//代理商或者网点提现
     }
+
     /**
      * 支付状态类型
      */

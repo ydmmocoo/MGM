@@ -1000,7 +1000,7 @@
     <string name="to_settle">Payer</string>
     <string name="total_money">Total%1$sAR</string>
     <string name="delivery_conditions">Il manque %1$s à livrer</string>
-    <string name="meet_delivery_conditions">Conditions de livraison remplies</string>
+    <string name="meet_delivery_conditions">Conditions remplies</string>
     <string name="shopping_cart">Panier</string>
     <string name="shop_cart_clear">Vider</string>
     <string name="no_purchase">Aucun article séléctionné</string>
@@ -1018,10 +1018,10 @@
     <string name="specifications">Caractéristiques：</string>
     <string name="store_goods_price">Prix：</string>
     <string name="have_chosen">Séléctionné</string>
-    <string name="first_reduction">Réduction immédiate pour le nouveau client %1$s</string>
-    <string name="first_reduction_text">Réduction immédiate pour le nouveau client</string>
+    <string name="first_reduction">Réduction pour le nouveau client %1$s</string>
+    <string name="first_reduction_text">Réduction pour le nouveau client</string>
     <string name="full_reduction">%1$s smoins %2$s</string>
-    <string name="delivery">Vente à emporter et livraison</string>
+    <string name="delivery">à emporter et livre r</string>
     <string name="collect_by_yourself">Retrait sur place</string>
     <string name="expected_delivery_time">Temps d\'arrivé souhaitée</string>
     <string name="delivery_method">Mode de livraison</string>
@@ -1029,7 +1029,7 @@
     <string name="distance_value">D\'une distance de %1$sm</string>
     <string name="delivery_fee_text">Frais de livraison</string>
     <string name="packing_fee">Frais d\'emballage</string>
-    <string name="lucky_red_envelopes_coupons">Enveloppe rouge\nBon de réduction</string>
+    <string name="lucky_red_envelopes_coupons">Enveloppe/Bon de réduction</string>
     <string name="food_total">Total：</string>
     <string name="taste_preference_and_other_requirements">Entrer le gôut,indiquer la préférence</string>
     <string name="to_pay">Payer</string>
@@ -1051,7 +1051,7 @@
     <string name="order_completed">Términé</string>
     <string name="order_total_price">Prix total：%1$sAR</string>
     <string name="to_evaluate">Evaluer</string>
-    <string name="another_one">Une autre commande</string>
+    <string name="another_one">Autre commande</string>
     <string name="apply_for_refund">Demande</string>
     <string name="order_term_of_validity">Validité：%1$s</string>
     <string name="checkout_success">Commande passée avec succés</string>
@@ -1102,11 +1102,11 @@
     <string name="refund_money">Montant à rembourser：</string>
     <string name="return_method">Mode de remboursement:selon le mode initial</string>
     <string name="return_method_tip">(Choisir jusqu\'à 1-3 jours ouvrables pour le remboursement dans le compte de paiement)</string>
-    <string name="reason_for_refund"><Data><![CDATA[Raison du remboursement<font color="#f0eff5">(séléctionner une option ou définir un motif)</font>]]></Data></string>
+    <string name="reason_for_refund"><Data><![CDATA[Raison<font color="#f0eff5">(séléctionner une option ou définir un motif)</font>]]></Data></string>
     <string name="no_merchandise_received">Colis non reçu</string>
     <string name="delivery_delay_too_long">Délai de livraison trop long</string>
-    <string name="wrong_order_or_re_order">Erreur de la commande/Repasser la commande</string>
-    <string name="forget_to_use_special_red_envelopes">Oublier d\'utiliser l\'enveloppe rouge de réduction</string>
+    <string name="wrong_order_or_re_order">Erreur de la commande/Repasser</string>
+    <string name="forget_to_use_special_red_envelopes">Oublier l\'enveloppe rouge</string>
     <string name="do_not_want_to_eat">Je ne veux pas manger</string>
     <string name="custom_reason">Raison personnalisée</string>
     <string name="submit_application_tip">Une demande de remboursement nécéssite l\'approbation du marchand,veuillez d\'abord discutez avec le marchand</string>
@@ -1147,5 +1147,6 @@
     <string name="merchant_has_no_phone_set">Le marchand n\'a pas défini le No.Tèl</string>
     <string name="call_phone_tip">Veuillez accéder aux paramètres pour ouvrir l\'autorisation Appel</string>
     <string name="shop">Boutique</string>
+    <string name="no_products">Pas de produits</string>
 
 </resources>
