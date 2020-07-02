@@ -68,6 +68,7 @@ public class OrderBean {
         private String orderId;
         private String createTime;
         private String sId;
+        private String payType;
         private String evaluateStatus;
         private List<GoodsListBean> goodsList;
 
@@ -189,6 +190,14 @@ public class OrderBean {
 
         public void setSId(String sId) {
             this.sId = sId;
+        }
+
+        public String getPayType() {
+            return payType;
+        }
+
+        public void setPayType(String payType) {
+            this.payType = payType;
         }
 
         public String getEvaluateStatus() {

@@ -23,11 +23,16 @@ import com.hjq.permissions.OnPermission;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
 import com.library.common.base.BaseMvpActivity;
+import com.library.common.utils.CommonToast;
+import com.library.common.utils.SoftInputUtil;
 import com.library.common.view.WrapContentListView;
+import com.library.repository.data.UserCenter;
 import com.library.repository.models.CreateOrderBean;
 import com.library.repository.models.ShoppingInfoBean;
 import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.core.BasePopupView;
 import com.lxj.xpopup.interfaces.OnConfirmListener;
+import com.lxj.xpopup.interfaces.OnInputConfirmListener;
 import com.lxj.xpopup.interfaces.OnSelectListener;
 
 import java.util.ArrayList;
@@ -70,6 +75,10 @@ public class ShoppingInfoActivity extends BaseMvpActivity<ShoppingInfoPresenter>
     WrapContentListView mLvGoods;
     @BindView(R.id.tv_packing_fee)
     TextView mTvPackingFee;
+    @BindView(R.id.v_line_six)
+    View mVLineSix;
+    @BindView(R.id.tv_delivery_fee_text)
+    TextView mTvDeliveryFeeText;
     @BindView(R.id.tv_delivery_fee)
     TextView mTvDeliveryFee;
     @BindView(R.id.tv_lucky_red_envelopes_coupons)
@@ -109,14 +118,16 @@ public class ShoppingInfoActivity extends BaseMvpActivity<ShoppingInfoPresenter>
     private long mTotalPrice;
     private String mPhone;
     private String mCouponId;
-    private String mCouponAmount;
+    private String mCouponAmount="0";
     private String mAddressId;
     private String mRemark;
     private String mTimeOfDelivery;
     private String mSelfExtractingTime;
-    private String mReservedPhone;
+    private String mReservedPhone="";
+    private String mDeliveryFee;
     private List<String> mTimeList;
     private List<String> mPhoneList=new ArrayList<>();
+    private BasePopupView mReservedPhonePop;
 
     @Override
     protected int layoutId() {
@@ -135,6 +146,8 @@ public class ShoppingInfoActivity extends BaseMvpActivity<ShoppingInfoPresenter>
         //初始化商品列表
         mAdapter = new LvGoodsAdapter(getCurContext(), mList);
         mLvGoods.setAdapter(mAdapter);
+
+        mReservedPhone= UserCenter.getUserInfo().getPhone();
 
         mPresenter.getShoppingInfo(mId);
     }
@@ -155,6 +168,16 @@ public class ShoppingInfoActivity extends BaseMvpActivity<ShoppingInfoPresenter>
                 mTvCollectByYourself.setBackground(null);
                 mTvCollectByYourself.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
                 mTvCollectByYourself.setTextColor(ContextCompat.getColor(getCurContext(), R.color.white));
+
+                mVLineSix.setVisibility(View.GONE);
+                mTvDeliveryFeeText.setVisibility(View.GONE);
+                mTvDeliveryFee.setVisibility(View.GONE);
+
+                mVLineSix.setVisibility(View.GONE);
+                mTvDeliveryFeeText.setVisibility(View.GONE);
+                mTvDeliveryFee.setVisibility(View.GONE);
+                mTvTotal.setText(getResources().getString(R.string.goods_price, String.valueOf(mTotalPrice - Integer.parseInt(mCouponAmount))));
+                mTvTotalPrice.setText(getResources().getString(R.string.goods_price, String.valueOf(mTotalPrice - Integer.parseInt(mCouponAmount))));
                 break;
             case R.id.tv_collect_by_yourself://到店自取
                 mIsDelivery = false;
@@ -166,6 +189,12 @@ public class ShoppingInfoActivity extends BaseMvpActivity<ShoppingInfoPresenter>
                 mTvCollectByYourself.setBackground(ContextCompat.getDrawable(getCurContext(), R.drawable.btn_white_bg));
                 mTvCollectByYourself.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
                 mTvCollectByYourself.setTextColor(ContextCompat.getColor(getCurContext(), R.color.colorAccent));
+
+                mVLineSix.setVisibility(View.GONE);
+                mTvDeliveryFeeText.setVisibility(View.GONE);
+                mTvDeliveryFee.setVisibility(View.GONE);
+                mTvTotal.setText(getResources().getString(R.string.goods_price, String.valueOf(mTotalPrice - Integer.parseInt(mCouponAmount)-Integer.parseInt(mDeliveryFee))));
+                mTvTotalPrice.setText(getResources().getString(R.string.goods_price, String.valueOf(mTotalPrice - Integer.parseInt(mCouponAmount)-Integer.parseInt(mDeliveryFee))));
                 break;
             case R.id.v_address://选择地址
                 startActivityForResult(AddressListActivity.newInstance(getCurContext()), 2);
@@ -181,6 +210,20 @@ public class ShoppingInfoActivity extends BaseMvpActivity<ShoppingInfoPresenter>
                             mTimeList);
                 break;
             case R.id.tv_reserved_telephone://预留电话
+                mReservedPhonePop = new XPopup.Builder(getCurActivity())
+                        .isDarkTheme(false)
+                        .autoDismiss(false)
+                        .asInputConfirm(getResources().getString(R.string.modify_reserved_phone), "", "", mReservedPhone, text -> {
+                            if (!TextUtils.isEmpty(text)) {
+                                mReservedPhone = text;
+                                mTvReservedTelephone.setText(mReservedPhone);
+                                SoftInputUtil.hideSoftInput(ShoppingInfoActivity.this);
+                                mReservedPhonePop.dismiss();
+                            } else {
+                                CommonToast.toast(getResources().getString(R.string.hint_input_contact_phone));
+                            }
+                        })
+                        .show();
                 break;
             case R.id.tv_store_name://点击店铺名称跳转详情
                 Intent intent = new Intent(getCurContext(), StoreDetailActivity.class);
@@ -256,9 +299,14 @@ public class ShoppingInfoActivity extends BaseMvpActivity<ShoppingInfoPresenter>
             mTvDelivery.setVisibility(View.GONE);
             mTvCollectByYourself.setVisibility(View.GONE);
             mTabBg.setVisibility(View.INVISIBLE);
+        }else{
+            mTvDeliveryOther.setVisibility(View.GONE);
+            mTvDelivery.setVisibility(View.VISIBLE);
+            mTvCollectByYourself.setVisibility(View.VISIBLE);
+            mTabBg.setVisibility(View.VISIBLE);
         }
         //设置地址
-        if (data.getAddressInfo() == null) {
+        if (TextUtils.isEmpty(data.getAddressInfo().getAddress())) {
             mTvAddress.setText(getResources().getString(R.string.please_add_address_first));
         } else {
             mAddressId = data.getAddressInfo().getAddressId();
@@ -284,8 +332,8 @@ public class ShoppingInfoActivity extends BaseMvpActivity<ShoppingInfoPresenter>
         //设置包装费
         //mTvPackingFee.setText(data.getShopInfo().get);
         //设置配送费
-        mTvDeliveryFee.setText(getResources().getString(R.string.goods_price,
-                data.getShopInfo().getDistributionFee()));
+        mDeliveryFee=data.getShopInfo().getDistributionFee();
+        mTvDeliveryFee.setText(getResources().getString(R.string.goods_price, mDeliveryFee));
         //设置店铺满减
         if (TextUtils.isEmpty(data.getFullReduction())) {
             mTvShopFullReduction.setVisibility(View.GONE);

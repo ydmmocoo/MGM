@@ -128,7 +128,8 @@ public class FoodPresenter extends FoodContract.Presenter {
         String lng=RepositoryFactory.getLocalRepository().getLongitude();
         String lat=RepositoryFactory.getLocalRepository().getLatitude();
         if (TextUtils.isEmpty(lat)||TextUtils.isEmpty(lng)){
-            return;
+            lat="0.0";
+            lng="0.0";
         }
         RepositoryFactory.getRemoteFoodApi().getShopList(lng,lat,"1",serviceId,secondServiceId,
                 order,"",page)

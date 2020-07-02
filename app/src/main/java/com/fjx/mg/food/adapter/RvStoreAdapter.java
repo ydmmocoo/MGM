@@ -61,10 +61,12 @@ public class RvStoreAdapter extends BaseQuickAdapter<HomeShopListBean.ShopListBe
         List<String> list=new ArrayList<>();
         String language = RepositoryFactory.getLocalRepository().getLangugeType();
         int size=0;
-        if (language.equals("zh-ch")||language.equals("zh-tw")) {
-            size = Math.min(item.getReductionList().size(), 4);
-        }else {
+        if (language.equals("en-us")) {
+            size = Math.min(item.getReductionList().size(), 2);
+        }else if (language.equals("fr")){
             size = Math.min(item.getReductionList().size(), 3);
+        }else {
+            size = Math.min(item.getReductionList().size(), 4);
         }
         for (int i=0;i<size;i++){
             list.add(getContext().getResources().getString(R.string.full_reduction,

@@ -65,7 +65,8 @@ public class GvAddImageAdapter extends BaseAdapter {
             CommonImageLoader.load(mList.get(position))
                     .placeholder(R.drawable.big_image_default).into(holder.mIvPic);
         } else {
-            holder.mIvPic.setImageResource(R.drawable.add_image_default);
+            CommonImageLoader.load(R.drawable.add_image_default)
+                    .placeholder(R.drawable.big_image_default).into(holder.mIvPic);
         }
         return convertView;
     }

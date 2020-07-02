@@ -51,6 +51,7 @@ import static com.tencent.qcloud.uikit.business.chat.model.MessageInfoUtil.TRANS
 
 
 public class TimConfig {
+
     public static boolean isRelease =!BuildConfig.DEBUG ;
 
     private static int TIM_APPID_DEBUG = 1400246080;//测试
@@ -125,25 +126,7 @@ public class TimConfig {
             //添加自定初始化配置
             customConfig();
             System.out.println(">>>>>>>>>>>>>>>>>>" + (System.currentTimeMillis() - current));
-
-//            if (IMFunc.isBrandXiaoMi()) {
-            // 小米离线推送
-//                MiPushClient.registerPush(context, XM_PUSH_APPID, XM_PUSH_APPKEY);
-//            }
-//            if (IMFunc.isBrandHuawei()) {
-//                // 华为离线推送
-//                HMSAgent.init(this);
-//            }
-//            if (MzSystemUtils.isBrandMeizu(this)) {
-//                // 魅族离线推送
-//                PushManager.register(this, Constants.MZ_PUSH_APPID, SyncStateContract.Constants.MZ_PUSH_APPKEY);
-//            }
-//            if (IMFunc.isBrandVivo()) {
-//                // vivo离线推送
-//                PushClient.getInstance(getApplicationContext()).initialize();
-//            }
         }
-
     }
 
     public static void customConfig() {
@@ -151,7 +134,6 @@ public class TimConfig {
                 .setUserStatusListener(new TIMUserStatusListener() {
                     @Override
                     public void onForceOffline() {
-                        EventBus.getDefault().post(true);
                         final Activity activity = CActivityManager.getAppManager().currentActivity();
                         if (activity == null) return;
                         SharedPreferencesUtil.name("user_data").put("UserInfoModel", "").apply();
@@ -189,7 +171,6 @@ public class TimConfig {
 
                     @Override
                     public void onUserSigExpired() {
-
                     }
                 });
         //将用户配置与通讯管理器进行绑定
@@ -213,21 +194,20 @@ public class TimConfig {
 
     private static void showNotifaction(final TIMMessage message) {
 
-
         final String msg = getMessage(message);
         if (msg == null) return;
 
         message.getSenderProfile(new TIMValueCallBack<TIMUserProfile>() {
+
             @Override
             public void onError(int i, String s) {
-
             }
 
             @Override
             public void onSuccess(TIMUserProfile profile) {
                 if (profile == null) return;
                 String nickName = profile.getNickName();
-//        String faceUrl = message.getSenderProfile().getFaceUrl();
+                //String faceUrl = message.getSenderProfile().getFaceUrl();
                 Intent intent = new Intent("mg_ChatActivity");
                 intent.putExtra("IS_GROUP", false);
                 intent.putExtra("INTENT_DATA", message.getSender());
@@ -305,7 +285,6 @@ public class TimConfig {
                     return "[".concat(ContextManager.getContext().getString(R.string.action_file)).concat("]");
                 }
             }
-
         }
         return null;
     }

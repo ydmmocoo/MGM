@@ -85,6 +85,7 @@ public class StoreGoodsPresenter extends StoreGoodsContract.Presenter {
                 StoreGoodsGroupBean bean = new StoreGoodsGroupBean();
                 bean.setCount(0);
                 bean.setName(data.get(i).getCateName());
+                bean.setCateId(data.get(i).getcId());
                 bean.setGroupId(i);
                 list.add(bean);
             }
@@ -100,6 +101,7 @@ public class StoreGoodsPresenter extends StoreGoodsContract.Presenter {
                     StoreGoodsBean.CateListBean.GoodsListBean bean = data.get(i).getGoodsList().get(j);
                     bean.setGroupId(i);
                     bean.setGroupName(data.get(i).getCateName());
+                    bean.setCateId(data.get(i).getcId());
                     list.add(bean);
                 }
             }

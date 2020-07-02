@@ -87,7 +87,7 @@ public class RvOrderAdapter extends BaseQuickAdapter<OrderBean.OrderListBean, Ba
                 helper.setTextColor(R.id.tv_order_status, ContextCompat.getColor(getContext(), R.color.gray_text));
                 helper.setVisible(R.id.btn_left, true);
                 helper.setVisible(R.id.btn_right, true);
-                helper.setText(R.id.btn_left, getContext().getResources().getString(R.string.refund_detail));
+                helper.setText(R.id.btn_left, getContext().getResources().getString(R.string.view_progress));
                 helper.setBackgroundResource(R.id.btn_right, R.drawable.btn_gray_bg);
                 helper.setTextColor(R.id.btn_right, ContextCompat.getColor(getContext(), R.color.black));
                 helper.setText(R.id.btn_right, getContext().getResources().getString(R.string.cancel_refund));
@@ -254,6 +254,7 @@ public class RvOrderAdapter extends BaseQuickAdapter<OrderBean.OrderListBean, Ba
                 intent = new Intent(getContext(), RefundDetailsActivity.class);
                 intent.putExtra("refund_remark", item.getRefundRemark());
                 intent.putExtra("refund_status", item.getRefundStatus());
+                intent.putExtra("pay_type", item.getPayType());
                 intent.putExtra("price", item.getTotalPrice());
                 getContext().startActivity(intent);
             } else if (btnRight.getText().equals(getContext().getResources().getString(R.string.apply_for_refund))) {
@@ -313,10 +314,10 @@ public class RvOrderAdapter extends BaseQuickAdapter<OrderBean.OrderListBean, Ba
                                 getContext().getResources().getString(R.string.cancel), getContext().getResources().getString(R.string.confirm_short),
                                 () -> mListener.cancelOrder(item.getOrderId()), null, false)
                         .show();
-            } /*else if (btnLeft.getText().equals(getContext().getResources().getString(R.string.view_progress))) {
+            } else if (btnLeft.getText().equals(getContext().getResources().getString(R.string.view_progress))) {
                 getContext().startActivity(RefundDetailsActivity.newInstance(getContext(),
-                        item.getRefundStatus(), item.getRefundRemark(), item.getTotalPrice()));
-            }*/
+                        item.getRefundStatus(), item.getRefundRemark(), item.getPayType(),item.getTotalPrice()));
+            }
         });
     }
 

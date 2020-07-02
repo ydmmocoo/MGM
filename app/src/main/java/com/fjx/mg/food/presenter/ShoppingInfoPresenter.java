@@ -1,7 +1,11 @@
 package com.fjx.mg.food.presenter;
 
+import android.text.TextUtils;
+
+import com.fjx.mg.R;
 import com.fjx.mg.food.contract.ShoppingInfoContract;
 import com.fjx.mg.food.contract.StoreDetailContract;
+import com.library.common.base.BaseApp;
 import com.library.common.utils.CommonToast;
 import com.library.repository.core.net.CommonObserver;
 import com.library.repository.core.net.RxScheduler;
@@ -77,6 +81,12 @@ public class ShoppingInfoPresenter extends ShoppingInfoContract.Presenter {
 
     @Override
     public void checkGoods(String sId, String type, String addressId, String expectedDeliveryTime, String cId, String remark, String scId, String reservedTelephone) {
+        if("1".equals(type)){
+            if (TextUtils.isEmpty(addressId)) {
+                CommonToast.toast(BaseApp.getInstance().getResources().getString(R.string.please_add_address_first));
+                return;
+            }
+        }
         RepositoryFactory.getRemoteFoodApi().checkGoods(sId)
                 .compose(RxScheduler.<ResponseModel<CheckGoodsBean>>toMain())
                 .as(mView.<ResponseModel<CheckGoodsBean>>bindAutoDispose())

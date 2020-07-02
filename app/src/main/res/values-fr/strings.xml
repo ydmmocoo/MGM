@@ -1149,5 +1149,6 @@
     <string name="shop">Boutique</string>
     <string name="no_products">Pas de produits</string>
     <string name="business_phone">Téléphone de travail</string>
+    <string name="modify_reserved_phone">Modifier le numéro de résérvation</string>
 
 </resources>

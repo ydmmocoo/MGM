@@ -10,6 +10,7 @@ public class StoreGoodsGroupBean {
 
     private long groupId;
     private String name;
+    private String cateId;
     private long count;
 
     public long getGroupId() {
@@ -26,6 +27,14 @@ public class StoreGoodsGroupBean {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCateId() {
+        return cateId;
+    }
+
+    public void setCateId(String cateId) {
+        this.cateId = cateId;
     }
 
     public long getCount() {

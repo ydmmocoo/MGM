@@ -1165,6 +1165,7 @@
     <string name="shop">店铺</string>
     <string name="no_products">暂无商品</string>
     <string name="business_phone">商家电话</string>
+    <string name="modify_reserved_phone">修改预留电话</string>
 
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <bool name="bottomsheet_is_tablet">false</bool>

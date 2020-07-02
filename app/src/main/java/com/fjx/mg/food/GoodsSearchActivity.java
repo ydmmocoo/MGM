@@ -129,6 +129,7 @@ public class GoodsSearchActivity extends BaseMvpActivity<GoodsSearchPresenter>
         mEtSearch.setOnEditorActionListener((v, actionId, event) -> {
             if ((actionId == EditorInfo.IME_ACTION_SEARCH)) {//如果是搜索按钮
                 mPage = 1;
+                mContent=mEtSearch.getText().toString();
                 mPresenter.getGoodsList(mId, mContent, mPage);
                 SoftInputUtil.hideSoftInput(GoodsSearchActivity.this);
                 return true;

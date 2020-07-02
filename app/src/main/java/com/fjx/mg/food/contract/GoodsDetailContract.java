@@ -23,7 +23,7 @@ public interface GoodsDetailContract {
 
         void getShopCartDataSuccess(ShopingCartBean data);
 
-        void addShopCartSuccess();
+        void addShopCartSuccess(boolean isAdd);
 
         void clearShopCartSuccess();
 

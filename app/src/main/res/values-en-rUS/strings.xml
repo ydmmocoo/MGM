@@ -1145,5 +1145,6 @@
     <string name="shop">Shop</string>
     <string name="no_products">No products</string>
     <string name="business_phone">Business phone</string>
+    <string name="modify_reserved_phone">Modify reservation number</string>
 
 </resources>

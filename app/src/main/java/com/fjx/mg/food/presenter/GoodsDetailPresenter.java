@@ -1,5 +1,7 @@
 package com.fjx.mg.food.presenter;
 
+import android.util.Log;
+
 import com.fjx.mg.food.contract.GoodsDetailContract;
 import com.library.common.utils.CommonToast;
 import com.library.repository.core.net.CommonObserver;
@@ -37,7 +39,8 @@ public class GoodsDetailPresenter extends GoodsDetailContract.Presenter {
 
                     @Override
                     public void onError(ResponseModel data) {
-                        CommonToast.toast(data.getMsg());
+                        //CommonToast.toast(data.getMsg());
+                        getGoodsInfo(gId);
                     }
 
                     @Override
@@ -81,7 +84,11 @@ public class GoodsDetailPresenter extends GoodsDetailContract.Presenter {
                     @Override
                     public void onSuccess(Object data) {
                         if (mView != null) {
-                            mView.addShopCartSuccess();
+                            if (num.equals("-1")) {
+                                mView.addShopCartSuccess(false);
+                            }else {
+                                mView.addShopCartSuccess(true);
+                            }
                         }
                     }
 
@@ -137,7 +144,7 @@ public class GoodsDetailPresenter extends GoodsDetailContract.Presenter {
 
                     @Override
                     public void onError(ResponseModel data) {
-                        CommonToast.toast(data.getMsg());
+                        //CommonToast.toast(data.getMsg());
                     }
 
                     @Override

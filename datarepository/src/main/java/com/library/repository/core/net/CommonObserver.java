@@ -58,7 +58,7 @@ public abstract class CommonObserver<T> implements Observer<ResponseModel<T>> {
                 BaseActivity activity = (BaseActivity) CActivityManager.getAppManager().currentActivity();
                 if (activity == null) return;
                 activity.destoryAndDismissDialog();
-                if (!NetCode.isShowGestureLockActivity) {
+                if (!NetCode.isShowGestureLockActivity&&!TextUtils.isEmpty(UserCenter.getToken())) {
                     NetCode.isShowGestureLockActivity = true;
                     Intent intent = new Intent("mg_GestureLockActivity");
                     intent.putExtra("type", 3);
@@ -74,11 +74,10 @@ public abstract class CommonObserver<T> implements Observer<ResponseModel<T>> {
             }
         }else if(response.getCode() == NetCode.LOGIN_OTHER_DEVICE_TIP){
             try {
-                UserCenter.logout();
+                UserCenter.logout2Settings();
                 BaseActivity activity = (BaseActivity) CActivityManager.getAppManager().currentActivity();
                 if (activity == null) return;
                 activity.destoryAndDismissDialog();
-                NetCode.isShowGestureLockActivity = false;
                 onFinish();
             } catch (IndexOutOfBoundsException e) {
                 e.printStackTrace();

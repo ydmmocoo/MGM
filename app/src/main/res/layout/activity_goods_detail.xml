@@ -58,7 +58,7 @@
                     android:layout_below="@+id/tv_goods_name"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
-                    android:text="@string/monthly_sales"
+                    tools:text="@string/monthly_sales"
                     android:textSize="12sp" />
 
                 <TextView
@@ -69,7 +69,7 @@
                     android:layout_marginStart="10dp"
                     android:paddingTop="15dp"
                     android:paddingBottom="15dp"
-                    android:text="@string/goods_price"
+                    tools:text="@string/goods_price"
                     android:textColor="@color/colorAccent"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -212,7 +212,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:text="@string/delivery_conditions"
+            tools:text="@string/delivery_conditions"
             android:textColor="@color/white"
             android:textSize="12sp"
             app:layout_constraintLeft_toLeftOf="@+id/tv_price"

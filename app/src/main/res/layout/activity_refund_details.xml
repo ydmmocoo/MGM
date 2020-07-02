@@ -21,7 +21,7 @@
         android:paddingEnd="10dp"
         android:paddingTop="15dp"
         android:background="@color/white"
-        android:text="@string/food_refund_amount"/>
+        tools:text="@string/food_refund_amount"/>
 
     <TextView
         android:id="@+id/tv_return_account"
@@ -31,7 +31,7 @@
         android:paddingEnd="10dp"
         android:paddingTop="15dp"
         android:background="@color/white"
-        android:text="@string/food_return_account"/>
+        tools:text="@string/food_return_account"/>
 
     <TextView
         android:id="@+id/tv_refund_reason"
@@ -41,7 +41,7 @@
         android:paddingEnd="10dp"
         android:paddingTop="15dp"
         android:background="@color/white"
-        android:text="@string/food_refund_reason"/>
+        tools:text="@string/food_refund_reason"/>
 
     <TextView
         android:id="@+id/tv_refund_status"
@@ -52,7 +52,7 @@
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:background="@color/white"
-        android:text="@string/food_refund_status"/>
+        tools:text="@string/food_refund_status"/>
 
     <View
         android:layout_width="match_parent"

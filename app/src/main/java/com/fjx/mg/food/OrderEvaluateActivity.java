@@ -24,6 +24,8 @@ import com.library.common.utils.DimensionUtil;
 import com.library.common.utils.JsonUtil;
 import com.library.common.utils.SoftInputUtil;
 import com.library.common.view.materialratingbar.MaterialRatingBar;
+import com.library.common.view.ratingbar.BaseRatingBar;
+import com.library.common.view.ratingbar.ScaleRatingBar;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.entity.LocalMedia;
@@ -46,17 +48,17 @@ public class OrderEvaluateActivity extends BaseMvpActivity<OrderEvaluatePresente
     @BindView(R.id.tv_price)
     TextView mTvPrice;
     @BindView(R.id.rb_in_general)
-    MaterialRatingBar mRbInGeneral;
+    ScaleRatingBar mRbInGeneral;
     @BindView(R.id.rb_flavor)
-    MaterialRatingBar mRbFlavor;
+    ScaleRatingBar mRbFlavor;
     @BindView(R.id.tv_flavor_score)
     TextView mTvFlavorScore;
     @BindView(R.id.rb_packing)
-    MaterialRatingBar mRbPacking;
+    ScaleRatingBar mRbPacking;
     @BindView(R.id.tv_packing_score)
     TextView mTvPackingScore;
     @BindView(R.id.rb_distribution)
-    MaterialRatingBar mRbDistribution;
+    ScaleRatingBar mRbDistribution;
     @BindView(R.id.tv_distribution_score)
     TextView mTvDistributionScore;
     @BindView(R.id.et_content)
@@ -97,15 +99,11 @@ public class OrderEvaluateActivity extends BaseMvpActivity<OrderEvaluatePresente
         //设置价格
         mTvPrice.setText(getResources().getString(R.string.goods_price, price));
         //默认评分都为5分
-        mRbInGeneral.setProgress(5);
         mInGeneralScore = "5";
-        mRbFlavor.setProgress(5);
         mFlavorScore = "5";
         setScoreText(mTvFlavorScore,5);
-        mRbPacking.setProgress(5);
         mPackingScore = "5";
         setScoreText(mTvPackingScore,5);
-        mRbDistribution.setProgress(5);
         mDistributionScore = "5";
         setScoreText(mTvDistributionScore,5);
 
@@ -119,51 +117,36 @@ public class OrderEvaluateActivity extends BaseMvpActivity<OrderEvaluatePresente
 
     private void setListener() {
         //监听总体评分
-        mRbInGeneral.setOnRatingChangeListener(new MaterialRatingBar.OnRatingChangeListener() {
-            @Override
-            public void onRatingChanged(MaterialRatingBar ratingBar, float rating) {
-                int score = (int) rating;
-                mInGeneralScore = String.valueOf(score);
-            }
+        mRbInGeneral.setOnRatingChangeListener((ratingBar, rating, fromUser) -> {
+            int score = (int) rating;
+            mInGeneralScore = String.valueOf(score);
         });
         //监听口味评分
-        mRbFlavor.setOnRatingChangeListener(new MaterialRatingBar.OnRatingChangeListener() {
-            @Override
-            public void onRatingChanged(MaterialRatingBar ratingBar, float rating) {
-                int score = (int) rating;
-                mFlavorScore = String.valueOf(score);
-                setScoreText(mTvFlavorScore, score);
-            }
+        mRbFlavor.setOnRatingChangeListener((ratingBar, rating, fromUser) -> {
+            int score = (int) rating;
+            mFlavorScore = String.valueOf(score);
+            setScoreText(mTvFlavorScore, score);
         });
         //监听包装评分
-        mRbPacking.setOnRatingChangeListener(new MaterialRatingBar.OnRatingChangeListener() {
-            @Override
-            public void onRatingChanged(MaterialRatingBar ratingBar, float rating) {
-                int score = (int) rating;
-                mPackingScore = String.valueOf(score);
-                setScoreText(mTvPackingScore, score);
-            }
+        mRbPacking.setOnRatingChangeListener((ratingBar, rating, fromUser) -> {
+            int score = (int) rating;
+            mPackingScore = String.valueOf(score);
+            setScoreText(mTvPackingScore, score);
         });
         //监听配送评分
-        mRbDistribution.setOnRatingChangeListener(new MaterialRatingBar.OnRatingChangeListener() {
-            @Override
-            public void onRatingChanged(MaterialRatingBar ratingBar, float rating) {
-                int score = (int) rating;
-                mDistributionScore = String.valueOf(score);
-                setScoreText(mTvDistributionScore, score);
-            }
+        mRbDistribution.setOnRatingChangeListener((ratingBar, rating, fromUser) -> {
+            int score = (int) rating;
+            mDistributionScore = String.valueOf(score);
+            setScoreText(mTvDistributionScore, score);
         });
         //图片添加点击事件
-        mGvPic.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                PickImageDialog dialog = new PickImageDialog(getCurContext());
-                dialog.setSelectSingle(false);
-                new XPopup.Builder(getCurContext())
-                        .asCustom(dialog)
-                        .show();
-                SoftInputUtil.hideSoftInput(getCurActivity());
-            }
+        mGvPic.setOnItemClickListener((parent, view, position, id) -> {
+            PickImageDialog dialog = new PickImageDialog(getCurContext());
+            dialog.setSelectSingle(false);
+            new XPopup.Builder(getCurContext())
+                    .asCustom(dialog)
+                    .show();
+            SoftInputUtil.hideSoftInput(getCurActivity());
         });
     }
 
@@ -225,8 +208,8 @@ public class OrderEvaluateActivity extends BaseMvpActivity<OrderEvaluatePresente
                 // 图片、视频、音频选择结果回调
                 List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
                 mList.clear();
-                for (LocalMedia localMedia : selectList) {
-                    mList.add(localMedia.getCompressPath());
+                for (int i=0;i<selectList.size();i++){
+                    mList.add(selectList.get(i).getCompressPath());
                 }
                 if (mList.size() < 3) {
                     mList.add("");

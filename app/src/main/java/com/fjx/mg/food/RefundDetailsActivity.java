@@ -35,10 +35,11 @@ public class RefundDetailsActivity extends BaseActivity {
     private LvRefundDetailProcessAdapter mAdapter;
 
     public static Intent newInstance(Context context, String refundStatus, String refundRemark,
-                                     String price) {
+                                     String payType,String price) {
         Intent intent = new Intent(context, RefundDetailsActivity.class);
         intent.putExtra("refund_status", refundStatus);
         intent.putExtra("refund_remark", refundRemark);
+        intent.putExtra("pay_type", payType);
         intent.putExtra("price", price);
         return intent;
     }
@@ -52,6 +53,7 @@ public class RefundDetailsActivity extends BaseActivity {
     protected void initView() {
         String refundStatus = getIntent().getStringExtra("refund_status");
         String refundRemark = getIntent().getStringExtra("refund_remark");
+        String payType= getIntent().getStringExtra("pay_type");
         String price = getIntent().getStringExtra("price");
         //设置标题
         ToolBarManager.with(this).setTitle(getString(R.string.refund_detail));
@@ -72,7 +74,7 @@ public class RefundDetailsActivity extends BaseActivity {
             mTvRefundAmount.setText(Html.fromHtml(getResources().getString(R.string.food_refund_amount, price), Html.FROM_HTML_MODE_LEGACY));
             //设置退回账户
             mTvReturnAccount.setText(Html.fromHtml(getResources().getString(R.string.food_return_account,
-                    getResources().getString(R.string.wallet_balance)), Html.FROM_HTML_MODE_LEGACY));
+                    payType), Html.FROM_HTML_MODE_LEGACY));
             //退款原因
             mTvRefundReason.setText(Html.fromHtml(getResources().getString(R.string.food_refund_reason, refundRemark),
                     Html.FROM_HTML_MODE_LEGACY));
@@ -83,7 +85,7 @@ public class RefundDetailsActivity extends BaseActivity {
             mTvRefundAmount.setText(Html.fromHtml(getResources().getString(R.string.food_refund_amount, price)));
             //设置退回账户
             mTvReturnAccount.setText(Html.fromHtml(getResources().getString(R.string.food_return_account,
-                    getResources().getString(R.string.wallet_balance))));
+                    payType)));
             //退款原因
             mTvRefundReason.setText(Html.fromHtml(getResources().getString(R.string.food_refund_reason, refundRemark)));
             //设置退款状态

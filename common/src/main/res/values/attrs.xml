@@ -7,8 +7,8 @@
 
         <attr name="dmt_selectTextColor" format="color" />
         <attr name="dmt_un_selectTextColor" format="color" />
-
     </declare-styleable>
+
     <declare-styleable name="PagerSlidingTabStrip">
         <attr name="pstsIndicatorColor" format="color" />
         <attr name="pstsUnderlineColor" format="color" />
@@ -101,6 +101,22 @@
             <enum name="add" value="16" />
         </attr>
         <attr name="mrb_fillBackgroundStars" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="BaseRatingBar">
+        <attr name="srb_numStars" format="integer" />
+        <attr name="srb_minimumStars" format="float" />
+        <attr name="srb_rating" format="float" />
+        <attr name="srb_starPadding" format="dimension" />
+        <attr name="srb_drawableEmpty" format="reference" />
+        <attr name="srb_drawableFilled" format="reference" />
+        <attr name="srb_isIndicator" format="boolean" />
+        <attr name="srb_scrollable" format="boolean" />
+        <attr name="srb_clickable" format="boolean" />
+        <attr name="srb_clearRatingEnabled" format="boolean" />
+        <attr name="srb_starWidth" format="dimension" />
+        <attr name="srb_starHeight" format="dimension" />
+        <attr name="srb_stepSize" format="float" />
     </declare-styleable>
 
 </resources>

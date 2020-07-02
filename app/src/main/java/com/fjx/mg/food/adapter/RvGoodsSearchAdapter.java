@@ -8,10 +8,12 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.fjx.mg.R;
 import com.fjx.mg.dialog.AddShopCartDialog;
+import com.fjx.mg.utils.DialogUtil;
 import com.fjx.mg.view.RoundImageView;
 import com.library.common.utils.CommonImageLoader;
 import com.library.common.utils.CommonToast;
 import com.library.common.utils.DimensionUtil;
+import com.library.repository.data.UserCenter;
 import com.library.repository.models.GoodsSearchBean;
 import com.library.repository.models.StoreGoodsBean;
 
@@ -71,6 +73,13 @@ public class RvGoodsSearchAdapter extends BaseQuickAdapter<GoodsSearchBean.Goods
 
         //添加商品
         ivPlus.setOnClickListener(v -> {
+            if (!UserCenter.hasLogin()){
+                new DialogUtil().showAlertDialog(getContext(), R.string.tips, R.string.not_login_forward_login, (dialog, which) -> {
+                    dialog.dismiss();
+                    UserCenter.goLoginActivity();
+                });
+                return;
+            }
             if (item.getSpecialList().size() <= 1
                     && item.getAttrList().size() == 0) {
                 mListener.plusOne(item.getGId(), item.getGName(), item.getSpecialList().get(0).getSId(), item.getSpecialList().get(0).getName(),
@@ -88,6 +97,13 @@ public class RvGoodsSearchAdapter extends BaseQuickAdapter<GoodsSearchBean.Goods
         });
         //移除商品
         ivLess.setOnClickListener(v -> {
+            if (!UserCenter.hasLogin()){
+                new DialogUtil().showAlertDialog(getContext(), R.string.tips, R.string.not_login_forward_login, (dialog, which) -> {
+                    dialog.dismiss();
+                    UserCenter.goLoginActivity();
+                });
+                return;
+            }
             boolean hasAttr = false;
             if (item.getSpecialList().size() > 0 || item.getAttrList().size() > 0) {
                 if (item.getCount() > 1) {
@@ -98,7 +114,7 @@ public class RvGoodsSearchAdapter extends BaseQuickAdapter<GoodsSearchBean.Goods
                 }
             }
             item.setCount(0);
-            mListener.lessOne(item.getGId(), item.getGName(), "", "",
+            mListener.lessOne(item.getGId(), item.getGName(), item.getSpecialList().get(0).getSId(), item.getSpecialList().get(0).getName(),
                     "", "", item.getPrice(), "-1", item.getGImg(), hasAttr);
         });
     }

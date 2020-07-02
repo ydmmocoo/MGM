@@ -31,6 +31,7 @@
         android:layout_width="204dp"
         android:layout_height="35dp"
         android:background="@drawable/translucent_bg"
+        android:visibility="invisible"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_back" />
@@ -60,6 +61,7 @@
         android:textColor="@color/colorAccent"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintLeft_toLeftOf="@+id/tab_bg"
         app:layout_constraintTop_toTopOf="@+id/tab_bg" />
 
@@ -71,6 +73,7 @@
         android:text="@string/collect_by_yourself"
         android:textColor="@color/white"
         android:textSize="18sp"
+        android:visibility="invisible"
         app:layout_constraintRight_toRightOf="@+id/tab_bg"
         app:layout_constraintTop_toTopOf="@+id/tab_bg" />
 
@@ -117,6 +120,8 @@
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="15dp"
                         android:layout_marginEnd="12dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -231,9 +236,9 @@
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="3dp"
                         android:layout_marginEnd="12dp"
-                        android:text="@string/distance_value"
                         android:textColor="@color/black"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        tools:text="@string/distance_value" />
 
                     <View
                         android:id="@+id/v_center"
@@ -402,6 +407,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_packing_fee" />
 
             <TextView
+                android:id="@+id/tv_delivery_fee_text"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:gravity="center_vertical"
@@ -618,12 +624,12 @@
         android:layout_height="49dp"
         android:layout_marginStart="10dp"
         android:gravity="center_vertical"
-        android:text="@string/goods_price"
         android:textColor="@color/colorAccent"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/tv_total_text" />
+        app:layout_constraintLeft_toRightOf="@+id/tv_total_text"
+        tools:text="@string/goods_price" />
 
     <TextView
         android:id="@+id/tv_pay"

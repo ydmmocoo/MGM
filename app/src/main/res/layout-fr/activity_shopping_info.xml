@@ -117,6 +117,8 @@
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="15dp"
                         android:layout_marginEnd="12dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -618,12 +620,12 @@
         android:layout_height="49dp"
         android:layout_marginStart="10dp"
         android:gravity="center_vertical"
-        android:text="@string/goods_price"
         android:textColor="@color/colorAccent"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/tv_total_text" />
+        app:layout_constraintLeft_toRightOf="@+id/tv_total_text"
+        tools:text="@string/goods_price" />
 
     <TextView
         android:id="@+id/tv_pay"

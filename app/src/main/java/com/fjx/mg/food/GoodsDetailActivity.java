@@ -4,6 +4,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -214,6 +215,11 @@ public class GoodsDetailActivity extends BaseMvpActivity<GoodsDetailPresenter>
                     });
                     return;
                 }
+
+                if (mData.getGoodInfo().getCount()==1){
+                    mIvLess.setVisibility(View.INVISIBLE);
+                    mTvGoodsCount.setVisibility(View.INVISIBLE);
+                }
                 boolean hasAttr = false;
                 if (mData.getGoodInfo().getSpecialList().size() > 1 || mData.getGoodInfo().getAttrList().size() > 0) {
                     if (mData.getGoodInfo().getCount() > 1) {
@@ -239,6 +245,9 @@ public class GoodsDetailActivity extends BaseMvpActivity<GoodsDetailPresenter>
                             price = mList.get(i).getPirce();
                         }
                     }
+                }else {
+                    seId = mData.getGoodInfo().getSpecialList().get(0).getSId();
+                    seName = mData.getGoodInfo().getSpecialList().get(0).getName();
                 }
                 mPresenter.addShopCart(mId, mGoodsId, mData.getGoodInfo().getName(), seId, seName, aIds, aNames, price, "-1", mData.getGoodInfo().getImg());
                 break;
@@ -301,17 +310,22 @@ public class GoodsDetailActivity extends BaseMvpActivity<GoodsDetailPresenter>
         if (UserCenter.hasLogin()) {
             mPresenter.getShopCartData(mId);
         }
-        //设置商品图片
-        CommonImageLoader.load(data.getGoodInfo().getImg())
-                .placeholder(R.drawable.food_default).into(mIvGoodsPic);
-        //设置商品名称
-        mTvGoodsName.setText(data.getGoodInfo().getName());
-        //设置商品价格
-        mTvGoodsPrice.setText(getResources().getString(R.string.goods_price, data.getGoodInfo().getPrice()));
-        //设置月售
-        mTvMonthlySales.setText(getResources().getString(R.string.monthly_sales, String.valueOf(data.getGoodInfo().getSaleCount())));
-        //设置商品详情
-        mTvContent.setText(data.getGoodInfo().getDesc());
+        if (mData.getGoodInfo()!=null) {
+            //设置商品图片
+            CommonImageLoader.load(mData.getGoodInfo().getImg())
+                    .placeholder(R.drawable.food_default).into(mIvGoodsPic);
+            //设置商品名称
+            mTvGoodsName.setText(mData.getGoodInfo().getName());
+            //设置商品价格
+            mTvGoodsPrice.setText(getResources().getString(R.string.goods_price, mData.getGoodInfo().getPrice()));
+            //设置月售
+            mTvMonthlySales.setText(getResources().getString(R.string.monthly_sales, String.valueOf(mData.getGoodInfo().getSaleCount())));
+            //设置商品详情
+            mTvContent.setText(mData.getGoodInfo().getDesc());
+        }else {
+            mPresenter.getGoodsInfo(mGoodsId);
+            mPresenter.getEvaluateList(mId, "", mPage);
+        }
     }
 
     @Override
@@ -327,7 +341,9 @@ public class GoodsDetailActivity extends BaseMvpActivity<GoodsDetailPresenter>
                 count = count + Integer.parseInt(mList.get(i).getNum());
             }
         }
-        mData.getGoodInfo().setCount(count);
+        if (mData!=null&&mData.getGoodInfo()!=null) {
+            mData.getGoodInfo().setCount(count);
+        }
         if (count > 0) {
             mTvGoodsCount.setVisibility(View.VISIBLE);
             mTvGoodsCount.setText(String.valueOf(count));
@@ -336,9 +352,11 @@ public class GoodsDetailActivity extends BaseMvpActivity<GoodsDetailPresenter>
     }
 
     @Override
-    public void addShopCartSuccess() {
-        showAddShopCartAnim();
-        showCartAnimation();
+    public void addShopCartSuccess(boolean isAdd) {
+        if (isAdd) {
+            showAddShopCartAnim();
+            showCartAnimation();
+        }
         mPresenter.getShopCartData(mId);
     }
 
@@ -381,8 +399,12 @@ public class GoodsDetailActivity extends BaseMvpActivity<GoodsDetailPresenter>
 
     public void setData(ShopingCartBean data) {
         if (data != null) {
-            mTvCount.setVisibility(View.VISIBLE);
-            mTvCount.setText(String.valueOf(data.getTotalNum()));
+            if (data.getTotalNum()==0){
+                mTvCount.setVisibility(View.GONE);
+            }else {
+                mTvCount.setVisibility(View.VISIBLE);
+                mTvCount.setText(String.valueOf(data.getTotalNum()));
+            }
             mTvPrice.setText(getResources().getString(R.string.goods_price,
                     String.valueOf(data.getTotalPrice())));
             mTotalPrice = data.getTotalPrice();

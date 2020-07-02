@@ -131,6 +131,7 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
     private String mOrderStatus;
     private String mRefundStatus;
     private String mRefundRemark;
+    private String mPayType;
     private String mPrice;
     private String mStoreName;
     private String mStoreLogo;
@@ -164,7 +165,7 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
         switch (view.getId()) {
             case R.id.tv_refund_detail://退款详情
                 startActivity(RefundDetailsActivity.newInstance(getCurContext(),
-                        mRefundStatus, mRefundRemark, mPrice));
+                        mRefundStatus, mRefundRemark, mPayType,mPrice));
                 break;
             case R.id.tv_store_name://查看店铺
                 intent = new Intent(getCurContext(), StoreDetailActivity.class);
@@ -239,7 +240,7 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
                             .show();
                 } else if (mTvLeft.getText().equals(getResources().getString(R.string.view_progress))) {
                     startActivity(RefundDetailsActivity.newInstance(getCurContext(),
-                            mRefundStatus, mRefundRemark, mPrice));
+                            mRefundStatus, mRefundRemark, mPayType,mPrice));
                 }
                 break;
             case R.id.tv_right://底部右边按钮
@@ -530,16 +531,9 @@ public class OrderDetailActivity extends BaseMvpActivity<OrderDetailPresenter> i
         //设置下单时间
         mTvOrderTime.setText(data.getOrderInfo().getCreateTime());
         //设置付款方式
-        if (!TextUtils.isEmpty(data.getOrderInfo().getPayType())) {
-            /*String payType;
-            if (data.getOrderInfo().getPayType().equals("2")) {
-                payType = getResources().getString(R.string.ali_apy);
-            } else if (data.getOrderInfo().getPayType().equals("3")) {
-                payType = getResources().getString(R.string.wechat_pay);
-            } else {
-                payType = getResources().getString(R.string.balance_pay);
-            }*/
-            mTvPayType.setText(data.getOrderInfo().getPayType());
+        mPayType=data.getOrderInfo().getPayType();
+        if (!TextUtils.isEmpty(mPayType)) {
+            mTvPayType.setText(mPayType);
         }
     }
 

@@ -1150,5 +1150,6 @@
     <string name="shop">店鋪</string>
     <string name="no_products">暫無商品</string>
     <string name="business_phone">商家電話</string>
+    <string name="modify_reserved_phone">修改預留電話</string>
 
 </resources>

@@ -27,6 +27,7 @@ public class StoreGoodsBean {
          */
 
         private String cateName;
+        private String cId;
         private List<GoodsListBean> goodsList;
 
         public String getCateName() {
@@ -35,6 +36,14 @@ public class StoreGoodsBean {
 
         public void setCateName(String cateName) {
             this.cateName = cateName;
+        }
+
+        public String getcId() {
+            return cId;
+        }
+
+        public void setcId(String cId) {
+            this.cId = cId;
         }
 
         public List<GoodsListBean> getGoodsList() {
@@ -60,6 +69,7 @@ public class StoreGoodsBean {
 
             private long groupId;
             private String groupName;
+            private String cateId;
             private long count;
             private String gId;
             private String gImg;
@@ -85,6 +95,14 @@ public class StoreGoodsBean {
 
             public void setGroupName(String groupName) {
                 this.groupName = groupName;
+            }
+
+            public String getCateId() {
+                return cateId;
+            }
+
+            public void setCateId(String cateId) {
+                this.cateId = cateId;
             }
 
             public long getCount() {

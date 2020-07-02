@@ -108,6 +108,7 @@ public class MaterialRatingBar extends RatingBar {
         mDrawable = new MaterialRatingDrawable(getContext(), fillBackgroundStars);
         mDrawable.setStarCount(getNumStars());
         setProgressDrawable(mDrawable);
+
     }
 
     @Override

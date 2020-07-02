@@ -67,6 +67,7 @@ public class StoreGoodsFragment extends BaseMvpFragment<StoreGoodsPresenter>
         LinearLayoutManager manager = new LinearLayoutManager(getCurContext());
         mRvType.setLayoutManager(manager);
         mTypeAdapter = new RvTypeAdapter(R.layout.item_rv_goods_type, mGroupList);
+        mTypeAdapter.setHasStableIds(true);
         mRvType.setAdapter(mTypeAdapter);
         //初始化商品列表
         mGoodsAdapter = new LvStoreGoodsAdapter((StoreDetailActivity) getActivity(), mGoodsList);
@@ -76,12 +77,15 @@ public class StoreGoodsFragment extends BaseMvpFragment<StoreGoodsPresenter>
         mLvContent.addFooterView(footerView);
 
         setListener();
+
+        mPresenter.getGoodsData(mId);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.getGoodsData(mId);
+
+        mActivity.getShopCartData();
     }
 
     private void setListener() {
@@ -156,6 +160,9 @@ public class StoreGoodsFragment extends BaseMvpFragment<StoreGoodsPresenter>
             mGoodsList.get(i).setCount(0);
         }
         for (int i = 0; i < mGoodsList.size(); i++) {
+            if ("0".equals(mGoodsList.get(i).getCateId())){
+                continue;
+            }
             int count = 0;
             for (int j = 0; j < mShopCartList.size(); j++) {
                 if (mShopCartList.get(j).getGId().equals(mGoodsList.get(i).getGId())) {
@@ -165,6 +172,9 @@ public class StoreGoodsFragment extends BaseMvpFragment<StoreGoodsPresenter>
             }
         }
         for (int i = 0; i < mGroupList.size(); i++) {
+            if ("0".equals(mGroupList.get(i).getCateId())){
+                continue;
+            }
             long count = 0;
             for (int j = 0; j < mGoodsList.size(); j++) {
                 if (mGoodsList.get(j).getGroupId() == mGroupList.get(i).getGroupId()) {

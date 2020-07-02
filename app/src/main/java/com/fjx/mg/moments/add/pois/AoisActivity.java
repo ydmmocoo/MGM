@@ -232,8 +232,10 @@ public class AoisActivity extends BaseMvpActivity<AoisPresenter>
             @Override
             public void onSuccess(String json) {
                 GoogleMapKeywordSearchBean data = JsonUtil.strToModel(json, GoogleMapKeywordSearchBean.class);
-                mSearchList = data.getResults();
-                mHandler.sendEmptyMessage(2);
+                if (data.getResults()!=null) {
+                    mSearchList = data.getResults();
+                    mHandler.sendEmptyMessage(2);
+                }
             }
 
             @Override

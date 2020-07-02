@@ -14,11 +14,13 @@ import android.widget.TextView;
 import com.fjx.mg.R;
 import com.fjx.mg.dialog.AddShopCartDialog;
 import com.fjx.mg.food.StoreDetailActivity;
+import com.fjx.mg.utils.DialogUtil;
 import com.fjx.mg.view.RoundImageView;
 import com.library.common.utils.CommonImageLoader;
 import com.library.common.utils.CommonToast;
 import com.library.common.utils.DimensionUtil;
 import com.library.common.view.stickylistheaders.StickyListHeadersAdapter;
+import com.library.repository.data.UserCenter;
 import com.library.repository.models.StoreGoodsBean;
 
 import java.util.List;
@@ -124,6 +126,13 @@ public class LvStoreGoodsAdapter extends BaseAdapter implements StickyListHeader
 
         //添加商品
         holder.mIvPlus.setOnClickListener(v -> {
+            if (!UserCenter.hasLogin()){
+                new DialogUtil().showAlertDialog(mContext, R.string.tips, R.string.not_login_forward_login, (dialog, which) -> {
+                    dialog.dismiss();
+                    UserCenter.goLoginActivity();
+                });
+                return;
+            }
             if (mList.get(position).getSpecialList().size() <=1
                     && mList.get(position).getAttrList().size() == 0) {
                 mListener.plusOne(mList.get(position).getGId(), mList.get(position).getGName(), mList.get(position).getSpecialList().get(0).getSId(), mList.get(position).getSpecialList().get(0).getName(),
@@ -141,6 +150,13 @@ public class LvStoreGoodsAdapter extends BaseAdapter implements StickyListHeader
         });
         //移除商品
         holder.mIvLess.setOnClickListener(v -> {
+            if (!UserCenter.hasLogin()){
+                new DialogUtil().showAlertDialog(mContext, R.string.tips, R.string.not_login_forward_login, (dialog, which) -> {
+                    dialog.dismiss();
+                    UserCenter.goLoginActivity();
+                });
+                return;
+            }
             boolean hasAttr=false;
             if (mList.get(position).getSpecialList().size() > 1 || mList.get(position).getAttrList().size() > 1) {
                 if (mList.get(position).getCount() > 1) {
@@ -151,7 +167,7 @@ public class LvStoreGoodsAdapter extends BaseAdapter implements StickyListHeader
                 }
             }
             mList.get(position).setCount(0);
-            mListener.lessOne(mList.get(position).getGId(), mList.get(position).getGName(), "", "",
+            mListener.lessOne(mList.get(position).getGId(), mList.get(position).getGName(), mList.get(position).getSpecialList().get(0).getSId(), mList.get(position).getSpecialList().get(0).getName(),
                     "", "", mList.get(position).getPrice(), "-1", mList.get(position).getGImg(),hasAttr);
         });
         return convertView;

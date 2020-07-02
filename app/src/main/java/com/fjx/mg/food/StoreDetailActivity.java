@@ -469,7 +469,7 @@ public class StoreDetailActivity extends BaseMvpActivity<StoreDetailPresenter>
         if (mBottomSheetLayout.isSheetShowing()) {
             mBottomSheetLayout.dismissSheet();
         } else {
-            if (mList.size() != 0) {
+            if (mList!=null&&mList.size() != 0) {
                 mBottomSheetLayout.showWithSheetView(mBottomSheet);
                 mAdapter.setList(mList);
             }

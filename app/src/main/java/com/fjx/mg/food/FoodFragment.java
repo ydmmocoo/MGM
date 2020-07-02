@@ -3,7 +3,11 @@ package com.fjx.mg.food;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -28,6 +32,7 @@ import com.fjx.mg.food.adapter.GvSelectedGoodStoreAdapter;
 import com.fjx.mg.food.adapter.RvStoreAdapter;
 import com.fjx.mg.food.contract.FoodContract;
 import com.fjx.mg.food.presenter.FoodPresenter;
+import com.fjx.mg.main.MainActivity;
 import com.fjx.mg.moments.add.pois.AoisActivity;
 import com.fjx.mg.setting.address.list.AddressListActivity;
 import com.fjx.mg.utils.GPSUtils;
@@ -46,6 +51,7 @@ import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
 import com.library.common.base.BaseApp;
 import com.library.common.base.BaseMvpFragment;
+import com.library.common.utils.CommonToast;
 import com.library.common.utils.DimensionUtil;
 import com.library.common.utils.JsonUtil;
 import com.library.common.view.BannerView;
@@ -61,11 +67,14 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import okhttp3.Response;
+
+import static android.content.Context.LOCATION_SERVICE;
 
 public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View.OnClickListener, FoodContract.View {
 
@@ -358,29 +367,43 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
     private void locationAddress() {
         GoogleApiAvailability googleApiAvailability = GoogleApiAvailability.getInstance();
         int resultCode = googleApiAvailability.isGooglePlayServicesAvailable(getActivity());
-        GPSUtils.getInstance(getCurContext()).getLngAndLat(new GPSUtils.OnLocationResultListener() {
-            @Override
-            public void onLocationResult(Location location) {
-                double latitude = location.getLatitude();
-                double longitude = location.getLongitude();
 
-                RepositoryFactory.getLocalRepository().saveLatitude(String.valueOf(latitude));
-                RepositoryFactory.getLocalRepository().saveLongitude(String.valueOf(longitude));
+        //获取系统的LocationManager对象
+        LocationManager locationManager = (LocationManager) getCurActivity().getSystemService(LOCATION_SERVICE);
+        //设置每一秒获取一次location信息
+        locationManager.requestLocationUpdates(
+                LocationManager.NETWORK_PROVIDER,      //GPS定位提供者
+                1000,       //更新数据时间为1秒
+                1,      //位置间隔为1米
+                //位置监听器
+                new LocationListener() {  //GPS定位信息发生改变时触发，用于更新位置信息
 
-                mPresenter.getShopsList(mServiceId, mSecondServiceId, mOrder, mPage);
-            }
+                    @Override
+                    public void onLocationChanged(Location location) {
+                        //GPS信息发生改变时，更新位置
+                        locationUpdates(location);
+                    }
 
-            @Override
-            public void OnLocationChange(Location location) {
-                double latitude = location.getLatitude();
-                double longitude = location.getLongitude();
+                    @Override
+                    //位置状态发生改变时触发
+                    public void onStatusChanged(String provider, int status, Bundle extras) {
+                    }
 
-                RepositoryFactory.getLocalRepository().saveLatitude(String.valueOf(latitude));
-                RepositoryFactory.getLocalRepository().saveLongitude(String.valueOf(longitude));
+                    @Override
+                    //定位提供者启动时触发
+                    public void onProviderEnabled(String provider) {
+                    }
 
-                mPresenter.getShopsList(mServiceId, mSecondServiceId, mOrder, mPage);
-            }
-        });
+                    @Override
+                    //定位提供者关闭时触发
+                    public void onProviderDisabled(String provider) {
+                    }
+                });
+        //从GPS获取最新的定位信息
+        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        locationUpdates(location);    //将最新的定位信息传递给创建的locationUpdates()方法中
+
+
         if (resultCode == ConnectionResult.SUCCESS) {
             //定位相关
             mClient = LocationServices.getFusedLocationProviderClient(getCurActivity());
@@ -394,6 +417,7 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
                     super.onLocationResult(locationResult);
                     double latitude = locationResult.getLastLocation().getLatitude();
                     double longitude = locationResult.getLastLocation().getLongitude();
+
                     RepositoryFactory.getLocalRepository().saveLatitude(String.valueOf(latitude));
                     RepositoryFactory.getLocalRepository().saveLongitude(String.valueOf(longitude));
 
@@ -402,6 +426,19 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
             };
 
             mClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
+        }
+    }
+
+    public void locationUpdates(Location location) {  //获取指定的查询信息
+        //如果location不为空时
+        if (location != null) {
+            double latitude = location.getLatitude();
+            double longitude = location.getLongitude();
+
+            RepositoryFactory.getLocalRepository().saveLatitude(String.valueOf(latitude));
+            RepositoryFactory.getLocalRepository().saveLongitude(String.valueOf(longitude));
+
+            mPresenter.getShopsList(mServiceId, mSecondServiceId, mOrder, mPage);
         }
     }
 
@@ -529,5 +566,11 @@ public class FoodFragment extends BaseMvpFragment<FoodPresenter> implements View
             RepositoryFactory.getLocalRepository().saveLatitude(lat);
             RepositoryFactory.getLocalRepository().saveLongitude(lng);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        GPSUtils.getInstance(getCurActivity()).removeLocationUpdatesListener();
     }
 }
